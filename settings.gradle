@@ -1,0 +1,5 @@
+rootProject.name = 'project-tracker'
+
+include 'core'
+include 'web'
+
