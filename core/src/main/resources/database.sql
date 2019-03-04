@@ -53,7 +53,8 @@ create table project
   user_id bigint    not null
     constraint project_user_id_fk
       references "user",
-  public  boolean   not null
+  public  boolean   not null,
+  created timestamp not null
 );
 
 alter table project
@@ -84,10 +85,10 @@ create table task
     constraint task_project_id_fk
       references project,
   type       varchar not null,
-  due        date,
   estimate   interval,
   elapsed    interval,
-  column_6   integer
+  opened     timestamp,
+  due        timestamp
 );
 
 alter table task
@@ -124,19 +125,19 @@ alter table user_role
 
 create table activity
 (
-  id                    bigint not null
+  id                    bigint    not null
     constraint activity_pk
       primary key,
-  task_id               bigint not null
+  task_id               bigint    not null
     constraint activity_task_id_fk
       references task,
-  user_id               bigint not null
+  user_id               bigint    not null
     constraint activity_user_id_fk
       references "user",
   status                varchar,
-  completion_difference integer
+  completion_difference integer,
+  timestamp             timestamp not null
 );
 
 alter table activity
   owner to postgres;
-
