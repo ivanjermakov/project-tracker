@@ -111,13 +111,16 @@ alter table task_info
 
 create table user_role
 (
-  user_id    bigint  not null
+  id         bigserial not null
+    constraint user_role_pk
+      primary key,
+  user_id    bigint    not null
     constraint user_role_user_id_fk
       references "user",
-  project_id bigint  not null
+  project_id bigint    not null
     constraint user_role_project_id_fk
       references project,
-  role       varchar not null
+  role       varchar   not null
 );
 
 alter table user_role
@@ -141,3 +144,17 @@ create table activity
 
 alter table activity
   owner to postgres;
+
+create table user_follower
+(
+  user_id     bigint not null
+    constraint user_follower_user_id_fk
+      references "user",
+  follower_id bigint not null
+    constraint user_follower_user_id_fk_2
+      references "user"
+);
+
+alter table user_follower
+  owner to postgres;
+
