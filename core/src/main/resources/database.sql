@@ -32,7 +32,7 @@ create table user_info
   id       bigint not null
     constraint user_info_pk
       primary key,
-  user_id  bigint not null
+  user_id_ bigint not null
     constraint user_info_user_id_fk
       references "user",
   name     varchar,
@@ -157,4 +157,21 @@ create table user_follower
 
 alter table user_follower
   owner to postgres;
+
+create table token
+(
+  id      bigserial not null
+    constraint token_pk
+      primary key,
+  user_id bigint
+    constraint token_user_id_fk
+      references "user",
+  token   varchar   not null
+);
+
+alter table token
+  owner to postgres;
+
+create unique index token_token_uindex
+  on token (token);
 
