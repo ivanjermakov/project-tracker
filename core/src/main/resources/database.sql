@@ -29,10 +29,10 @@ create unique index user_credentials_login_uindex
 
 create table user_info
 (
-  id       bigint not null
+  id       bigserial not null
     constraint user_info_pk
       primary key,
-  user_id_ bigint not null
+  user_id bigint not null
     constraint user_info_user_id_fk
       references "user",
   name     varchar,

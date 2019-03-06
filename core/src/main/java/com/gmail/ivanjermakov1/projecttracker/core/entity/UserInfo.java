@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -15,6 +17,10 @@ public class UserInfo {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Long id;
+	
+	@OneToOne
+	@JoinColumn(name = "user_id")
+	private User user;
 	
 	@Column(name = "name")
 	private String name;
@@ -34,7 +40,12 @@ public class UserInfo {
 	public UserInfo() {
 	}
 	
-	public UserInfo(String name, String bio, String url, String company, String location) {
+	public UserInfo(User user) {
+		this.user = user;
+	}
+	
+	public UserInfo(User user, String name, String bio, String url, String company, String location) {
+		this.user = user;
 		this.name = name;
 		this.bio = bio;
 		this.url = url;
@@ -48,6 +59,14 @@ public class UserInfo {
 	
 	public void setId(Long id) {
 		this.id = id;
+	}
+	
+	public User getUser() {
+		return user;
+	}
+	
+	public void setUser(User user) {
+		this.user = user;
 	}
 	
 	public String getName() {

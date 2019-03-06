@@ -10,6 +10,7 @@ import com.gmail.ivanjermakov1.projecttracker.core.exeption.AuthenticationExcept
 import com.gmail.ivanjermakov1.projecttracker.core.exeption.NoSuchEntityException;
 import com.gmail.ivanjermakov1.projecttracker.core.exeption.RegistrationException;
 import com.gmail.ivanjermakov1.projecttracker.core.repository.TokenRepository;
+import com.gmail.ivanjermakov1.projecttracker.core.repository.UserCredentialsRepository;
 import com.gmail.ivanjermakov1.projecttracker.core.repository.UserRepository;
 import com.gmail.ivanjermakov1.projecttracker.core.security.Hasher;
 import com.gmail.ivanjermakov1.projecttracker.core.security.TokenGenerator;
@@ -25,16 +26,18 @@ public class UserService {
 	
 	private final TokenRepository tokenRepository;
 	private final UserRepository userRepository;
+	private final UserCredentialsRepository userCredentialsRepository;
 	
 	@Autowired
-	public UserService(TokenRepository tokenRepository, UserRepository userRepository) {
+	public UserService(TokenRepository tokenRepository, UserRepository userRepository, UserCredentialsRepository userCredentialsRepository) {
 		this.tokenRepository = tokenRepository;
 		this.userRepository = userRepository;
+		this.userCredentialsRepository = userCredentialsRepository;
 	}
 	
 	public String authenticate(AuthUserDto authUserDto) throws NoSuchEntityException, AuthenticationException {
-		User user = userRepository.findUserByLogin(authUserDto.login)
-				.orElseThrow(() -> new NoSuchEntityException("no user with such login"));
+		User user = userCredentialsRepository.findByLogin(authUserDto.login)
+				.orElseThrow(() -> new NoSuchEntityException("no user with such login")).getUser();
 		if (!Hasher.check(authUserDto.password, user.getUserCredentials().getHash()))
 			throw new AuthenticationException("invalid credentials");
 		
@@ -49,15 +52,14 @@ public class UserService {
 	}
 	
 	public void register(RegisterUserDto registerUserDto) throws RegistrationException {
-		if (userRepository.findUserByLogin(registerUserDto.login).isPresent())
+		if (userCredentialsRepository.findByLogin(registerUserDto.login).isPresent())
 			throw new RegistrationException("user with such login already exist");
 		
-		User user = new User(
-				LocalDate.now(),
-				new UserCredentials(registerUserDto.login, Hasher.getHash(registerUserDto.password)),
-				new UserInfo()
-		);
+		User user = new User(LocalDate.now());
+		userRepository.save(user);
 		
+		user.setUserCredentials(new UserCredentials(user, registerUserDto.login, Hasher.getHash(registerUserDto.password)));
+		user.setUserInfo(new UserInfo(user));
 		userRepository.save(user);
 	}
 	

@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -16,6 +18,10 @@ public class UserCredentials {
 	@Column(name = "id")
 	private Long id;
 	
+	@OneToOne
+	@JoinColumn(name = "user_id")
+	private User user;
+	
 	@Column(name = "login")
 	private String login;
 	
@@ -25,7 +31,8 @@ public class UserCredentials {
 	public UserCredentials() {
 	}
 	
-	public UserCredentials(String login, String hash) {
+	public UserCredentials(User user, String login, String hash) {
+		this.user = user;
 		this.login = login;
 		this.hash = hash;
 	}
@@ -36,6 +43,14 @@ public class UserCredentials {
 	
 	public void setId(Long id) {
 		this.id = id;
+	}
+	
+	public User getUser() {
+		return user;
+	}
+	
+	public void setUser(User user) {
+		this.user = user;
 	}
 	
 	public String getLogin() {
