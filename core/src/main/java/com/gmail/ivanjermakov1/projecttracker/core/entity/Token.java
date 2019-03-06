@@ -1,7 +1,5 @@
 package com.gmail.ivanjermakov1.projecttracker.core.entity;
 
-import com.gmail.ivanjermakov1.projecttracker.core.entity.enums.UserRole;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,8 +10,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "user_role")
-public class Role {
+@Table(name = "token")
+public class Token {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,23 +19,18 @@ public class Role {
 	private Long id;
 	
 	@ManyToOne
-	@JoinColumn(name = "project_id")
-	private Project project;
-	
-	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User user;
 	
-	@Column(name = "role")
-	private UserRole role;
+	@Column(name = "token")
+	private String token;
 	
-	public Role() {
+	public Token() {
 	}
 	
-	public Role(Project project, User user, UserRole role) {
-		this.project = project;
+	public Token(User user, String token) {
 		this.user = user;
-		this.role = role;
+		this.token = token;
 	}
 	
 	public Long getId() {
@@ -48,14 +41,6 @@ public class Role {
 		this.id = id;
 	}
 	
-	public Project getProject() {
-		return project;
-	}
-	
-	public void setProject(Project project) {
-		this.project = project;
-	}
-	
 	public User getUser() {
 		return user;
 	}
@@ -64,12 +49,12 @@ public class Role {
 		this.user = user;
 	}
 	
-	public UserRole getRole() {
-		return role;
+	public String getToken() {
+		return token;
 	}
 	
-	public void setRole(UserRole role) {
-		this.role = role;
+	public void setToken(String token) {
+		this.token = token;
 	}
 	
 }

@@ -1,6 +1,17 @@
 package com.gmail.ivanjermakov1.projecttracker.core.entity;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -21,7 +32,9 @@ public class User {
 	private UserCredentials userCredentials;
 	
 	@OneToOne(cascade = {CascadeType.ALL}, orphanRemoval = true)
-	@JoinColumn(name = "user_id", nullable = false)
+//	name = "user_id_" is temporarily fix of hibernate bug
+//	TODO: investigate
+	@JoinColumn(name = "user_id_", nullable = false)
 	private UserInfo userInfo;
 	
 	@ManyToMany
@@ -39,6 +52,9 @@ public class User {
 			inverseJoinColumns = @JoinColumn(name = "follower_id")
 	)
 	private List<User> followed;
+	
+	@OneToMany(mappedBy = "user")
+	List<Token> tokens;
 	
 	public User() {
 	}
