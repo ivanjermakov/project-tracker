@@ -27,24 +27,6 @@ alter table user_credentials
 create unique index user_credentials_login_uindex
   on user_credentials (login);
 
-create table user_info
-(
-  id       bigserial not null
-    constraint user_info_pk
-      primary key,
-  user_id bigint not null
-    constraint user_info_user_id_fk
-      references "user",
-  name     varchar,
-  bio      varchar,
-  url      varchar,
-  company  varchar,
-  location varchar
-);
-
-alter table user_info
-  owner to postgres;
-
 create table project
 (
   id      bigserial not null
@@ -174,4 +156,22 @@ alter table token
 
 create unique index token_token_uindex
   on token (token);
+
+create table user_info
+(
+  id       bigserial not null
+    constraint user_info_pk
+      primary key,
+  user_id  bigint    not null
+    constraint user_info_user_id_fk
+      references "user",
+  name     varchar,
+  bio      varchar,
+  url      varchar,
+  company  varchar,
+  location varchar
+);
+
+alter table user_info
+  owner to postgres;
 
