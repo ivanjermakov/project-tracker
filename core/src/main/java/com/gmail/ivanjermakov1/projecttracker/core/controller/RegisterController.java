@@ -32,9 +32,4 @@ public class RegisterController {
 		userService.register(registerUserDto);
 	}
 	
-	@GetMapping
-	public Iterable<UserCredentials> test() {
-		return userCredentialsRepository.findAll();
-	}
-	
 }
