@@ -39,7 +39,7 @@ public class UserService {
 		User user = userCredentialsRepository.findByLogin(authUserDto.login)
 				.orElseThrow(() -> new NoSuchEntityException("no user with such login")).getUser();
 		if (!Hasher.check(authUserDto.password, user.getUserCredentials().getHash()))
-			throw new AuthenticationException("invalid credentials");
+			throw new AuthenticationException("invalid userCredentials");
 		
 		Token token = new Token(user, TokenGenerator.generate());
 		return tokenRepository.save(token).getToken();

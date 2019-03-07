@@ -2,6 +2,7 @@ package com.gmail.ivanjermakov1.projecttracker.core.controller;
 
 import com.gmail.ivanjermakov1.projecttracker.core.dto.AuthUserDto;
 import com.gmail.ivanjermakov1.projecttracker.core.dto.UserDto;
+import com.gmail.ivanjermakov1.projecttracker.core.entity.User;
 import com.gmail.ivanjermakov1.projecttracker.core.exeption.AuthenticationException;
 import com.gmail.ivanjermakov1.projecttracker.core.exeption.NoSuchEntityException;
 import com.gmail.ivanjermakov1.projecttracker.core.service.UserService;
@@ -32,7 +33,8 @@ public class AuthController {
 	
 	@GetMapping("validate")
 	public UserDto validate(@RequestHeader("Auth-Token") String token) throws NoSuchEntityException {
-		return Mapper.map(userService.validate(token), UserDto.class);
+		User user = userService.validate(token);
+		return Mapper.map(user);
 	}
 	
 }

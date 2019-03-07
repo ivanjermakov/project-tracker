@@ -1,13 +1,10 @@
 package com.gmail.ivanjermakov1.projecttracker.core;
 
 import com.gmail.ivanjermakov1.projecttracker.core.controller.RegisterController;
-import com.gmail.ivanjermakov1.projecttracker.core.dto.AuthUserDto;
 import com.gmail.ivanjermakov1.projecttracker.core.dto.RegisterUserDto;
 import com.gmail.ivanjermakov1.projecttracker.core.exeption.AuthenticationException;
 import com.gmail.ivanjermakov1.projecttracker.core.exeption.NoSuchEntityException;
 import com.gmail.ivanjermakov1.projecttracker.core.exeption.RegistrationException;
-import com.gmail.ivanjermakov1.projecttracker.core.service.UserService;
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,16 +20,9 @@ public class RegisterTest {
 	@Autowired
 	private RegisterController registerController;
 	
-	@Autowired
-	private UserService userService;
-	
 	@Test
-	public void shouldRegisterUser() throws RegistrationException, AuthenticationException, NoSuchEntityException {
-		RegisterUserDto registerUserDto = new RegisterUserDto("login", "password");
-		
-		registerController.register(registerUserDto);
-		
-		Assert.assertNotNull(userService.authenticate(new AuthUserDto("login", "password")));
+	public void shouldRegisterUser() throws RegistrationException {
+		registerController.register(new RegisterUserDto("login", "password"));
 	}
 	
 }
