@@ -1,5 +1,7 @@
 package com.gmail.ivanjermakov1.projecttracker.core.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,6 +20,7 @@ public class UserInfo {
 	@Column(name = "id")
 	private Long id;
 	
+	@JsonIgnore
 	@OneToOne
 	@JoinColumn(name = "user_id")
 	private User user;

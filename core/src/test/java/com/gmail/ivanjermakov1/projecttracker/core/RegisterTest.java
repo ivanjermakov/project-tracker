@@ -2,8 +2,6 @@ package com.gmail.ivanjermakov1.projecttracker.core;
 
 import com.gmail.ivanjermakov1.projecttracker.core.controller.RegisterController;
 import com.gmail.ivanjermakov1.projecttracker.core.dto.RegisterUserDto;
-import com.gmail.ivanjermakov1.projecttracker.core.exeption.AuthenticationException;
-import com.gmail.ivanjermakov1.projecttracker.core.exeption.NoSuchEntityException;
 import com.gmail.ivanjermakov1.projecttracker.core.exeption.RegistrationException;
 import org.junit.Test;
 import org.junit.runner.RunWith;

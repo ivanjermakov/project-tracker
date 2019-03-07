@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.IOException;
+
 @RestController
 @RequestMapping("auth")
 public class AuthController {
@@ -32,7 +34,7 @@ public class AuthController {
 	}
 	
 	@GetMapping("validate")
-	public UserDto validate(@RequestHeader("Auth-Token") String token) throws NoSuchEntityException {
+	public UserDto validate(@RequestHeader("Auth-Token") String token) throws NoSuchEntityException, IOException {
 		User user = userService.validate(token);
 		return Mapper.map(user);
 	}
