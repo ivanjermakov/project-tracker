@@ -1,6 +1,6 @@
 export class AuthUser {
 
-  login: string;
-  password: string;
+	login: string;
+	password: string;
 
 }

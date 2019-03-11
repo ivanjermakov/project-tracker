@@ -1,7 +1,7 @@
 export class VerifiableRegisterUser {
 
-  login: string;
-  password: string;
-  confirmPassword: string;
+	login: string;
+	password: string;
+	confirmPassword: string;
 
 }
