@@ -1,1 +1,30 @@
-/* You can add global styles to this file, and also import other style files */
+* {
+  font-size: 24px;
+  font-family: Calibri, serif;
+}
+
+:root {
+  --bright: #F5F5F5;
+  --mainblue: #5390e4;
+  --dark: #494949;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--bright);
+}
+
+input {
+  border: silver solid 1px;
+  border-radius: 2px;
+}
+
+button[type=submit] {
+  background: var(--mainblue);
+
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 5px;
+}

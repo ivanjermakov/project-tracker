@@ -1,1 +1,13 @@
-
+<div class="overlay">
+  <div class="auth-container">
+    <div class="text">Log in</div>
+    <form class="auth-form" (ngSubmit)="authenticate()">
+      <input type="text" placeholder="login" [(ngModel)]="authUser.login" name="login">
+      <input type="password" placeholder="password" [(ngModel)]="authUser.password" name="password">
+      <div class="register-hint">
+        <div class="text">Haven't registered yet?</div><a [routerLink]="'/register'">Register</a>
+      </div>
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+</div>

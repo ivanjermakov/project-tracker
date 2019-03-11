@@ -1,0 +1,16 @@
+<div class="overlay">
+	<div class="register-container">
+		<div class="text">Register</div>
+		<form class="register-form" (ngSubmit)="register()">
+			<input type="text" placeholder="login" [(ngModel)]="verifiableRegisterUser.login" name="login">
+			<input type="password" placeholder="password" [(ngModel)]="verifiableRegisterUser.password" name="password">
+			<input type="password" placeholder="confirm password" [(ngModel)]="verifiableRegisterUser.confirmPassword"
+			       name="confirm password">
+			<div class="auth-hint">
+				<div class="text">Already registered?</div>
+				<a [routerLink]="'/auth'">Log in</a>
+			</div>
+			<button type="submit">Submit</button>
+		</form>
+	</div>
+</div>
