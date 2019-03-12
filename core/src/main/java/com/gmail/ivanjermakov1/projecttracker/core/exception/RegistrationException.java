@@ -1,4 +1,4 @@
-package com.gmail.ivanjermakov1.projecttracker.core.exeption;
+package com.gmail.ivanjermakov1.projecttracker.core.exception;
 
 public class RegistrationException extends Exception {
 	

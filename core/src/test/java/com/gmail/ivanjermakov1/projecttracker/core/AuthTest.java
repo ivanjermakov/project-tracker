@@ -5,9 +5,9 @@ import com.gmail.ivanjermakov1.projecttracker.core.controller.RegisterController
 import com.gmail.ivanjermakov1.projecttracker.core.dto.AuthUserDto;
 import com.gmail.ivanjermakov1.projecttracker.core.dto.RegisterUserDto;
 import com.gmail.ivanjermakov1.projecttracker.core.dto.UserDto;
-import com.gmail.ivanjermakov1.projecttracker.core.exeption.AuthenticationException;
-import com.gmail.ivanjermakov1.projecttracker.core.exeption.NoSuchEntityException;
-import com.gmail.ivanjermakov1.projecttracker.core.exeption.RegistrationException;
+import com.gmail.ivanjermakov1.projecttracker.core.exception.AuthenticationException;
+import com.gmail.ivanjermakov1.projecttracker.core.exception.NoSuchEntityException;
+import com.gmail.ivanjermakov1.projecttracker.core.exception.RegistrationException;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

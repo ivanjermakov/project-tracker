@@ -1,7 +1,7 @@
 package com.gmail.ivanjermakov1.projecttracker.core.controller;
 
 import com.gmail.ivanjermakov1.projecttracker.core.dto.RegisterUserDto;
-import com.gmail.ivanjermakov1.projecttracker.core.exeption.RegistrationException;
+import com.gmail.ivanjermakov1.projecttracker.core.exception.RegistrationException;
 import com.gmail.ivanjermakov1.projecttracker.core.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;

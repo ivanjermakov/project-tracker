@@ -1,8 +1,10 @@
 package com.gmail.ivanjermakov1.projecttracker.core.util;
 
+import com.gmail.ivanjermakov1.projecttracker.core.dto.ProjectDto;
 import com.gmail.ivanjermakov1.projecttracker.core.dto.UserCredentialsDto;
 import com.gmail.ivanjermakov1.projecttracker.core.dto.UserDto;
 import com.gmail.ivanjermakov1.projecttracker.core.dto.UserInfoDto;
+import com.gmail.ivanjermakov1.projecttracker.core.entity.Project;
 import com.gmail.ivanjermakov1.projecttracker.core.entity.User;
 
 public class Mapper {
@@ -21,6 +23,18 @@ public class Mapper {
 				new UserCredentialsDto(
 						user.getUserCredentials().getLogin()
 				)
+		);
+	}
+	
+	public static ProjectDto map(Project project, Integer progress) {
+		return new ProjectDto(
+				project.getId(),
+				project.getPublic(),
+				project.getCreated(),
+				project.getProjectInfo().getName(),
+				project.getProjectInfo().getDescription(),
+				project.getProjectInfo().getAbout(),
+				progress
 		);
 	}
 	

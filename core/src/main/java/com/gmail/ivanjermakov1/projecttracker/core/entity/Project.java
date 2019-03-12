@@ -1,5 +1,6 @@
 package com.gmail.ivanjermakov1.projecttracker.core.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -30,6 +32,9 @@ public class Project {
 	
 	@Column(name = "created")
 	private LocalDateTime created;
+	
+	@OneToOne(mappedBy = "project", cascade = {CascadeType.ALL}, orphanRemoval = true)
+	private ProjectInfo projectInfo;
 	
 	@OneToMany(mappedBy = "project")
 	private List<Task> tasks;
@@ -81,6 +86,14 @@ public class Project {
 	
 	public void setTasks(List<Task> tasks) {
 		this.tasks = tasks;
+	}
+	
+	public ProjectInfo getProjectInfo() {
+		return projectInfo;
+	}
+	
+	public void setProjectInfo(ProjectInfo projectInfo) {
+		this.projectInfo = projectInfo;
 	}
 	
 }

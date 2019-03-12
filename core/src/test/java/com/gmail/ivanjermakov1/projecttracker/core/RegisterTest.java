@@ -2,7 +2,7 @@ package com.gmail.ivanjermakov1.projecttracker.core;
 
 import com.gmail.ivanjermakov1.projecttracker.core.controller.RegisterController;
 import com.gmail.ivanjermakov1.projecttracker.core.dto.RegisterUserDto;
-import com.gmail.ivanjermakov1.projecttracker.core.exeption.RegistrationException;
+import com.gmail.ivanjermakov1.projecttracker.core.exception.RegistrationException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -9,11 +9,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "task")
@@ -47,10 +50,18 @@ public class Task {
 	@JoinColumn(name = "task_id", nullable = false)
 	private TaskInfo taskInfo;
 	
+	@ManyToMany
+	@JoinTable(
+			name = "task_subtask",
+			joinColumns = @JoinColumn(name = "task_id"),
+			inverseJoinColumns = @JoinColumn(name = "subtask_id")
+	)
+	private List<Task> subtasks;
+	
 	public Task() {
 	}
 	
-	public Task(Project project, TaskType type, Duration estimate, Duration elapsed, LocalDateTime opened, LocalDateTime due, TaskInfo taskInfo) {
+	public Task(Project project, TaskType type, Duration estimate, Duration elapsed, LocalDateTime opened, LocalDateTime due, TaskInfo taskInfo, List<Task> subtasks) {
 		this.project = project;
 		this.type = type;
 		this.estimate = estimate;
@@ -58,6 +69,7 @@ public class Task {
 		this.opened = opened;
 		this.due = due;
 		this.taskInfo = taskInfo;
+		this.subtasks = subtasks;
 	}
 	
 	public Long getId() {
@@ -122,6 +134,14 @@ public class Task {
 	
 	public void setTaskInfo(TaskInfo taskInfo) {
 		this.taskInfo = taskInfo;
+	}
+	
+	public List<Task> getSubtasks() {
+		return subtasks;
+	}
+	
+	public void setSubtasks(List<Task> subtasks) {
+		this.subtasks = subtasks;
 	}
 	
 }
