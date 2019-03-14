@@ -14,7 +14,7 @@ import {Router} from '@angular/router';
 })
 export class RegisterComponent implements OnInit {
 
-	private verifiableRegisterUser: VerifiableRegisterUser = new VerifiableRegisterUser();
+	verifiableRegisterUser: VerifiableRegisterUser = new VerifiableRegisterUser();
 
 	constructor(
 		private registerService: RegisterService,
