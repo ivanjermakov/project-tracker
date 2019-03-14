@@ -121,7 +121,8 @@ create table activity
       references "user",
   status                varchar,
   completion_difference integer,
-  timestamp             timestamp not null
+  timestamp             timestamp not null,
+  description           varchar
 );
 
 alter table activity
@@ -175,3 +176,15 @@ create table user_info
 alter table user_info
   owner to postgres;
 
+create table task_subtask
+(
+  task_id    bigint not null
+    constraint task_subtask_task_id_fk
+      references task,
+  subtask_id bigint not null
+    constraint task_subtask_task_id_fk_2
+      references task
+);
+
+alter table task_subtask
+  owner to postgres;

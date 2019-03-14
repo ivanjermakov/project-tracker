@@ -5,6 +5,7 @@ import com.gmail.ivanjermakov1.projecttracker.core.entity.enums.TaskType;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -31,6 +32,7 @@ public class Task {
 	@JoinColumn(name = "project_id")
 	private Project project;
 	
+	@Enumerated
 	@Column(name = "type")
 	private TaskType type;
 	

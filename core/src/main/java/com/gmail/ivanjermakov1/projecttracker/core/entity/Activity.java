@@ -4,6 +4,7 @@ import com.gmail.ivanjermakov1.projecttracker.core.entity.enums.TaskStatus;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -29,6 +30,7 @@ public class Activity {
 	@JoinColumn(name = "user_id")
 	private User user;
 	
+	@Enumerated
 	@Column(name = "status")
 	private TaskStatus status;
 	
@@ -38,15 +40,19 @@ public class Activity {
 	@Column(name = "timestamp")
 	private LocalDateTime timestamp;
 	
+	@Column(name = "description")
+	private String description;
+	
 	public Activity() {
 	}
 	
-	public Activity(Task task, User user, TaskStatus status, Integer completion_difference, LocalDateTime timestamp) {
+	public Activity(Task task, User user, TaskStatus status, Integer completion_difference, LocalDateTime timestamp, String description) {
 		this.task = task;
 		this.user = user;
 		this.status = status;
 		this.completion_difference = completion_difference;
 		this.timestamp = timestamp;
+		this.description = description;
 	}
 	
 	public Long getId() {
@@ -95,6 +101,14 @@ public class Activity {
 	
 	public void setTimestamp(LocalDateTime timestamp) {
 		this.timestamp = timestamp;
+	}
+	
+	public String getDescription() {
+		return description;
+	}
+	
+	public void setDescription(String description) {
+		this.description = description;
 	}
 	
 }
