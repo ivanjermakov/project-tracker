@@ -5,7 +5,11 @@ let win;
 
 function createWindow() {
 	win = new BrowserWindow({width: 800, height: 600}); // load the dist folder from Angular
-	win.loadURL(url.format({pathname: path.join(__dirname, 'dist/project-tracker/index.html'), protocol: 'file:', slashes: true}));
+	win.loadURL(url.format({
+		pathname: path.join(__dirname, 'dist/project-tracker/index.html'),
+		protocol: 'file:',
+		slashes: true
+	}));
 // Open the DevTools optionally:
 	win.webContents.openDevTools();
 	win.on('closed', () => {
@@ -26,3 +30,5 @@ app.on('activate', () => {
 		createWindow()
 	}
 });
+
+// how to here https://stackoverflow.com/a/49812397/8662097
