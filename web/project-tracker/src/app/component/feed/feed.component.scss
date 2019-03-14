@@ -1,0 +1,21 @@
+.content-container {
+  display: flex;
+  align-items: flex-start;
+  max-width: 1920px;
+  margin: 50px auto 0 auto;
+
+  .content {
+    background: white;
+    width: 100%;
+
+    min-height: calc(100vh - 50px);
+  }
+
+  .projects {
+    width: 400px;
+    margin: 5px;
+    background: white;
+    border-radius: 5px;
+  }
+}
+
