@@ -4,6 +4,7 @@ import {AuthComponent} from './component/auth/auth.component';
 import {RegisterComponent} from './component/register/register.component';
 import {FeedComponent} from './component/feed/feed.component';
 import {ProfileComponent} from './component/profile/profile.component';
+import {ProjectComponent} from './component/project/project.component';
 
 const routes: Routes = [
 	{
@@ -21,6 +22,10 @@ const routes: Routes = [
 	{
 		path: 'profile',
 		component: ProfileComponent
+	},
+	{
+		path: ':login/:name',
+		component: ProjectComponent
 	}
 ];
 

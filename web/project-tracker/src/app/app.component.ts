@@ -1,7 +1,8 @@
 import {Component} from '@angular/core';
-import {NavigationEnd, Router} from '@angular/router';
+import {Router} from '@angular/router';
 import {LOCALSTORAGE_TOKEN_NAME} from '../globals';
 import {TokenProviderService} from './service/token.provider.service';
+import {UrlService} from './service/url.service';
 
 @Component({
 	selector: 'app-root',
@@ -12,22 +13,13 @@ export class AppComponent {
 
 	constructor(
 		private router: Router,
-		private tokenProviderService: TokenProviderService
+		private tokenProviderService: TokenProviderService,
+		private urlService: UrlService
 	) {
 		this.autoLogin();
-		this.getViewPath((url) => {
+		this.urlService.getViewPath((url) => {
 			if (url === '/') {
 				this.router.navigate(['/auth']);
-			}
-		});
-	}
-
-	getViewPath(event: (url: string) => void) {
-		this.router.events.subscribe(e => {
-			if (e instanceof NavigationEnd) {
-				if (e.url === '/') {
-					event(e.url);
-				}
 			}
 		});
 	}

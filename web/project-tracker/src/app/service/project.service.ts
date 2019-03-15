@@ -25,4 +25,14 @@ export class ProjectService {
 		});
 	}
 
+	get(token: string, login: string, name: string): Observable<Project> {
+		return this.http.get<Project>(API_URL + 'project/get', {
+			params: {
+				login: login,
+				name: name,
+			},
+			headers: {token: token}
+		});
+	}
+
 }

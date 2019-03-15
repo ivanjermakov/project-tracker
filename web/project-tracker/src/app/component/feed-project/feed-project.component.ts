@@ -1,5 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Project} from '../../dto/Project';
+import {Router} from '@angular/router';
+import {AuthService} from '../../service/auth.service';
+import {TokenProviderService} from '../../service/token.provider.service';
 
 @Component({
 	selector: 'app-feed-project',
@@ -11,10 +14,21 @@ export class FeedProjectComponent implements OnInit {
 	@Input('project')
 	project: Project;
 
-	constructor() {
+	constructor(
+		private router: Router,
+		private tokenProviderService: TokenProviderService,
+		private authService: AuthService
+	) {
 	}
 
 	ngOnInit() {
 	}
 
+	open() {
+		this.tokenProviderService.token.subscribe(token => {
+			this.authService.validate(token).subscribe(user => {
+				this.router.navigate([user.userCredentials.login, this.project.name], {replaceUrl: true});
+			});
+		});
+	}
 }

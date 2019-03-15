@@ -1,5 +1,4 @@
 export class RegisterUser {
-
 	login: string;
 	password: string;
 
@@ -7,5 +6,4 @@ export class RegisterUser {
 		this.login = login;
 		this.password = password;
 	}
-
 }
