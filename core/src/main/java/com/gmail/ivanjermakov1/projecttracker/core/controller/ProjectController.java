@@ -16,8 +16,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -48,7 +50,17 @@ public class ProjectController {
 		return projectService.all(user, pageable)
 				.stream()
 				.map(p -> Mapper.map(p, 0))
+				.sorted(Comparator.comparing(p -> p.created))
 				.collect(Collectors.toList());
+	}
+	
+	@GetMapping("get")
+	public ProjectDto get(@RequestHeader("token") String token,
+	                      @RequestParam("login") String login,
+	                      @RequestParam("name") String name) throws NoSuchEntityException {
+		User user = userService.validate(token);
+		
+		return Mapper.map(projectService.get(user, login, name), 0);
 	}
 	
 }

@@ -8,6 +8,7 @@ import com.gmail.ivanjermakov1.projecttracker.core.entity.Role;
 import com.gmail.ivanjermakov1.projecttracker.core.entity.User;
 import com.gmail.ivanjermakov1.projecttracker.core.entity.enums.UserRole;
 import com.gmail.ivanjermakov1.projecttracker.core.exception.DuplicationException;
+import com.gmail.ivanjermakov1.projecttracker.core.exception.NoSuchEntityException;
 import com.gmail.ivanjermakov1.projecttracker.core.repository.ProjectRepository;
 import com.gmail.ivanjermakov1.projecttracker.core.repository.RoleRepository;
 import com.gmail.ivanjermakov1.projecttracker.core.util.Mapper;
@@ -61,6 +62,11 @@ public class ProjectService {
 	
 	public List<Project> all(User user, Pageable pageable) {
 		return projectRepository.findAllByUser(user, pageable);
+	}
+	
+	public Project get(User user, String login, String name) throws NoSuchEntityException {
+//		TODO: authorization
+		return projectRepository.findByLoginAndName(login, name).orElseThrow(() -> new NoSuchEntityException("no such project"));
 	}
 	
 }
