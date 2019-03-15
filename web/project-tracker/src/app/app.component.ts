@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {Router} from '@angular/router';
+import {NavigationEnd, Router} from '@angular/router';
 
 @Component({
 	selector: 'app-root',
@@ -9,7 +9,21 @@ import {Router} from '@angular/router';
 export class AppComponent {
 
 	constructor(private router: Router) {
-		this.router.navigate(['/auth'], {replaceUrl: true});
+		this.getViewPath((url) => {
+			if (url === '/') {
+				this.router.navigate(['/auth'], {replaceUrl: true});
+			}
+		});
+	}
+
+	getViewPath(event: (url: string) => void) {
+		this.router.events.subscribe(e => {
+			if (e instanceof NavigationEnd) {
+				if (e.url === '/') {
+					event(e.url);
+				}
+			}
+		});
 	}
 
 }
