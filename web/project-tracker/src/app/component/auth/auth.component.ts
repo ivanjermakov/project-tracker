@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {AuthUser} from '../../dto/AuthUser';
 import {AuthService} from '../../service/auth.service';
 import {Router} from '@angular/router';
+import {TokenProviderService} from '../../service/token.provider.service';
+import {LOCALSTORAGE_TOKEN_NAME} from '../../../globals';
 
 @Component({
 	selector: 'app-auth',
@@ -17,7 +19,8 @@ export class AuthComponent implements OnInit {
 
 	constructor(
 		private authService: AuthService,
-		private router: Router
+		private router: Router,
+		private tokenProviderService: TokenProviderService
 	) {
 	}
 
@@ -27,6 +30,9 @@ export class AuthComponent implements OnInit {
 	authenticate() {
 		this.authService.authenticate(this.authUser).subscribe(token => {
 			console.log('TOKEN: ' + token);
+			this.tokenProviderService.setToken(token);
+			localStorage.setItem(LOCALSTORAGE_TOKEN_NAME, token);
+
 			this.router.navigate(['/feed'], {replaceUrl: true});
 		});
 	}

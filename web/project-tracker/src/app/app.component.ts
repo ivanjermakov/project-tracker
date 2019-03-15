@@ -1,5 +1,7 @@
 import {Component} from '@angular/core';
 import {NavigationEnd, Router} from '@angular/router';
+import {LOCALSTORAGE_TOKEN_NAME} from '../globals';
+import {TokenProviderService} from './service/token.provider.service';
 
 @Component({
 	selector: 'app-root',
@@ -8,11 +10,15 @@ import {NavigationEnd, Router} from '@angular/router';
 })
 export class AppComponent {
 
-	constructor(private router: Router) {
+	constructor(
+		private router: Router,
+		private tokenProviderService: TokenProviderService
+	) {
 		this.getViewPath((url) => {
 			if (url === '/') {
-				this.router.navigate(['/auth'], {replaceUrl: true});
+				this.router.navigate(['/auth']);
 			}
+			this.autoLogin();
 		});
 	}
 
@@ -24,6 +30,19 @@ export class AppComponent {
 				}
 			}
 		});
+	}
+
+	private autoLogin() {
+		console.log('auto login attempt');
+		let token = localStorage.getItem(LOCALSTORAGE_TOKEN_NAME);
+		if (!token) {
+			return;
+		}
+
+		console.log('token in localstorage: ' + token);
+
+		this.tokenProviderService.setToken(token);
+		this.router.navigate(['/feed']);
 	}
 
 }
