@@ -19,7 +19,7 @@ export class ProjectService {
 	}
 
 	all(token: string, pageable: Pageable): Observable<Array<Project>> {
-		return this.http.get<Array<Project>>(API_URL + 'project/create', {
+		return this.http.get<Array<Project>>(API_URL + 'project/all', {
 			params: pageable.toHttpParams(),
 			headers: {token: token}
 		});

@@ -1,4 +1,8 @@
 import {Component, OnInit} from '@angular/core';
+import {ProjectService} from '../../service/project.service';
+import {TokenProviderService} from '../../service/token.provider.service';
+import {Pageable} from '../../dto/Pageable';
+import {PROJECTS_IN_FEED} from '../../../globals';
 
 @Component({
 	selector: 'app-feed',
@@ -7,41 +11,17 @@ import {Component, OnInit} from '@angular/core';
 })
 export class FeedComponent implements OnInit {
 
-	projects = [{
-		'id': 6,
-		'isPublic': true,
-		'created': '2019-03-14 10:48:03',
-		'name': 'project',
-		'description': null,
-		'about': null,
-		'progress': 0
-	}, {
-		'id': 6,
-		'isPublic': true,
-		'created': '2019-03-14 10:48:03',
-		'name': 'project2',
-		'description': null,
-		'about': null,
-		'progress': 0
-	}, {
-		'id': 6,
-		'isPublic': false,
-		'created': '2019-03-14 10:48:03',
-		'name': 'project',
-		'description': null,
-		'about': null,
-		'progress': 0
-	}, {
-		'id': 6,
-		'isPublic': true,
-		'created': '2019-03-14 10:48:03',
-		'name': 'project3',
-		'description': null,
-		'about': null,
-		'progress': 0
-	}];
+	projects = [];
 
-	constructor() {
+	constructor(
+		private projectService: ProjectService,
+		private tokenProviderService: TokenProviderService
+	) {
+		this.tokenProviderService.token.subscribe(token => {
+			projectService.all(token, new Pageable(0, PROJECTS_IN_FEED)).subscribe(ps => {
+				this.projects = ps;
+			});
+		});
 	}
 
 	ngOnInit() {

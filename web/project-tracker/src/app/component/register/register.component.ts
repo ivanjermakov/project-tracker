@@ -31,7 +31,6 @@ export class RegisterComponent implements OnInit {
 		}
 		this.registerService.register(new RegisterUser(this.verifiableRegisterUser.login, this.verifiableRegisterUser.password))
 			.subscribe(success => {
-				console.log('registered successfully!');
 				this.router.navigate(['/auth'], {replaceUrl: true});
 			});
 	}

@@ -1,0 +1,26 @@
+.project {
+  display: flex;
+  align-items: center;
+
+  .is-open-status {
+    i {
+      font-size: 20px;
+      margin: 5px;
+      width: 24px;
+    }
+
+    .public {
+      color: #89d73a;
+    }
+
+    .private {
+      color: #ced73e;
+    }
+  }
+}
+
+.project:hover {
+  text-decoration: underline;
+  color: var(--mainblue);
+  cursor: pointer;
+}

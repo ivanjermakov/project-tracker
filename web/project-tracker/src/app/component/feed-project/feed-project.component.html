@@ -1,3 +1,7 @@
 <div class="project">
-  {{project.isPublic ? 'public' : 'private'}} {{project.name}}
+  <div class="is-open-status">
+    <i class="fas fa-lock-open public" *ngIf="project.isPublic === true"></i>
+    <i class="fas fa-lock private" *ngIf="project.isPublic === false"></i>
+  </div>
+  {{project.name}}
 </div>

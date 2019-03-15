@@ -14,11 +14,11 @@ export class AppComponent {
 		private router: Router,
 		private tokenProviderService: TokenProviderService
 	) {
+		this.autoLogin();
 		this.getViewPath((url) => {
 			if (url === '/') {
 				this.router.navigate(['/auth']);
 			}
-			this.autoLogin();
 		});
 	}
 
@@ -33,13 +33,10 @@ export class AppComponent {
 	}
 
 	private autoLogin() {
-		console.log('auto login attempt');
 		let token = localStorage.getItem(LOCALSTORAGE_TOKEN_NAME);
 		if (!token) {
 			return;
 		}
-
-		console.log('token in localstorage: ' + token);
 
 		this.tokenProviderService.setToken(token);
 		this.router.navigate(['/feed']);

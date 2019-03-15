@@ -29,7 +29,6 @@ export class AuthComponent implements OnInit {
 
 	authenticate() {
 		this.authService.authenticate(this.authUser).subscribe(token => {
-			console.log('TOKEN: ' + token);
 			this.tokenProviderService.setToken(token);
 			localStorage.setItem(LOCALSTORAGE_TOKEN_NAME, token);
 

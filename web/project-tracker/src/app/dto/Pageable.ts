@@ -9,11 +9,9 @@ export class Pageable {
 		this.size = size;
 	}
 
-	toHttpParams() {
-		const httpParams = new HttpParams();
-		httpParams.append('page', this.page.toString());
-		httpParams.append('size', this.size.toString());
-
-		return httpParams;
+	toHttpParams(): HttpParams {
+		return new HttpParams()
+			.append('page', this.page.toString())
+			.append('size', this.size.toString());
 	}
 }
