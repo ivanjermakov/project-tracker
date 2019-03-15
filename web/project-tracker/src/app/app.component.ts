@@ -16,22 +16,27 @@ export class AppComponent {
 		private tokenProviderService: TokenProviderService,
 		private urlService: UrlService
 	) {
-		this.autoLogin();
 		this.urlService.getViewPath((url) => {
+			let autoLogged = this.autoLogin(url);
+
 			if (url === '/') {
-				this.router.navigate(['/auth']);
+				if (autoLogged) {
+					this.router.navigate(['/feed']);
+				} else {
+					this.router.navigate(['/auth']);
+				}
 			}
 		});
 	}
 
-	private autoLogin() {
+	private autoLogin(url: string): boolean {
 		let token = localStorage.getItem(LOCALSTORAGE_TOKEN_NAME);
 		if (!token) {
-			return;
+			return false;
 		}
 
 		this.tokenProviderService.setToken(token);
-		this.router.navigate(['/feed']);
+		return true;
 	}
 
 }
