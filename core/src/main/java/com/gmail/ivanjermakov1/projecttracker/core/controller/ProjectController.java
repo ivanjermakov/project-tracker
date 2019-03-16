@@ -12,6 +12,7 @@ import com.gmail.ivanjermakov1.projecttracker.core.util.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -54,10 +55,10 @@ public class ProjectController {
 				.collect(Collectors.toList());
 	}
 	
-	@GetMapping("get")
+	@GetMapping("/{login}/{name}/get")
 	public ProjectDto get(@RequestHeader("token") String token,
-	                      @RequestParam("login") String login,
-	                      @RequestParam("name") String name) throws NoSuchEntityException {
+	                      @PathVariable String login,
+	                      @PathVariable String name) throws NoSuchEntityException {
 		User user = userService.validate(token);
 		
 		return Mapper.map(projectService.get(user, login, name), 0);
