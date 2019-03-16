@@ -17,10 +17,8 @@ export class AppComponent {
 		private urlService: UrlService
 	) {
 		this.urlService.getViewPath((url) => {
-			let autoLogged = this.autoLogin(url);
-
 			if (url === '/') {
-				if (autoLogged) {
+				if (this.autoLogin()) {
 					this.router.navigate(['/feed']);
 				} else {
 					this.router.navigate(['/auth']);
@@ -29,7 +27,7 @@ export class AppComponent {
 		});
 	}
 
-	private autoLogin(url: string): boolean {
+	private autoLogin(): boolean {
 		let token = localStorage.getItem(LOCALSTORAGE_TOKEN_NAME);
 		if (!token) {
 			return false;
