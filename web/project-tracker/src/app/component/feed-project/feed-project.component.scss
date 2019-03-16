@@ -2,11 +2,13 @@
   display: flex;
   align-items: center;
 
+  padding: 1px;
+
   .is-open-status {
+
     i {
       font-size: 20px;
-      margin: 5px;
-      width: 24px;
+      padding: 4px;
     }
 
     .public {
@@ -16,6 +18,10 @@
     .private {
       color: #ced73e;
     }
+  }
+
+  .text {
+    margin: 0 1px;
   }
 }
 

@@ -26,6 +26,10 @@ const routes: Routes = [
 	{
 		path: ':login/:name',
 		component: ProjectComponent
+	},
+	{
+		path: ':login/:name/overview',
+		redirectTo: ':login/:name'
 	}
 ];
 

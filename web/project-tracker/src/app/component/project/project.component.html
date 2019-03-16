@@ -1,0 +1,19 @@
+<app-header></app-header>
+<div class="content-container" *ngIf="project && me">
+	<div class="project">
+		<div class="header">
+			<div class="is-open-status">
+				<i class="fas fa-unlock-alt public" *ngIf="project.isPublic === true"></i>
+				<i class="fas fa-lock private" *ngIf="project.isPublic === false"></i>
+			</div>
+			<div class="name">
+				<div class="text">{{me.userCredentials.login}}</div>
+				<div class="text delimiter">/</div>
+				<div class="text">{{project.name}}</div>
+			</div>
+		</div>
+		<div class="description-container">
+			<div class="text">{{project.description}}</div>
+		</div>
+	</div>
+</div>

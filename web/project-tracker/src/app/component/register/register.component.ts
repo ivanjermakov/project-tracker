@@ -30,7 +30,7 @@ export class RegisterComponent implements OnInit {
 			return;
 		}
 		this.registerService.register(new RegisterUser(this.verifiableRegisterUser.login, this.verifiableRegisterUser.password))
-			.subscribe(success => {
+			.subscribe(() => {
 				this.router.navigate(['/auth'], {replaceUrl: true});
 			});
 	}

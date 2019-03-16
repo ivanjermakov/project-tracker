@@ -6,7 +6,7 @@ import {BehaviorSubject} from 'rxjs';
 })
 export class TokenProviderService {
 
-	private tokenSubject = new BehaviorSubject<string>('');
+	private tokenSubject = new BehaviorSubject<string>(null);
 	token = this.tokenSubject.asObservable();
 
 	constructor() {

@@ -3,6 +3,7 @@ import {Project} from '../../dto/Project';
 import {Router} from '@angular/router';
 import {AuthService} from '../../service/auth.service';
 import {TokenProviderService} from '../../service/token.provider.service';
+import {User} from '../../dto/User';
 
 @Component({
 	selector: 'app-feed-project',
@@ -11,8 +12,11 @@ import {TokenProviderService} from '../../service/token.provider.service';
 })
 export class FeedProjectComponent implements OnInit {
 
-	@Input('project')
+	@Input()
 	project: Project;
+
+	@Input()
+	me: User;
 
 	constructor(
 		private router: Router,
@@ -25,9 +29,10 @@ export class FeedProjectComponent implements OnInit {
 	}
 
 	open() {
+		console.debug('open project');
 		this.tokenProviderService.token.subscribe(token => {
 			this.authService.validate(token).subscribe(user => {
-				this.router.navigate([user.userCredentials.login, this.project.name], {replaceUrl: true});
+				this.router.navigate([user.userCredentials.login, this.project.name]);
 			});
 		});
 	}

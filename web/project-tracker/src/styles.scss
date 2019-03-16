@@ -1,11 +1,12 @@
 * {
   font-size: 24px;
-  font-family: Calibri, serif;
+  font-family: 'Open Sans', sans-serif;
 }
 
 :root {
   --bright: #F5F5F5;
   --mainblue: #5390e4;
+  --darkblue: #447cd2;
   --dark: #494949;
 }
 
@@ -17,14 +18,16 @@ body {
 
 input {
   border: silver solid 1px;
-  border-radius: 2px;
+  border-radius: 4px;
 }
 
-button[type=submit] {
+button {
   background: var(--mainblue);
 
   color: white;
   border: none;
   border-radius: 4px;
   padding: 5px;
+
+  cursor: pointer;
 }

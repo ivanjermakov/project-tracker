@@ -1,23 +1,35 @@
 <app-header></app-header>
-<div class="content-container">
+<div class="content-wrapper">
 	<div class="projects">
-		<app-feed-project *ngFor="let p of projects" [project]="p"></app-feed-project>
+		<div class="header">
+			<div class="text">Projects</div>
+			<button class="new-project-button">New</button>
+			<div class="search">
+				<input type="text" placeholder="Find a project">
+			</div>
+		</div>
+		<app-feed-project *ngFor="let p of projects"
+		                  [project]="p"
+		                  [me]="me">
+		</app-feed-project>
 	</div>
-	<div class="content">
-		content
-		<br>content
-		<br>content
-		<br>content
-		<br>content
-		<br>content
-		<br>content
-		<br>content
-		<br>content
-		<br>content
-		<br>content
-		<br>content
-		<br>content
-		<br>content
-		<br>
+	<div class="content-container">
+		<div class="content">
+			content
+			<br>content
+			<br>content
+			<br>content
+			<br>content
+			<br>content
+			<br>content
+			<br>content
+			<br>content
+			<br>content
+			<br>content
+			<br>content
+			<br>content
+			<br>content
+			<br>
+		</div>
 	</div>
 </div>

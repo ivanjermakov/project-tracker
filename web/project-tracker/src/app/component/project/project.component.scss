@@ -1,0 +1,55 @@
+.content-container {
+
+  .project {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    width: 100%;
+
+    .header {
+      display: flex;
+      align-items: center;
+
+      padding: 10px;
+
+      .is-open-status {
+
+        i {
+          font-size: 20px;
+          padding: 6px;
+        }
+
+        .public {
+          color: #89d73a;
+        }
+
+        .private {
+          color: #ced73e;
+        }
+      }
+
+      .name {
+        display: flex;
+        align-items: center;
+
+        .text {
+          color: var(--darkblue);
+        }
+
+        .delimiter {
+          color: var(--dark);
+          margin: 0 4px;
+        }
+      }
+    }
+
+    .description-container {
+      padding: 10px;
+
+      .text {
+
+      }
+    }
+  }
+}
