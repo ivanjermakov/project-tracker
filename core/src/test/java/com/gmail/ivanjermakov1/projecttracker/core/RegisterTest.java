@@ -20,7 +20,7 @@ public class RegisterTest {
 	
 	@Test
 	public void shouldRegisterUser() throws RegistrationException {
-		registerController.register(new RegisterUserDto("login", "password"));
+		registerController.register(new RegisterUserDto("test", "password"));
 	}
 	
 }

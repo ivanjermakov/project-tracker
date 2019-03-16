@@ -34,7 +34,7 @@ public class AuthTest {
 	
 	@Before
 	public void registerUser() throws RegistrationException, AuthenticationException, NoSuchEntityException {
-		registerUserDto = new RegisterUserDto("login", "password");
+		registerUserDto = new RegisterUserDto("test", "password");
 		
 		registerController.register(registerUserDto);
 	}
