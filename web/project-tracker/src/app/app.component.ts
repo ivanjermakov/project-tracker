@@ -49,8 +49,10 @@ export class AppComponent {
 			console.debug('token from localstorage:  ' + token);
 			this.tokenProviderService.setToken(token);
 			this.authService.validate(token).subscribe(user => {
+				console.debug('received \'me\'', user);
 				this.userProviderService.setMe(user);
 			}, error => {
+				console.debug('error validating token');
 				this.tokenProviderService.setToken(null);
 				error();
 			});
