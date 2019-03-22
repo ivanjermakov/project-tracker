@@ -2,7 +2,14 @@
   display: flex;
   align-items: flex-start;
   max-width: 1200px;
+  min-height: calc(100vh - 50px);
+
   margin: 50px auto 0 auto;
 
   background: white;
+
+  .content {
+    background: white;
+    width: 100%;
+  }
 }

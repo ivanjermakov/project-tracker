@@ -1,7 +1,7 @@
 <div class="project" (click)="open()">
 	<div class="is-open-status">
-		<i class="fas fa-unlock-alt public" *ngIf="project.isPublic === true"></i>
-		<i class="fas fa-lock private" *ngIf="project.isPublic === false"></i>
+		<i class="fas fa-unlock-alt public-wrapper" *ngIf="project.isPublic === true"></i>
+		<i class="fas fa-lock private-wrapper" *ngIf="project.isPublic === false"></i>
 	</div>
 	<div class="text">{{me.userCredentials.login}}</div>
 	<div class="text">/</div>

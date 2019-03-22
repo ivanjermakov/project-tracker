@@ -10,8 +10,9 @@ import {AuthComponent} from './component/auth/auth.component';
 import {RegisterComponent} from './component/register/register.component';
 import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
-import { HeaderComponent } from './component/header/header.component';
-import { FeedProjectComponent } from './component/feed-project/feed-project.component';
+import {HeaderComponent} from './component/header/header.component';
+import {FeedProjectComponent} from './component/feed-project/feed-project.component';
+import {NewProjectComponent} from './component/new-project/new-project.component';
 
 @NgModule({
 	declarations: [
@@ -22,7 +23,8 @@ import { FeedProjectComponent } from './component/feed-project/feed-project.comp
 		AuthComponent,
 		RegisterComponent,
 		HeaderComponent,
-		FeedProjectComponent
+		FeedProjectComponent,
+		NewProjectComponent
 	],
 	imports: [
 		BrowserModule,

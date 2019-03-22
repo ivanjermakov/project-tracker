@@ -5,6 +5,7 @@ import {RegisterComponent} from './component/register/register.component';
 import {FeedComponent} from './component/feed/feed.component';
 import {ProfileComponent} from './component/profile/profile.component';
 import {ProjectComponent} from './component/project/project.component';
+import {NewProjectComponent} from './component/new-project/new-project.component';
 
 const routes: Routes = [
 	{
@@ -22,6 +23,10 @@ const routes: Routes = [
 	{
 		path: 'profile',
 		component: ProfileComponent
+	},
+	{
+		path: 'project/create',
+		component: NewProjectComponent
 	},
 	{
 		path: ':login/:name',

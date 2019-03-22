@@ -6,7 +6,7 @@
 :root {
   --bright: #F5F5F5;
   --mainblue: #5390e4;
-  --darkblue: #447cd2;
+  --darkblue: 2;
   --dark: #494949;
 }
 
@@ -30,4 +30,8 @@ button {
   padding: 5px;
 
   cursor: pointer;
+}
+
+.heading {
+  font-size: 26px;
 }
