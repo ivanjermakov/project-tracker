@@ -10,6 +10,10 @@
     }
 
     .project-form {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+
       margin: 10px 10%;
 
       .name-wrapper, .description-wrapper {
@@ -26,35 +30,21 @@
         display: flex;
         flex-direction: column;
 
-        margin: 20px;
-
-        width: 100%;
+        margin: 10px;
 
         .public-wrapper, .private-wrapper {
           display: grid;
-          grid-template-columns: 30px 30px auto;
+          grid-template-columns: 40px auto;
           grid-template-rows: auto auto;
 
           align-items: center;
-          justify-items: start;
 
-          width: 100%;
+          transition: border 100ms;
 
-          input {
-            grid-column: 1/2;
-            grid-row: 1/3;
-
-            border: 0;
-            margin: 0;
-            width: 100%;
-            height: 18px;
-
-            align-self: center;
-            justify-self: center;
-          }
+          width: max-content;
 
           i {
-            grid-column: 2/3;
+            grid-column: 1/2;
             grid-row: 1/3;
 
 
@@ -62,18 +52,29 @@
           }
 
           .text {
-            grid-column: 3/4;
+            grid-column: 2/3;
             grid-row: 1/2;
-
-            width: 100%;
           }
 
           .description {
-            grid-column: 3/4;
+            grid-column: 2/3;
             grid-row: 2/3;
 
             font-size: 18px;
           }
+
+          .public {
+            color: var(--public-lock);
+          }
+
+          .private {
+            color: var(--private-lock);
+          }
+        }
+
+        .selected {
+          border-left: var(--mainblue) solid 4px;
+          background: var(--bright);
         }
       }
 

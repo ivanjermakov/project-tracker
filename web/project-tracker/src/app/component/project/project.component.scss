@@ -21,11 +21,11 @@
         }
 
         .public-wrapper {
-          color: #89d73a;
+          color: var(--public-lock);
         }
 
         .private-wrapper {
-          color: #ced73e;
+          color: var(--private-lock);
         }
       }
 
