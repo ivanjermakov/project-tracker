@@ -1,8 +1,38 @@
 .header-container {
   position: fixed;
+
+  display: flex;
+  align-items: center;
+
   width: 100%;
   top: 0;
   left: 0;
   height: 50px;
   background: var(--dark);
+
+  .logo {
+    width: 40px;
+    height: 40px;
+
+    margin: 5px;
+
+    cursor: pointer;
+  }
+
+  .search {
+    width: 350px;
+
+    input {
+      padding: 2px;
+      background-color: var(--gray);
+      color: white;
+      border: none;
+
+      width: 100%;
+    }
+
+    input::placeholder {
+      color: var(--lightgray);
+    }
+  }
 }
