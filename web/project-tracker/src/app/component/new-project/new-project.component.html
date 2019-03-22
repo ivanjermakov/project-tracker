@@ -5,7 +5,9 @@
 		<div class="heading">Create a new project</div>
 		<form class="project-form">
 			<div class="name-wrapper">
-				<div class="text">Project name</div>
+				<div class="text">Project name
+					<span class="required">*</span>
+				</div>
 				<input type="text" placeholder="name">
 			</div>
 			<div class="description-wrapper">
@@ -13,12 +15,14 @@
 				<input type="text" placeholder="description">
 			</div>
 			<div class="public-private">
-				<div class="public-wrapper" [ngClass]="{'selected': project.isPublic}" (click)="project.isPublic = true">
+				<div class="public-wrapper" [ngClass]="{'selected': project.isPublic}"
+				     (click)="project.isPublic = true">
 					<i class="fas fa-unlock-alt public"></i>
 					<div class="text">Public</div>
 					<div class="description">Anyone can see project and its activity</div>
 				</div>
-				<div class="private-wrapper" [ngClass]="{'selected': !project.isPublic}" (click)="project.isPublic = false">
+				<div class="private-wrapper" [ngClass]="{'selected': !project.isPublic}"
+				     (click)="project.isPublic = false">
 					<i class="fas fa-lock private"></i>
 					<div class="text">Private</div>
 					<div class="description">You manually give access to a project</div>

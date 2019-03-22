@@ -11,6 +11,8 @@
 
   --public-lock: #89d73a;
   --private-lock: #ced73e;
+
+  --required: #d75a63;
 }
 
 body {
@@ -22,6 +24,7 @@ body {
 input {
   border: silver solid 1px;
   border-radius: 4px;
+  padding: 3px;
 }
 
 button {
@@ -37,4 +40,8 @@ button {
 
 .heading {
   font-size: 26px;
+}
+
+.required {
+  color: var(--required);
 }

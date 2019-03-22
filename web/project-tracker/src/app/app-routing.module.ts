@@ -10,31 +10,39 @@ import {NewProjectComponent} from './component/new-project/new-project.component
 const routes: Routes = [
 	{
 		path: 'auth',
-		component: AuthComponent
+		component: AuthComponent,
+		data: {title: 'Auth'}
 	},
 	{
 		path: 'register',
-		component: RegisterComponent
+		component: RegisterComponent,
+		data: {title: 'Register'}
 	},
 	{
 		path: 'feed',
-		component: FeedComponent
-	},
-	{
-		path: 'profile',
-		component: ProfileComponent
+		component: FeedComponent,
+		data: {title: 'Feed'}
 	},
 	{
 		path: 'project/create',
-		component: NewProjectComponent
+		component: NewProjectComponent,
+		data: {title: 'New project'}
+	},
+	{
+		path: ':name',
+		component: ProfileComponent,
+		// TODO: change page title to user name
+		data: {title: 'Profile'}
 	},
 	{
 		path: ':login/:name',
-		component: ProjectComponent
+		component: ProjectComponent,
+		data: {title: 'Project'}
 	},
 	{
 		path: ':login/:name/overview',
-		redirectTo: ':login/:name'
+		redirectTo: ':login/:name',
+		data: {title: 'Project overview'}
 	}
 ];
 

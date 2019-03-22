@@ -1,10 +1,11 @@
 import {Component} from '@angular/core';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {LOCALSTORAGE_TOKEN_NAME} from '../globals';
 import {TokenProviderService} from './service/token.provider.service';
 import {UrlService} from './service/url.service';
 import {UserProviderService} from './service/user.provider.service';
 import {AuthService} from './service/auth.service';
+import {Title} from '@angular/platform-browser';
 
 @Component({
 	selector: 'app-root',
@@ -15,12 +16,23 @@ export class AppComponent {
 
 	constructor(
 		private router: Router,
+		private activatedRoute: ActivatedRoute,
+		private titleService: Title,
 		private authService: AuthService,
 		private tokenProviderService: TokenProviderService,
 		private userProviderService: UserProviderService,
 		private urlService: UrlService
 	) {
 		this.urlService.getViewPath((url) => {
+			console.debug('page initiation');
+
+			if (url !== '/') {
+				this.activatedRoute.firstChild.data.subscribe(d => {
+					console.debug(d['title']);
+					this.titleService.setTitle(d['title']);
+				});
+			}
+
 			if (url !== '/auth' && url !== '/register') {
 				this.autoLogin(() => {
 					if (url === '/') {
