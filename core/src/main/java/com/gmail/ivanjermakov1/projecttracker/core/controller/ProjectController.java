@@ -9,6 +9,7 @@ import com.gmail.ivanjermakov1.projecttracker.core.exception.NoSuchEntityExcepti
 import com.gmail.ivanjermakov1.projecttracker.core.service.ProjectService;
 import com.gmail.ivanjermakov1.projecttracker.core.service.UserService;
 import com.gmail.ivanjermakov1.projecttracker.core.util.Mapper;
+import com.gmail.ivanjermakov1.projecttracker.core.util.Streams;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,12 +18,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("project")
@@ -48,11 +47,10 @@ public class ProjectController {
 	public List<ProjectDto> all(@RequestHeader("token") String token, Pageable pageable) throws NoSuchEntityException {
 		User user = userService.validate(token);
 		
-		return projectService.all(user, pageable)
-				.stream()
-				.map(p -> Mapper.map(p, 0))
-				.sorted(Comparator.comparing(p -> p.created))
-				.collect(Collectors.toList());
+		return Streams.sortList(
+				Mapper.mapAll(projectService.all(user, pageable), ProjectDto.class),
+				Comparator.comparing(p -> p.created)
+		);
 	}
 	
 	@GetMapping("/{login}/{name}/get")
@@ -61,7 +59,7 @@ public class ProjectController {
 	                      @PathVariable String name) throws NoSuchEntityException {
 		User user = userService.validate(token);
 		
-		return Mapper.map(projectService.get(user, login, name), 0);
+		return Mapper.map(projectService.get(user, login, name), ProjectDto.class);
 	}
 	
 }

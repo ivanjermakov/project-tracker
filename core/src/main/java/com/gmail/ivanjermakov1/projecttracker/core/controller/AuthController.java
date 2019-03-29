@@ -36,7 +36,7 @@ public class AuthController {
 	@GetMapping("validate")
 	public UserDto validate(@RequestHeader("token") String token) throws NoSuchEntityException, IOException {
 		User user = userService.validate(token);
-		return Mapper.map(user);
+		return Mapper.map(user, UserDto.class);
 	}
 	
 }

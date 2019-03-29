@@ -1,41 +1,31 @@
 package com.gmail.ivanjermakov1.projecttracker.core.util;
 
-import com.gmail.ivanjermakov1.projecttracker.core.dto.ProjectDto;
-import com.gmail.ivanjermakov1.projecttracker.core.dto.UserCredentialsDto;
-import com.gmail.ivanjermakov1.projecttracker.core.dto.UserDto;
-import com.gmail.ivanjermakov1.projecttracker.core.dto.UserInfoDto;
-import com.gmail.ivanjermakov1.projecttracker.core.entity.Project;
-import com.gmail.ivanjermakov1.projecttracker.core.entity.User;
+import org.modelmapper.ModelMapper;
+import org.modelmapper.convention.MatchingStrategies;
+
+import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class Mapper {
 	
-	public static UserDto map(User user) {
-		return new UserDto(
-				user.getId(),
-				user.getJoined(),
-				new UserInfoDto(
-						user.getUserInfo().getName(),
-						user.getUserInfo().getBio(),
-						user.getUserInfo().getUrl(),
-						user.getUserInfo().getCompany(),
-						user.getUserInfo().getLocation()
-				),
-				new UserCredentialsDto(
-						user.getUserCredentials().getLogin()
-				)
-		);
+	private static ModelMapper modelMapper;
+	
+	static {
+		modelMapper = new ModelMapper();
+		modelMapper.getConfiguration()
+				.setFieldMatchingEnabled(true)
+				.setMatchingStrategy(MatchingStrategies.LOOSE);
 	}
 	
-	public static ProjectDto map(Project project, Integer progress) {
-		return new ProjectDto(
-				project.getId(),
-				project.getPublic(),
-				project.getCreated(),
-				project.getProjectInfo().getName(),
-				project.getProjectInfo().getDescription(),
-				project.getProjectInfo().getAbout(),
-				progress
-		);
+	public static <S, T> T map(S source, Class<T> targetClass) {
+		return modelMapper.map(source, targetClass);
+	}
+	
+	public static <S, T> List<T> mapAll(Collection<? extends S> sourceList, Class<T> targetClass) {
+		return sourceList.stream()
+				.map(e -> map(e, targetClass))
+				.collect(Collectors.toList());
 	}
 	
 }

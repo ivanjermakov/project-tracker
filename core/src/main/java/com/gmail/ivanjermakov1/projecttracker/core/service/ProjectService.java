@@ -15,11 +15,13 @@ import com.gmail.ivanjermakov1.projecttracker.core.util.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
+@Transactional
 public class ProjectService {
 	
 	private final ProjectRepository projectRepository;
@@ -57,7 +59,7 @@ public class ProjectService {
 		roleRepository.save(new Role(project, user, UserRole.OWNER));
 
 //		TODO: feature: progress
-		return Mapper.map(project, 0);
+		return Mapper.map(project, ProjectDto.class);
 	}
 	
 	public List<Project> all(User user, Pageable pageable) {

@@ -10,22 +10,16 @@ public class ProjectDto {
 	public Boolean isPublic;
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	public LocalDateTime created;
-	public String name;
-	public String description;
-	public String about;
-	public Integer progress;
+	public ProjectInfoDto projectInfo;
 	
 	public ProjectDto() {
 	}
 	
-	public ProjectDto(Long id, Boolean isPublic, LocalDateTime created, String name, String description, String about, Integer progress) {
+	public ProjectDto(Long id, Boolean isPublic, LocalDateTime created, ProjectInfoDto projectInfo) {
 		this.id = id;
 		this.isPublic = isPublic;
 		this.created = created;
-		this.name = name;
-		this.description = description;
-		this.about = about;
-		this.progress = progress;
+		this.projectInfo = projectInfo;
 	}
 	
 }
