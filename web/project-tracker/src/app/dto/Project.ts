@@ -5,5 +5,4 @@ export class Project {
 	name: string;
 	description: string;
 	about: string;
-	progress: number;
 }

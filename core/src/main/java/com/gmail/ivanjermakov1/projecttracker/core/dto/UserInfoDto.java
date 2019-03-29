@@ -2,6 +2,7 @@ package com.gmail.ivanjermakov1.projecttracker.core.dto;
 
 public class UserInfoDto {
 	
+	public Integer id;
 	public String name;
 	public String bio;
 	public String url;
@@ -11,7 +12,8 @@ public class UserInfoDto {
 	public UserInfoDto() {
 	}
 	
-	public UserInfoDto(String name, String bio, String url, String company, String location) {
+	public UserInfoDto(Integer id, String name, String bio, String url, String company, String location) {
+		this.id = id;
 		this.name = name;
 		this.bio = bio;
 		this.url = url;

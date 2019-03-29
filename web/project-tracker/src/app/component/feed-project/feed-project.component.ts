@@ -32,7 +32,7 @@ export class FeedProjectComponent implements OnInit {
 		console.debug('open project');
 		this.tokenProviderService.token.subscribe(token => {
 			this.authService.validate(token).subscribe(user => {
-				this.router.navigate([user.userCredentials.login, this.project.name]);
+				this.router.navigate([user.login, this.project.name]);
 			});
 		});
 	}

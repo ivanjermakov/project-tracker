@@ -10,16 +10,16 @@ public class UserDto {
 	@JsonFormat(pattern = "yyyy-MM-dd")
 	public LocalDate joined;
 	public UserInfoDto userInfo;
-	public UserCredentialsDto userCredentials;
+	public String login;
 	
 	public UserDto() {
 	}
 	
-	public UserDto(Long id, LocalDate joined, UserInfoDto userInfo, UserCredentialsDto userCredentials) {
+	public UserDto(Long id, LocalDate joined, UserInfoDto userInfo, String login) {
 		this.id = id;
 		this.joined = joined;
 		this.userInfo = userInfo;
-		this.userCredentials = userCredentials;
+		this.login = login;
 	}
 	
 }

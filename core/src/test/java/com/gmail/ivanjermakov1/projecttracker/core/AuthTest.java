@@ -46,7 +46,7 @@ public class AuthTest {
 		
 		UserDto user = authController.validate(token);
 		Assert.assertNotNull(user);
-		Assert.assertEquals(user.userCredentials.login, registerUserDto.login);
+		Assert.assertEquals(user.login, registerUserDto.login);
 	}
 	
 }

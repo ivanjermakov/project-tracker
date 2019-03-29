@@ -1,9 +1,8 @@
 import {UserInfo} from './UserInfo';
-import {UserCredentials} from './UserCredentials';
 
 export class User {
 	id: number;
+	login: string;
 	joined: Date;
 	userInfo: UserInfo;
-	userCredentials: UserCredentials;
 }
