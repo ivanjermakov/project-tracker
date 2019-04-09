@@ -1,15 +1,24 @@
 <app-header></app-header>
 <div class="content-container" *ngIf="project && me">
 	<div class="project">
-		<div class="header">
-			<div class="is-open-status">
-				<i class="fas fa-unlock-alt public-wrapper" *ngIf="project.isPublic === true"></i>
-				<i class="fas fa-lock private-wrapper" *ngIf="project.isPublic === false"></i>
-			</div>
-			<div class="name">
-				<div class="text">{{me.login}}</div>
-				<div class="text delimiter">/</div>
-				<div class="text">{{project.name}}</div>
+		<div class="header-container">
+			<div class="header">
+				<div class="is-open-status">
+					<i class="fas fa-unlock-alt public-wrapper" *ngIf="project.isPublic === true"></i>
+					<i class="fas fa-lock private-wrapper" *ngIf="project.isPublic === false"></i>
+				</div>
+				<div class="name">
+					<div class="text" [routerLink]="'/' + me.login">
+						{{me.login}}
+					</div>
+					<div class="text delimiter">/</div>
+					<div class="text" [routerLink]="'/' + me.login + '/' + project.name">
+						{{project.name}}
+					</div>
+				</div>
+				<div class="created">
+					<div class="text">created on {{formatDate(project.created)}}</div>
+				</div>
 			</div>
 		</div>
 		<div class="description-container">

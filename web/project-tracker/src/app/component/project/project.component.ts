@@ -7,6 +7,8 @@ import {UrlService} from '../../service/url.service';
 import {UserProviderService} from '../../service/user.provider.service';
 import {User} from '../../dto/User';
 
+import * as moment from 'moment';
+
 @Component({
 	selector: 'app-project',
 	templateUrl: './project.component.html',
@@ -44,6 +46,10 @@ export class ProjectComponent implements OnInit {
 				});
 			});
 		});
+	}
+
+	formatDate(date: Date) {
+		return moment(date).format('MMMM Do[, ] YYYY [ at ] HH:mm');
 	}
 
 }

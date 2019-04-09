@@ -3,6 +3,10 @@
   font-family: 'Open Sans', sans-serif;
 }
 
+*:focus {
+  outline: 0;
+}
+
 :root {
   --bright: #F5F5F5;
   --mainblue: #5390e4;

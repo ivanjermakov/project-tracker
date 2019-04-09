@@ -7,39 +7,62 @@
 
     width: 100%;
 
-    .header {
-      display: flex;
-      align-items: center;
+    .header-container {
+      background: url('../../../assets/header/project-header.jpg');
+      background-size: cover;
 
-      padding: 10px;
-
-      .is-open-status {
-
-        i {
-          font-size: 20px;
-          padding: 6px;
-        }
-
-        .public-wrapper {
-          color: var(--public-lock);
-        }
-
-        .private-wrapper {
-          color: var(--private-lock);
-        }
-      }
-
-      .name {
+      .header {
         display: flex;
         align-items: center;
 
-        .text {
-          color: var(--darkblue);
+        padding: 200px 15px 15px 15px;
+        background: rgba(255, 255, 255, 0.7);
+
+        .is-open-status {
+
+          i {
+            font-size: 20px;
+            padding: 6px;
+          }
+
+          .public-wrapper {
+            color: var(--public-lock);
+          }
+
+          .private-wrapper {
+            color: var(--private-lock);
+          }
         }
 
-        .delimiter {
-          color: var(--dark);
-          margin: 0 4px;
+        .name {
+          display: flex;
+          align-items: center;
+
+          .text {
+            color: var(--darkblue);
+
+            cursor: pointer;
+          }
+
+          .text:hover {
+            text-decoration: underline;
+          }
+
+          .delimiter {
+            color: var(--dark);
+            margin: 0 4px;
+          }
+        }
+
+        .created {
+          margin-left: auto;
+
+          .text {
+            margin: 4px;
+
+            font-size: 18px;
+            color: var(--gray);
+          }
         }
       }
     }
