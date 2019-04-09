@@ -3,7 +3,6 @@ package com.gmail.ivanjermakov1.projecttracker.core.dto;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.gmail.ivanjermakov1.projecttracker.core.entity.enums.TaskType;
 
-import java.time.Duration;
 import java.time.LocalDateTime;
 
 public class NewTaskDto {

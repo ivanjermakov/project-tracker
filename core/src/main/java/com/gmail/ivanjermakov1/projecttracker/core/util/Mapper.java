@@ -1,8 +1,5 @@
 package com.gmail.ivanjermakov1.projecttracker.core.util;
 
-import com.gmail.ivanjermakov1.projecttracker.core.dto.UserInfoDto;
-import com.gmail.ivanjermakov1.projecttracker.core.entity.UserInfo;
-import org.modelmapper.Conditions;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 
