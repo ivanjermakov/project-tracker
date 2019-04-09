@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -22,12 +24,17 @@ public class TaskInfo {
 	@Column(name = "description")
 	private String description;
 	
+	@OneToOne
+	@JoinColumn(name = "task_id")
+	private Task task;
+	
 	public TaskInfo() {
 	}
 	
-	public TaskInfo(String name, String description) {
+	public TaskInfo(String name, String description, Task task) {
 		this.name = name;
 		this.description = description;
+		this.task = task;
 	}
 	
 	public Long getId() {
@@ -52,6 +59,14 @@ public class TaskInfo {
 	
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	
+	public Task getTask() {
+		return task;
+	}
+	
+	public void setTask(Task task) {
+		this.task = task;
 	}
 	
 }

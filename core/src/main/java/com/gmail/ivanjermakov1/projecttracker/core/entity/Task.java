@@ -15,7 +15,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -37,10 +36,10 @@ public class Task {
 	private TaskType type;
 	
 	@Column(name = "estimate")
-	private Duration estimate;
+	private Double estimate;
 	
 	@Column(name = "elapsed")
-	private Duration elapsed;
+	private Double elapsed;
 	
 	@Column(name = "opened")
 	private LocalDateTime opened;
@@ -48,8 +47,7 @@ public class Task {
 	@Column(name = "due")
 	private LocalDateTime due;
 	
-	@OneToOne(cascade = {CascadeType.ALL}, orphanRemoval = true)
-	@JoinColumn(name = "task_id", nullable = false)
+	@OneToOne(mappedBy = "task", cascade = {CascadeType.ALL}, orphanRemoval = true)
 	private TaskInfo taskInfo;
 	
 	@ManyToMany
@@ -63,7 +61,7 @@ public class Task {
 	public Task() {
 	}
 	
-	public Task(Project project, TaskType type, Duration estimate, Duration elapsed, LocalDateTime opened, LocalDateTime due, TaskInfo taskInfo, List<Task> subtasks) {
+	public Task(Project project, TaskType type, Double estimate, Double elapsed, LocalDateTime opened, LocalDateTime due, TaskInfo taskInfo, List<Task> subtasks) {
 		this.project = project;
 		this.type = type;
 		this.estimate = estimate;
@@ -98,19 +96,19 @@ public class Task {
 		this.type = type;
 	}
 	
-	public Duration getEstimate() {
+	public Double getEstimate() {
 		return estimate;
 	}
 	
-	public void setEstimate(Duration estimate) {
+	public void setEstimate(Double estimate) {
 		this.estimate = estimate;
 	}
 	
-	public Duration getElapsed() {
+	public Double getElapsed() {
 		return elapsed;
 	}
 	
-	public void setElapsed(Duration elapsed) {
+	public void setElapsed(Double elapsed) {
 		this.elapsed = elapsed;
 	}
 	

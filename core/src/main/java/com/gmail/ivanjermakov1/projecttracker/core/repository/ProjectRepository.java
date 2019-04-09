@@ -11,7 +11,6 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 
-@Repository
 public interface ProjectRepository extends CrudRepository<Project, Long> {
 	
 	@Query("select p from Project p join p.projectInfo i where p.user.id = :userId and i.name = :name")

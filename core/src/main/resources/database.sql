@@ -60,15 +60,15 @@ alter table project_info
 
 create table task
 (
-  id         bigint  not null
+  id         bigserial not null
     constraint task_pk
       primary key,
-  project_id bigint  not null
+  project_id bigint    not null
     constraint task_project_id_fk
       references project,
-  type       varchar not null,
-  estimate   interval,
-  elapsed    interval,
+  type       varchar   not null,
+  estimate   double precision,
+  elapsed    double precision,
   opened     timestamp,
   due        timestamp
 );

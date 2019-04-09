@@ -71,4 +71,10 @@ public class ProjectService {
 		return projectRepository.findByLoginAndName(login, name).orElseThrow(() -> new NoSuchEntityException("no such project"));
 	}
 	
+	public Project get(User user, Long projectId) throws NoSuchEntityException {
+		Project project = projectRepository.findById(projectId).orElseThrow(() -> new NoSuchEntityException("no such project"));
+		
+		return get(user, project.getUser().getUserCredentials().getLogin(), project.getProjectInfo().getName());
+	}
+	
 }

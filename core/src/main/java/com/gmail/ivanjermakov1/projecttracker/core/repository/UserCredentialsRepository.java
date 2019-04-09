@@ -6,7 +6,6 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
-@Repository
 public interface UserCredentialsRepository extends CrudRepository<UserCredentials, Long> {
 	
 	Optional<UserCredentials> findByLogin(String login);
