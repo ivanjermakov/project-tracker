@@ -33,7 +33,7 @@ public class AuthTest {
 	private RegisterUserDto registerUserDto;
 	
 	@Before
-	public void registerUser() throws RegistrationException, AuthenticationException, NoSuchEntityException {
+	public void registerUser() throws RegistrationException {
 		registerUserDto = new RegisterUserDto("test", "password");
 		
 		registerController.register(registerUserDto);
