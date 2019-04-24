@@ -8,6 +8,8 @@ import {UserProviderService} from '../../service/user.provider.service';
 import {User} from '../../dto/User';
 
 import * as moment from 'moment';
+import {EditProject} from '../../dto/EditProject';
+import {AuthService} from '../../service/auth.service';
 
 @Component({
 	selector: 'app-project',
@@ -19,8 +21,13 @@ import * as moment from 'moment';
 })
 export class ProjectComponent implements OnInit {
 
+	// TODO: public/private edit
+
 	project: Project;
+	beforeEditProject: Project;
 	me: User;
+	mine: boolean;
+	editMode: boolean = false;
 
 	constructor(
 		private router: Router,
@@ -29,6 +36,7 @@ export class ProjectComponent implements OnInit {
 		private projectService: ProjectService,
 		private tokenProviderService: TokenProviderService,
 		private userProviderService: UserProviderService,
+		private authService: AuthService
 	) {
 	}
 
@@ -36,6 +44,7 @@ export class ProjectComponent implements OnInit {
 		console.debug('project initiation');
 		this.userProviderService.me.subscribe(me => {
 			this.me = me;
+			console.debug('me: ', this.me);
 		});
 		this.route.params.subscribe(params => {
 			console.debug('params', params);
@@ -43,6 +52,8 @@ export class ProjectComponent implements OnInit {
 				this.projectService.get(token, params['login'], params['name']).subscribe(project => {
 					this.project = project;
 					console.debug(project);
+					this.mine = project.user.id === this.me.id;
+					console.debug('mine: ', this.mine);
 				});
 			});
 		});
@@ -52,4 +63,32 @@ export class ProjectComponent implements OnInit {
 		return moment(date).format('MMMM Do[, ] YYYY [ at ] HH:mm');
 	}
 
+	edit() {
+		this.beforeEditProject = JSON.parse(JSON.stringify(this.project));
+		this.editMode = true;
+	}
+
+	cancelEdit() {
+		this.editMode = false;
+		this.project = this.beforeEditProject;
+		this.beforeEditProject = null;
+	}
+
+	applyEdit() {
+		let editProject = new EditProject();
+		editProject.id = this.project.id;
+		editProject.isPublic = this.project.isPublic;
+		editProject.name = this.project.name;
+		editProject.description = this.project.description;
+		editProject.about = this.project.about;
+
+		this.tokenProviderService.token.subscribe(token => {
+			this.projectService.edit(token, editProject).subscribe(project => {
+				this.editMode = false;
+				this.authService.validate(token).subscribe(user => {
+					this.router.navigate([user.login, project.name]);
+				});
+			});
+		});
+	}
 }

@@ -8,11 +8,11 @@
 				<div class="text">Project name
 					<span class="required">*</span>
 				</div>
-				<input type="text" placeholder="name">
+				<input type="text" placeholder="name" name="name" [(ngModel)]="project.name">
 			</div>
 			<div class="description-wrapper">
 				<div class="text">Description</div>
-				<input type="text" placeholder="description">
+				<input type="text" placeholder="description" name="description" [(ngModel)]="project.description">
 			</div>
 			<div class="public-private">
 				<div class="public-wrapper" [ngClass]="{'selected': project.isPublic}"
@@ -28,7 +28,7 @@
 					<div class="description">You manually give access to a project</div>
 				</div>
 			</div>
-			<button type="submit">Create project</button>
+			<button type="submit" (click)="create()">Create project</button>
 		</form>
 	</div>
 </div>

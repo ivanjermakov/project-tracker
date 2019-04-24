@@ -54,6 +54,21 @@
           }
         }
 
+        .edit {
+          margin: 2px;
+
+          i {
+            color: var(--gray);
+            font-size: 20px;
+            padding: 4px;
+            cursor: pointer
+          }
+
+          i:hover {
+            color: var(--mainblue);
+          }
+        }
+
         .created {
           margin-left: auto;
 
@@ -92,5 +107,22 @@
 
       }
     }
+
+    .edit-choice {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      padding: 10px;
+
+      * {
+        margin: 0 10px;
+      }
+    }
   }
+}
+
+.editing {
+  border: 1px solid silver;
+  border-radius: 4px;
 }

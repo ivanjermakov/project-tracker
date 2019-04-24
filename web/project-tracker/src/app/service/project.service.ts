@@ -5,6 +5,7 @@ import {Observable} from 'rxjs';
 import {Project} from '../dto/Project';
 import {API_URL} from '../../globals';
 import {Pageable} from '../dto/Pageable';
+import {EditProject} from '../dto/EditProject';
 
 @Injectable({
 	providedIn: 'root'
@@ -31,4 +32,7 @@ export class ProjectService {
 		});
 	}
 
+	edit(token: string, editProject: EditProject) {
+		return this.http.post<Project>(API_URL + 'project/edit', editProject, {headers: {token: token}});
+	}
 }

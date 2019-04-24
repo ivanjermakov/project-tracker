@@ -34,7 +34,7 @@ input {
 }
 
 button {
-  background: var(--mainblue);
+  background: var(--darkblue);
 
   color: white;
   border: none;
@@ -42,6 +42,20 @@ button {
   padding: 5px;
 
   cursor: pointer;
+
+  transition: background-color ease-in-out 50ms;
+}
+
+.cancel {
+  cursor:pointer;
+}
+
+.cancel:hover {
+  text-decoration: underline;
+}
+
+button:hover {
+  background: var(--mainblue);
 }
 
 .heading {
