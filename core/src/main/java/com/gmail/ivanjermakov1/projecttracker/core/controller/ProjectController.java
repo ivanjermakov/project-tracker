@@ -1,6 +1,7 @@
 package com.gmail.ivanjermakov1.projecttracker.core.controller;
 
 
+import com.gmail.ivanjermakov1.projecttracker.core.dto.EditProjectDto;
 import com.gmail.ivanjermakov1.projecttracker.core.dto.NewProjectDto;
 import com.gmail.ivanjermakov1.projecttracker.core.dto.ProjectDto;
 import com.gmail.ivanjermakov1.projecttracker.core.entity.User;
@@ -41,6 +42,13 @@ public class ProjectController {
 		User user = userService.validate(token);
 		
 		return projectService.create(user, newProjectDto);
+	}
+	
+	@PostMapping("edit")
+	public ProjectDto edit(@RequestHeader("token") String token, @RequestBody EditProjectDto editProjectDto) throws NoSuchEntityException, DuplicationException {
+		User user = userService.validate(token);
+		
+		return Mapper.map(projectService.edit(user, editProjectDto), ProjectDto.class);
 	}
 	
 	@GetMapping("all")

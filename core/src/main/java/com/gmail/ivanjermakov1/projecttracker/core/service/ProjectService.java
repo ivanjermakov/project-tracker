@@ -1,5 +1,6 @@
 package com.gmail.ivanjermakov1.projecttracker.core.service;
 
+import com.gmail.ivanjermakov1.projecttracker.core.dto.EditProjectDto;
 import com.gmail.ivanjermakov1.projecttracker.core.dto.NewProjectDto;
 import com.gmail.ivanjermakov1.projecttracker.core.dto.ProjectDto;
 import com.gmail.ivanjermakov1.projecttracker.core.entity.Project;
@@ -60,6 +61,18 @@ public class ProjectService {
 
 //		TODO: feature: progress
 		return Mapper.map(project, ProjectDto.class);
+	}
+	
+	public Project edit(User user, EditProjectDto editProjectDto) throws NoSuchEntityException {
+//		TODO: authorization
+		Project project = this.projectRepository.findById(editProjectDto.id).orElseThrow(() -> new NoSuchEntityException("no such project to edit"));
+		
+		project.setPublic(editProjectDto.isPublic);
+		project.getProjectInfo().setName(editProjectDto.name);
+		project.getProjectInfo().setDescription(editProjectDto.description);
+		project.getProjectInfo().setAbout(editProjectDto.about);
+		
+		return projectRepository.save(project);
 	}
 	
 	public List<Project> all(User user, Pageable pageable) {

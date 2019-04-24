@@ -13,17 +13,19 @@ public class ProjectDto {
 	public String name;
 	public String description;
 	public String about;
+	public UserDto user;
 	
 	public ProjectDto() {
 	}
 	
-	public ProjectDto(Long id, Boolean isPublic, LocalDateTime created, String name, String description, String about, Integer progress) {
+	public ProjectDto(Long id, Boolean isPublic, LocalDateTime created, String name, String description, String about, UserDto user) {
 		this.id = id;
 		this.isPublic = isPublic;
 		this.created = created;
 		this.name = name;
 		this.description = description;
 		this.about = about;
+		this.user = user;
 	}
 	
 }
