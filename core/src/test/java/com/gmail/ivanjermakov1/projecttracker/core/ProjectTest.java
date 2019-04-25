@@ -41,11 +41,6 @@ public class ProjectTest {
 	private int projectsCount;
 	
 	@Before
-	public void registerUser() throws RegistrationException {
-	
-	}
-	
-	@Before
 	public void registerUserAndInitProjects() throws AuthenticationException, NoSuchEntityException, RegistrationException {
 		RegisterUserDto registerUserDto = new RegisterUserDto("test", "password");
 		registerController.register(registerUserDto);
