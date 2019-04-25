@@ -37,7 +37,6 @@ public class ProjectTest {
 	@Autowired
 	private ProjectController projectController;
 	
-	private RegisterUserDto registerUserDto;
 	private String token;
 	private int projectsCount;
 	
@@ -48,7 +47,7 @@ public class ProjectTest {
 	
 	@Before
 	public void registerUserAndInitProjects() throws AuthenticationException, NoSuchEntityException, RegistrationException {
-		registerUserDto = new RegisterUserDto("test", "password");
+		RegisterUserDto registerUserDto = new RegisterUserDto("test", "password");
 		registerController.register(registerUserDto);
 		
 		token = authController.authenticate(new AuthUserDto(registerUserDto.login, registerUserDto.password));
