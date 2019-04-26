@@ -30,6 +30,7 @@ public class TaskService {
 	public Task create(User user, NewTaskDto newTaskDto) throws NoSuchEntityException {
 		Task task = new Task(
 				projectService.get(user, newTaskDto.projectId),
+				user,
 				newTaskDto.type,
 				newTaskDto.estimate,
 				0d,

@@ -27,8 +27,8 @@ public class Activity {
 	private Task task;
 	
 	@ManyToOne
-	@JoinColumn(name = "user_id")
-	private User user;
+	@JoinColumn(name = "assignee_id")
+	private User assignee;
 	
 	@Enumerated
 	@Column(name = "status")
@@ -46,9 +46,9 @@ public class Activity {
 	public Activity() {
 	}
 	
-	public Activity(Task task, User user, TaskStatus status, Integer completion_difference, LocalDateTime timestamp, String description) {
+	public Activity(Task task, User assignee, TaskStatus status, Integer completion_difference, LocalDateTime timestamp, String description) {
 		this.task = task;
-		this.user = user;
+		this.assignee = assignee;
 		this.status = status;
 		this.completion_difference = completion_difference;
 		this.timestamp = timestamp;
@@ -71,12 +71,12 @@ public class Activity {
 		this.task = task;
 	}
 	
-	public User getUser() {
-		return user;
+	public User getAssignee() {
+		return assignee;
 	}
 	
-	public void setUser(User user) {
-		this.user = user;
+	public void setAssignee(User assignee) {
+		this.assignee = assignee;
 	}
 	
 	public TaskStatus getStatus() {

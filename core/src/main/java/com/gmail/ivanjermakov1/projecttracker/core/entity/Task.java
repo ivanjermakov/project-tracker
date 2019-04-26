@@ -31,6 +31,10 @@ public class Task {
 	@JoinColumn(name = "project_id")
 	private Project project;
 	
+	@ManyToOne
+	@JoinColumn(name = "creator_id")
+	private User creator;
+	
 	@Enumerated
 	@Column(name = "type")
 	private TaskType type;
@@ -61,8 +65,9 @@ public class Task {
 	public Task() {
 	}
 	
-	public Task(Project project, TaskType type, Double estimate, Double elapsed, LocalDateTime opened, LocalDateTime due, TaskInfo taskInfo, List<Task> subtasks) {
+	public Task(Project project, User creator, TaskType type, Double estimate, Double elapsed, LocalDateTime opened, LocalDateTime due, TaskInfo taskInfo, List<Task> subtasks) {
 		this.project = project;
+		this.creator = creator;
 		this.type = type;
 		this.estimate = estimate;
 		this.elapsed = elapsed;
@@ -86,6 +91,14 @@ public class Task {
 	
 	public void setProject(Project project) {
 		this.project = project;
+	}
+	
+	public User getCreator() {
+		return creator;
+	}
+	
+	public void setCreator(User creator) {
+		this.creator = creator;
 	}
 	
 	public TaskType getType() {
