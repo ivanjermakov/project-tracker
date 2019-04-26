@@ -3,22 +3,32 @@
 	<div class="project">
 		<div class="header-container">
 			<div class="header">
-				<div class="is-open-status">
-					<i class="fas fa-unlock-alt public-wrapper" *ngIf="project.isPublic === true"></i>
-					<i class="fas fa-lock private-wrapper" *ngIf="project.isPublic === false"></i>
+				<div class="is-open-status"
+				     [ngClass]="{'editing': editMode}"
+				     (click)="editMode ? project.isPublic = !project.isPublic : null">
+					<i class="fas fa-unlock-alt public-wrapper"
+					   *ngIf="project.isPublic === true"></i>
+					<i class="fas fa-lock private-wrapper"
+					   *ngIf="project.isPublic === false"></i>
 				</div>
 				<div class="name">
-					<div class="text" [routerLink]="'/' + me.login">
+					<div class="text"
+					     [routerLink]="'/' + me.login">
 						{{me.login}}
 					</div>
 					<div class="text delimiter">/</div>
-					<div class="text" [ngClass]="{'editing': editMode}" [contentEditable]="editMode"
-					     [routerLink]="'/' + me.login + '/' + project.name" [textContent]="project.name"
+					<div class="text"
+					     [ngClass]="{'editing': editMode}"
+					     [contentEditable]="editMode"
+					     [routerLink]="'/' + me.login + '/' + project.name"
+					     [textContent]="project.name"
 					     (input)="project.name = $event.target.textContent">
 						{{project.name}}
 					</div>
 				</div>
-				<div class="edit" *ngIf="!editMode" (click)="edit()">
+				<div class="edit"
+				     *ngIf="!editMode"
+				     (click)="edit()">
 					<i class="fas fa-pen"></i>
 				</div>
 				<div class="created">
@@ -26,24 +36,37 @@
 				</div>
 			</div>
 		</div>
-		<div class="description-container" *ngIf="(project.description && project.description.length != 0) || editMode">
+		<div class="description-container"
+		     *ngIf="(project.description && project.description.length != 0) || editMode">
 			<div class="description">Description</div>
-			<div class="text" [ngClass]="{'editing': editMode}"
-			     [contentEditable]="editMode" [textContent]="project.description"
-			     (input)="project.description = $event.target.textContent">{{project.description}}</div>
+			<div class="text"
+			     [ngClass]="{'editing': editMode}"
+			     [contentEditable]="editMode"
+			     [textContent]="project.description"
+			     (input)="project.description = $event.target.textContent">
+				{{project.description}}
+			</div>
 		</div>
-		<div class="tasks-container" *ngIf="!editMode">
-
+		<div class="tasks-container"
+		     *ngIf="!editMode">
 		</div>
-		<div class="about-container" *ngIf="(project.about && project.about.length != 0) || editMode">
+		<div class="about-container"
+		     *ngIf="(project.about && project.about.length != 0) || editMode">
 			<div class="about">About</div>
-			<div class="text" [ngClass]="{'editing': editMode}" [contentEditable]="editMode"
+			<div class="text"
+			     [ngClass]="{'editing': editMode}"
+			     [contentEditable]="editMode"
 			     [textContent]="project.about"
 			     (input)="project.about = $event.target.textContent">{{project.about}}</div>
 		</div>
-		<div class="edit-choice" *ngIf="editMode">
-			<button (click)="applyEdit()">Apply</button>
-			<div class="cancel" (click)="cancelEdit()">Cancel</div>
+		<div class="edit-choice"
+		     *ngIf="editMode">
+			<button
+					(click)="applyEdit()">Apply
+			</button>
+			<div class="cancel"
+			     (click)="cancelEdit()">Cancel
+			</div>
 		</div>
 	</div>
 </div>
