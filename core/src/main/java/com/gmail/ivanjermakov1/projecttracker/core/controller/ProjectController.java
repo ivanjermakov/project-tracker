@@ -5,6 +5,7 @@ import com.gmail.ivanjermakov1.projecttracker.core.dto.EditProjectDto;
 import com.gmail.ivanjermakov1.projecttracker.core.dto.NewProjectDto;
 import com.gmail.ivanjermakov1.projecttracker.core.dto.ProjectDto;
 import com.gmail.ivanjermakov1.projecttracker.core.entity.User;
+import com.gmail.ivanjermakov1.projecttracker.core.exception.AuthorizationException;
 import com.gmail.ivanjermakov1.projecttracker.core.exception.DuplicationException;
 import com.gmail.ivanjermakov1.projecttracker.core.exception.NoSuchEntityException;
 import com.gmail.ivanjermakov1.projecttracker.core.service.ProjectService;
@@ -45,7 +46,7 @@ public class ProjectController {
 	}
 	
 	@PostMapping("edit")
-	public ProjectDto edit(@RequestHeader("token") String token, @RequestBody EditProjectDto editProjectDto) throws NoSuchEntityException, DuplicationException {
+	public ProjectDto edit(@RequestHeader("token") String token, @RequestBody EditProjectDto editProjectDto) throws NoSuchEntityException, DuplicationException, AuthorizationException {
 		User user = userService.validate(token);
 		
 		return Mapper.map(projectService.edit(user, editProjectDto), ProjectDto.class);
@@ -64,7 +65,7 @@ public class ProjectController {
 	@GetMapping("/{login}/{name}/get")
 	public ProjectDto get(@RequestHeader("token") String token,
 	                      @PathVariable String login,
-	                      @PathVariable String name) throws NoSuchEntityException {
+	                      @PathVariable String name) throws NoSuchEntityException, AuthorizationException {
 		User user = userService.validate(token);
 		
 		return Mapper.map(projectService.get(user, login, name), ProjectDto.class);

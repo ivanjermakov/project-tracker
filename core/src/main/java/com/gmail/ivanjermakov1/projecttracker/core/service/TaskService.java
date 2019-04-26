@@ -5,6 +5,7 @@ import com.gmail.ivanjermakov1.projecttracker.core.dto.NewTaskDto;
 import com.gmail.ivanjermakov1.projecttracker.core.entity.Task;
 import com.gmail.ivanjermakov1.projecttracker.core.entity.TaskInfo;
 import com.gmail.ivanjermakov1.projecttracker.core.entity.User;
+import com.gmail.ivanjermakov1.projecttracker.core.exception.AuthorizationException;
 import com.gmail.ivanjermakov1.projecttracker.core.exception.NoSuchEntityException;
 import com.gmail.ivanjermakov1.projecttracker.core.repository.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,7 @@ public class TaskService {
 		this.taskRepository = taskRepository;
 	}
 	
-	public Task create(User user, NewTaskDto newTaskDto) throws NoSuchEntityException {
+	public Task create(User user, NewTaskDto newTaskDto) throws NoSuchEntityException, AuthorizationException {
 		Task task = new Task(
 				projectService.get(user, newTaskDto.projectId),
 				user,

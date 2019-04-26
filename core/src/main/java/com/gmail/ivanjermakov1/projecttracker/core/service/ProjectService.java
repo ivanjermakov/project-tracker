@@ -8,6 +8,7 @@ import com.gmail.ivanjermakov1.projecttracker.core.entity.ProjectInfo;
 import com.gmail.ivanjermakov1.projecttracker.core.entity.Role;
 import com.gmail.ivanjermakov1.projecttracker.core.entity.User;
 import com.gmail.ivanjermakov1.projecttracker.core.entity.enums.UserRole;
+import com.gmail.ivanjermakov1.projecttracker.core.exception.AuthorizationException;
 import com.gmail.ivanjermakov1.projecttracker.core.exception.DuplicationException;
 import com.gmail.ivanjermakov1.projecttracker.core.exception.NoSuchEntityException;
 import com.gmail.ivanjermakov1.projecttracker.core.repository.ProjectRepository;
@@ -25,13 +26,15 @@ import java.util.List;
 @Transactional
 public class ProjectService {
 	
+	private final RoleService roleService;
 	private final ProjectRepository projectRepository;
 	private final RoleRepository roleRepository;
 	
 	@Autowired
-	public ProjectService(ProjectRepository projectRepository, RoleRepository roleRepository) {
+	public ProjectService(ProjectRepository projectRepository, RoleRepository roleRepository, RoleService roleService) {
 		this.projectRepository = projectRepository;
 		this.roleRepository = roleRepository;
+		this.roleService = roleService;
 	}
 	
 	public ProjectDto create(User user, NewProjectDto newProjectDto) throws DuplicationException {
@@ -63,10 +66,12 @@ public class ProjectService {
 		return Mapper.map(project, ProjectDto.class);
 	}
 	
-	public Project edit(User user, EditProjectDto editProjectDto) throws NoSuchEntityException {
-//		TODO: authorization
+	public Project edit(User user, EditProjectDto editProjectDto) throws NoSuchEntityException, AuthorizationException {
 // 		TODO: dto validation
 		Project project = this.projectRepository.findById(editProjectDto.id).orElseThrow(() -> new NoSuchEntityException("no such project to edit"));
+		
+		if (roleService.getRole(user, project).level < UserRole.COLLABORATOR.level)
+			throw new AuthorizationException("no permission");
 		
 		project.setPublic(editProjectDto.isPublic);
 		project.getProjectInfo().setName(editProjectDto.name);
@@ -80,12 +85,16 @@ public class ProjectService {
 		return projectRepository.findAllByUser(user, pageable);
 	}
 	
-	public Project get(User user, String login, String name) throws NoSuchEntityException {
-//		TODO: authorization
-		return projectRepository.findByLoginAndName(login, name).orElseThrow(() -> new NoSuchEntityException("no such project"));
+	public Project get(User user, String login, String name) throws NoSuchEntityException, AuthorizationException {
+		Project project = projectRepository.findByLoginAndName(login, name).orElseThrow(() -> new NoSuchEntityException("no such project"));
+		
+		if (roleService.getRole(user, project).equals(UserRole.VIEWER))
+			throw new AuthorizationException("no permission");
+		
+		return project;
 	}
 	
-	public Project get(User user, Long projectId) throws NoSuchEntityException {
+	public Project get(User user, Long projectId) throws NoSuchEntityException, AuthorizationException {
 		Project project = projectRepository.findById(projectId).orElseThrow(() -> new NoSuchEntityException("no such project"));
 		
 		return get(user, project.getUser().getUserCredentials().getLogin(), project.getProjectInfo().getName());
