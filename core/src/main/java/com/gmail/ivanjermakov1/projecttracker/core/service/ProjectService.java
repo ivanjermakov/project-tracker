@@ -65,6 +65,7 @@ public class ProjectService {
 	
 	public Project edit(User user, EditProjectDto editProjectDto) throws NoSuchEntityException {
 //		TODO: authorization
+// 		TODO: dto validation
 		Project project = this.projectRepository.findById(editProjectDto.id).orElseThrow(() -> new NoSuchEntityException("no such project to edit"));
 		
 		project.setPublic(editProjectDto.isPublic);

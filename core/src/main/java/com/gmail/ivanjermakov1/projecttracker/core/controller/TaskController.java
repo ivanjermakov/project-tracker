@@ -1,5 +1,6 @@
 package com.gmail.ivanjermakov1.projecttracker.core.controller;
 
+import com.gmail.ivanjermakov1.projecttracker.core.dto.EditTaskDto;
 import com.gmail.ivanjermakov1.projecttracker.core.dto.NewTaskDto;
 import com.gmail.ivanjermakov1.projecttracker.core.dto.TaskDto;
 import com.gmail.ivanjermakov1.projecttracker.core.entity.User;
@@ -32,6 +33,13 @@ public class TaskController {
 		User user = userService.validate(token);
 		
 		return Mapper.map(taskService.create(user, newTaskDto), TaskDto.class);
+	}
+	
+	@PostMapping("edit")
+	public TaskDto edit(@RequestHeader("token") String token, @RequestBody EditTaskDto editTaskDto) throws NoSuchEntityException {
+		User user = userService.validate(token);
+		
+		return Mapper.map(taskService.edit(user, editTaskDto), TaskDto.class);
 	}
 	
 }

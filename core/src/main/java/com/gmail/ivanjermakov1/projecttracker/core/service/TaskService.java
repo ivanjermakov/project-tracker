@@ -1,5 +1,6 @@
 package com.gmail.ivanjermakov1.projecttracker.core.service;
 
+import com.gmail.ivanjermakov1.projecttracker.core.dto.EditTaskDto;
 import com.gmail.ivanjermakov1.projecttracker.core.dto.NewTaskDto;
 import com.gmail.ivanjermakov1.projecttracker.core.entity.Task;
 import com.gmail.ivanjermakov1.projecttracker.core.entity.TaskInfo;
@@ -47,6 +48,23 @@ public class TaskService {
 				newTaskDto.description,
 				task
 		));
+		
+		return taskRepository.save(task);
+	}
+	
+	public Task edit(User user, EditTaskDto editTaskDto) throws NoSuchEntityException {
+//		TODO: authorization
+//		TODO: dto validation
+		
+		Task task = taskRepository.findById(editTaskDto.id).orElseThrow(() -> new NoSuchEntityException("no such task to edit"));
+		
+		task.setType(editTaskDto.type);
+		task.setEstimate(editTaskDto.estimate);
+		task.setDue(editTaskDto.due);
+		TaskInfo taskInfo = task.getTaskInfo();
+		taskInfo.setName(editTaskDto.name);
+		taskInfo.setDescription(editTaskDto.description);
+		task.setTaskInfo(taskInfo);
 		
 		return taskRepository.save(task);
 	}
