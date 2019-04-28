@@ -21,8 +21,6 @@ import {AuthService} from '../../service/auth.service';
 })
 export class ProjectComponent implements OnInit {
 
-	// TODO: public/private edit
-
 	project: Project;
 	beforeEditProject: Project;
 	me: User;
