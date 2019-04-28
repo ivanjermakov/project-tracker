@@ -1,12 +1,16 @@
 package com.gmail.ivanjermakov1.projecttracker.core.service;
 
 import com.gmail.ivanjermakov1.projecttracker.core.dto.AuthUserDto;
+import com.gmail.ivanjermakov1.projecttracker.core.dto.EditProjectDto;
+import com.gmail.ivanjermakov1.projecttracker.core.dto.EditUserDto;
 import com.gmail.ivanjermakov1.projecttracker.core.dto.RegisterUserDto;
+import com.gmail.ivanjermakov1.projecttracker.core.dto.UserDto;
 import com.gmail.ivanjermakov1.projecttracker.core.entity.Token;
 import com.gmail.ivanjermakov1.projecttracker.core.entity.User;
 import com.gmail.ivanjermakov1.projecttracker.core.entity.UserCredentials;
 import com.gmail.ivanjermakov1.projecttracker.core.entity.UserInfo;
 import com.gmail.ivanjermakov1.projecttracker.core.exception.AuthenticationException;
+import com.gmail.ivanjermakov1.projecttracker.core.exception.AuthorizationException;
 import com.gmail.ivanjermakov1.projecttracker.core.exception.NoSuchEntityException;
 import com.gmail.ivanjermakov1.projecttracker.core.exception.RegistrationException;
 import com.gmail.ivanjermakov1.projecttracker.core.repository.TokenRepository;
@@ -69,6 +73,23 @@ public class UserService {
 		return userCredentialsRepository.findByLogin(login)
 				.orElseThrow(() -> new NoSuchEntityException("no such user by given login"))
 				.getUser();
+	}
+	
+	public User edit(User user, EditUserDto editUserDto) throws NoSuchEntityException, AuthorizationException {
+		User editingUser = getUser(user, editUserDto.login);
+		if (!user.getId().equals(editingUser.getId())) throw new AuthorizationException("no permission");
+		
+		editingUser.getUserCredentials().setLogin(editUserDto.login);
+		
+		UserInfo userInfo = editingUser.getUserInfo();
+		userInfo.setName(editUserDto.name);
+		userInfo.setBio(editUserDto.bio);
+		userInfo.setCompany(editUserDto.company);
+		userInfo.setUrl(editUserDto.url);
+		userInfo.setLocation(editUserDto.location);
+		editingUser.setUserInfo(userInfo);
+		
+		return userRepository.save(editingUser);
 	}
 	
 }
