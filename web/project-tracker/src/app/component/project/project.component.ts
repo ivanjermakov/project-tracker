@@ -6,11 +6,11 @@ import {Project} from '../../dto/Project';
 import {UrlService} from '../../service/url.service';
 import {UserProviderService} from '../../service/user.provider.service';
 
-import * as moment from 'moment';
 import {EditProject} from '../../dto/EditProject';
 import {AuthService} from '../../service/auth.service';
 import {AppComponent} from '../../app.component';
 import {User} from '../../dto/User';
+import {TimeService} from '../../service/time.service';
 
 @Component({
 	selector: 'app-project',
@@ -63,7 +63,7 @@ export class ProjectComponent implements OnInit {
 	}
 
 	formatDate(date: Date) {
-		return moment(date).format('MMMM Do[, ] YYYY [ at ] HH:mm');
+		return TimeService.formatDate(date, 'MMMM Do[, ] YYYY [ at ] HH:mm');
 	}
 
 	edit() {

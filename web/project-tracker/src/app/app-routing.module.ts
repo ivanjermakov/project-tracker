@@ -4,9 +4,12 @@ import {AuthComponent} from './component/auth/auth.component';
 import {RegisterComponent} from './component/register/register.component';
 import {FeedComponent} from './component/feed/feed.component';
 import {ProfileComponent} from './component/profile/profile.component';
-import {ProjectComponent} from './component/project/project.component';
 import {NewProjectComponent} from './component/new-project/new-project.component';
+import {ProfileOverviewComponent} from './component/profile-overview/profile-overview.component';
+import {ProfileActivityComponent} from './component/profile-activity/profile-activity.component';
+import {ProjectComponent} from './component/project/project.component';
 
+// TODO: fix
 const routes: Routes = [
 	{
 		path: 'auth',
@@ -24,26 +27,37 @@ const routes: Routes = [
 		data: {title: 'Feed'}
 	},
 	{
-		path: 'project/create',
+		path: 'create',
 		component: NewProjectComponent,
 		data: {title: 'New project'}
 	},
 	{
-		path: ':login',
+		path: 'profile/:login',
 		component: ProfileComponent,
 		// TODO: change page title to user name
-		data: {title: 'Profile'}
+		data: {title: 'Profile'},
+		children: [
+			{
+				path: 'overview',
+				redirectTo: '',
+			},
+			{
+				path: 'activity',
+				component: ProfileActivityComponent,
+				outlet: 'tab'
+			},
+			{
+				path: '',
+				component: ProfileOverviewComponent,
+				outlet: 'tab'
+			},
+		]
 	},
 	{
 		path: ':login/:name',
 		component: ProjectComponent,
 		data: {title: 'Project'}
 	},
-	{
-		path: ':login/:name/overview',
-		redirectTo: ':login/:name',
-		data: {title: 'Project overview'}
-	}
 ];
 
 @NgModule({

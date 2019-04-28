@@ -5,15 +5,20 @@ import {UserProviderService} from '../../service/user.provider.service';
 import {User} from '../../dto/User';
 import {ActivatedRoute} from '@angular/router';
 import {AppComponent} from '../../app.component';
+import {TimeService} from '../../service/time.service';
 
 @Component({
 	selector: 'app-profile',
 	templateUrl: './profile.component.html',
-	styleUrls: ['./profile.component.scss']
+	styleUrls: [
+		'./profile.component.scss',
+		'./../../app.component.scss',
+	]
 })
 export class ProfileComponent implements OnInit {
 
 	user: User;
+	editMode:boolean = false;
 
 	constructor(
 		private app: AppComponent,
@@ -37,6 +42,10 @@ export class ProfileComponent implements OnInit {
 				});
 			});
 		});
+	}
+
+	formatDate(date: Date) {
+		return TimeService.formatDate(date, 'MMMM Do[, ] YYYY');
 	}
 
 }

@@ -1,0 +1,49 @@
+<app-header></app-header>
+<div class="content-container" *ngIf="user">
+	<div class="content">
+		<div class="profile">
+			<div class="header-container">
+				<div class="header">
+					<div class="name-container">
+						<div class="name" *ngIf="user.userInfo.name">
+							<div class="text"
+							     [ngClass]="{'editing': editMode}"
+							     [contentEditable]="editMode"
+							     [textContent]="user.userInfo.name"
+							     (input)="user.userInfo.name = $event.target.textContent">
+								{{user.userInfo.name}}
+							</div>
+						</div>
+						<div class="login">
+							<div class="text"
+							     [ngClass]="{'editing': editMode}"
+							     [contentEditable]="editMode"
+							     [textContent]="'@' + user.login"
+							     (input)="user.login = $event.target.textContent">
+								{{user.login}}
+							</div>
+						</div>
+					</div>
+					<div class="joined">
+						<div class="text">joined on {{formatDate(user.joined)}}</div>
+					</div>
+				</div>
+				<div class="menu">
+					<div class="tab">
+						<div class="text">Overview</div>
+					</div>
+					<div class="tab active">
+						<div class="text">Activity</div>
+					</div>
+					<div class="tab">
+						<div class="text">Followers</div>
+					</div>
+					<div class="tab">
+						<div class="text">Followed</div>
+					</div>
+				</div>
+			</div>
+			<router-outlet name='tab'></router-outlet>
+		</div>
+	</div>
+</div>

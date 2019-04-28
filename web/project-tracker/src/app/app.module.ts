@@ -13,6 +13,9 @@ import {HttpClientModule} from '@angular/common/http';
 import {HeaderComponent} from './component/header/header.component';
 import {FeedProjectComponent} from './component/feed-project/feed-project.component';
 import {NewProjectComponent} from './component/new-project/new-project.component';
+import { ProfileOverviewComponent } from './component/profile-overview/profile-overview.component';
+import { ProfileActivityComponent } from './component/profile-activity/profile-activity.component';
+import {RouterModule} from '@angular/router';
 
 @NgModule({
 	declarations: [
@@ -24,7 +27,9 @@ import {NewProjectComponent} from './component/new-project/new-project.component
 		RegisterComponent,
 		HeaderComponent,
 		FeedProjectComponent,
-		NewProjectComponent
+		NewProjectComponent,
+		ProfileOverviewComponent,
+		ProfileActivityComponent
 	],
 	imports: [
 		BrowserModule,

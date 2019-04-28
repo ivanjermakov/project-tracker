@@ -26,11 +26,10 @@ export class FeedProjectComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		console.debug('p: ', this.project)
+		console.debug('p: ', this.project);
 	}
 
 	open() {
-		console.debug('open project');
 		this.tokenProviderService.token.subscribe(token => {
 			this.authService.validate(token).subscribe(user => {
 				this.router.navigate([user.login, this.project.name]);
