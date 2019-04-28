@@ -32,7 +32,7 @@ public class ProfileController {
 		return Mapper.map(userService.edit(user, editUserDto), UserDto.class);
 	}
 	
-	@GetMapping("/{login}/edit")
+	@GetMapping("/{login}/get")
 	public UserDto get(@RequestHeader("token") String token,
 	                   @PathVariable String login) throws NoSuchEntityException {
 		User user = userService.validate(token);
