@@ -9,7 +9,6 @@ import {ProfileOverviewComponent} from './component/profile-overview/profile-ove
 import {ProfileActivityComponent} from './component/profile-activity/profile-activity.component';
 import {ProjectComponent} from './component/project/project.component';
 
-// TODO: fix
 const routes: Routes = [
 	{
 		path: 'auth',
@@ -32,7 +31,7 @@ const routes: Routes = [
 		data: {title: 'New project'}
 	},
 	{
-		path: 'profile/:login',
+		path: ':login',
 		component: ProfileComponent,
 		// TODO: change page title to user name
 		data: {title: 'Profile'},
@@ -44,12 +43,10 @@ const routes: Routes = [
 			{
 				path: 'activity',
 				component: ProfileActivityComponent,
-				outlet: 'tab'
 			},
 			{
 				path: '',
 				component: ProfileOverviewComponent,
-				outlet: 'tab'
 			},
 		]
 	},
