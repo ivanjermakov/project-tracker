@@ -70,8 +70,7 @@ public class ProjectService {
 // 		TODO: dto validation
 		Project project = this.projectRepository.findById(editProjectDto.id).orElseThrow(() -> new NoSuchEntityException("no such project to edit"));
 		
-		if (roleService.getRole(user, project).level < UserRole.COLLABORATOR.level)
-			throw new AuthorizationException("no permission");
+		roleService.authorize(user, project, UserRole.COLLABORATOR);
 		
 		project.setPublic(editProjectDto.isPublic);
 		project.getProjectInfo().setName(editProjectDto.name);
@@ -81,6 +80,13 @@ public class ProjectService {
 		return projectRepository.save(project);
 	}
 	
+	/**
+	 * Available only for projects owner
+	 *
+	 * @param user
+	 * @param pageable
+	 * @return
+	 */
 	public List<Project> all(User user, Pageable pageable) {
 		return projectRepository.findAllByUser(user, pageable);
 	}
@@ -88,8 +94,7 @@ public class ProjectService {
 	public Project get(User user, String login, String name) throws NoSuchEntityException, AuthorizationException {
 		Project project = projectRepository.findByLoginAndName(login, name).orElseThrow(() -> new NoSuchEntityException("no such project"));
 		
-		if (roleService.getRole(user, project).equals(UserRole.VIEWER))
-			throw new AuthorizationException("no permission");
+		roleService.authorize(user, project, UserRole.VIEWER);
 		
 		return project;
 	}

@@ -46,7 +46,7 @@ public class ProjectController {
 	}
 	
 	@PostMapping("edit")
-	public ProjectDto edit(@RequestHeader("token") String token, @RequestBody EditProjectDto editProjectDto) throws NoSuchEntityException, DuplicationException, AuthorizationException {
+	public ProjectDto edit(@RequestHeader("token") String token, @RequestBody EditProjectDto editProjectDto) throws NoSuchEntityException, AuthorizationException {
 		User user = userService.validate(token);
 		
 		return Mapper.map(projectService.edit(user, editProjectDto), ProjectDto.class);

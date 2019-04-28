@@ -8,11 +8,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Entity
 @Table(name = "project")
@@ -35,9 +33,6 @@ public class Project {
 	
 	@OneToOne(mappedBy = "project", cascade = {CascadeType.ALL}, orphanRemoval = true)
 	private ProjectInfo projectInfo;
-	
-	@OneToMany(mappedBy = "project")
-	private List<Task> tasks;
 	
 	public Project() {
 	}
@@ -78,14 +73,6 @@ public class Project {
 	
 	public void setCreated(LocalDateTime created) {
 		this.created = created;
-	}
-	
-	public List<Task> getTasks() {
-		return tasks;
-	}
-	
-	public void setTasks(List<Task> tasks) {
-		this.tasks = tasks;
 	}
 	
 	public ProjectInfo getProjectInfo() {

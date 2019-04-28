@@ -37,7 +37,7 @@ public class TaskController {
 	}
 	
 	@PostMapping("edit")
-	public TaskDto edit(@RequestHeader("token") String token, @RequestBody EditTaskDto editTaskDto) throws NoSuchEntityException {
+	public TaskDto edit(@RequestHeader("token") String token, @RequestBody EditTaskDto editTaskDto) throws NoSuchEntityException, AuthorizationException {
 		User user = userService.validate(token);
 		
 		return Mapper.map(taskService.edit(user, editTaskDto), TaskDto.class);
