@@ -29,7 +29,7 @@ const routes: Routes = [
 		data: {title: 'New project'}
 	},
 	{
-		path: ':name',
+		path: ':login',
 		component: ProfileComponent,
 		// TODO: change page title to user name
 		data: {title: 'Profile'}

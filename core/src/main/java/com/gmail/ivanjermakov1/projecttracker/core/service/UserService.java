@@ -63,4 +63,12 @@ public class UserService {
 		userRepository.save(user);
 	}
 	
+	public User getUser(User user, String login) throws NoSuchEntityException {
+//		TODO: maybe some kind of authorization
+		
+		return userCredentialsRepository.findByLogin(login)
+				.orElseThrow(() -> new NoSuchEntityException("no such user by given login"))
+				.getUser();
+	}
+	
 }

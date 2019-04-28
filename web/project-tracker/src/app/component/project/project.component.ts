@@ -5,11 +5,12 @@ import {TokenProviderService} from '../../service/token.provider.service';
 import {Project} from '../../dto/Project';
 import {UrlService} from '../../service/url.service';
 import {UserProviderService} from '../../service/user.provider.service';
-import {User} from '../../dto/User';
 
 import * as moment from 'moment';
 import {EditProject} from '../../dto/EditProject';
 import {AuthService} from '../../service/auth.service';
+import {AppComponent} from '../../app.component';
+import {User} from '../../dto/User';
 
 @Component({
 	selector: 'app-project',
@@ -28,6 +29,7 @@ export class ProjectComponent implements OnInit {
 	editMode: boolean = false;
 
 	constructor(
+		private app: AppComponent,
 		private router: Router,
 		private route: ActivatedRoute,
 		private urlService: UrlService,
@@ -39,19 +41,22 @@ export class ProjectComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		console.debug('project initiation');
-		this.userProviderService.me.subscribe(me => {
-			this.me = me;
-			console.debug('me: ', this.me);
-		});
-		this.route.params.subscribe(params => {
-			console.debug('params', params);
-			this.tokenProviderService.token.subscribe(token => {
-				this.projectService.get(token, params['login'], params['name']).subscribe(project => {
-					this.project = project;
-					console.debug(project);
-					this.mine = project.user.id === this.me.id;
-					console.debug('mine: ', this.mine);
+		this.app.onLoad(() => {
+			this.userProviderService.me.subscribe(me => {
+				this.me = me;
+			});
+			console.debug('project initiation');
+			this.userProviderService.me.subscribe(me => {
+				this.route.params.subscribe(params => {
+					console.debug('params', params);
+					this.tokenProviderService.token.subscribe(token => {
+						this.projectService.get(token, params['login'], params['name']).subscribe(project => {
+							this.project = project;
+							console.debug(project);
+							this.mine = project.user.id === me.id;
+							console.debug('mine: ', this.mine);
+						});
+					});
 				});
 			});
 		});

@@ -8,9 +8,10 @@
 				<input type="text" placeholder="Find a project">
 			</div>
 		</div>
-		<app-feed-project *ngFor="let p of projects"
-		                  [project]="p"
-		                  [me]="me">
+		<app-feed-project
+				*ngFor="let p of projects"
+				[project]="p"
+				[me]="me">
 		</app-feed-project>
 	</div>
 	<div class="content-container">

@@ -14,6 +14,8 @@ import {Title} from '@angular/platform-browser';
 })
 export class AppComponent {
 
+	isLoaded: boolean = false;
+
 	constructor(
 		private router: Router,
 		private activatedRoute: ActivatedRoute,
@@ -23,12 +25,12 @@ export class AppComponent {
 		private userProviderService: UserProviderService,
 		private urlService: UrlService
 	) {
-		this.urlService.getViewPath((url) => {
-			console.debug('page initiation');
+		console.debug('app initiation');
 
+		this.urlService.getViewPath((url) => {
 			if (url !== '/') {
 				this.activatedRoute.firstChild.data.subscribe(d => {
-					console.debug(d['title']);
+					console.debug('view: ' + d['title']);
 					this.titleService.setTitle(d['title']);
 				});
 			}
@@ -45,30 +47,44 @@ export class AppComponent {
 		});
 	}
 
+	onLoad(loaded: () => void) {
+		setTimeout(() => {
+			if (this.isLoaded) {
+				console.debug('onload: loaded...');
+				loaded();
+			} else {
+				this.onLoad(loaded);
+				console.debug('onload: waiting...');
+			}
+		}, 10);
+	}
+
 	private autoLogin(success: () => void, error: () => void): void {
 		this.tokenProviderService.token.subscribe(t => {
 			if (t) {
+				this.isLoaded = true;
 				return success();
 			}
 
-			console.debug('auto login attempt');
+			console.debug('app: auto login attempt');
 			let token = localStorage.getItem(LOCALSTORAGE_TOKEN_NAME);
 			if (!token) {
-				console.debug('no token in localstorage');
+				console.debug('app: no token in localstorage');
 				return error();
 			}
 
-			console.debug('token from localstorage:  ' + token);
-			this.tokenProviderService.setToken(token);
+			console.debug('app: token from localstorage:  ' + token);
 			this.authService.validate(token).subscribe(user => {
-				console.debug('received \'me\'', user);
+				console.debug('app: received \'me\'', user);
+				this.tokenProviderService.setToken(token);
 				this.userProviderService.setMe(user);
-			}, error => {
-				console.debug('error validating token');
+				this.isLoaded = true;
+				return success();
+			}, error2 => {
+				console.debug('app: error validating token');
 				this.tokenProviderService.setToken(null);
-				error();
+				return error();
 			});
-			return success();
 		});
 	}
 
