@@ -8,6 +8,7 @@ import com.gmail.ivanjermakov1.projecttracker.core.exception.NoSuchEntityExcepti
 import com.gmail.ivanjermakov1.projecttracker.core.service.UserService;
 import com.gmail.ivanjermakov1.projecttracker.core.util.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

@@ -27,6 +27,10 @@ public class Activity {
 	private Task task;
 	
 	@ManyToOne
+	@JoinColumn(name = "creator_id")
+	private User creator;
+	
+	@ManyToOne
 	@JoinColumn(name = "assignee_id")
 	private User assignee;
 	
@@ -46,8 +50,9 @@ public class Activity {
 	public Activity() {
 	}
 	
-	public Activity(Task task, User assignee, TaskStatus status, Integer completion_difference, LocalDateTime timestamp, String description) {
+	public Activity(Task task, User creator, User assignee, TaskStatus status, Integer completion_difference, LocalDateTime timestamp, String description) {
 		this.task = task;
+		this.creator = creator;
 		this.assignee = assignee;
 		this.status = status;
 		this.completion_difference = completion_difference;
@@ -69,6 +74,14 @@ public class Activity {
 	
 	public void setTask(Task task) {
 		this.task = task;
+	}
+	
+	public User getCreator() {
+		return creator;
+	}
+	
+	public void setCreator(User creator) {
+		this.creator = creator;
 	}
 	
 	public User getAssignee() {

@@ -13,7 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Optional;
 
 @Service
-@Transactional
 public class RoleService {
 	
 	private final RoleRepository roleRepository;
@@ -38,6 +37,7 @@ public class RoleService {
 	 * @return
 	 */
 	public boolean hasPermission(User user, Project project, UserRole role) {
+		if (!project.getPublic() && role == UserRole.UNAUTHORIZED) return false;
 		return getRole(user, project).level >= role.level;
 	}
 	

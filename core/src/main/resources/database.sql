@@ -119,6 +119,9 @@ create table activity
     task_id               bigint    not null
         constraint activity_task_id_fk
             references task,
+    creator_id            bigint    not null
+        constraint activity_user_id_fk_2
+            references "user",
     assignee_id           bigint    not null
         constraint activity_user_id_fk
             references "user",

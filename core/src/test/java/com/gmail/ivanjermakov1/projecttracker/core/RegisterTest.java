@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
-@Transactional
+
 public class RegisterTest {
 	
 	@Autowired

@@ -26,7 +26,8 @@ public class ProfileController {
 	}
 	
 	@PostMapping("edit")
-	public UserDto edit(@RequestHeader("token") String token, @RequestBody EditUserDto editUserDto) throws NoSuchEntityException, AuthorizationException {
+	public UserDto edit(@RequestHeader("token") String token,
+	                    @RequestBody EditUserDto editUserDto) throws NoSuchEntityException, AuthorizationException {
 		User user = userService.validate(token);
 		
 		return Mapper.map(userService.edit(user, editUserDto), UserDto.class);

@@ -25,7 +25,7 @@ import java.util.stream.IntStream;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
-@Transactional
+
 public class ProjectTest {
 	
 	@Autowired

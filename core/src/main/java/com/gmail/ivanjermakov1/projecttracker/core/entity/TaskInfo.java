@@ -18,23 +18,23 @@ public class TaskInfo {
 	@Column(name = "id")
 	private Long id;
 	
+	@OneToOne
+	@JoinColumn(name = "task_id")
+	private Task task;
+	
 	@Column(name = "name")
 	private String name;
 	
 	@Column(name = "description")
 	private String description;
 	
-	@OneToOne
-	@JoinColumn(name = "task_id")
-	private Task task;
-	
 	public TaskInfo() {
 	}
 	
-	public TaskInfo(String name, String description, Task task) {
+	public TaskInfo(Task task, String name, String description) {
+		this.task = task;
 		this.name = name;
 		this.description = description;
-		this.task = task;
 	}
 	
 	public Long getId() {
@@ -43,6 +43,14 @@ public class TaskInfo {
 	
 	public void setId(Long id) {
 		this.id = id;
+	}
+	
+	public Task getTask() {
+		return task;
+	}
+	
+	public void setTask(Task task) {
+		this.task = task;
 	}
 	
 	public String getName() {
@@ -59,14 +67,6 @@ public class TaskInfo {
 	
 	public void setDescription(String description) {
 		this.description = description;
-	}
-	
-	public Task getTask() {
-		return task;
-	}
-	
-	public void setTask(Task task) {
-		this.task = task;
 	}
 	
 }

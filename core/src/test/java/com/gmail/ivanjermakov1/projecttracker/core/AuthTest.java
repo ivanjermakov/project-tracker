@@ -21,7 +21,7 @@ import java.io.IOException;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
-@Transactional
+
 public class AuthTest {
 	
 	@Autowired

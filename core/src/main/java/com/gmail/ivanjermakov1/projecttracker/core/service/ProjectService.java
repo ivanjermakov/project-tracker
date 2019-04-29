@@ -23,7 +23,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
-@Transactional
 public class ProjectService {
 	
 	private final RoleService roleService;
@@ -103,6 +102,14 @@ public class ProjectService {
 		Project project = projectRepository.findById(projectId).orElseThrow(() -> new NoSuchEntityException("no such project"));
 		
 		return get(user, project.getUser().getUserCredentials().getLogin(), project.getProjectInfo().getName());
+	}
+	
+	public void delete(User user, Long projectId) throws NoSuchEntityException, AuthorizationException {
+		Project project = projectRepository.findById(projectId).orElseThrow(() -> new NoSuchEntityException("no such project"));
+		
+		roleService.authorize(user, project, UserRole.OWNER);
+		
+		projectRepository.delete(project);
 	}
 	
 }

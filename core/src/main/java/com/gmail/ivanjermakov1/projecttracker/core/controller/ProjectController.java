@@ -11,18 +11,19 @@ import com.gmail.ivanjermakov1.projecttracker.core.exception.NoSuchEntityExcepti
 import com.gmail.ivanjermakov1.projecttracker.core.service.ProjectService;
 import com.gmail.ivanjermakov1.projecttracker.core.service.UserService;
 import com.gmail.ivanjermakov1.projecttracker.core.util.Mapper;
-import com.gmail.ivanjermakov1.projecttracker.core.util.Streams;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Comparator;
 import java.util.List;
 
 @RestController
@@ -39,27 +40,27 @@ public class ProjectController {
 	}
 	
 	@PostMapping("create")
-	public ProjectDto create(@RequestHeader("token") String token, @RequestBody NewProjectDto newProjectDto) throws NoSuchEntityException, DuplicationException {
+	public ProjectDto create(@RequestHeader("token") String token,
+	                         @RequestBody NewProjectDto newProjectDto) throws NoSuchEntityException, DuplicationException {
 		User user = userService.validate(token);
 		
 		return projectService.create(user, newProjectDto);
 	}
 	
 	@PostMapping("edit")
-	public ProjectDto edit(@RequestHeader("token") String token, @RequestBody EditProjectDto editProjectDto) throws NoSuchEntityException, AuthorizationException {
+	public ProjectDto edit(@RequestHeader("token") String token,
+	                       @RequestBody EditProjectDto editProjectDto) throws NoSuchEntityException, AuthorizationException {
 		User user = userService.validate(token);
 		
 		return Mapper.map(projectService.edit(user, editProjectDto), ProjectDto.class);
 	}
 	
 	@GetMapping("all")
-	public List<ProjectDto> all(@RequestHeader("token") String token, Pageable pageable) throws NoSuchEntityException {
+	public List<ProjectDto> all(@RequestHeader("token") String token,
+	                            @PageableDefault(direction = Sort.Direction.DESC, sort = "created") Pageable pageable) throws NoSuchEntityException {
 		User user = userService.validate(token);
 		
-		return Streams.sortList(
-				Mapper.mapAll(projectService.all(user, pageable), ProjectDto.class),
-				Comparator.comparing(p -> p.created)
-		);
+		return Mapper.mapAll(projectService.all(user, pageable), ProjectDto.class);
 	}
 	
 	@GetMapping("/{login}/{name}/get")
@@ -69,6 +70,14 @@ public class ProjectController {
 		User user = userService.validate(token);
 		
 		return Mapper.map(projectService.get(user, login, name), ProjectDto.class);
+	}
+	
+	@GetMapping("delete")
+	public void delete(@RequestHeader("token") String token,
+	                   @RequestParam("projectId") Long projectId) throws NoSuchEntityException, AuthorizationException {
+		User user = userService.validate(token);
+		
+		projectService.delete(user, projectId);
 	}
 	
 }
