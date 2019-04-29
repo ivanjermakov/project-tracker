@@ -26,7 +26,6 @@ export class FeedProjectComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		console.debug('p: ', this.project);
 	}
 
 	open() {

@@ -11,6 +11,10 @@ import {AuthService} from '../../service/auth.service';
 import {AppComponent} from '../../app.component';
 import {User} from '../../dto/User';
 import {TimeService} from '../../service/time.service';
+import {Task} from '../../dto/Task';
+import {Pageable} from '../../dto/Pageable';
+import {TASKS_IN_TABLE} from '../../../globals';
+import {TaskService} from '../../service/task.service';
 
 @Component({
 	selector: 'app-project',
@@ -27,6 +31,7 @@ export class ProjectComponent implements OnInit {
 	me: User;
 	mine: boolean;
 	editMode: boolean = false;
+	tasks: Task[];
 
 	constructor(
 		private app: AppComponent,
@@ -34,6 +39,7 @@ export class ProjectComponent implements OnInit {
 		private route: ActivatedRoute,
 		private urlService: UrlService,
 		private projectService: ProjectService,
+		private taskService: TaskService,
 		private tokenProviderService: TokenProviderService,
 		private userProviderService: UserProviderService,
 		private authService: AuthService
@@ -52,9 +58,12 @@ export class ProjectComponent implements OnInit {
 					this.tokenProviderService.token.subscribe(token => {
 						this.projectService.get(token, params['login'], params['name']).subscribe(project => {
 							this.project = project;
+							this.taskService.all(token, project.id, new Pageable(0, TASKS_IN_TABLE)).subscribe(tasks => {
+								this.tasks = tasks;
+								console.debug(tasks);
+							});
 							console.debug(project);
 							this.mine = project.user.id === me.id;
-							console.debug('mine: ', this.mine);
 						});
 					});
 				});
@@ -62,8 +71,12 @@ export class ProjectComponent implements OnInit {
 		});
 	}
 
-	formatDate(date: Date) {
+	formatDateWithTime(date: Date) {
 		return TimeService.formatDate(date, 'MMMM Do[, ] YYYY [ at ] HH:mm');
+	}
+
+	formatDate(date: Date) {
+		return TimeService.formatDate(date, 'MMMM Do[, ] YYYY');
 	}
 
 	edit() {

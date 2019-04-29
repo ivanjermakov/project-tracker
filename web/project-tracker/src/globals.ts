@@ -8,3 +8,4 @@ export const LOGO_BW_SRC = 'assets/logo/project-tracker-bw.png';
 
 // pageable
 export const PROJECTS_IN_FEED = 10;
+export const TASKS_IN_TABLE = 10;

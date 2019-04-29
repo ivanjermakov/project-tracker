@@ -6,6 +6,7 @@ import {PROJECTS_IN_FEED} from '../../../globals';
 import {UserProviderService} from '../../service/user.provider.service';
 import {User} from '../../dto/User';
 import {AppComponent} from '../../app.component';
+import {Direction} from '../../dto/SortDirection';
 
 @Component({
 	selector: 'app-feed',

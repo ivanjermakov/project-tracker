@@ -52,9 +52,13 @@
 
         .tab {
           width: 100%;
+
+          border-top: transparent solid 4px;
           border-radius: 3px 3px 0 0;
 
           cursor: pointer;
+
+          transition: background-color 100ms, border-top-color 100ms;
 
           .text {
             padding: 6px;
@@ -75,4 +79,8 @@
       }
     }
   }
+}
+
+.tab-content {
+  animation: appear .2s;
 }

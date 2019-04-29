@@ -16,7 +16,7 @@
 					     [routerLink]="'/' + me.login">
 						{{me.login}}
 					</div>
-					<div class="text delimiter">/</div>
+					<div class="text name-delimiter">/</div>
 					<div class="text"
 					     [ngClass]="{'editing': editMode}"
 					     [contentEditable]="editMode"
@@ -32,7 +32,7 @@
 					<i class="fas fa-pen"></i>
 				</div>
 				<div class="created">
-					<div class="text">created on {{formatDate(project.created)}}</div>
+					<div class="text">created on {{formatDateWithTime(project.created)}}</div>
 				</div>
 			</div>
 		</div>
@@ -47,9 +47,32 @@
 				{{project.description}}
 			</div>
 		</div>
+		<div class="delimiter"></div>
 		<div class="tasks-container"
 		     *ngIf="!editMode">
+			<div class="tasks">Tasks</div>
+			<table class="tasks-table">
+				<tr>
+					<th>Id</th>
+					<th>Project</th>
+					<th>Type</th>
+					<th>Estimate</th>
+					<th>Elapsed</th>
+					<th>Opened</th>
+					<th>Due</th>
+				</tr>
+				<tr *ngFor="let t of tasks">
+					<td>{{t.id}}</td>
+					<td>{{t.project.name}}</td>
+					<td>{{t.type}}</td>
+					<td>{{t.estimate}}h</td>
+					<td>{{t.elapsed}}h</td>
+					<td>{{formatDate(t.opened)}}</td>
+					<td>{{formatDate(t.due)}}</td>
+				</tr>
+			</table>
 		</div>
+		<div class="delimiter" *ngIf="!editMode"></div>
 		<div class="about-container"
 		     *ngIf="(project.about && project.about.length != 0) || editMode">
 			<div class="about">About</div>

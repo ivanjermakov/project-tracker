@@ -19,8 +19,8 @@ export class ProjectService {
 		return this.http.post<Project>(API_URL + 'project/create', newProject, {headers: {token: token}});
 	}
 
-	all(token: string, pageable: Pageable): Observable<Array<Project>> {
-		return this.http.get<Array<Project>>(API_URL + 'project/all', {
+	all(token: string, pageable: Pageable): Observable<Project[]> {
+		return this.http.get<Project[]>(API_URL + 'project/all', {
 			params: pageable.toHttpParams(),
 			headers: {token: token}
 		});

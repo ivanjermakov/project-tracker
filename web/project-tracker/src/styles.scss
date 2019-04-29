@@ -28,7 +28,7 @@ body {
 }
 
 input {
-  border: silver solid 1px;
+  border: 1px solid silver;
   border-radius: 4px;
   padding: 3px;
 }
@@ -47,7 +47,7 @@ button {
 }
 
 .cancel {
-  cursor:pointer;
+  cursor: pointer;
 }
 
 .cancel:hover {
@@ -64,4 +64,20 @@ button:hover {
 
 .required {
   color: var(--required);
+}
+
+.delimiter {
+  height: 2px;
+  width: 100%;
+  background: var(--bright);
+}
+
+//ANIMATIONS
+@keyframes appear {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }

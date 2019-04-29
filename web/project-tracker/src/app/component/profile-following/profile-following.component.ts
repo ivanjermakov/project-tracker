@@ -1,15 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
-  selector: 'app-profile-following',
-  templateUrl: './profile-following.component.html',
-  styleUrls: ['./profile-following.component.scss']
+	selector: 'app-profile-following',
+	templateUrl: './profile-following.component.html',
+	styleUrls: [
+		'./profile-following.component.scss',
+		'./../profile/profile.component.scss'
+	]
 })
 export class ProfileFollowingComponent implements OnInit {
 
-  constructor() { }
+	constructor() {
+	}
 
-  ngOnInit() {
-  }
+	ngOnInit() {
+	}
 
 }

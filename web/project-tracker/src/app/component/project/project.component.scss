@@ -48,9 +48,14 @@
             text-decoration: underline;
           }
 
-          .delimiter {
+          .name-delimiter {
             color: var(--dark);
             margin: 0 4px;
+          }
+
+          .name-delimiter:hover {
+            text-decoration: none;
+            cursor: unset;
           }
         }
 
@@ -89,10 +94,6 @@
         font-size: 20px;
         color: var(--gray)
       }
-
-      .text {
-
-      }
     }
 
     .about-container {
@@ -101,10 +102,6 @@
       .about {
         font-size: 20px;
         color: var(--gray)
-      }
-
-      .text {
-
       }
     }
 
@@ -117,6 +114,42 @@
 
       * {
         margin: 0 10px;
+      }
+    }
+
+    .tasks-container {
+      padding: 10px;
+
+      .tasks {
+        font-size: 20px;
+        color: var(--gray)
+      }
+
+      .tasks-table {
+        width: 100%;
+
+        border-collapse: collapse;
+
+        th {
+          padding: 4px;
+
+          font-size: 20px;
+
+          text-align: left;
+        }
+
+        tr {
+
+          td {
+            padding: 4px;
+
+            font-size: 20px;
+          }
+        }
+
+        tr:nth-child(even) {
+          background: var(--bright);
+        }
       }
     }
   }
