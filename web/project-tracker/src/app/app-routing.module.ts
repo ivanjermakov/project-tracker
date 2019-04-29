@@ -10,6 +10,7 @@ import {ProfileActivityComponent} from './component/profile-activity/profile-act
 import {ProjectComponent} from './component/project/project.component';
 import {ProfileFollowersComponent} from './component/profile-followers/profile-followers.component';
 import {ProfileFollowingComponent} from './component/profile-following/profile-following.component';
+import {NewTaskComponent} from './component/new-task/new-task.component';
 
 const routes: Routes = [
 	{
@@ -28,7 +29,7 @@ const routes: Routes = [
 		data: {title: 'Feed'}
 	},
 	{
-		path: 'create',
+		path: 'project/create',
 		component: NewProjectComponent,
 		data: {title: 'New project'}
 	},
@@ -59,6 +60,11 @@ const routes: Routes = [
 				component: ProfileOverviewComponent,
 			},
 		]
+	},
+	{
+		path: 'task/create',
+		component: NewTaskComponent,
+		data: {title: 'New task'}
 	},
 	{
 		path: ':login/:name',

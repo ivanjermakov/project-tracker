@@ -34,6 +34,7 @@ input {
 }
 
 button {
+  display: grid;
   background: var(--darkblue);
 
   color: white;

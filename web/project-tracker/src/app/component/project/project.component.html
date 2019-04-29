@@ -26,7 +26,7 @@
 						{{project.name}}
 					</div>
 				</div>
-				<div class="edit"
+				<div class="edit" title="Edit project"
 				     *ngIf="!editMode"
 				     (click)="edit()">
 					<i class="fas fa-pen"></i>
@@ -50,7 +50,12 @@
 		<div class="delimiter"></div>
 		<div class="tasks-container"
 		     *ngIf="!editMode">
-			<div class="tasks">Tasks</div>
+			<div class="tasks-header">
+				<div class="tasks">Tasks</div>
+				<button class="new-task-button" [routerLink]="'/task/create'" title="New task">
+					<i class="fas fa-plus"></i>
+				</button>
+			</div>
 			<table class="tasks-table" *ngIf="tasks.length !== 0">
 				<tr>
 					<th>Id</th>

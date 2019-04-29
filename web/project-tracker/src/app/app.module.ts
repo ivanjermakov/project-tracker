@@ -18,6 +18,7 @@ import { ProfileActivityComponent } from './component/profile-activity/profile-a
 import {RouterModule} from '@angular/router';
 import { ProfileFollowersComponent } from './component/profile-followers/profile-followers.component';
 import { ProfileFollowingComponent } from './component/profile-following/profile-following.component';
+import { NewTaskComponent } from './component/new-task/new-task.component';
 
 @NgModule({
 	declarations: [
@@ -33,7 +34,8 @@ import { ProfileFollowingComponent } from './component/profile-following/profile
 		ProfileOverviewComponent,
 		ProfileActivityComponent,
 		ProfileFollowersComponent,
-		ProfileFollowingComponent
+		ProfileFollowingComponent,
+		NewTaskComponent
 	],
 	imports: [
 		BrowserModule,

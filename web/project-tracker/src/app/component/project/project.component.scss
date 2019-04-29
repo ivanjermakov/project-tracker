@@ -120,9 +120,22 @@
     .tasks-container {
       padding: 10px;
 
-      .tasks {
-        font-size: 20px;
-        color: var(--gray)
+      .tasks-header {
+        display: flex;
+        align-items: center;
+
+        .tasks {
+          font-size: 20px;
+          color: var(--gray)
+        }
+
+        .new-task-button {
+          margin: 0 4px;
+
+          i {
+            font-size: 18px;
+          }
+        }
       }
 
       .tasks-table {
