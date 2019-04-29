@@ -8,6 +8,8 @@ import {NewProjectComponent} from './component/new-project/new-project.component
 import {ProfileOverviewComponent} from './component/profile-overview/profile-overview.component';
 import {ProfileActivityComponent} from './component/profile-activity/profile-activity.component';
 import {ProjectComponent} from './component/project/project.component';
+import {ProfileFollowersComponent} from './component/profile-followers/profile-followers.component';
+import {ProfileFollowingComponent} from './component/profile-following/profile-following.component';
 
 const routes: Routes = [
 	{
@@ -43,6 +45,14 @@ const routes: Routes = [
 			{
 				path: 'activity',
 				component: ProfileActivityComponent,
+			},
+			{
+				path: 'followers',
+				component: ProfileFollowersComponent,
+			},
+			{
+				path: 'following',
+				component: ProfileFollowingComponent,
 			},
 			{
 				path: '',

@@ -29,16 +29,16 @@
 					</div>
 				</div>
 				<div class="menu">
-					<div class="tab">
+					<div class="tab" (click)="changeTab('overview')">
 						<div class="text">Overview</div>
 					</div>
-					<div class="tab active">
+					<div class="tab" (click)="changeTab('activity')">
 						<div class="text">Activity</div>
 					</div>
-					<div class="tab">
+					<div class="tab" (click)="changeTab('followers')">
 						<div class="text">Followers</div>
 					</div>
-					<div class="tab">
+					<div class="tab" (click)="changeTab('following')">
 						<div class="text">Followed</div>
 					</div>
 				</div>

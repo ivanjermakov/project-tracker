@@ -16,6 +16,8 @@ import {NewProjectComponent} from './component/new-project/new-project.component
 import { ProfileOverviewComponent } from './component/profile-overview/profile-overview.component';
 import { ProfileActivityComponent } from './component/profile-activity/profile-activity.component';
 import {RouterModule} from '@angular/router';
+import { ProfileFollowersComponent } from './component/profile-followers/profile-followers.component';
+import { ProfileFollowingComponent } from './component/profile-following/profile-following.component';
 
 @NgModule({
 	declarations: [
@@ -29,7 +31,9 @@ import {RouterModule} from '@angular/router';
 		FeedProjectComponent,
 		NewProjectComponent,
 		ProfileOverviewComponent,
-		ProfileActivityComponent
+		ProfileActivityComponent,
+		ProfileFollowersComponent,
+		ProfileFollowingComponent
 	],
 	imports: [
 		BrowserModule,
