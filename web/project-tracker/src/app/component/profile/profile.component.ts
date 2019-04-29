@@ -62,7 +62,8 @@ export class ProfileComponent implements OnInit {
 	}
 
 	getCurrentTab(): ProfileTab {
-		return ProfileTab[this.router.url.split('/').slice(-1)[0].toUpperCase()];
+		const tab = ProfileTab[this.router.url.split('/').slice(-1)[0].toUpperCase()];
+		return tab ? tab : ProfileTab.OVERVIEW;
 	}
 
 }

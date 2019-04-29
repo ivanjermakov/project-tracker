@@ -46,15 +46,15 @@
       .menu {
         display: flex;
         align-items: stretch;
-        justify-content: space-around;
-
-        padding: 0 40px;
+        justify-content: space-between;
 
         background: rgba(255, 255, 255, 0.7);
 
         .tab {
           width: 100%;
           border-radius: 3px 3px 0 0;
+
+          cursor: pointer;
 
           .text {
             padding: 6px;

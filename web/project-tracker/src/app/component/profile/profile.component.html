@@ -29,17 +29,21 @@
 					</div>
 				</div>
 				<div class="menu">
-					<div class="tab" (click)="changeTab('overview')">
+					<div class="tab" (click)="changeTab('overview')"
+					     [ngClass]="{'active': tab === 0}">
 						<div class="text">Overview</div>
 					</div>
-					<div class="tab" (click)="changeTab('activity')">
+					<div class="tab" (click)="changeTab('activity')"
+					     [ngClass]="{'active': tab === 1}">
 						<div class="text">Activity</div>
 					</div>
-					<div class="tab" (click)="changeTab('followers')">
+					<div class="tab" (click)="changeTab('followers')"
+					     [ngClass]="{'active': tab === 2}">
 						<div class="text">Followers</div>
 					</div>
-					<div class="tab" (click)="changeTab('following')">
-						<div class="text">Followed</div>
+					<div class="tab" (click)="changeTab('following')"
+					     [ngClass]="{'active': tab === 3}">
+						<div class="text">Following</div>
 					</div>
 				</div>
 			</div>
