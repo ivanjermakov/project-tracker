@@ -15,6 +15,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -49,7 +50,7 @@ public class Task {
 	private LocalDateTime opened;
 	
 	@Column(name = "due")
-	private LocalDateTime due;
+	private LocalDate due;
 	
 	@OneToOne(mappedBy = "task", cascade = {CascadeType.ALL}, orphanRemoval = true)
 	private TaskInfo taskInfo;
@@ -65,7 +66,7 @@ public class Task {
 	public Task() {
 	}
 	
-	public Task(Project project, User creator, TaskType type, Double estimate, Double elapsed, LocalDateTime opened, LocalDateTime due, TaskInfo taskInfo, List<Task> subtasks) {
+	public Task(Project project, User creator, TaskType type, Double estimate, Double elapsed, LocalDateTime opened, LocalDate due, TaskInfo taskInfo, List<Task> subtasks) {
 		this.project = project;
 		this.creator = creator;
 		this.type = type;
@@ -133,11 +134,11 @@ public class Task {
 		this.opened = opened;
 	}
 	
-	public LocalDateTime getDue() {
+	public LocalDate getDue() {
 		return due;
 	}
 	
-	public void setDue(LocalDateTime due) {
+	public void setDue(LocalDate due) {
 		this.due = due;
 	}
 	

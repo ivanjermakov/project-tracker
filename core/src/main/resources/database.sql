@@ -73,7 +73,7 @@ create table task
     estimate   double precision,
     elapsed    double precision,
     opened     timestamp,
-    due        timestamp
+    due        date
 );
 
 alter table task
