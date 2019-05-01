@@ -74,10 +74,10 @@
 					<td>{{t.project.name}}</td>
 					<td>
 						<div class="task-type-icon">
-							<i class="fas fa-bolt feature" *ngIf="t.type === 'FEATURE'"></i>
-							<i class="fas fa-exclamation-triangle issue" *ngIf="t.type === 'ISSUE'"></i>
-							<i class="fas fa-bug bug" *ngIf="t.type === 'BUG'"></i>
-							<i class="fas fa-info request" *ngIf="t.type === 'REQUEST'"></i>
+							<i class="fas fa-bolt feature" title="feature" *ngIf="t.type === 'FEATURE'"></i>
+							<i class="fas fa-exclamation-triangle issue" title="issue" *ngIf="t.type === 'ISSUE'"></i>
+							<i class="fas fa-bug bug" title="bug" *ngIf="t.type === 'BUG'"></i>
+							<i class="fas fa-info request" title="request" *ngIf="t.type === 'REQUEST'"></i>
 						</div>
 					</td>
 					<td>{{t.estimate}}h</td>
