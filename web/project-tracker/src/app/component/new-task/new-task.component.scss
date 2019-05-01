@@ -1,0 +1,62 @@
+.content-container {
+  .content {
+    display: flex;
+    flex-direction: column;
+
+    padding: 10px;
+
+    .heading {
+      margin: 0 10%;
+    }
+
+    .task-form {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+
+      margin: 0 10%;
+
+      .task-type-wrapper, .name-wrapper, .description-wrapper, .due-wrapper, .estimate-wrapper {
+        margin: 10px;
+      }
+
+      .task-type-wrapper {
+
+        .select-wrapper {
+          display: flex;
+          padding: 3px;
+        }
+      }
+
+      .name-wrapper {
+
+        input {
+          width: available;
+          max-width: 400px;
+        }
+      }
+
+      .due-wrapper {
+
+      }
+
+      .estimate-wrapper {
+
+        input {
+          width: 100px;
+          text-align: right;
+        }
+      }
+
+      .description-wrapper {
+        input {
+          width: 100%;
+        }
+      }
+
+      button {
+        margin: 10px;
+      }
+    }
+  }
+}

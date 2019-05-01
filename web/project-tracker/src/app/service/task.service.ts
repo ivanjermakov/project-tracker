@@ -32,4 +32,9 @@ export class TaskService {
 	edit(token: string, editTask: EditTask): Observable<Task> {
 		return this.http.post<Task>(API_URL + 'task/edit', editTask, {headers: {token: token}});
 	}
+
+	delete(token: string, taskId: number): Observable<void> {
+		return this.http.post<void>(API_URL + 'task/delete', taskId, {headers: {token: token}});
+	}
+
 }

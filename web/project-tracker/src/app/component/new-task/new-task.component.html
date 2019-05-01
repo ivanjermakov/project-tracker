@@ -1,3 +1,40 @@
-<p>
-  new-task works!
-</p>
+<app-header></app-header>
+<div class="content-container">
+	<div class="content">
+		<div class="heading">Create a new task</div>
+		<form class="task-form">
+			<div class="task-type-wrapper">
+				<div class="text">Task type<span class="required">*</span></div>
+				<div class="select-wrapper">
+					<select [(ngModel)]="task.type" name="task-form">
+						<option *ngFor="let t of taskTypes" [value]="t">{{t[0] + t.slice(1).toLowerCase()}}</option>
+					</select>
+					<div class="task-type-icon">
+						<i class="fas fa-bolt feature" *ngIf="task.type === 'FEATURE'"></i>
+						<i class="fas fa-exclamation-triangle issue" *ngIf="task.type === 'ISSUE'"></i>
+						<i class="fas fa-bug bug" *ngIf="task.type === 'BUG'"></i>
+						<i class="fas fa-info request" *ngIf="task.type === 'REQUEST'"></i>
+					</div>
+				</div>
+			</div>
+			<div class="name-wrapper">
+				<div class="text">Task name<span class="required">*</span></div>
+				<input type="text" placeholder="name" name="name" [(ngModel)]="task.name">
+			</div>
+			<div class="due-wrapper">
+				<div class="text">Due</div>
+				<input type="date" name="due" [(ngModel)]="task.due">
+			</div>
+			<div class="estimate-wrapper">
+				<div class="text">Estimate</div>
+				<input type="text" placeholder="0" name="estimate" [(ngModel)]="task.estimate">h
+			</div>
+			<div class="description-wrapper">
+				<div class="text">Description</div>
+				<input type="text" placeholder="description" name="description" [(ngModel)]="task.description">
+			</div>
+
+			<button type="submit" (click)="open()">Open task</button>
+		</form>
+	</div>
+</div>

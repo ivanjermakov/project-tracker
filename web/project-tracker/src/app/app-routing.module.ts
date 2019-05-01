@@ -11,6 +11,7 @@ import {ProjectComponent} from './component/project/project.component';
 import {ProfileFollowersComponent} from './component/profile-followers/profile-followers.component';
 import {ProfileFollowingComponent} from './component/profile-following/profile-following.component';
 import {NewTaskComponent} from './component/new-task/new-task.component';
+import {TaskComponent} from './component/task/task.component';
 
 const routes: Routes = [
 	{
@@ -62,13 +63,18 @@ const routes: Routes = [
 		]
 	},
 	{
-		path: 'task/create',
+		path: ':login/:name',
+		component: ProjectComponent,
+		data: {title: 'Project'}
+	},
+	{
+		path: ':login/:name/task/create',
 		component: NewTaskComponent,
 		data: {title: 'New task'}
 	},
 	{
-		path: ':login/:name',
-		component: ProjectComponent,
+		path: ':login/:name/task/:id',
+		component: TaskComponent,
 		data: {title: 'Project'}
 	},
 ];

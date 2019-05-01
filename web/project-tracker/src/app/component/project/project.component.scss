@@ -140,18 +140,31 @@
 
       .tasks-table {
         width: 100%;
+        margin-top: 4px;
 
         border-collapse: collapse;
 
+        tr {
+          border-left: 4px solid white;
+          border-right: 4px solid white;
+        }
+
+        tr:nth-child(even) {
+          background: var(--bright);
+          border-left-color: var(--bright);
+          border-right-color: var(--bright);
+        }
+
         th {
           padding: 4px;
-
           font-size: 20px;
-
           text-align: left;
         }
 
-        tr {
+        .row {
+          cursor: pointer;
+
+          transition: border linear .1s;
 
           td {
             padding: 4px;
@@ -160,9 +173,11 @@
           }
         }
 
-        tr:nth-child(even) {
-          background: var(--bright);
+        .row:hover {
+          border-left-color: var(--mainblue);
+          border-right-color: var(--mainblue);
         }
+
       }
 
       .no-tasks {
