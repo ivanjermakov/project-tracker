@@ -17,7 +17,6 @@ import com.gmail.ivanjermakov1.projecttracker.core.util.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -66,7 +65,6 @@ public class ProjectService {
 	}
 	
 	public Project edit(User user, EditProjectDto editProjectDto) throws NoSuchEntityException, AuthorizationException {
-// 		TODO: dto validation
 		Project project = this.projectRepository.findById(editProjectDto.id).orElseThrow(() -> new NoSuchEntityException("no such project to edit"));
 		
 		roleService.authorize(user, project, UserRole.COLLABORATOR);

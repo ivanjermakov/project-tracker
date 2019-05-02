@@ -68,8 +68,6 @@ public class TaskService {
 	}
 	
 	public Task edit(User user, EditTaskDto editTaskDto) throws NoSuchEntityException, AuthorizationException {
-//		TODO: dto validation
-		
 		Task task = taskRepository.findById(editTaskDto.id).orElseThrow(() -> new NoSuchEntityException("no such task to edit"));
 		
 		roleService.authorize(user, task.getProject(), UserRole.COLLABORATOR);

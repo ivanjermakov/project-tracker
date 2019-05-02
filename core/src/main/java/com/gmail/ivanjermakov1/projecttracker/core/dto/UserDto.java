@@ -7,8 +7,10 @@ import java.time.LocalDate;
 public class UserDto {
 	
 	public Long id;
+	
 	@JsonFormat(pattern = "yyyy-MM-dd")
 	public LocalDate joined;
+	
 	public UserInfoDto userInfo;
 	public String login;
 	

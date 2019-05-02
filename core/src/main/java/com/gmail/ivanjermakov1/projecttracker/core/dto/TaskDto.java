@@ -16,10 +16,13 @@ public class TaskDto {
 	public TaskType type;
 	public Double estimate;
 	public Double elapsed;
+	
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	public LocalDateTime opened;
+	
 	@JsonFormat(pattern = "yyyy-MM-dd")
 	public LocalDate due;
+	
 	public String name;
 	public String description;
 	public List<TaskDto> subtasks;

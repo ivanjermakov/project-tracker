@@ -1,9 +1,15 @@
 package com.gmail.ivanjermakov1.projecttracker.core.dto;
 
+import javax.validation.constraints.NotNull;
+
 public class EditTaskDto {
 	
+	@NotNull
 	public Long id;
+	
+	@NotNull
 	public String name;
+	
 	public String description;
 	
 	public EditTaskDto() {

@@ -1,10 +1,18 @@
 package com.gmail.ivanjermakov1.projecttracker.core.dto;
 
+import javax.validation.constraints.NotNull;
+
 public class EditProjectDto {
 	
+	@NotNull
 	public Long id;
+	
+	@NotNull
 	public Boolean isPublic;
+	
+	@NotNull
 	public String name;
+	
 	public String description;
 	public String about;
 	

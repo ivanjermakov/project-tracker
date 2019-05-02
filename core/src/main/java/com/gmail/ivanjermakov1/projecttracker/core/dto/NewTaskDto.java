@@ -3,16 +3,25 @@ package com.gmail.ivanjermakov1.projecttracker.core.dto;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.gmail.ivanjermakov1.projecttracker.core.entity.enums.TaskType;
 
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 public class NewTaskDto {
 	
 	public Long parentTaskId;
+	
+	@NotNull
 	public Long projectId;
+	
+	@NotNull
 	public TaskType type;
+	
 	public Double estimate;
+	
 	@JsonFormat(pattern = "yyyy-MM-dd")
 	public LocalDate due;
+	
+	@NotNull
 	public String name;
 	public String description;
 	

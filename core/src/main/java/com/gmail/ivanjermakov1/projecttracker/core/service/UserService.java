@@ -1,10 +1,8 @@
 package com.gmail.ivanjermakov1.projecttracker.core.service;
 
 import com.gmail.ivanjermakov1.projecttracker.core.dto.AuthUserDto;
-import com.gmail.ivanjermakov1.projecttracker.core.dto.EditProjectDto;
 import com.gmail.ivanjermakov1.projecttracker.core.dto.EditUserDto;
 import com.gmail.ivanjermakov1.projecttracker.core.dto.RegisterUserDto;
-import com.gmail.ivanjermakov1.projecttracker.core.dto.UserDto;
 import com.gmail.ivanjermakov1.projecttracker.core.entity.Token;
 import com.gmail.ivanjermakov1.projecttracker.core.entity.User;
 import com.gmail.ivanjermakov1.projecttracker.core.entity.UserCredentials;
@@ -20,7 +18,6 @@ import com.gmail.ivanjermakov1.projecttracker.core.security.Hasher;
 import com.gmail.ivanjermakov1.projecttracker.core.security.TokenGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 
@@ -67,8 +64,6 @@ public class UserService {
 	}
 	
 	public User getUser(User user, String login) throws NoSuchEntityException {
-//		TODO: maybe some kind of authorization
-		
 		return userCredentialsRepository.findByLogin(login)
 				.orElseThrow(() -> new NoSuchEntityException("no such user by given login"))
 				.getUser();
