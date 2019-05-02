@@ -12,7 +12,7 @@ public class TaskDto {
 	
 	public Long id;
 	public ProjectDto project;
-	public User creator;
+	public UserDto creator;
 	public TaskType type;
 	public Double estimate;
 	public Double elapsed;
@@ -30,7 +30,7 @@ public class TaskDto {
 	public TaskDto() {
 	}
 	
-	public TaskDto(Long id, ProjectDto project, User creator, TaskType type, Double estimate, Double elapsed, LocalDateTime opened, LocalDate due, String name, String description, List<TaskDto> subtasks) {
+	public TaskDto(Long id, ProjectDto project, UserDto creator, TaskType type, Double estimate, Double elapsed, LocalDateTime opened, LocalDate due, String name, String description, List<TaskDto> subtasks) {
 		this.id = id;
 		this.project = project;
 		this.creator = creator;
