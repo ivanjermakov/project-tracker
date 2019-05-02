@@ -45,6 +45,7 @@ public class TaskController {
 		return Mapper.mapAll(taskService.all(user, projectId, pageable), TaskDto.class);
 	}
 	
+	@GetMapping("get")
 	public TaskDto get(@RequestHeader("token") String token, @RequestParam("taskId") Long taskId) throws NoSuchEntityException, AuthorizationException {
 		User user = userService.validate(token);
 		
