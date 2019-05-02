@@ -48,11 +48,9 @@ export class ProjectComponent implements OnInit {
 
 	ngOnInit() {
 		this.app.onLoad(() => {
-			this.userProviderService.me.subscribe(me => {
-				this.me = me;
-			});
 			console.debug('project initiation');
 			this.userProviderService.me.subscribe(me => {
+				this.me = me;
 				this.route.params.subscribe(params => {
 					console.debug('params', params);
 					this.tokenProviderService.token.subscribe(token => {

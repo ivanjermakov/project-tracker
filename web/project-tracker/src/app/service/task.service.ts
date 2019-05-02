@@ -29,6 +29,13 @@ export class TaskService {
 		});
 	}
 
+	get(token: string, taskId: number): Observable<Task> {
+		return this.http.get<Task>(API_URL + 'task/get', {
+			params: {taskId: taskId.toString()},
+			headers: {token: token}
+		});
+	}
+
 	edit(token: string, editTask: EditTask): Observable<Task> {
 		return this.http.post<Task>(API_URL + 'task/edit', editTask, {headers: {token: token}});
 	}
