@@ -80,10 +80,10 @@
 							<i class="fas fa-info request" title="request" *ngIf="t.type === 'REQUEST'"></i>
 						</div>
 					</td>
-					<td>{{t.estimate}}h</td>
-					<td>{{t.elapsed}}h</td>
+					<td>{{t.estimate ? t.estimate + 'h' : '-'}}</td>
+					<td>{{t.elapsed ? t.elapsed : '-'}}</td>
 					<td>{{formatDate(t.opened)}}</td>
-					<td>{{formatDate(t.due)}}</td>
+					<td>{{t.due ? formatDate(t.due) : '-'}}</td>
 				</tr>
 			</table>
 			<div *ngIf="tasks.length === 0" class="no-tasks">No tasks yet.</div>
