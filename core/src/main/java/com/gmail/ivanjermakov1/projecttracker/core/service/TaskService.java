@@ -14,7 +14,6 @@ import com.gmail.ivanjermakov1.projecttracker.core.repository.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.Collections;
@@ -98,6 +97,14 @@ public class TaskService {
 		roleService.authorize(user, project, UserRole.VIEWER);
 		
 		return taskRepository.findAllByProject(project, pageable);
+	}
+	
+	public Task get(User user, Long taskId) throws AuthorizationException, NoSuchEntityException {
+		Task task = taskRepository.findById(taskId).orElseThrow(() -> new NoSuchElementException("no such task"));
+		
+		roleService.authorize(user, task.getProject(), UserRole.VIEWER);
+		
+		return task;
 	}
 	
 }

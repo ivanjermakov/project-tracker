@@ -13,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -44,6 +43,12 @@ public class TaskController {
 		User user = userService.validate(token);
 		
 		return Mapper.mapAll(taskService.all(user, projectId, pageable), TaskDto.class);
+	}
+	
+	public TaskDto get(@RequestHeader("token") String token, @RequestParam("taskId") Long taskId) throws NoSuchEntityException, AuthorizationException {
+		User user = userService.validate(token);
+		
+		return Mapper.map(taskService.get(user, taskId), TaskDto.class);
 	}
 	
 	@PostMapping("create")
