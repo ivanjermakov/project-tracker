@@ -1,8 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Task} from '../../dto/Task';
 import {AppComponent} from '../../app.component';
-import {Pageable} from '../../dto/Pageable';
-import {TASKS_IN_TABLE} from '../../../globals';
 import {ActivatedRoute, Router} from '@angular/router';
 import {UrlService} from '../../service/url.service';
 import {ProjectService} from '../../service/project.service';
@@ -11,6 +9,7 @@ import {TokenProviderService} from '../../service/token.provider.service';
 import {UserProviderService} from '../../service/user.provider.service';
 import {AuthService} from '../../service/auth.service';
 import {User} from '../../dto/User';
+import {TimeService} from '../../service/time.service';
 
 @Component({
 	selector: 'app-task',
@@ -24,6 +23,7 @@ export class TaskComponent implements OnInit {
 
 	me: User;
 	task: Task;
+	editMode: boolean = false;
 
 	constructor(
 		private app: AppComponent,
@@ -47,7 +47,7 @@ export class TaskComponent implements OnInit {
 				this.route.params.subscribe(params => {
 					console.debug('params', params);
 					this.tokenProviderService.token.subscribe(token => {
-						this.taskService.get(token, params["id"]).subscribe(task => {
+						this.taskService.get(token, params['id']).subscribe(task => {
 							this.task = task;
 							console.debug(task);
 						});
@@ -57,4 +57,7 @@ export class TaskComponent implements OnInit {
 		});
 	}
 
+	formatDateWithTime(date: Date) {
+		return TimeService.formatDate(date, 'MMMM Do[, ] YYYY [ at ] HH:mm');
+	}
 }

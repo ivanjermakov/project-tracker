@@ -103,6 +103,11 @@ button:hover {
   background: var(--bright);
 }
 
+.pre {
+  color: var(--gray);
+  padding-right: 6px;
+}
+
 //ANIMATIONS
 @keyframes appear {
   0% {

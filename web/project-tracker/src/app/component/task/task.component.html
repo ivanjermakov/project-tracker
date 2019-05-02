@@ -1,6 +1,59 @@
 <app-header></app-header>
-<div class="content-container">
+<div class="content-container" *ngIf="task && me">
 	<div class="content">
-
+		<div class="back-container" [routerLink]="'/' + task.project.user.login + '/' + task.project.name">
+			<i class="fas fa-arrow-left"></i>
+			<div class="text">Back to project</div>
+		</div>
+		<div class="delimiter"></div>
+		<div class="name-container">
+			<div class="heading">#{{task.id}}</div>
+			<div class="heading" [ngClass]="{'editing': editMode}"
+			     [contentEditable]="editMode"
+			     [textContent]="task.name"
+			     (input)="task.name = $event.target.textContent">
+				{{task.name}}
+			</div>
+			<div class="task-type-icon">
+				<i class="fas fa-bolt feature" title="feature" *ngIf="task.type === 'FEATURE'"></i>
+				<i class="fas fa-exclamation-triangle issue" title="issue" *ngIf="task.type === 'ISSUE'"></i>
+				<i class="fas fa-bug bug" title="bug" *ngIf="task.type === 'BUG'"></i>
+				<i class="fas fa-info request" title="request" *ngIf="task.type === 'REQUEST'"></i>
+			</div>
+			<div class="opened">
+				<div class="text">opened on {{formatDateWithTime(task.opened)}}</div>
+			</div>
+		</div>
+		<div class="info-container">
+			<div class="type">
+				<div class="pre">Type:</div>
+				<div class="text">
+					{{task.type[0] + task.type.toString().slice(1).toLowerCase()}}
+				</div>
+			</div>
+			<div class="creator">
+				<div class="pre">Creator:</div>
+				<div class="text" [routerLink]="'/' + task.creator.login">
+					@{{task.creator.login}}
+				</div>
+			</div>
+			<div class="project">
+				<div class="pre">Project:</div>
+				<div class="text" [routerLink]="'/' + task.project.user.login + '/' + task.project.name">
+					{{task.project.name}}
+				</div>
+			</div>
+			<div class="description">
+				<div class="pre">Description:</div>
+				<div class="text"
+				     [ngClass]="{'editing': editMode}"
+				     [contentEditable]="editMode"
+				     [textContent]="task.description"
+				     (input)="task.description = $event.target.textContent">
+					{{task.description}}
+				</div>
+			</div>
+		</div>
+		<div class="delimiter"></div>
 	</div>
 </div>
