@@ -50,7 +50,7 @@
 					{{'#' + parentTask.id + ' ' + parentTask.name}}
 				</div>
 			</div>
-			<div class="description">
+			<div class="description" *ngIf="task.description">
 				<div class="pre">Description:</div>
 				<div class="text"
 				     [ngClass]="{'editing': editMode}"
