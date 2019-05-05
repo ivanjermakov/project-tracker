@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("auth")
 public class AuthController {
@@ -27,7 +29,7 @@ public class AuthController {
 	}
 	
 	@PostMapping
-	public String authenticate(@RequestBody AuthUserDto authUserDto) throws AuthenticationException, NoSuchEntityException {
+	public String authenticate(@Valid @RequestBody AuthUserDto authUserDto) throws AuthenticationException, NoSuchEntityException {
 		return userService.authenticate(authUserDto);
 	}
 	

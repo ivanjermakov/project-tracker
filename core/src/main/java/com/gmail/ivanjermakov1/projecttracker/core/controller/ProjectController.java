@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -41,7 +42,7 @@ public class ProjectController {
 	
 	@PostMapping("create")
 	public ProjectDto create(@RequestHeader("token") String token,
-	                         @RequestBody NewProjectDto newProjectDto) throws NoSuchEntityException, DuplicationException {
+	                         @Valid @RequestBody NewProjectDto newProjectDto) throws NoSuchEntityException, DuplicationException {
 		User user = userService.validate(token);
 		
 		return projectService.create(user, newProjectDto);
@@ -49,7 +50,7 @@ public class ProjectController {
 	
 	@PostMapping("edit")
 	public ProjectDto edit(@RequestHeader("token") String token,
-	                       @RequestBody EditProjectDto editProjectDto) throws NoSuchEntityException, AuthorizationException {
+	                       @Valid @RequestBody EditProjectDto editProjectDto) throws NoSuchEntityException, AuthorizationException {
 		User user = userService.validate(token);
 		
 		return Mapper.map(projectService.edit(user, editProjectDto), ProjectDto.class);

@@ -23,6 +23,7 @@ public class NewTaskDto {
 	
 	@NotNull
 	public String name;
+	
 	public String description;
 	
 	public NewTaskDto() {

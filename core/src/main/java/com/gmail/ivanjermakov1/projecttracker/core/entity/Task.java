@@ -10,9 +10,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import java.time.LocalDate;
@@ -31,6 +30,10 @@ public class Task {
 	@ManyToOne
 	@JoinColumn(name = "project_id")
 	private Project project;
+	
+	@ManyToOne
+	@JoinColumn(name = "parent_id")
+	private Task parent;
 	
 	@ManyToOne
 	@JoinColumn(name = "creator_id")
@@ -55,19 +58,15 @@ public class Task {
 	@OneToOne(mappedBy = "task", cascade = {CascadeType.ALL}, orphanRemoval = true)
 	private TaskInfo taskInfo;
 	
-	@ManyToMany
-	@JoinTable(
-			name = "task_subtask",
-			joinColumns = @JoinColumn(name = "task_id"),
-			inverseJoinColumns = @JoinColumn(name = "subtask_id")
-	)
+	@OneToMany(mappedBy = "parent")
 	private List<Task> subtasks;
 	
 	public Task() {
 	}
 	
-	public Task(Project project, User creator, TaskType type, Double estimate, Double elapsed, LocalDateTime opened, LocalDate due, TaskInfo taskInfo, List<Task> subtasks) {
+	public Task(Project project, Task parent, User creator, TaskType type, Double estimate, Double elapsed, LocalDateTime opened, LocalDate due, TaskInfo taskInfo, List<Task> subtasks) {
 		this.project = project;
+		this.parent = parent;
 		this.creator = creator;
 		this.type = type;
 		this.estimate = estimate;
@@ -92,6 +91,14 @@ public class Task {
 	
 	public void setProject(Project project) {
 		this.project = project;
+	}
+	
+	public Task getParent() {
+		return parent;
+	}
+	
+	public void setParent(Task parent) {
+		this.parent = parent;
 	}
 	
 	public User getCreator() {

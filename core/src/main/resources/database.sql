@@ -66,6 +66,9 @@ create table task
     project_id bigint    not null
         constraint task_project_id_fk
             references project,
+    parent_id  bigint
+        constraint task_task_id_fk
+            references task,
     creator_id bigint    not null
         constraint task_user_id_fk
             references "user",
@@ -109,29 +112,6 @@ create table user_role
 );
 
 alter table user_role
-    owner to postgres;
-
-create table activity
-(
-    id                    bigint    not null
-        constraint activity_pk
-            primary key,
-    task_id               bigint    not null
-        constraint activity_task_id_fk
-            references task,
-    creator_id            bigint    not null
-        constraint activity_user_id_fk_2
-            references "user",
-    assignee_id           bigint    not null
-        constraint activity_user_id_fk
-            references "user",
-    status                varchar,
-    completion_difference integer,
-    timestamp             timestamp not null,
-    description           varchar
-);
-
-alter table activity
     owner to postgres;
 
 create table user_follower
@@ -182,16 +162,26 @@ create table user_info
 alter table user_info
     owner to postgres;
 
-create table task_subtask
+create table activity
 (
-    task_id    bigint not null
-        constraint task_subtask_task_id_fk
+    id                    bigint    not null
+        constraint activity_pk
+            primary key,
+    task_id               bigint    not null
+        constraint activity_task_id_fk
             references task,
-    subtask_id bigint not null
-        constraint task_subtask_task_id_fk_2
-            references task
+    creator_id            bigint    not null
+        constraint activity_user_id_fk_2
+            references "user",
+    assignee_id           bigint    not null
+        constraint activity_user_id_fk
+            references "user",
+    status                varchar,
+    completion_difference integer,
+    timestamp             timestamp not null,
+    description           varchar
 );
 
-alter table task_subtask
+alter table activity
     owner to postgres;
 

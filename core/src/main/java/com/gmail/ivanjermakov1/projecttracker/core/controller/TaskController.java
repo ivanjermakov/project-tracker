@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -53,14 +54,14 @@ public class TaskController {
 	}
 	
 	@PostMapping("create")
-	public TaskDto create(@RequestHeader("token") String token, @RequestBody NewTaskDto newTaskDto) throws NoSuchEntityException, AuthorizationException {
+	public TaskDto create(@RequestHeader("token") String token, @Valid @RequestBody NewTaskDto newTaskDto) throws NoSuchEntityException, AuthorizationException {
 		User user = userService.validate(token);
 		
 		return Mapper.map(taskService.create(user, newTaskDto), TaskDto.class);
 	}
 	
 	@PostMapping("edit")
-	public TaskDto edit(@RequestHeader("token") String token, @RequestBody EditTaskDto editTaskDto) throws NoSuchEntityException, AuthorizationException {
+	public TaskDto edit(@RequestHeader("token") String token, @Valid @RequestBody EditTaskDto editTaskDto) throws NoSuchEntityException, AuthorizationException {
 		User user = userService.validate(token);
 		
 		return Mapper.map(taskService.edit(user, editTaskDto), TaskDto.class);

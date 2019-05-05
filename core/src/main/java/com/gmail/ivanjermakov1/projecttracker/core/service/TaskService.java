@@ -40,6 +40,7 @@ public class TaskService {
 	public Task create(User user, NewTaskDto newTaskDto) throws NoSuchEntityException, AuthorizationException {
 		Task task = new Task(
 				projectService.get(user, newTaskDto.projectId),
+				null,
 				user,
 				newTaskDto.type,
 				newTaskDto.estimate,
@@ -50,6 +51,11 @@ public class TaskService {
 				Collections.emptyList()
 		);
 		
+		if (newTaskDto.parentTaskId != null) {
+			Task parentTask = taskRepository.findById(newTaskDto.parentTaskId).orElseThrow(() -> new NoSuchElementException("no such parent task"));
+			task.setParent(parentTask);
+		}
+		
 		task = taskRepository.save(task);
 		
 		task.setTaskInfo(new TaskInfo(
@@ -58,13 +64,9 @@ public class TaskService {
 				newTaskDto.description
 		));
 		
-		if (newTaskDto.parentTaskId != null) {
-			Task parentTask = taskRepository.findById(newTaskDto.parentTaskId).orElseThrow(() -> new NoSuchElementException("no such parent task"));
-			parentTask.getSubtasks().add(task);
-			taskRepository.save(parentTask);
-		}
+		task = taskRepository.save(task);
 		
-		return taskRepository.save(task);
+		return task;
 	}
 	
 	public Task edit(User user, EditTaskDto editTaskDto) throws NoSuchEntityException, AuthorizationException {

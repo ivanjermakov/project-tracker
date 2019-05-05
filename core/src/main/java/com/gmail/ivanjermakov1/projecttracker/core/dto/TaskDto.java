@@ -1,7 +1,6 @@
 package com.gmail.ivanjermakov1.projecttracker.core.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.gmail.ivanjermakov1.projecttracker.core.entity.User;
 import com.gmail.ivanjermakov1.projecttracker.core.entity.enums.TaskType;
 
 import java.time.LocalDate;
@@ -26,6 +25,7 @@ public class TaskDto {
 	public String name;
 	public String description;
 	public List<TaskDto> subtasks;
+	public Long parentTaskId;
 	
 	public TaskDto() {
 	}
@@ -42,6 +42,10 @@ public class TaskDto {
 		this.name = name;
 		this.description = description;
 		this.subtasks = subtasks;
+	}
+	
+	public void setParentTaskId(Long parentTaskId) {
+		this.parentTaskId = parentTaskId;
 	}
 	
 }

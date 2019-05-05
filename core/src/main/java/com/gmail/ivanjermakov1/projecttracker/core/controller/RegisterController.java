@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("register")
 public class RegisterController {
@@ -21,7 +23,7 @@ public class RegisterController {
 	}
 	
 	@PostMapping
-	public void register(@RequestBody RegisterUserDto registerUserDto) throws RegistrationException {
+	public void register(@Valid @RequestBody RegisterUserDto registerUserDto) throws RegistrationException {
 		userService.register(registerUserDto);
 	}
 	

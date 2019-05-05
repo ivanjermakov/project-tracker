@@ -1,5 +1,7 @@
 package com.gmail.ivanjermakov1.projecttracker.core.util;
 
+import com.gmail.ivanjermakov1.projecttracker.core.dto.TaskDto;
+import com.gmail.ivanjermakov1.projecttracker.core.entity.Task;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 
@@ -13,10 +15,15 @@ public class Mapper {
 	
 	static {
 		modelMapper = new ModelMapper();
-		modelMapper.getConfiguration()
+		modelMapper
+				.getConfiguration()
 				.setFieldMatchingEnabled(true)
 				.setSkipNullEnabled(false)
 				.setMatchingStrategy(MatchingStrategies.LOOSE);
+		
+		modelMapper
+				.createTypeMap(Task.class, TaskDto.class)
+				.addMapping(s -> s.getParent().getId(), TaskDto::setParentTaskId);
 	}
 	
 	public static <S, T> T map(S source, Class<T> targetClass) {

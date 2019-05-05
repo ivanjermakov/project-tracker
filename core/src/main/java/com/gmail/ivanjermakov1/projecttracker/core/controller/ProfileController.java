@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("profile")
 public class ProfileController {
@@ -27,7 +29,7 @@ public class ProfileController {
 	
 	@PostMapping("edit")
 	public UserDto edit(@RequestHeader("token") String token,
-	                    @RequestBody EditUserDto editUserDto) throws NoSuchEntityException, AuthorizationException {
+	                    @Valid @RequestBody EditUserDto editUserDto) throws NoSuchEntityException, AuthorizationException {
 		User user = userService.validate(token);
 		
 		return Mapper.map(userService.edit(user, editUserDto), UserDto.class);
