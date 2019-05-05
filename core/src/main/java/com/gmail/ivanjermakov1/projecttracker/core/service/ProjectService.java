@@ -36,8 +36,8 @@ public class ProjectService {
 	}
 	
 	public ProjectDto create(User user, NewProjectDto newProjectDto) throws DuplicationException {
-		if (projectRepository.findByNameAndUser(newProjectDto.name, user.getId()) != null)
-			throw new DuplicationException("such project already exist");
+		projectRepository.findByNameAndUser(newProjectDto.name, user.getId())
+				.orElseThrow(() -> new DuplicationException("such project already exist"));
 		
 		Project project = projectRepository.save(
 				new Project(

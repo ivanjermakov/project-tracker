@@ -32,7 +32,7 @@ dependencies {
     compile group: 'org.hibernate', name: 'hibernate-validator', version: '6.0.2.Final'
     compile group: 'org.hibernate', name: 'hibernate-validator-annotation-processor', version: '6.0.2.Final'
     compile group: 'javax.el', name: 'javax.el-api', version: '3.0.0'
-    compile group: 'org.glassfish', name: 'javax.el', version: '2.2.6'
+    compile group: 'org.glassfish', name: 'javax.el', version: '3.0.0'
 
     compile group: "com.twilio.sdk", name: "twilio", version: "7.35.1"
 

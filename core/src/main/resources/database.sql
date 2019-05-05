@@ -164,22 +164,22 @@ alter table user_info
 
 create table activity
 (
-    id                    bigint    not null
+    id          bigserial not null
         constraint activity_pk
             primary key,
-    task_id               bigint    not null
+    task_id     bigint    not null
         constraint activity_task_id_fk
             references task,
-    creator_id            bigint    not null
+    creator_id  bigint    not null
         constraint activity_user_id_fk_2
             references "user",
-    assignee_id           bigint    not null
+    assignee_id bigint
         constraint activity_user_id_fk
             references "user",
-    status                varchar,
-    completion_difference integer,
-    timestamp             timestamp not null,
-    description           varchar
+    status      varchar,
+    elapsed     double precision,
+    timestamp   timestamp not null,
+    description varchar
 );
 
 alter table activity

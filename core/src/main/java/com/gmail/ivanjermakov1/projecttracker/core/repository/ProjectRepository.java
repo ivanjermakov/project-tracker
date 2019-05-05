@@ -13,7 +13,7 @@ import java.util.Optional;
 public interface ProjectRepository extends CrudRepository<Project, Long> {
 	
 	@Query("select p from Project p join p.projectInfo i where p.user.id = :userId and i.name = :name")
-	Project findByNameAndUser(@Param("name") String name, @Param("userId") Long userId);
+	Optional<Project> findByNameAndUser(@Param("name") String name, @Param("userId") Long userId);
 	
 	Optional<Project> findById(Long id);
 	

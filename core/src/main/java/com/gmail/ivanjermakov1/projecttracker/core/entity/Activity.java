@@ -38,8 +38,8 @@ public class Activity {
 	@Column(name = "status")
 	private TaskStatus status;
 	
-	@Column(name = "completion_difference")
-	private Integer completion_difference;
+	@Column(name = "elapsed")
+	private Double elapsed;
 	
 	@Column(name = "timestamp")
 	private LocalDateTime timestamp;
@@ -50,12 +50,12 @@ public class Activity {
 	public Activity() {
 	}
 	
-	public Activity(Task task, User creator, User assignee, TaskStatus status, Integer completion_difference, LocalDateTime timestamp, String description) {
+	public Activity(Task task, User creator, User assignee, TaskStatus status, Double elapsed, LocalDateTime timestamp, String description) {
 		this.task = task;
 		this.creator = creator;
 		this.assignee = assignee;
 		this.status = status;
-		this.completion_difference = completion_difference;
+		this.elapsed = elapsed;
 		this.timestamp = timestamp;
 		this.description = description;
 	}
@@ -100,12 +100,12 @@ public class Activity {
 		this.status = status;
 	}
 	
-	public Integer getCompletion_difference() {
-		return completion_difference;
+	public Double getElapsed() {
+		return elapsed;
 	}
 	
-	public void setCompletion_difference(Integer completion_difference) {
-		this.completion_difference = completion_difference;
+	public void setElapsed(Double elapsed) {
+		this.elapsed = elapsed;
 	}
 	
 	public LocalDateTime getTimestamp() {
