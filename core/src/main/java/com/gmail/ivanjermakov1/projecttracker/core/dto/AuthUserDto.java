@@ -1,13 +1,14 @@
 package com.gmail.ivanjermakov1.projecttracker.core.dto;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 public class AuthUserDto {
 	
-	@NotNull
+	@NotBlank
 	public String login;
 	
-	@NotNull
+	@NotBlank
 	public String password;
 	
 	public AuthUserDto() {

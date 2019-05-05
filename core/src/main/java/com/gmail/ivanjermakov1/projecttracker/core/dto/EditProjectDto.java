@@ -1,5 +1,6 @@
 package com.gmail.ivanjermakov1.projecttracker.core.dto;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 public class EditProjectDto {
@@ -10,7 +11,7 @@ public class EditProjectDto {
 	@NotNull
 	public Boolean isPublic;
 	
-	@NotNull
+	@NotBlank
 	public String name;
 	
 	public String description;
