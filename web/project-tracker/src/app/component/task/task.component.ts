@@ -27,6 +27,7 @@ export class TaskComponent implements OnInit {
 	me: User;
 	task: Task;
 	beforeEditTask: Task;
+	parentTask: Task;
 	editMode: boolean = false;
 
 	constructor(
@@ -56,6 +57,11 @@ export class TaskComponent implements OnInit {
 							this.task = task;
 							console.debug(task);
 							this.titleService.setTitle(`#${task.id} ${task.name}`);
+							if (task.parentTaskId) {
+								this.taskService.get(token, task.parentTaskId).subscribe(parentTask => {
+									this.parentTask = parentTask;
+								});
+							}
 						});
 					});
 				});

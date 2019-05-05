@@ -76,13 +76,16 @@
         }
       }
 
-      .creator .text, .project .text {
+      .linkable {
         cursor: pointer;
       }
 
-      .creator .text:hover, .project .text:hover {
-        color: var(--darkblue);
-        text-decoration: underline;
+      .linkable:hover {
+
+        .text {
+          color: var(--darkblue);
+          text-decoration: underline;
+        }
       }
 
     }

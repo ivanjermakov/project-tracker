@@ -36,16 +36,23 @@
 					{{task.type[0] + task.type.toString().slice(1).toLowerCase()}}
 				</div>
 			</div>
-			<div class="creator">
+			<div class="creator linkable">
 				<div class="pre">Creator:</div>
 				<div class="text" [routerLink]="'/' + task.creator.login">
 					@{{task.creator.login}}
 				</div>
 			</div>
-			<div class="project">
+			<div class="project linkable">
 				<div class="pre">Project:</div>
 				<div class="text" [routerLink]="'/' + task.project.user.login + '/' + task.project.name">
 					{{task.project.name}}
+				</div>
+			</div>
+			<div class="parent-task linkable" *ngIf="task.parentTaskId">
+				<div class="pre">Parent task:</div>
+				<div class="text"
+				     [routerLink]="'/' + task.project.user.login + '/' + task.project.name + '/task/' + parentTask.id">
+					{{'#' + parentTask.id + ' ' + parentTask.name}}
 				</div>
 			</div>
 			<div class="description">
@@ -66,7 +73,7 @@
 				<div class="subtasks">Subtasks</div>
 				<button class="new-subtask-button"
 				        [routerLink]="'/' + task.project.user.login + '/' + task.project.name + '/task/create'"
-				        [queryParams]="{parentTaskId: task.id}" title="New task">
+				        [queryParams]="{parentTaskId: task.id}" title="New subtask">
 					<i class="fas fa-plus"></i>
 				</button>
 			</div>
