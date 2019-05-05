@@ -21,6 +21,7 @@ import { ProfileFollowingComponent } from './component/profile-following/profile
 import { NewTaskComponent } from './component/new-task/new-task.component';
 import { TaskComponent } from './component/task/task.component';
 import { TasksTableComponent } from './component/tasks-table/tasks-table.component';
+import { TaskTypeIconComponent } from './component/task-type-icon/task-type-icon.component';
 
 @NgModule({
 	declarations: [
@@ -39,7 +40,8 @@ import { TasksTableComponent } from './component/tasks-table/tasks-table.compone
 		ProfileFollowingComponent,
 		NewTaskComponent,
 		TaskComponent,
-		TasksTableComponent
+		TasksTableComponent,
+		TaskTypeIconComponent
 	],
 	imports: [
 		BrowserModule,

@@ -16,12 +16,7 @@
 		<td>{{t.name}}</td>
 		<td>{{t.project.name}}</td>
 		<td>
-			<div class="task-type-icon">
-				<i class="fas fa-bolt feature" title="feature" *ngIf="t.type === 'FEATURE'"></i>
-				<i class="fas fa-exclamation-triangle issue" title="issue" *ngIf="t.type === 'ISSUE'"></i>
-				<i class="fas fa-bug bug" title="bug" *ngIf="t.type === 'BUG'"></i>
-				<i class="fas fa-info request" title="request" *ngIf="t.type === 'REQUEST'"></i>
-			</div>
+			<app-task-type-icon [task]="t"></app-task-type-icon>
 		</td>
 		<td>{{t.estimate ? t.estimate + 'h' : '-'}}</td>
 		<td>{{t.elapsed ? t.elapsed : '-'}}</td>

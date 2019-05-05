@@ -14,12 +14,7 @@
 			     (input)="task.name = $event.target.textContent">
 				{{task.name}}
 			</div>
-			<div class="task-type-icon">
-				<i class="fas fa-bolt feature" title="feature" *ngIf="task.type === 'FEATURE'"></i>
-				<i class="fas fa-exclamation-triangle issue" title="issue" *ngIf="task.type === 'ISSUE'"></i>
-				<i class="fas fa-bug bug" title="bug" *ngIf="task.type === 'BUG'"></i>
-				<i class="fas fa-info request" title="request" *ngIf="task.type === 'REQUEST'"></i>
-			</div>
+			<app-task-type-icon [task]="task"></app-task-type-icon>
 			<div class="edit" title="Edit project"
 			     *ngIf="!editMode"
 			     (click)="edit()">
