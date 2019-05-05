@@ -12,7 +12,9 @@ import {EditProject} from '../dto/EditProject';
 })
 export class ProjectService {
 
-	constructor(private http: HttpClient) {
+	constructor(
+		private http: HttpClient
+	) {
 	}
 
 	create(token: string, newProject: NewProject): Observable<Project> {

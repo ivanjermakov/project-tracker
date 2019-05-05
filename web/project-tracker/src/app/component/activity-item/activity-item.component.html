@@ -1,0 +1,25 @@
+<div class="activity">
+	<div class="of">
+		<div class="pre">Of</div>
+		<div class="text">{{'#' + activity.task.id + ' ' + activity.task.name}}</div>
+	</div>
+	<div class="by">
+		<div class="pre">By</div>
+		<div class="text">{{'@' + activity.creator.login}}</div>
+	</div>
+	<div class="description" *ngIf="activity.description">
+		<div class="pre">Description</div>
+		<div class="text">{{activity.description}}</div>
+	</div>
+	<div class="actions">
+		<div class="status" *ngIf="activity.assignee">
+			<div class="pre">Changed status to</div>
+			<app-task-status-icon [status]="activity.status"></app-task-status-icon>
+		</div>
+		<div class="assigned" *ngIf="activity.assignee">
+			<div class="pre">Assigned to</div>
+			<div class="text">{{'@' + activity.assignee.login}}</div>
+		</div>
+	</div>
+
+</div>

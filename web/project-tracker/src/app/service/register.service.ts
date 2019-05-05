@@ -9,7 +9,9 @@ import {RegisterUser} from '../dto/RegisterUser';
 })
 export class RegisterService {
 
-	constructor(private http: HttpClient) {
+	constructor(
+		private http: HttpClient
+	) {
 	}
 
 	register(registerUser: RegisterUser): Observable<void> {

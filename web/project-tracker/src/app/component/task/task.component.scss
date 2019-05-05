@@ -2,7 +2,7 @@
 
   .content {
 
-    .back-container, .name-container, .info-container, .subtasks-container {
+    .back-container, .name-container, .info-container, .subtasks-container, .activities-container {
       padding: 10px;
     }
 
@@ -64,6 +64,8 @@
     }
 
     .info-container {
+      display: flex;
+      flex-direction: column;
 
       div {
         display: flex;
@@ -91,12 +93,14 @@
     }
 
     .subtasks-container {
+      display: flex;
+      flex-direction: column;
 
       .subtasks-header {
         display: flex;
         align-items: center;
 
-        .subtasks {
+        .text {
           font-size: 20px;
           color: var(--gray)
         }
@@ -111,6 +115,34 @@
       }
 
       .no-subtasks {
+        font-size: 20px;
+        font-style: italic;
+      }
+    }
+
+    .activities-container {
+      display: flex;
+      flex-direction: column;
+
+      .activities-header {
+        display: flex;
+        align-items: center;
+
+        .text {
+          font-size: 20px;
+          color: var(--gray)
+        }
+
+        .new-activity-button {
+          margin: 0 8px;
+
+          i {
+            font-size: 18px;
+          }
+        }
+      }
+
+      .no-activities {
         font-size: 20px;
         font-style: italic;
       }

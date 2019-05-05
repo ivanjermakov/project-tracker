@@ -14,7 +14,7 @@
 			     (input)="task.name = $event.target.textContent">
 				{{task.name}}
 			</div>
-			<app-task-type-icon [task]="task"></app-task-type-icon>
+			<app-task-type-icon [type]="task.type"></app-task-type-icon>
 			<div class="edit" title="Edit project"
 			     *ngIf="!editMode"
 			     (click)="edit()">
@@ -62,10 +62,9 @@
 			</div>
 		</div>
 		<div class="delimiter"></div>
-		<div class="subtasks-container"
-		     *ngIf="!editMode">
+		<div class="subtasks-container" *ngIf="!editMode">
 			<div class="subtasks-header">
-				<div class="subtasks">Subtasks</div>
+				<div class="text">Subtasks</div>
 				<button class="new-subtask-button"
 				        [routerLink]="'/' + task.project.user.login + '/' + task.project.name + '/task/create'"
 				        [queryParams]="{parentTaskId: task.id}" title="New subtask">
@@ -76,6 +75,17 @@
 			                 [project]="task.project">
 			</app-tasks-table>
 			<div *ngIf="task.subtasks.length === 0" class="no-subtasks">No subtasks yet.</div>
+		</div>
+		<div class="delimiter"></div>
+		<div class="activities-container" *ngIf="!editMode && activities">
+			<div class="activities-header">
+				<div class="text">Activities</div>
+				<button class="new-activity-button" [routerLink]="'activity/create'" title="New activity">
+					<i class="fas fa-plus"></i>
+				</button>
+			</div>
+			<app-activity-list [activities]="activities"></app-activity-list>
+			<div *ngIf="activities.length === 0" class="no-activities">No activities yet.</div>
 		</div>
 		<div class="delimiter"></div>
 		<div class="edit-choice"

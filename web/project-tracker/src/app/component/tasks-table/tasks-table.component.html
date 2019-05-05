@@ -16,7 +16,7 @@
 		<td>{{t.name}}</td>
 		<td>{{t.project.name}}</td>
 		<td>
-			<app-task-type-icon [task]="t"></app-task-type-icon>
+			<app-task-type-icon [type]="t.type"></app-task-type-icon>
 		</td>
 		<td>{{t.estimate ? t.estimate + 'h' : '-'}}</td>
 		<td>{{t.elapsed ? t.elapsed : '-'}}</td>

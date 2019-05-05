@@ -1,0 +1,12 @@
+.activity-list {
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+
+  app-activity-item:nth-child(even) {
+    background: var(--bright);
+    border-left-color: var(--bright);
+    border-right-color: var(--bright);
+  }
+}

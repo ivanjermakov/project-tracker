@@ -12,6 +12,10 @@ import {User} from '../../dto/User';
 import {TimeService} from '../../service/time.service';
 import {Title} from '@angular/platform-browser';
 import {EditTask} from '../../dto/EditTask';
+import {ActivityService} from '../../service/activity.service';
+import {Pageable} from '../../dto/Pageable';
+import {ACTIVITIES_IN_LIST} from '../../../globals';
+import {Activity} from '../../dto/Activity';
 
 @Component({
 	selector: 'app-task',
@@ -27,7 +31,11 @@ export class TaskComponent implements OnInit {
 	me: User;
 	task: Task;
 	beforeEditTask: Task;
+
 	parentTask: Task;
+
+	activities: Activity[];
+
 	editMode: boolean = false;
 
 	constructor(
@@ -37,6 +45,7 @@ export class TaskComponent implements OnInit {
 		private urlService: UrlService,
 		private projectService: ProjectService,
 		private taskService: TaskService,
+		private activityService: ActivityService,
 		private tokenProviderService: TokenProviderService,
 		private userProviderService: UserProviderService,
 		private authService: AuthService,
@@ -62,6 +71,9 @@ export class TaskComponent implements OnInit {
 									this.parentTask = parentTask;
 								});
 							}
+							this.activityService.allByTask(token, this.task.id, new Pageable(0, ACTIVITIES_IN_LIST)).subscribe(activities => {
+								this.activities = activities;
+							});
 						});
 					});
 				});

@@ -9,7 +9,7 @@
 					<select [(ngModel)]="task.type" name="task-form">
 						<option *ngFor="let t of taskTypes" [value]="t">{{t[0] + t.slice(1).toLowerCase()}}</option>
 					</select>
-					<app-task-type-icon [task]="task"></app-task-type-icon>
+					<app-task-type-icon [type]="task.type"></app-task-type-icon>
 				</div>
 			</div>
 			<div class="name-wrapper">

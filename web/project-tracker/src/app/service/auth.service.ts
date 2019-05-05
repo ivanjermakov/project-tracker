@@ -10,7 +10,9 @@ import {User} from '../dto/User';
 })
 export class AuthService {
 
-	constructor(private http: HttpClient) {
+	constructor(
+		private http: HttpClient
+	) {
 	}
 
 	authenticate(authUser: AuthUser): Observable<string> {

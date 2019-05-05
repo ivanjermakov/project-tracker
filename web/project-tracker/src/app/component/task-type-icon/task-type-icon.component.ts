@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Task} from '../../dto/Task';
+import {TaskType} from '../../dto/TaskType';
 
 @Component({
   selector: 'app-task-type-icon',
@@ -9,7 +10,7 @@ import {Task} from '../../dto/Task';
 export class TaskTypeIconComponent implements OnInit {
 
   @Input()
-  task: Task;
+  type: TaskType;
 
   constructor() { }
 

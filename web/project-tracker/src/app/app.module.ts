@@ -22,6 +22,11 @@ import { NewTaskComponent } from './component/new-task/new-task.component';
 import { TaskComponent } from './component/task/task.component';
 import { TasksTableComponent } from './component/tasks-table/tasks-table.component';
 import { TaskTypeIconComponent } from './component/task-type-icon/task-type-icon.component';
+import { ActivityComponent } from './component/activity/activity.component';
+import { ActivityListComponent } from './component/activity-list/activity-list.component';
+import { TaskStatusIconComponent } from './component/task-status-icon/task-status-icon.component';
+import { NewActivityComponent } from './component/new-activity/new-activity.component';
+import { ActivityItemComponent } from './component/activity-item/activity-item.component';
 
 @NgModule({
 	declarations: [
@@ -41,7 +46,12 @@ import { TaskTypeIconComponent } from './component/task-type-icon/task-type-icon
 		NewTaskComponent,
 		TaskComponent,
 		TasksTableComponent,
-		TaskTypeIconComponent
+		TaskTypeIconComponent,
+		ActivityComponent,
+		ActivityListComponent,
+		TaskStatusIconComponent,
+		NewActivityComponent,
+		ActivityItemComponent
 	],
 	imports: [
 		BrowserModule,

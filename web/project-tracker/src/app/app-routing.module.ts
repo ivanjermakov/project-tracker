@@ -12,6 +12,8 @@ import {ProfileFollowersComponent} from './component/profile-followers/profile-f
 import {ProfileFollowingComponent} from './component/profile-following/profile-following.component';
 import {NewTaskComponent} from './component/new-task/new-task.component';
 import {TaskComponent} from './component/task/task.component';
+import {ActivityComponent} from './component/activity/activity.component';
+import {NewActivityComponent} from './component/new-activity/new-activity.component';
 
 const routes: Routes = [
 	{
@@ -76,6 +78,16 @@ const routes: Routes = [
 		path: ':login/:name/task/:id',
 		component: TaskComponent,
 		data: {title: 'Project'}
+	},
+	{
+		path: ':login/:name/task/:taskId/activity/create',
+		component: NewActivityComponent,
+		data: {title: 'New activity'}
+	},
+	{
+		path: ':login/:name/task/:taskId/activity/:activityId',
+		component: ActivityComponent,
+		data: {title: 'Activity'}
 	},
 ];
 
