@@ -15,6 +15,7 @@ import {Task} from '../../dto/Task';
 import {Pageable} from '../../dto/Pageable';
 import {TASKS_IN_TABLE} from '../../../globals';
 import {TaskService} from '../../service/task.service';
+import {Title} from '@angular/platform-browser';
 
 @Component({
 	selector: 'app-project',
@@ -42,7 +43,8 @@ export class ProjectComponent implements OnInit {
 		private taskService: TaskService,
 		private tokenProviderService: TokenProviderService,
 		private userProviderService: UserProviderService,
-		private authService: AuthService
+		private authService: AuthService,
+		private titleService: Title
 	) {
 	}
 
@@ -56,11 +58,12 @@ export class ProjectComponent implements OnInit {
 					this.tokenProviderService.token.subscribe(token => {
 						this.projectService.get(token, params['login'], params['name']).subscribe(project => {
 							this.project = project;
+							console.debug('project: ', this.project);
+							this.titleService.setTitle(this.project.name);
 							this.taskService.all(token, project.id, new Pageable(0, TASKS_IN_TABLE)).subscribe(tasks => {
 								this.tasks = tasks;
 								console.debug(tasks);
 							});
-							console.debug(project);
 							this.mine = project.user.id === me.id;
 						});
 					});

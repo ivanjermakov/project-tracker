@@ -8,10 +8,7 @@ import {AppComponent} from '../../app.component';
 import {TimeService} from '../../service/time.service';
 import {ProfileTab} from './ProfileTab';
 import {UrlService} from '../../service/url.service';
-import {Task} from '../../dto/Task';
-import {TaskService} from '../../service/task.service';
-import {Pageable} from '../../dto/Pageable';
-import {TASKS_IN_TABLE} from '../../../globals';
+import {Title} from '@angular/platform-browser';
 
 @Component({
 	selector: 'app-profile',
@@ -34,7 +31,8 @@ export class ProfileComponent implements OnInit {
 		private tokenProviderService: TokenProviderService,
 		private userProviderService: UserProviderService,
 		private route: ActivatedRoute,
-		private router: Router
+		private router: Router,
+		private titleService: Title
 	) {
 	}
 
@@ -47,6 +45,7 @@ export class ProfileComponent implements OnInit {
 					this.profileService.get(token, params['login']).subscribe(user => {
 						this.user = user;
 						console.debug('profile user: ', this.user);
+						this.titleService.setTitle(`@${this.user.login}`);
 					});
 					this.tab = this.getCurrentTab();
 					console.debug('tab: ', this.tab);

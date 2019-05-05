@@ -10,6 +10,7 @@ import {UserProviderService} from '../../service/user.provider.service';
 import {AuthService} from '../../service/auth.service';
 import {User} from '../../dto/User';
 import {TimeService} from '../../service/time.service';
+import {Title} from '@angular/platform-browser';
 
 @Component({
 	selector: 'app-task',
@@ -34,7 +35,8 @@ export class TaskComponent implements OnInit {
 		private taskService: TaskService,
 		private tokenProviderService: TokenProviderService,
 		private userProviderService: UserProviderService,
-		private authService: AuthService
+		private authService: AuthService,
+		private titleService: Title
 	) {
 	}
 
@@ -50,6 +52,7 @@ export class TaskComponent implements OnInit {
 						this.taskService.get(token, params['id']).subscribe(task => {
 							this.task = task;
 							console.debug(task);
+							this.titleService.setTitle(`#${task.id} ${task.name}`);
 						});
 					});
 				});
