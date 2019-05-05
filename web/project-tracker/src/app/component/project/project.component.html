@@ -56,36 +56,9 @@
 					<i class="fas fa-plus"></i>
 				</button>
 			</div>
-			<table class="tasks-table" *ngIf="tasks.length !== 0">
-				<tr>
-					<th>Id</th>
-					<th>Name</th>
-					<th>Project</th>
-					<th>Type</th>
-					<th>Estimate</th>
-					<th>Elapsed</th>
-					<th>Opened</th>
-					<th>Due</th>
-				</tr>
-				<tr class="row" *ngFor="let t of tasks"
-				    [routerLink]="'/' + project.user.login + '/' + project.name + '/task/' + t.id">
-					<td>#{{t.id}}</td>
-					<td>{{t.name}}</td>
-					<td>{{t.project.name}}</td>
-					<td>
-						<div class="task-type-icon">
-							<i class="fas fa-bolt feature" title="feature" *ngIf="t.type === 'FEATURE'"></i>
-							<i class="fas fa-exclamation-triangle issue" title="issue" *ngIf="t.type === 'ISSUE'"></i>
-							<i class="fas fa-bug bug" title="bug" *ngIf="t.type === 'BUG'"></i>
-							<i class="fas fa-info request" title="request" *ngIf="t.type === 'REQUEST'"></i>
-						</div>
-					</td>
-					<td>{{t.estimate ? t.estimate + 'h' : '-'}}</td>
-					<td>{{t.elapsed ? t.elapsed : '-'}}</td>
-					<td>{{formatDate(t.opened)}}</td>
-					<td>{{t.due ? formatDate(t.due) : '-'}}</td>
-				</tr>
-			</table>
+			<app-tasks-table [tasks]="tasks"
+			                 [project]="project">
+			</app-tasks-table>
 			<div *ngIf="tasks.length === 0" class="no-tasks">No tasks yet.</div>
 		</div>
 		<div class="delimiter" *ngIf="!editMode"></div>

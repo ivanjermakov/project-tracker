@@ -105,18 +105,6 @@
       }
     }
 
-    .edit-choice {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      padding: 10px;
-
-      * {
-        margin: 0 10px;
-      }
-    }
-
     .tasks-container {
       padding: 10px;
 
@@ -138,57 +126,10 @@
         }
       }
 
-      .tasks-table {
-        width: 100%;
-        margin-top: 4px;
-
-        border-collapse: collapse;
-
-        tr {
-          border-left: 4px solid white;
-          border-right: 4px solid white;
-        }
-
-        tr:nth-child(even) {
-          background: var(--bright);
-          border-left-color: var(--bright);
-          border-right-color: var(--bright);
-        }
-
-        th {
-          padding: 4px;
-          font-size: 20px;
-          text-align: left;
-        }
-
-        .row {
-          cursor: pointer;
-
-          transition: border linear .1s;
-
-          td {
-            padding: 4px;
-
-            font-size: 20px;
-          }
-        }
-
-        .row:hover {
-          border-left-color: var(--mainblue);
-          border-right-color: var(--mainblue);
-        }
-
-      }
-
       .no-tasks {
         font-size: 20px;
         font-style: italic;
       }
     }
   }
-}
-
-.editing {
-  border: 1px solid silver;
-  border-radius: 4px;
 }

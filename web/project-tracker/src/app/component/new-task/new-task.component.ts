@@ -6,6 +6,7 @@ import {AuthService} from '../../service/auth.service';
 import {NewTask} from '../../dto/NewTask';
 import {TaskService} from '../../service/task.service';
 import {TaskType} from '../../dto/TaskType';
+import {ArrayService} from '../../service/array.service';
 
 @Component({
 	selector: 'app-new-task',
@@ -26,12 +27,15 @@ export class NewTaskComponent implements OnInit {
 		private projectService: ProjectService,
 		private taskService: TaskService,
 		private tokenProviderService: TokenProviderService,
-		private authService: AuthService
+		private authService: AuthService,
+		private arrayService: ArrayService
 	) {
 		// @ts-ignore
 		this.task.type = TaskType[TaskType.FEATURE];
-		this.taskTypes = Object.keys(TaskType).filter(k => isNaN(parseInt(k)));
-		console.debug(this.taskTypes);
+		this.arrayService.filter(Object.keys(TaskType), k => isNaN(parseInt(k)), keys => {
+			this.taskTypes = keys;
+			console.debug(this.taskTypes);
+		});
 	}
 
 	ngOnInit() {
@@ -42,11 +46,13 @@ export class NewTaskComponent implements OnInit {
 			this.route.params.subscribe(params => {
 				console.debug('params', params);
 				this.projectService.get(token, params['login'], params['name']).subscribe(project => {
-					this.task.projectId = project.id;
-					// TODO: parentTaskId
-					console.debug(this.task);
-					this.taskService.create(token, this.task).subscribe(task => {
-						this.router.navigate([`/${task.project.user.login}/${task.project.name}/task/${task.id}`]);
+					this.route.queryParams.subscribe(queryParams => {
+						this.task.projectId = project.id;
+						this.task.parentTaskId = queryParams['parentTaskId'] ? queryParams['parentTaskId'] : null;
+						console.debug(this.task);
+						this.taskService.create(token, this.task).subscribe(task => {
+							this.router.navigate([`/${task.project.user.login}/${task.project.name}/task/${task.id}`]);
+						});
 					});
 				});
 			});

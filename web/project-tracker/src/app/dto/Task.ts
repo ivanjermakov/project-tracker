@@ -5,6 +5,7 @@ import {TaskType} from './TaskType';
 export class Task {
 	id: number;
 	project: Project;
+	parentTaskId: number;
 	creator: User;
 	type: TaskType;
 	estimate: number;

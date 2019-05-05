@@ -16,6 +16,7 @@ import {Pageable} from '../../dto/Pageable';
 import {TASKS_IN_TABLE} from '../../../globals';
 import {TaskService} from '../../service/task.service';
 import {Title} from '@angular/platform-browser';
+import {ArrayService} from '../../service/array.service';
 
 @Component({
 	selector: 'app-project',
@@ -23,6 +24,7 @@ import {Title} from '@angular/platform-browser';
 	styleUrls: [
 		'./project.component.scss',
 		'./../../app.component.scss',
+		'./../../style/edit.scss'
 	]
 })
 export class ProjectComponent implements OnInit {
@@ -44,7 +46,8 @@ export class ProjectComponent implements OnInit {
 		private tokenProviderService: TokenProviderService,
 		private userProviderService: UserProviderService,
 		private authService: AuthService,
-		private titleService: Title
+		private titleService: Title,
+		private arrayService: ArrayService
 	) {
 	}
 
@@ -59,12 +62,15 @@ export class ProjectComponent implements OnInit {
 						this.projectService.get(token, params['login'], params['name']).subscribe(project => {
 							this.project = project;
 							console.debug('project: ', this.project);
+							this.mine = this.project.user.id === this.me.id;
 							this.titleService.setTitle(this.project.name);
 							this.taskService.all(token, project.id, new Pageable(0, TASKS_IN_TABLE)).subscribe(tasks => {
-								this.tasks = tasks;
-								console.debug(tasks);
+								// show only primary tasks (that does not have parent task above)
+								this.arrayService.filter(tasks, t => !t.parentTaskId, tasks => {
+									this.tasks = tasks;
+									console.debug(this.tasks);
+								});
 							});
-							this.mine = project.user.id === me.id;
 						});
 					});
 				});
@@ -76,15 +82,12 @@ export class ProjectComponent implements OnInit {
 		return TimeService.formatDate(date, 'MMMM Do[, ] YYYY [ at ] HH:mm');
 	}
 
-	formatDate(date: Date) {
-		return TimeService.formatDate(date, 'MMMM Do[, ] YYYY');
-	}
-
 	edit() {
 		this.beforeEditProject = JSON.parse(JSON.stringify(this.project));
 		this.editMode = true;
 	}
 
+	// TODO: keystrokes support
 	cancelEdit() {
 		this.editMode = false;
 		this.project = this.beforeEditProject;
@@ -102,9 +105,7 @@ export class ProjectComponent implements OnInit {
 		this.tokenProviderService.token.subscribe(token => {
 			this.projectService.edit(token, editProject).subscribe(project => {
 				this.editMode = false;
-				this.authService.validate(token).subscribe(user => {
-					this.router.navigate([user.login, project.name]);
-				});
+				this.router.navigate([project.user.login, project.name]);
 			});
 		});
 	}

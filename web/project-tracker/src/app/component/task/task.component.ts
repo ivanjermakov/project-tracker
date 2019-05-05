@@ -11,19 +11,22 @@ import {AuthService} from '../../service/auth.service';
 import {User} from '../../dto/User';
 import {TimeService} from '../../service/time.service';
 import {Title} from '@angular/platform-browser';
+import {EditTask} from '../../dto/EditTask';
 
 @Component({
 	selector: 'app-task',
 	templateUrl: './task.component.html',
 	styleUrls: [
 		'./task.component.scss',
-		'./../../app.component.scss'
+		'./../../app.component.scss',
+		'./../../style/edit.scss'
 	]
 })
 export class TaskComponent implements OnInit {
 
 	me: User;
 	task: Task;
+	beforeEditTask: Task;
 	editMode: boolean = false;
 
 	constructor(
@@ -62,5 +65,31 @@ export class TaskComponent implements OnInit {
 
 	formatDateWithTime(date: Date) {
 		return TimeService.formatDate(date, 'MMMM Do[, ] YYYY [ at ] HH:mm');
+	}
+
+	edit() {
+		this.beforeEditTask = JSON.parse(JSON.stringify(this.task));
+		this.editMode = true;
+	}
+
+	// TODO: keystrokes support
+	cancelEdit() {
+		this.editMode = false;
+		this.task = this.beforeEditTask;
+		this.beforeEditTask = null;
+	}
+
+	applyEdit() {
+		let editTask = new EditTask();
+		editTask.id = this.task.id;
+		editTask.name = this.task.name;
+		editTask.description = this.task.description;
+
+		this.tokenProviderService.token.subscribe(token => {
+			this.taskService.edit(token, editTask).subscribe(task => {
+				this.editMode = false;
+				this.router.navigate([task.project.user.login, task.project.name, 'task', task.id]);
+			});
+		});
 	}
 }

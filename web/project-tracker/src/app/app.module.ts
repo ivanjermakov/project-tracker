@@ -20,6 +20,7 @@ import { ProfileFollowersComponent } from './component/profile-followers/profile
 import { ProfileFollowingComponent } from './component/profile-following/profile-following.component';
 import { NewTaskComponent } from './component/new-task/new-task.component';
 import { TaskComponent } from './component/task/task.component';
+import { TasksTableComponent } from './component/tasks-table/tasks-table.component';
 
 @NgModule({
 	declarations: [
@@ -37,7 +38,8 @@ import { TaskComponent } from './component/task/task.component';
 		ProfileFollowersComponent,
 		ProfileFollowingComponent,
 		NewTaskComponent,
-		TaskComponent
+		TaskComponent,
+		TasksTableComponent
 	],
 	imports: [
 		BrowserModule,

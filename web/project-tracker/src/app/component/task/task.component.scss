@@ -2,7 +2,7 @@
 
   .content {
 
-    .back-container, .name-container, .info-container {
+    .back-container, .name-container, .info-container, .subtasks-container {
       padding: 10px;
     }
 
@@ -38,8 +38,28 @@
         font-weight: bold;
       }
 
+      .edit {
+        margin: 2px;
+
+        i {
+          color: var(--gray);
+          font-size: 20px;
+          padding: 4px;
+          cursor: pointer
+        }
+
+        i:hover {
+          color: var(--mainblue);
+        }
+      }
+
       .opened {
         margin-left: auto;
+
+        .text {
+          font-size: 20px;
+          color: var(--gray);
+        }
       }
     }
 
@@ -65,6 +85,32 @@
         text-decoration: underline;
       }
 
+    }
+
+    .subtasks-container {
+
+      .subtasks-header {
+        display: flex;
+        align-items: center;
+
+        .subtasks {
+          font-size: 20px;
+          color: var(--gray)
+        }
+
+        .new-subtask-button {
+          margin: 0 4px;
+
+          i {
+            font-size: 18px;
+          }
+        }
+      }
+
+      .no-subtasks {
+        font-size: 20px;
+        font-style: italic;
+      }
     }
 
   }
