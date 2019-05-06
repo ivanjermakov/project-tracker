@@ -46,10 +46,29 @@ public class ActivityController {
 		return Mapper.mapAll(activityService.allByTask(user, taskId, pageable), ActivityDto.class);
 	}
 	
+	@GetMapping("allByProject")
+	public List<ActivityDto> allByProject(@RequestHeader("token") String token,
+	                                      @RequestParam("projectId") Long projectId,
+	                                      @PageableDefault(direction = Sort.Direction.DESC, sort = "timestamp") Pageable pageable) throws NoSuchEntityException, AuthorizationException {
+		User user = userService.validate(token);
+		
+		return Mapper.mapAll(activityService.allByProject(user, projectId, pageable), ActivityDto.class);
+	}
+	
+	@GetMapping("allByUser")
+	public List<ActivityDto> allByUser(@RequestHeader("token") String token,
+	                                   @PageableDefault(direction = Sort.Direction.DESC, sort = "timestamp") Pageable pageable) throws NoSuchEntityException, AuthorizationException {
+		User user = userService.validate(token);
+		
+		return Mapper.mapAll(activityService.allByUser(user, pageable), ActivityDto.class);
+	}
+	
 	@GetMapping("getLastByTask")
 	public ActivityDto getLastByTask(@RequestHeader("token") String token,
 	                                 @RequestParam("taskId") Long taskId) throws NoSuchEntityException, AuthorizationException {
-		return allByTask(token, taskId, PageRequest.of(0, 1, Sort.Direction.DESC, "timestamp")).stream().findFirst().orElseThrow(() -> new NoSuchEntityException("no such activity"));
+		return allByTask(token, taskId, PageRequest.of(0, 1, Sort.Direction.DESC, "timestamp"))
+				.stream()
+				.findFirst().orElseThrow(() -> new NoSuchEntityException("no such activity"));
 	}
 	
 	@GetMapping("get")

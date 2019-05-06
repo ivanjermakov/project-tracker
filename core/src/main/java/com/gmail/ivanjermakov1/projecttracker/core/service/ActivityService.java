@@ -2,6 +2,7 @@ package com.gmail.ivanjermakov1.projecttracker.core.service;
 
 import com.gmail.ivanjermakov1.projecttracker.core.dto.NewActivityDto;
 import com.gmail.ivanjermakov1.projecttracker.core.entity.Activity;
+import com.gmail.ivanjermakov1.projecttracker.core.entity.Project;
 import com.gmail.ivanjermakov1.projecttracker.core.entity.Task;
 import com.gmail.ivanjermakov1.projecttracker.core.entity.User;
 import com.gmail.ivanjermakov1.projecttracker.core.entity.enums.UserRole;
@@ -15,7 +16,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import javax.validation.Valid;
 import java.security.InvalidParameterException;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -28,14 +28,16 @@ public class ActivityService {
 	private final RoleService roleService;
 	private final TaskService taskService;
 	private final UserService userService;
+	private final ProjectService projectService;
 	
 	@Autowired
-	public ActivityService(ActivityRepository activityRepository, RoleService roleService, TaskService taskService, UserRepository userRepository, UserService userService, TaskRepository taskRepository) {
+	public ActivityService(ActivityRepository activityRepository, RoleService roleService, TaskService taskService, UserRepository userRepository, UserService userService, TaskRepository taskRepository, ProjectService projectService) {
 		this.activityRepository = activityRepository;
 		this.roleService = roleService;
 		this.taskService = taskService;
 		this.userService = userService;
 		this.taskRepository = taskRepository;
+		this.projectService = projectService;
 	}
 	
 	public Activity get(User user, Long activityId) throws NoSuchEntityException, AuthorizationException {
@@ -77,6 +79,12 @@ public class ActivityService {
 		return activityRepository.findAllByTask(task, pageable);
 	}
 	
+	public List<Activity> allByProject(User user, Long projectId, Pageable pageable) throws AuthorizationException, NoSuchEntityException {
+		Project project = projectService.get(user, projectId);
+		
+		return activityRepository.findAllByProject(project, pageable);
+	}
+	
 	public void delete(User user, Long activityId) throws NoSuchEntityException, AuthorizationException {
 		Activity activity = activityRepository.findById(activityId).orElseThrow(() -> new NoSuchEntityException("no such activity"));
 		
@@ -85,6 +93,11 @@ public class ActivityService {
 			throw new AuthorizationException("no permission");
 		
 		activityRepository.delete(activity);
+	}
+	
+	public List<Activity> allByUser(User user, Pageable pageable) {
+//		TODO: followers visible activities
+		return activityRepository.findAllByUser(user, pageable);
 	}
 	
 }
