@@ -52,14 +52,14 @@ public class ProjectTest {
 				.forEach(i -> {
 					try {
 						projectController.create(token, new NewProjectDto(true, "test_proj" + i, null, null));
-					} catch (Exception ignored) {
+					} catch (Exception e) {
+						e.printStackTrace();
 					}
 				});
 	}
 	
 	@Test
 	public void shouldGetAllUserProjects() throws NoSuchEntityException {
-		
 		List<ProjectDto> twoProjects = projectController.all(token, PageRequest.of(0, 2));
 		List<ProjectDto> allProjects = projectController.all(token, PageRequest.of(0, Integer.MAX_VALUE));
 		
