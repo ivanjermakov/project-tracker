@@ -1,9 +1,11 @@
 .activity-item {
   display: grid;
   grid-template-rows: 1fr;
-  grid-template-columns: 1fr auto 4fr 4fr;
+  grid-template-columns: 1fr 4fr 4fr 4fr;
 
   width: 100%;
+
+  padding: 2px;
 
   * {
     padding: 0 4px;

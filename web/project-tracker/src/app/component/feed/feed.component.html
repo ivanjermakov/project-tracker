@@ -1,8 +1,8 @@
 <app-header></app-header>
-<div class="content-wrapper" *ngIf="projects && me">
+<div class="content-wrapper" *ngIf="projects && activities && me">
 	<div class="projects">
 		<div class="header">
-			<div class="text">Projects</div>
+			<div class="heading">Projects</div>
 			<button class="new-project-button" [routerLink]="'/project/create'">New</button>
 			<div class="search">
 				<input type="text" placeholder="Find a project">
@@ -16,7 +16,10 @@
 	</div>
 	<div class="content-container">
 		<div class="content">
-
+			<div class="activity-container">
+				<div class="heading">Recent activities</div>
+				<app-activity-list [activities]="activities"></app-activity-list>
+			</div>
 		</div>
 	</div>
 </div>

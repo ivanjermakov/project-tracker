@@ -28,6 +28,21 @@ export class ActivityService {
 		});
 	}
 
+	allByProject(token: string, projectId: number, pageable: Pageable): Observable<Activity[]> {
+		return this.http.get<Activity[]>(API_URL + 'activity/allByProject', {
+			params: pageable.toHttpParams()
+				.append('projectId', projectId.toString()),
+			headers: {token: token}
+		});
+	}
+
+	allByUser(token: string, pageable: Pageable): Observable<Activity[]> {
+		return this.http.get<Activity[]>(API_URL + 'activity/allByUser', {
+			params: pageable.toHttpParams(),
+			headers: {token: token}
+		});
+	}
+
 	getLastByTask(token: string, taskId: number): Observable<Activity> {
 		return this.http.get<Activity>(API_URL + 'activity/getLastByTask', {
 			params: {taskId: taskId.toString()},

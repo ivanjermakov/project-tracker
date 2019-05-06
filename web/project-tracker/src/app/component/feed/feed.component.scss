@@ -26,7 +26,7 @@
 
       padding: 5px;
 
-      .text {
+      .heading {
         grid-column: 1/2;
         grid-row: 1/2;
       }
@@ -60,6 +60,8 @@
     .content {
       background: white;
       width: 100%;
+
+      padding: 10px;
     }
   }
 }
