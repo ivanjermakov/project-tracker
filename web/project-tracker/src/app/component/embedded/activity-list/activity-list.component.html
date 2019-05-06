@@ -3,6 +3,6 @@
 		<app-activity-item
 				[activity]="a">
 		</app-activity-item>
-		<div class="delimiter"></div>
+		<div class="delimiter" *ngIf="a.id !== activities.slice(-1)[0].id"></div>
 	</ng-container>
 </div>
