@@ -1,19 +1,20 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {AuthComponent} from './component/auth/auth.component';
-import {RegisterComponent} from './component/register/register.component';
-import {FeedComponent} from './component/feed/feed.component';
-import {ProfileComponent} from './component/profile/profile.component';
-import {NewProjectComponent} from './component/new-project/new-project.component';
-import {ProfileOverviewComponent} from './component/profile-overview/profile-overview.component';
-import {ProfileActivityComponent} from './component/profile-activity/profile-activity.component';
-import {ProjectComponent} from './component/project/project.component';
-import {ProfileFollowersComponent} from './component/profile-followers/profile-followers.component';
-import {ProfileFollowingComponent} from './component/profile-following/profile-following.component';
-import {NewTaskComponent} from './component/new-task/new-task.component';
-import {TaskComponent} from './component/task/task.component';
-import {ActivityComponent} from './component/activity/activity.component';
-import {NewActivityComponent} from './component/new-activity/new-activity.component';
+import {AuthComponent} from './component/routed/auth/auth.component';
+import {RegisterComponent} from './component/routed/register/register.component';
+import {FeedComponent} from './component/routed/feed/feed.component';
+import {NewProjectComponent} from './component/routed/new-project/new-project.component';
+import {ProfileComponent} from './component/routed/profile/profile.component';
+import {ProfileActivityComponent} from './component/routed/profile-activity/profile-activity.component';
+import {ProfileFollowersComponent} from './component/routed/profile-followers/profile-followers.component';
+import {ProfileFollowingComponent} from './component/routed/profile-following/profile-following.component';
+import {ProfileOverviewComponent} from './component/routed/profile-overview/profile-overview.component';
+import {ProjectComponent} from './component/routed/project/project.component';
+import {NewTaskComponent} from './component/routed/new-task/new-task.component';
+import {TaskComponent} from './component/routed/task/task.component';
+import {NewActivityComponent} from './component/routed/new-activity/new-activity.component';
+import {ActivityComponent} from './component/routed/activity/activity.component';
+
 
 const routes: Routes = [
 	{
