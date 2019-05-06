@@ -1,6 +1,7 @@
 import {Project} from './Project';
 import {User} from './User';
 import {TaskType} from './TaskType';
+import {Activity} from './Activity';
 
 export class Task {
 	id: number;
@@ -15,4 +16,6 @@ export class Task {
 	name: string;
 	description: string;
 	subtasks: Task[];
+
+	lastActivity: Activity;
 }

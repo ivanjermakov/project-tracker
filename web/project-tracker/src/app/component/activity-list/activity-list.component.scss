@@ -4,7 +4,9 @@
 
   width: 100%;
 
-  app-activity-item:nth-child(even) {
+  margin-top: 4px;
+
+  app-activity-item:nth-child(odd) {
     background: var(--bright);
     border-left-color: var(--bright);
     border-right-color: var(--bright);

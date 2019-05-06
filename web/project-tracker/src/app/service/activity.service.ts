@@ -1,10 +1,8 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {Task} from '../dto/Task';
 import {API_URL} from '../../globals';
 import {Pageable} from '../dto/Pageable';
-import {EditTask} from '../dto/EditTask';
 import {NewActivity} from '../dto/NewActivity';
 import {Activity} from '../dto/Activity';
 
@@ -26,6 +24,13 @@ export class ActivityService {
 		return this.http.get<Activity[]>(API_URL + 'activity/allByTask', {
 			params: pageable.toHttpParams()
 				.append('taskId', taskId.toString()),
+			headers: {token: token}
+		});
+	}
+
+	getLastByTask(token: string, taskId: number): Observable<Activity> {
+		return this.http.get<Activity>(API_URL + 'activity/getLastByTask', {
+			params: {taskId: taskId.toString()},
 			headers: {token: token}
 		});
 	}

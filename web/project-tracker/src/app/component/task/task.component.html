@@ -15,6 +15,7 @@
 				{{task.name}}
 			</div>
 			<app-task-type-icon [type]="task.type"></app-task-type-icon>
+			<app-task-status-icon [status]="lastActivity.status" *ngIf="lastActivity"></app-task-status-icon>
 			<div class="edit" title="Edit project"
 			     *ngIf="!editMode"
 			     (click)="edit()">

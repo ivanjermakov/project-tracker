@@ -4,6 +4,7 @@
 		<th>Name</th>
 		<th>Project</th>
 		<th>Type</th>
+		<th>Status</th>
 		<th>Estimate</th>
 		<th>Elapsed</th>
 		<th>Opened</th>
@@ -17,6 +18,10 @@
 		<td>{{t.project.name}}</td>
 		<td>
 			<app-task-type-icon [type]="t.type"></app-task-type-icon>
+		</td>
+		<td>
+			<app-task-status-icon [status]="t.lastActivity.status" *ngIf="t.lastActivity"></app-task-status-icon>
+			<ng-container *ngIf="!t.lastActivity">-</ng-container>
 		</td>
 		<td>{{t.estimate ? t.estimate + 'h' : '-'}}</td>
 		<td>{{t.elapsed ? t.elapsed : '-'}}</td>
