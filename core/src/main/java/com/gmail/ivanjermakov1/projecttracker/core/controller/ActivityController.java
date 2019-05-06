@@ -9,6 +9,7 @@ import com.gmail.ivanjermakov1.projecttracker.core.service.ActivityService;
 import com.gmail.ivanjermakov1.projecttracker.core.service.UserService;
 import com.gmail.ivanjermakov1.projecttracker.core.util.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
@@ -43,6 +44,12 @@ public class ActivityController {
 		User user = userService.validate(token);
 		
 		return Mapper.mapAll(activityService.allByTask(user, taskId, pageable), ActivityDto.class);
+	}
+	
+	@GetMapping("getLastByTask")
+	public ActivityDto getLastByTask(@RequestHeader("token") String token,
+	                                 @RequestParam("taskId") Long taskId) throws NoSuchEntityException, AuthorizationException {
+		return allByTask(token, taskId, PageRequest.of(0, 1, Sort.Direction.DESC, "timestamp")).stream().findFirst().orElseThrow(() -> new NoSuchEntityException("no such activity"));
 	}
 	
 	@GetMapping("get")
