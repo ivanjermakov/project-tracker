@@ -131,5 +131,14 @@
         font-style: italic;
       }
     }
+
+    .stats-container {
+      padding: 10px;
+
+      .stats {
+        font-size: 20px;
+        color: var(--gray)
+      }
+    }
   }
 }

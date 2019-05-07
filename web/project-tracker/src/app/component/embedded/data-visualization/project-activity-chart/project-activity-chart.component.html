@@ -1,0 +1,9 @@
+<div class="project-activity-chart-container" *ngIf="project && chartConfig">
+	<canvas baseChart
+	        [datasets]="chartConfig.datasets"
+	        [labels]="chartConfig.labels"
+	        [options]="chartConfig.options"
+	        [legend]="chartConfig.legend"
+	        [chartType]="chartConfig.chartType">
+	</canvas>
+</div>

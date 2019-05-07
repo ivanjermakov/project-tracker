@@ -26,6 +26,8 @@ import {ActivityListComponent} from './component/embedded/activity-list/activity
 import {TaskStatusIconComponent} from './component/embedded/task-status-icon/task-status-icon.component';
 import {NewActivityComponent} from './component/routed/new-activity/new-activity.component';
 import {ActivityItemComponent} from './component/embedded/activity-item/activity-item.component';
+import {ProjectActivityChartComponent} from './component/embedded/data-visualization/project-activity-chart/project-activity-chart.component';
+import {ChartsModule} from 'ng2-charts';
 
 @NgModule({
 	declarations: [
@@ -50,13 +52,15 @@ import {ActivityItemComponent} from './component/embedded/activity-item/activity
 		ActivityListComponent,
 		TaskStatusIconComponent,
 		NewActivityComponent,
-		ActivityItemComponent
+		ActivityItemComponent,
+		ProjectActivityChartComponent
 	],
 	imports: [
 		BrowserModule,
 		AppRoutingModule,
 		HttpClientModule,
-		FormsModule
+		FormsModule,
+		ChartsModule
 	],
 	providers: [],
 	bootstrap: [AppComponent]
