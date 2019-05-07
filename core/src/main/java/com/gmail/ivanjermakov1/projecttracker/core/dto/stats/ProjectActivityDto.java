@@ -11,4 +11,12 @@ public class ProjectActivityDto {
 	
 	public Integer activityAmount;
 	
+	public ProjectActivityDto() {
+	}
+	
+	public ProjectActivityDto(LocalDate day, Integer activityAmount) {
+		this.day = day;
+		this.activityAmount = activityAmount;
+	}
+	
 }

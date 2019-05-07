@@ -1,6 +1,7 @@
 package com.gmail.ivanjermakov1.projecttracker.core.controller;
 
 import com.gmail.ivanjermakov1.projecttracker.core.dto.stats.ProjectActivityDto;
+import com.gmail.ivanjermakov1.projecttracker.core.dto.stats.ProjectTaskTypeDto;
 import com.gmail.ivanjermakov1.projecttracker.core.entity.Project;
 import com.gmail.ivanjermakov1.projecttracker.core.entity.User;
 import com.gmail.ivanjermakov1.projecttracker.core.exception.AuthorizationException;
@@ -39,6 +40,15 @@ public class StatisticsController {
 		Project project = projectService.get(user, projectId);
 		
 		return statisticsService.getProjectActivities(user, project);
+	}
+	
+	@GetMapping("project-task-type")
+	public List<ProjectTaskTypeDto> getProjectTaskTypes(@RequestHeader("token") String token,
+	                                                    @RequestParam("projectId") Long projectId) throws NoSuchEntityException, AuthorizationException {
+		User user = userService.validate(token);
+		Project project = projectService.get(user, projectId);
+		
+		return statisticsService.getProjectTaskTypes(user, project);
 	}
 	
 }
