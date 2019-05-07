@@ -133,12 +133,21 @@
     }
 
     .stats-container {
+      display: flex;
+      flex-direction: column;
+
       padding: 10px;
 
       .stats {
         font-size: 20px;
-        color: var(--gray)
+        color: var(--gray);
       }
+
+      .charts-container {
+        display: flex;
+        flex-direction: column;
+      }
+
     }
   }
 }

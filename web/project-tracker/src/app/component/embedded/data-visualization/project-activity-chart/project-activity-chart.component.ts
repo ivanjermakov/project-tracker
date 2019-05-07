@@ -28,8 +28,6 @@ export class ProjectActivityChartComponent implements OnInit {
 		this.app.onLoad(() => {
 			this.tokenProviderService.token.subscribe(token => {
 				this.statisticsService.getProjectActivities(token, this.project.id).subscribe(projectActivities => {
-					console.debug(projectActivities.map(a => a.activityAmount));
-					console.debug(projectActivities.map(a => a.day).map(d => TimeService.formatDate(d, 'MMMM Do[, ] YYYY')));
 					this.chartConfig = new ChartConfig(
 						[
 							{
@@ -37,8 +35,8 @@ export class ProjectActivityChartComponent implements OnInit {
 								label: 'Activities',
 								backgroundColor: 'rgba(83, 144, 228, 0.4)',
 								borderColor: 'rgb(83, 144, 228)',
-								pointBackgroundColor:'rgb(83, 144, 228)',
-								pointBorderColor:'rgb(83, 144, 228)'
+								pointBackgroundColor: 'rgb(83, 144, 228)',
+								pointBorderColor: 'rgb(83, 144, 228)'
 							}
 						],
 						projectActivities.map(a => a.day).map(d => TimeService.formatDate(d, 'MMMM Do')),
@@ -54,7 +52,7 @@ export class ProjectActivityChartComponent implements OnInit {
 								displayColors: false
 							},
 							responsive: true,
-							aspectRatio: 4
+							aspectRatio: 5
 						},
 						true,
 						'line'
