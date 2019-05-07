@@ -32,7 +32,14 @@ export class ProjectActivityChartComponent implements OnInit {
 					console.debug(projectActivities.map(a => a.day).map(d => TimeService.formatDate(d, 'MMMM Do[, ] YYYY')));
 					this.chartConfig = new ChartConfig(
 						[
-							{data: projectActivities.map(a => a.activityAmount), label: 'Activities'}
+							{
+								data: projectActivities.map(a => a.activityAmount),
+								label: 'Activities',
+								backgroundColor: 'rgba(83, 144, 228, 0.4)',
+								borderColor: 'rgb(83, 144, 228)',
+								pointBackgroundColor:'rgb(83, 144, 228)',
+								pointBorderColor:'rgb(83, 144, 228)'
+							}
 						],
 						projectActivities.map(a => a.day).map(d => TimeService.formatDate(d, 'MMMM Do')),
 						{
@@ -42,6 +49,9 @@ export class ProjectActivityChartComponent implements OnInit {
 										beginAtZero: true
 									}
 								}]
+							},
+							tooltips: {
+								displayColors: false
 							},
 							responsive: true,
 							aspectRatio: 4
