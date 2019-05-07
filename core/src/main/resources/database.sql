@@ -74,7 +74,6 @@ create table task
             references "user",
     type       varchar   not null,
     estimate   double precision,
-    elapsed    double precision,
     opened     timestamp,
     due        date
 );

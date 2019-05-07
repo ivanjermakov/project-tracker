@@ -1,6 +1,8 @@
 package com.gmail.ivanjermakov1.projecttracker.core.entity;
 
 import com.gmail.ivanjermakov1.projecttracker.core.entity.enums.TaskType;
+import org.hibernate.annotations.ColumnTransformer;
+import org.hibernate.annotations.Formula;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -45,8 +47,8 @@ public class Task {
 	
 	@Column(name = "estimate")
 	private Double estimate;
-	
-	@Column(name = "elapsed")
+
+	@Formula("(select sum(a.elapsed) from activity a where a.task_id = id)")
 	private Double elapsed;
 	
 	@Column(name = "opened")
