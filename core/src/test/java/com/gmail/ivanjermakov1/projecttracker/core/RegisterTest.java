@@ -14,7 +14,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
-@DirtiesContext
 @Transactional
 public class RegisterTest {
 	
