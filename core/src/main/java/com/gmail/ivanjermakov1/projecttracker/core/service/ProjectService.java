@@ -77,13 +77,6 @@ public class ProjectService {
 		return projectRepository.save(project);
 	}
 	
-	/**
-	 * Available only for projects owner
-	 *
-	 * @param user
-	 * @param pageable
-	 * @return
-	 */
 	public List<Project> all(User user, Pageable pageable) {
 		return projectRepository.findAllByUser(user, pageable);
 	}

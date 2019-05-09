@@ -2,6 +2,7 @@ package com.gmail.ivanjermakov1.projecttracker.core.entity;
 
 import com.gmail.ivanjermakov1.projecttracker.core.entity.enums.UserRole;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
@@ -21,8 +22,7 @@ public class Role {
 	@Column(name = "id")
 	private Long id;
 	
-	@ManyToOne
-	@JoinColumn(name = "project_id")
+	@ManyToOne(cascade = CascadeType.ALL)
 	private Project project;
 	
 	@ManyToOne

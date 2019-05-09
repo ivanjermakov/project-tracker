@@ -1,5 +1,7 @@
 package com.gmail.ivanjermakov1.projecttracker.core.entity;
 
+import org.hibernate.annotations.Cascade;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -33,7 +35,7 @@ public class Project {
 	@Column(name = "created")
 	private LocalDateTime created;
 	
-	@OneToOne(mappedBy = "project", cascade = {CascadeType.ALL}, orphanRemoval = true)
+	@OneToOne(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true)
 	private ProjectInfo projectInfo;
 	
 	@OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true)
