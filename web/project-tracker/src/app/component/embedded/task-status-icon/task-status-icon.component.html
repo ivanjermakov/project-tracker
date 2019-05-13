@@ -1,7 +1,7 @@
 <div class="task-status-icon">
-	<i class="fas fa-bullseye open" title="open" *ngIf="status === 'OPEN'"></i>
-	<i class="fas fa-user assigned" title="assigned" *ngIf="status === 'ASSIGNED'"></i>
-	<i class="fas fa-pause-circle suspended" title="suspended" *ngIf="status === 'SUSPENDED'"></i>
-	<i class="fas fa-times closed" title="closed" *ngIf="status === 'CLOSED'"></i>
-	<i class="fas fa-check completed" title="completed" *ngIf="status === 'COMPLETED'"></i>
+	<i class="fas fa-bullseye open" title="open" *ngIf="status.toString() === 'OPEN'"></i>
+	<i class="fas fa-user assigned" title="assigned" *ngIf="status.toString() === 'ASSIGNED'"></i>
+	<i class="fas fa-pause-circle suspended" title="suspended" *ngIf="status.toString() === 'SUSPENDED'"></i>
+	<i class="fas fa-times closed" title="closed" *ngIf="status.toString() === 'CLOSED'"></i>
+	<i class="fas fa-check completed" title="completed" *ngIf="status.toString() === 'COMPLETED'"></i>
 </div>

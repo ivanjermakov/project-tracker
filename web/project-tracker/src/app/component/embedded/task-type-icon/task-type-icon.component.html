@@ -1,6 +1,6 @@
 <div class="task-type-icon">
-	<i class="fas fa-bolt feature" title="feature" *ngIf="type === 'FEATURE'"></i>
-	<i class="fas fa-exclamation-triangle issue" title="issue" *ngIf="type === 'ISSUE'"></i>
-	<i class="fas fa-bug bug" title="bug" *ngIf="type === 'BUG'"></i>
-	<i class="fas fa-info request" title="request" *ngIf="type === 'REQUEST'"></i>
+	<i class="fas fa-bolt feature" title="feature" *ngIf="type.toString() === 'FEATURE'"></i>
+	<i class="fas fa-exclamation-triangle issue" title="issue" *ngIf="type.toString() === 'ISSUE'"></i>
+	<i class="fas fa-bug bug" title="bug" *ngIf="type.toString() === 'BUG'"></i>
+	<i class="fas fa-info request" title="request" *ngIf="type.toString() === 'REQUEST'"></i>
 </div>
