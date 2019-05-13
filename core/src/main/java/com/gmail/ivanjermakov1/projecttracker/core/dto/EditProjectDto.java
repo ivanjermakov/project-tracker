@@ -2,6 +2,7 @@ package com.gmail.ivanjermakov1.projecttracker.core.dto;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 public class EditProjectDto {
 	
@@ -12,6 +13,7 @@ public class EditProjectDto {
 	public Boolean isPublic;
 	
 	@NotBlank
+	@Pattern(regexp = "^[\\w-]{3,}[0-9a-zA-Z]$", message = "should match the pattern /^[\\w-]{3,30}[0-9a-zA-Z]$/")
 	public String name;
 	
 	public String description;
