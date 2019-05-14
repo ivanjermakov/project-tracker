@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {ProjectService} from '../../../service/project.service';
-import {TokenProviderService} from '../../../service/token.provider.service';
+import {TokenProvider} from '../../../provider/token.provider';
 import {Pageable} from '../../../dto/Pageable';
 import {ACTIVITIES_IN_FEED, PROJECTS_IN_FEED} from '../../../../globals';
-import {UserProviderService} from '../../../service/user.provider.service';
+import {UserProvider} from '../../../provider/user.provider';
 import {User} from '../../../dto/User';
 import {AppComponent} from '../../../app.component';
 import {ActivityService} from '../../../service/activity.service';
@@ -26,18 +26,18 @@ export class FeedComponent implements OnInit {
 		private app: AppComponent,
 		private projectService: ProjectService,
 		private activityService: ActivityService,
-		private tokenProviderService: TokenProviderService,
-		private userProviderService: UserProviderService,
+		private tokenProvider: TokenProvider,
+		private userProvider: UserProvider,
 	) {
 	}
 
 	ngOnInit() {
 		this.app.onLoad(() => {
 			console.debug('feed initiation');
-			this.userProviderService.me.subscribe(me => {
+			this.userProvider.me.subscribe(me => {
 				this.me = me;
 			});
-			this.tokenProviderService.token.subscribe(token => {
+			this.tokenProvider.token.subscribe(token => {
 				this.projectService.all(token, new Pageable(0, PROJECTS_IN_FEED)).subscribe(projects => {
 					this.projects = projects;
 				});

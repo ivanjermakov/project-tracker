@@ -1,11 +1,11 @@
 import {Component} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {LOCALSTORAGE_TOKEN_NAME} from '../globals';
-import {TokenProviderService} from './service/token.provider.service';
 import {UrlService} from './service/url.service';
-import {UserProviderService} from './service/user.provider.service';
 import {AuthService} from './service/auth.service';
 import {Title} from '@angular/platform-browser';
+import {TokenProvider} from './provider/token.provider';
+import {UserProvider} from './provider/user.provider';
 
 @Component({
 	selector: 'app-root',
@@ -21,8 +21,8 @@ export class AppComponent {
 		private activatedRoute: ActivatedRoute,
 		private titleService: Title,
 		private authService: AuthService,
-		private tokenProviderService: TokenProviderService,
-		private userProviderService: UserProviderService,
+		private tokenProvider: TokenProvider,
+		private userProviderService: UserProvider,
 		private urlService: UrlService
 	) {
 		console.debug('app initiation');
@@ -60,7 +60,7 @@ export class AppComponent {
 	}
 
 	private autoLogin(success: () => void, error: () => void): void {
-		this.tokenProviderService.token.subscribe(t => {
+		this.tokenProvider.token.subscribe(t => {
 			if (t) {
 				this.isLoaded = true;
 				return success();
@@ -76,13 +76,13 @@ export class AppComponent {
 			console.debug('app: token from localstorage:  ' + token);
 			this.authService.validate(token).subscribe(user => {
 				console.debug('app: received \'me\'', user);
-				this.tokenProviderService.setToken(token);
+				this.tokenProvider.setToken(token);
 				this.userProviderService.setMe(user);
 				this.isLoaded = true;
 				return success();
 			}, error2 => {
 				console.debug('app: error validating token');
-				this.tokenProviderService.setToken(null);
+				this.tokenProvider.setToken(null);
 				return error();
 			});
 		});

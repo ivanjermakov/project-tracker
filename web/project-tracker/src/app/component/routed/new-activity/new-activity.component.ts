@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {TokenProviderService} from '../../../service/token.provider.service';
+import {TokenProvider} from '../../../provider/token.provider';
 import {AuthService} from '../../../service/auth.service';
 import {ArrayService} from '../../../service/array.service';
 import {NewActivity} from '../../../dto/NewActivity';
@@ -24,7 +24,7 @@ export class NewActivityComponent implements OnInit {
 		private router: Router,
 		private route: ActivatedRoute,
 		private activityService: ActivityService,
-		private tokenProviderService: TokenProviderService,
+		private tokenProvider: TokenProvider,
 		private authService: AuthService,
 		private arrayService: ArrayService
 	) {
@@ -40,7 +40,7 @@ export class NewActivityComponent implements OnInit {
 	}
 
 	create() {
-		this.tokenProviderService.token.subscribe(token => {
+		this.tokenProvider.token.subscribe(token => {
 			this.route.params.subscribe(params => {
 				console.debug('params', params);
 				this.activity.taskId = params['taskId'];

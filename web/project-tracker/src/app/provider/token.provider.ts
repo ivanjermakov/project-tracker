@@ -4,7 +4,7 @@ import {BehaviorSubject} from 'rxjs';
 @Injectable({
 	providedIn: 'root'
 })
-export class TokenProviderService {
+export class TokenProvider {
 
 	private tokenSubject = new BehaviorSubject<string>(null);
 	token = this.tokenSubject.asObservable();

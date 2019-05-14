@@ -1,12 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ProjectService} from '../../../service/project.service';
-import {TokenProviderService} from '../../../service/token.provider.service';
 import {AuthService} from '../../../service/auth.service';
 import {NewTask} from '../../../dto/NewTask';
 import {TaskService} from '../../../service/task.service';
 import {TaskType} from '../../../dto/TaskType';
 import {ArrayService} from '../../../service/array.service';
+import {TokenProvider} from '../../../provider/token.provider';
 
 @Component({
 	selector: 'app-new-task',
@@ -26,7 +26,7 @@ export class NewTaskComponent implements OnInit {
 		private route: ActivatedRoute,
 		private projectService: ProjectService,
 		private taskService: TaskService,
-		private tokenProviderService: TokenProviderService,
+		private tokenProvider: TokenProvider,
 		private authService: AuthService,
 		private arrayService: ArrayService
 	) {
@@ -42,7 +42,7 @@ export class NewTaskComponent implements OnInit {
 	}
 
 	open() {
-		this.tokenProviderService.token.subscribe(token => {
+		this.tokenProvider.token.subscribe(token => {
 			this.route.params.subscribe(params => {
 				console.debug('params', params);
 				this.projectService.get(token, params['login'], params['name']).subscribe(project => {

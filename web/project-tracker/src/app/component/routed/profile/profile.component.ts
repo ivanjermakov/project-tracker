@@ -6,8 +6,8 @@ import {User} from '../../../dto/User';
 import {UrlService} from '../../../service/url.service';
 import {AppComponent} from '../../../app.component';
 import {ProfileService} from '../../../service/profile.service';
-import {TokenProviderService} from '../../../service/token.provider.service';
-import {UserProviderService} from '../../../service/user.provider.service';
+import {TokenProvider} from '../../../provider/token.provider';
+import {UserProvider} from '../../../provider/user.provider';
 import {TimeService} from '../../../service/time.service';
 
 @Component({
@@ -28,8 +28,8 @@ export class ProfileComponent implements OnInit {
 		private urlService: UrlService,
 		private app: AppComponent,
 		private profileService: ProfileService,
-		private tokenProviderService: TokenProviderService,
-		private userProviderService: UserProviderService,
+		private tokenProvider: TokenProvider,
+		private userProvider: UserProvider,
 		private route: ActivatedRoute,
 		private router: Router,
 		private titleService: Title
@@ -41,7 +41,7 @@ export class ProfileComponent implements OnInit {
 			console.debug('profile initiation');
 			this.route.params.subscribe(params => {
 				console.debug('params', params);
-				this.tokenProviderService.token.subscribe(token => {
+				this.tokenProvider.token.subscribe(token => {
 					this.profileService.get(token, params['login']).subscribe(user => {
 						this.user = user;
 						console.debug('profile user: ', this.user);

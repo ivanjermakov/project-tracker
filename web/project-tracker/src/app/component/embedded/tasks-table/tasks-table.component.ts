@@ -4,7 +4,7 @@ import {Task} from '../../../dto/Task';
 import {Project} from '../../../dto/Project';
 import {AppComponent} from '../../../app.component';
 import {ActivityService} from '../../../service/activity.service';
-import {TokenProviderService} from '../../../service/token.provider.service';
+import {TokenProvider} from '../../../provider/token.provider';
 
 @Component({
 	selector: 'app-tasks-table',
@@ -21,17 +21,18 @@ export class TasksTableComponent implements OnInit {
 	constructor(
 		private app: AppComponent,
 		private activityService: ActivityService,
-		private tokenProviderService: TokenProviderService,
+		private tokenProvider: TokenProvider,
 	) {
 	}
 
 	ngOnInit() {
 		this.app.onLoad(() => {
-			this.tokenProviderService.token.subscribe(token => {
+			this.tokenProvider.token.subscribe(token => {
 				this.tasks.forEach(t => {
 					this.activityService.getLastByTask(token, t.id).subscribe(activity => {
 						t.lastActivity = activity;
 					}, error => {
+						console.log('error handled');
 						t.lastActivity = null;
 					});
 				});

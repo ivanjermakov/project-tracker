@@ -1,10 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ProjectService} from '../../../service/project.service';
-import {TokenProviderService} from '../../../service/token.provider.service';
 import {Project} from '../../../dto/Project';
 import {UrlService} from '../../../service/url.service';
-import {UserProviderService} from '../../../service/user.provider.service';
 
 import {EditProject} from '../../../dto/EditProject';
 import {AuthService} from '../../../service/auth.service';
@@ -17,6 +15,8 @@ import {TASKS_IN_TABLE} from '../../../../globals';
 import {TaskService} from '../../../service/task.service';
 import {Title} from '@angular/platform-browser';
 import {ArrayService} from '../../../service/array.service';
+import {UserProvider} from '../../../provider/user.provider';
+import {TokenProvider} from '../../../provider/token.provider';
 
 @Component({
 	selector: 'app-project',
@@ -43,8 +43,8 @@ export class ProjectComponent implements OnInit {
 		private urlService: UrlService,
 		private projectService: ProjectService,
 		private taskService: TaskService,
-		private tokenProviderService: TokenProviderService,
-		private userProviderService: UserProviderService,
+		private tokenProvider: TokenProvider,
+		private userProvider: UserProvider,
 		private authService: AuthService,
 		private titleService: Title,
 		private arrayService: ArrayService
@@ -54,11 +54,11 @@ export class ProjectComponent implements OnInit {
 	ngOnInit() {
 		this.app.onLoad(() => {
 			console.debug('project initiation');
-			this.userProviderService.me.subscribe(me => {
+			this.userProvider.me.subscribe(me => {
 				this.me = me;
 				this.route.params.subscribe(params => {
 					console.debug('params', params);
-					this.tokenProviderService.token.subscribe(token => {
+					this.tokenProvider.token.subscribe(token => {
 						this.projectService.get(token, params['login'], params['name']).subscribe(project => {
 							this.project = project;
 							console.debug('project: ', this.project);
@@ -102,7 +102,7 @@ export class ProjectComponent implements OnInit {
 		editProject.description = this.project.description;
 		editProject.about = this.project.about;
 
-		this.tokenProviderService.token.subscribe(token => {
+		this.tokenProvider.token.subscribe(token => {
 			this.projectService.edit(token, editProject).subscribe(project => {
 				this.editMode = false;
 				this.router.navigate([project.user.login, project.name]);

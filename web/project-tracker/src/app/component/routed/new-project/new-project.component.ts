@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {NewProject} from '../../../dto/NewProject';
 import {ProjectService} from '../../../service/project.service';
-import {TokenProviderService} from '../../../service/token.provider.service';
+import {TokenProvider} from '../../../provider/token.provider';
 import {AuthService} from '../../../service/auth.service';
 import {Router} from '@angular/router';
 
@@ -20,7 +20,7 @@ export class NewProjectComponent implements OnInit {
 	constructor(
 		private router: Router,
 		private projectService: ProjectService,
-		private tokenProviderService: TokenProviderService,
+		private tokenProvider: TokenProvider,
 		private authService: AuthService
 	) {
 		this.project = new NewProject();
@@ -31,7 +31,7 @@ export class NewProjectComponent implements OnInit {
 	}
 
 	create() {
-		this.tokenProviderService.token.subscribe(token => {
+		this.tokenProvider.token.subscribe(token => {
 			console.debug(this.project);
 			this.projectService.create(token, this.project).subscribe(project => {
 				console.debug('created project', project);

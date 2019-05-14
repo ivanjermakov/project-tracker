@@ -1,10 +1,10 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Project} from '../../../../dto/Project';
 import {AppComponent} from '../../../../app.component';
-import {TokenProviderService} from '../../../../service/token.provider.service';
 import {StatisticsService} from '../../../../service/statistics.service';
 import {ChartConfig} from '../../../../dto/shared/ChartConfig';
 import {TimeService} from '../../../../service/time.service';
+import {TokenProvider} from '../../../../provider/token.provider';
 
 @Component({
 	selector: 'app-project-activity-chart',
@@ -19,14 +19,14 @@ export class ProjectActivityChartComponent implements OnInit {
 
 	constructor(
 		private app: AppComponent,
-		private tokenProviderService: TokenProviderService,
+		private tokenProvider: TokenProvider,
 		private statisticsService: StatisticsService,
 	) {
 	}
 
 	ngOnInit() {
 		this.app.onLoad(() => {
-			this.tokenProviderService.token.subscribe(token => {
+			this.tokenProvider.token.subscribe(token => {
 				this.statisticsService.getProjectActivities(token, this.project.id).subscribe(projectActivities => {
 					this.chartConfig = new ChartConfig(
 						[
@@ -57,7 +57,7 @@ export class ProjectActivityChartComponent implements OnInit {
 						true,
 						'line'
 					);
-					console.log(this.chartConfig);
+					console.debug(this.chartConfig);
 				});
 			});
 		});

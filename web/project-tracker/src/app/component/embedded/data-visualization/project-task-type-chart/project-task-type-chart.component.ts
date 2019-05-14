@@ -1,9 +1,9 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {AppComponent} from '../../../../app.component';
-import {TokenProviderService} from '../../../../service/token.provider.service';
 import {StatisticsService} from '../../../../service/statistics.service';
 import {ChartConfig} from '../../../../dto/shared/ChartConfig';
 import {Project} from '../../../../dto/Project';
+import {TokenProvider} from '../../../../provider/token.provider';
 
 @Component({
 	selector: 'app-project-task-type-chart',
@@ -18,14 +18,14 @@ export class ProjectTaskTypeChartComponent implements OnInit {
 
 	constructor(
 		private app: AppComponent,
-		private tokenProviderService: TokenProviderService,
+		private tokenProvider: TokenProvider,
 		private statisticsService: StatisticsService,
 	) {
 	}
 
 	ngOnInit() {
 		this.app.onLoad(() => {
-			this.tokenProviderService.token.subscribe(token => {
+			this.tokenProvider.token.subscribe(token => {
 				this.statisticsService.getProjectTaskTypes(token, this.project.id).subscribe(projectTaskTypes => {
 					this.chartConfig = new ChartConfig(
 						[
@@ -49,7 +49,7 @@ export class ProjectTaskTypeChartComponent implements OnInit {
 						true,
 						'doughnut'
 					);
-					console.log(this.chartConfig);
+					console.debug(this.chartConfig);
 				});
 			});
 		});

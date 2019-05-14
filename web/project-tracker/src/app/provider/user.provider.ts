@@ -5,7 +5,7 @@ import {User} from '../dto/User';
 @Injectable({
 	providedIn: 'root'
 })
-export class UserProviderService {
+export class UserProvider {
 
 	private meSubject = new BehaviorSubject<User>(null);
 	me = this.meSubject.asObservable();
