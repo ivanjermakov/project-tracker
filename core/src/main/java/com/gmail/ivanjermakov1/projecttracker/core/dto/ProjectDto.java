@@ -14,11 +14,13 @@ public class ProjectDto {
 	public String description;
 	public String about;
 	public UserDto user;
+	public Double estimate;
+	public Double elapsed;
 	
 	public ProjectDto() {
 	}
 	
-	public ProjectDto(Long id, Boolean isPublic, LocalDateTime created, String name, String description, String about, UserDto user) {
+	public ProjectDto(Long id, Boolean isPublic, LocalDateTime created, String name, String description, String about, UserDto user, Double estimate, Double elapsed) {
 		this.id = id;
 		this.isPublic = isPublic;
 		this.created = created;
@@ -26,6 +28,8 @@ public class ProjectDto {
 		this.description = description;
 		this.about = about;
 		this.user = user;
+		this.estimate = estimate;
+		this.elapsed = elapsed;
 	}
 	
 }

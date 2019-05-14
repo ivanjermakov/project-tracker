@@ -1,8 +1,6 @@
 package com.gmail.ivanjermakov1.projecttracker.core.entity;
 
 import com.gmail.ivanjermakov1.projecttracker.core.entity.enums.TaskType;
-import org.hibernate.annotations.ColumnTransformer;
-import org.hibernate.annotations.Formula;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -15,7 +13,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.PostLoad;
+import javax.persistence.PostPersist;
+import javax.persistence.PostUpdate;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -47,8 +49,8 @@ public class Task {
 	
 	@Column(name = "estimate")
 	private Double estimate;
-
-	@Formula("(select sum(a.elapsed) from activity a where a.task_id = id)")
+	
+	@Transient
 	private Double elapsed;
 	
 	@Column(name = "opened")
@@ -62,6 +64,9 @@ public class Task {
 	
 	@OneToMany(mappedBy = "parent")
 	private List<Task> subtasks;
+	
+	@OneToMany(mappedBy = "task")
+	private List<Activity> activities;
 	
 	public Task() {
 	}
@@ -77,6 +82,18 @@ public class Task {
 		this.due = due;
 		this.taskInfo = taskInfo;
 		this.subtasks = subtasks;
+	}
+	
+	@PostLoad
+	public void postLoad() {
+		elapsed = subtasks
+				.stream()
+				.mapToDouble(t -> t.getElapsed() != null ? t.getElapsed() : 0d)
+				.sum() +
+				activities
+						.stream()
+						.mapToDouble(a -> a.getElapsed() != null ? a.getElapsed() : 0d)
+						.sum();
 	}
 	
 	public Long getId() {
@@ -165,6 +182,14 @@ public class Task {
 	
 	public void setSubtasks(List<Task> subtasks) {
 		this.subtasks = subtasks;
+	}
+	
+	public List<Activity> getActivities() {
+		return activities;
+	}
+	
+	public void setActivities(List<Activity> activities) {
+		this.activities = activities;
 	}
 	
 }

@@ -1,7 +1,5 @@
 package com.gmail.ivanjermakov1.projecttracker.core.entity;
 
-import org.hibernate.annotations.Cascade;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,7 +10,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.PostLoad;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -41,6 +41,15 @@ public class Project {
 	@OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Role> roles;
 	
+	@OneToMany(mappedBy = "project")
+	private List<Task> tasks;
+	
+	@Transient
+	private Double estimate;
+	
+	@Transient
+	private Double elapsed;
+	
 	public Project() {
 	}
 	
@@ -48,6 +57,19 @@ public class Project {
 		this.user = user;
 		this.isPublic = isPublic;
 		this.created = created;
+	}
+	
+	@PostLoad
+	public void postLoad() {
+		estimate = tasks
+				.stream()
+				.mapToDouble(t -> t.getEstimate() != null ? t.getEstimate() : 0)
+				.sum();
+		
+		elapsed = tasks
+				.stream()
+				.mapToDouble(t -> t.getElapsed() != null ? t.getElapsed() : 0)
+				.sum();
 	}
 	
 	public Long getId() {
@@ -96,6 +118,30 @@ public class Project {
 	
 	public void setRoles(List<Role> roles) {
 		this.roles = roles;
+	}
+	
+	public List<Task> getTasks() {
+		return tasks;
+	}
+	
+	public void setTasks(List<Task> tasks) {
+		this.tasks = tasks;
+	}
+	
+	public Double getEstimate() {
+		return estimate;
+	}
+	
+	public void setEstimate(Double estimate) {
+		this.estimate = estimate;
+	}
+	
+	public Double getElapsed() {
+		return elapsed;
+	}
+	
+	public void setElapsed(Double elapsed) {
+		this.elapsed = elapsed;
 	}
 	
 }
