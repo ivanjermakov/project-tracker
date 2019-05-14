@@ -71,14 +71,6 @@
 			     [textContent]="project.about"
 			     (input)="project.about = $event.target.textContent">{{project.about}}</div>
 		</div>
-		<div class="delimiter" *ngIf="!editMode"></div>
-		<div class="stats-container">
-			<div class="stats">Stats</div>
-			<div class="charts-container">
-				<app-project-activity-chart [project]="project"></app-project-activity-chart>
-				<app-project-task-type-chart [project]="project"></app-project-task-type-chart>
-			</div>
-		</div>
 		<div class="edit-choice"
 		     *ngIf="editMode">
 			<button
@@ -86,6 +78,14 @@
 			</button>
 			<div class="cancel"
 			     (click)="cancelEdit()">Cancel
+			</div>
+		</div>
+		<div class="delimiter" *ngIf="!editMode"></div>
+		<div class="stats-container" *ngIf="!editMode">
+			<div class="stats">Stats</div>
+			<div class="charts-container">
+				<app-project-activity-chart [project]="project"></app-project-activity-chart>
+				<app-project-task-type-chart [project]="project"></app-project-task-type-chart>
 			</div>
 		</div>
 	</div>
