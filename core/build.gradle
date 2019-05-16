@@ -34,6 +34,9 @@ dependencies {
     compile group: 'javax.el', name: 'javax.el-api', version: '3.0.0'
     compile group: 'org.glassfish', name: 'javax.el', version: '3.0.0'
 
+//    spreadsheets
+    compile group: 'org.apache.poi', name: 'poi-ooxml', version: '4.1.0'
+
     compile group: "com.twilio.sdk", name: "twilio", version: "7.35.1"
 
     compile "io.springfox:springfox-swagger2:$springfoxVersion"
