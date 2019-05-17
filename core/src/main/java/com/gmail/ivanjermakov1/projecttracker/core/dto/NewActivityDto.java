@@ -21,5 +21,12 @@ public class NewActivityDto {
 	public NewActivityDto() {
 	}
 	
+	public NewActivityDto(@NotNull Long taskId, TaskStatus status, String description, @Min(value = 0, message = "elapsed time cannot be negative") Double elapsed, String assigneeLogin) {
+		this.taskId = taskId;
+		this.status = status;
+		this.description = description;
+		this.elapsed = elapsed;
+		this.assigneeLogin = assigneeLogin;
+	}
 	
 }

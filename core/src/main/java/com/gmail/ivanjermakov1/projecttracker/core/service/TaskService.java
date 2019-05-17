@@ -1,11 +1,13 @@
 package com.gmail.ivanjermakov1.projecttracker.core.service;
 
 import com.gmail.ivanjermakov1.projecttracker.core.dto.EditTaskDto;
+import com.gmail.ivanjermakov1.projecttracker.core.dto.NewActivityDto;
 import com.gmail.ivanjermakov1.projecttracker.core.dto.NewTaskDto;
 import com.gmail.ivanjermakov1.projecttracker.core.entity.Project;
 import com.gmail.ivanjermakov1.projecttracker.core.entity.Task;
 import com.gmail.ivanjermakov1.projecttracker.core.entity.TaskInfo;
 import com.gmail.ivanjermakov1.projecttracker.core.entity.User;
+import com.gmail.ivanjermakov1.projecttracker.core.entity.enums.TaskStatus;
 import com.gmail.ivanjermakov1.projecttracker.core.entity.enums.UserRole;
 import com.gmail.ivanjermakov1.projecttracker.core.exception.AuthorizationException;
 import com.gmail.ivanjermakov1.projecttracker.core.exception.NoSuchEntityException;
@@ -25,18 +27,31 @@ public class TaskService {
 	
 	private final ProjectService projectService;
 	
-	private final TaskRepository taskRepository;
 	private final RoleService roleService;
+	
+	
+	private final TaskRepository taskRepository;
 	private final ProjectRepository projectRepository;
+	private final ActivityService activityService;
 	
 	@Autowired
-	public TaskService(ProjectService projectService, TaskRepository taskRepository, RoleService roleService, ProjectRepository projectRepository) {
+	public TaskService(ProjectService projectService, TaskRepository taskRepository, RoleService roleService, ProjectRepository projectRepository, ActivityService activityService) {
 		this.projectService = projectService;
 		this.taskRepository = taskRepository;
 		this.roleService = roleService;
 		this.projectRepository = projectRepository;
+		this.activityService = activityService;
 	}
 	
+	/**
+	 * Create new task. By default also create activity with status {@code TaskStatus.OPEN}
+	 *
+	 * @param user       User
+	 * @param newTaskDto NewTaskDto
+	 * @return Created task
+	 * @throws NoSuchEntityException  if parent task with such id does not exist
+	 * @throws AuthorizationException if no access. Required role is {@code UserRole.COLLABORATOR}
+	 */
 	public Task create(User user, NewTaskDto newTaskDto) throws NoSuchEntityException, AuthorizationException {
 		Task task = new Task(
 				projectService.get(user, newTaskDto.projectId),
@@ -62,6 +77,14 @@ public class TaskService {
 				task,
 				newTaskDto.name,
 				newTaskDto.description
+		));
+		
+		activityService.create(user, new NewActivityDto(
+				task.getId(),
+				TaskStatus.OPEN,
+				null,
+				null,
+				null
 		));
 		
 		task = taskRepository.save(task);
