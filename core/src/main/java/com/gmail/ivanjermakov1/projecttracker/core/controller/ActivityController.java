@@ -57,7 +57,7 @@ public class ActivityController {
 	
 	@GetMapping("allByUser")
 	public List<ActivityDto> allByUser(@RequestHeader("token") String token,
-	                                   @PageableDefault(direction = Sort.Direction.DESC, sort = "timestamp") Pageable pageable) throws NoSuchEntityException, AuthorizationException {
+	                                   @PageableDefault(direction = Sort.Direction.DESC, sort = "timestamp") Pageable pageable) throws NoSuchEntityException {
 		User user = userService.validate(token);
 		
 		return Mapper.mapAll(activityService.allByUser(user, pageable), ActivityDto.class);
