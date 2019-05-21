@@ -10,7 +10,6 @@ import com.gmail.ivanjermakov1.projecttracker.core.exception.AuthorizationExcept
 import com.gmail.ivanjermakov1.projecttracker.core.exception.NoSuchEntityException;
 import com.gmail.ivanjermakov1.projecttracker.core.repository.ActivityRepository;
 import com.gmail.ivanjermakov1.projecttracker.core.repository.TaskRepository;
-import com.gmail.ivanjermakov1.projecttracker.core.repository.UserRepository;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -26,18 +25,22 @@ public class ActivityService {
 	private final ActivityRepository activityRepository;
 	private final TaskRepository taskRepository;
 	private final RoleService roleService;
-	private final TaskService taskService;
+	private TaskService taskService;
 	private final UserService userService;
 	private final ProjectService projectService;
 	
 	@Autowired
-	public ActivityService(ActivityRepository activityRepository, RoleService roleService, TaskService taskService, UserRepository userRepository, UserService userService, TaskRepository taskRepository, ProjectService projectService) {
+	public ActivityService(ActivityRepository activityRepository, RoleService roleService, UserService userService, TaskRepository taskRepository, ProjectService projectService) {
 		this.activityRepository = activityRepository;
 		this.roleService = roleService;
-		this.taskService = taskService;
 		this.userService = userService;
 		this.taskRepository = taskRepository;
 		this.projectService = projectService;
+	}
+	
+	@Autowired
+	public void setTaskService(TaskService taskService) {
+		this.taskService = taskService;
 	}
 	
 	public Activity get(User user, Long activityId) throws NoSuchEntityException, AuthorizationException {

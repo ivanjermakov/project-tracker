@@ -26,10 +26,7 @@ import java.util.NoSuchElementException;
 public class TaskService {
 	
 	private final ProjectService projectService;
-	
 	private final RoleService roleService;
-	
-	
 	private final TaskRepository taskRepository;
 	private final ProjectRepository projectRepository;
 	private final ActivityService activityService;
