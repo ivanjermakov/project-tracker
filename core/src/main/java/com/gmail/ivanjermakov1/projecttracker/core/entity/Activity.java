@@ -2,7 +2,6 @@ package com.gmail.ivanjermakov1.projecttracker.core.entity;
 
 import com.gmail.ivanjermakov1.projecttracker.core.entity.enums.TaskStatus;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
