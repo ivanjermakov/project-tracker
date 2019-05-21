@@ -1,4 +1,4 @@
-<table class="tasks-table" *ngIf="tasks.length !== 0">
+<table class="tasks-table" *ngIf="tasks && tasks.length !== 0">
 	<tr>
 		<th>Id</th>
 		<th>Name</th>
@@ -12,7 +12,7 @@
 		<th>Subtasks</th>
 	</tr>
 	<tr class="row" *ngFor="let t of tasks"
-	    [routerLink]="'/' + project.user.login + '/' + project.name + '/task/' + t.id">
+	    [routerLink]="'/' + t.project.user.login + '/' + t.project.name + '/task/' + t.id">
 		<td>#{{t.id}}</td>
 		<td>{{t.name}}</td>
 		<td>{{t.project.name}}</td>

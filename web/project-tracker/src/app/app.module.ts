@@ -30,6 +30,7 @@ import {ProjectActivityChartComponent} from './component/embedded/data-visualiza
 import {ChartsModule} from 'ng2-charts';
 import { ProjectTaskTypeChartComponent } from './component/embedded/data-visualization/project-task-type-chart/project-task-type-chart.component';
 import { ChartComponent } from './component/embedded/data-visualization/chart/chart.component';
+import { TasksComponent } from './component/routed/tasks/tasks.component';
 
 @NgModule({
 	declarations: [
@@ -57,7 +58,8 @@ import { ChartComponent } from './component/embedded/data-visualization/chart/ch
 		ActivityItemComponent,
 		ProjectActivityChartComponent,
 		ProjectTaskTypeChartComponent,
-		ChartComponent
+		ChartComponent,
+		TasksComponent
 	],
 	imports: [
 		BrowserModule,

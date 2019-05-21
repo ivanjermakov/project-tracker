@@ -14,6 +14,7 @@ import {NewTaskComponent} from './component/routed/new-task/new-task.component';
 import {TaskComponent} from './component/routed/task/task.component';
 import {NewActivityComponent} from './component/routed/new-activity/new-activity.component';
 import {ActivityComponent} from './component/routed/activity/activity.component';
+import {TasksComponent} from './component/routed/tasks/tasks.component';
 
 
 const routes: Routes = [
@@ -31,6 +32,11 @@ const routes: Routes = [
 		path: 'feed',
 		component: FeedComponent,
 		data: {title: 'Feed'}
+	},
+	{
+		path: 'tasks',
+		component: TasksComponent,
+		data: {title: 'Tasks'}
 	},
 	{
 		path: 'project/create',

@@ -15,8 +15,6 @@ export class TasksTableComponent implements OnInit {
 
 	@Input()
 	tasks: Task[];
-	@Input()
-	project: Project;
 
 	constructor(
 		private app: AppComponent,

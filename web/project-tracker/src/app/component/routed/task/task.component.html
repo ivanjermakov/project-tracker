@@ -72,8 +72,7 @@
 					<i class="fas fa-plus"></i>
 				</button>
 			</div>
-			<app-tasks-table [tasks]="task.subtasks"
-			                 [project]="task.project">
+			<app-tasks-table [tasks]="task.subtasks">
 			</app-tasks-table>
 			<div *ngIf="task.subtasks.length === 0" class="no-subtasks">No subtasks yet.</div>
 		</div>

@@ -11,3 +11,5 @@ export const PROJECTS_IN_FEED = 10;
 export const TASKS_IN_TABLE = 10;
 export const ACTIVITIES_IN_LIST = 20;
 export const ACTIVITIES_IN_FEED = 100;
+export const OWNED_TASKS_IN_TASKS = 100;
+export const ASSIGNEE_TASKS_IN_TASKS = 100;

@@ -29,6 +29,20 @@ export class TaskService {
 		});
 	}
 
+	owned(token: string, pageable: Pageable): Observable<Task[]> {
+		return this.http.get<Task[]>(API_URL + 'task/owned', {
+			params: pageable.toHttpParams(),
+			headers: {token: token}
+		});
+	}
+
+	assignee(token: string, pageable: Pageable): Observable<Task[]> {
+		return this.http.get<Task[]>(API_URL + 'task/assignee', {
+			params: pageable.toHttpParams(),
+			headers: {token: token}
+		});
+	}
+
 	get(token: string, taskId: number): Observable<Task> {
 		return this.http.get<Task>(API_URL + 'task/get', {
 			params: {taskId: taskId.toString()},

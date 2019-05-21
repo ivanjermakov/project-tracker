@@ -1,0 +1,16 @@
+<app-header></app-header>
+<div class="content-container">
+	<div class="content">
+		<div class="tasks-container">
+			<div class="owned" *ngIf="ownedTasks">
+				<div class="heading">Your tasks</div>
+				<app-tasks-table [tasks]="ownedTasks"></app-tasks-table>
+			</div>
+			<div class="delimiter"></div>
+			<div class="assignee" *ngIf="assigneeTasks">
+				<div class="heading">Assignee tasks</div>
+				<app-tasks-table [tasks]="assigneeTasks"></app-tasks-table>
+			</div>
+		</div>
+	</div>
+</div>
