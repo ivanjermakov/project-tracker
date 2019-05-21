@@ -28,19 +28,17 @@ import java.util.stream.Collectors;
 public class TaskService {
 	
 	private final ProjectService projectService;
-	private final ActivityService activityService;
 	private final RoleService roleService;
 	private final TaskRepository taskRepository;
 	private final ProjectRepository projectRepository;
 	private final ActivityRepository activityRepository;
 	
 	@Autowired
-	public TaskService(ProjectService projectService, TaskRepository taskRepository, RoleService roleService, ProjectRepository projectRepository, ActivityService activityService, ActivityRepository activityRepository) {
+	public TaskService(ProjectService projectService, TaskRepository taskRepository, RoleService roleService, ProjectRepository projectRepository, ActivityRepository activityRepository) {
 		this.projectService = projectService;
 		this.taskRepository = taskRepository;
 		this.roleService = roleService;
 		this.projectRepository = projectRepository;
-		this.activityService = activityService;
 		this.activityRepository = activityRepository;
 	}
 	
