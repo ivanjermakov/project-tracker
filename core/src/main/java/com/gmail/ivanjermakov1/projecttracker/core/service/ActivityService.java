@@ -71,7 +71,11 @@ public class ActivityService {
 				newActivityDto.description
 		);
 		
-		return activityRepository.save(activity);
+		task.getActivities().add(activity);
+		
+		taskRepository.save(task);
+		
+		return activity;
 	}
 	
 	public List<Activity> allByTask(User user, Long taskId, Pageable pageable) throws NoSuchEntityException, AuthorizationException {

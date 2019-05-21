@@ -1,7 +1,6 @@
 package com.gmail.ivanjermakov1.projecttracker.core.service;
 
 import com.gmail.ivanjermakov1.projecttracker.core.dto.EditTaskDto;
-import com.gmail.ivanjermakov1.projecttracker.core.dto.NewActivityDto;
 import com.gmail.ivanjermakov1.projecttracker.core.dto.NewTaskDto;
 import com.gmail.ivanjermakov1.projecttracker.core.entity.Activity;
 import com.gmail.ivanjermakov1.projecttracker.core.entity.Project;
@@ -20,7 +19,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
@@ -65,7 +64,8 @@ public class TaskService {
 				LocalDateTime.now(),
 				newTaskDto.due,
 				null,
-				Collections.emptyList()
+				new ArrayList<>(),
+				new ArrayList<>()
 		);
 		
 		if (newTaskDto.parentTaskId != null) {
@@ -81,17 +81,17 @@ public class TaskService {
 				newTaskDto.description
 		));
 		
-		activityService.create(user, new NewActivityDto(
-				task.getId(),
+		task.getActivities().add(new Activity(
+				task,
+				task.getCreator(),
+				null,
 				TaskStatus.OPEN,
 				null,
-				null,
+				LocalDateTime.now(),
 				null
 		));
 		
-		task = taskRepository.save(task);
-		
-		return task;
+		return taskRepository.save(task);
 	}
 	
 	public Task edit(User user, EditTaskDto editTaskDto) throws NoSuchEntityException, AuthorizationException {

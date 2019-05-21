@@ -60,16 +60,16 @@ public class Task {
 	@OneToOne(mappedBy = "task", cascade = {CascadeType.ALL}, orphanRemoval = true)
 	private TaskInfo taskInfo;
 	
-	@OneToMany(mappedBy = "parent")
+	@OneToMany(mappedBy = "parent", cascade = {CascadeType.ALL}, orphanRemoval = true)
 	private List<Task> subtasks;
 	
-	@OneToMany(mappedBy = "task")
+	@OneToMany(mappedBy = "task", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Activity> activities;
 	
 	public Task() {
 	}
 	
-	public Task(Project project, Task parent, User creator, TaskType type, Double estimate, Double elapsed, LocalDateTime opened, LocalDate due, TaskInfo taskInfo, List<Task> subtasks) {
+	public Task(Project project, Task parent, User creator, TaskType type, Double estimate, Double elapsed, LocalDateTime opened, LocalDate due, TaskInfo taskInfo, List<Task> subtasks, List<Activity> activities) {
 		this.project = project;
 		this.parent = parent;
 		this.creator = creator;
@@ -80,6 +80,7 @@ public class Task {
 		this.due = due;
 		this.taskInfo = taskInfo;
 		this.subtasks = subtasks;
+		this.activities = activities;
 	}
 	
 	@PostLoad
