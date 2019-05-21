@@ -35,4 +35,20 @@
       color: var(--lightgray);
     }
   }
+
+  .right {
+    display: flex;
+    margin-left: auto;
+    margin-right: 5px;
+
+    .tab {
+      padding: 10px;
+      color: white;
+      cursor: pointer;
+    }
+
+    .tab:hover {
+      color: var(--mainblue);
+    }
+  }
 }

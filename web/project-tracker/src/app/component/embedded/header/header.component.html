@@ -4,6 +4,8 @@
 		<input type="text" placeholder="global search">
 	</div>
 	<div class="right">
-
+		<div class="tab" [routerLink]="'/feed'">Feed</div>
+		<div class="tab">Tasks</div>
+		<div class="tab" [routerLink]="'/' + me.login">Profile</div>
 	</div>
 </div>
