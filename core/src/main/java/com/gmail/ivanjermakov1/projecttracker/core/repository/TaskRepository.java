@@ -2,6 +2,7 @@ package com.gmail.ivanjermakov1.projecttracker.core.repository;
 
 import com.gmail.ivanjermakov1.projecttracker.core.entity.Project;
 import com.gmail.ivanjermakov1.projecttracker.core.entity.Task;
+import com.gmail.ivanjermakov1.projecttracker.core.entity.User;
 import com.gmail.ivanjermakov1.projecttracker.core.entity.nontable.ProjectTaskType;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
@@ -20,5 +21,7 @@ public interface TaskRepository extends CrudRepository<Task, Long> {
 			"group by t.type\n" +
 			"order by t.type", nativeQuery = true)
 	List<ProjectTaskType> findTaskTypesByProject(@Param("id") Long projectId);
+	
+	List<Task> findAllByCreator(User user, Pageable pageable);
 	
 }

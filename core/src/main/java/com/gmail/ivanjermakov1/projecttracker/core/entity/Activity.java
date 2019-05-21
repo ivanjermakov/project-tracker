@@ -13,6 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import java.time.LocalDateTime;
 
+//TODO: priority
 @Entity
 @Table(name = "activity")
 public class Activity {

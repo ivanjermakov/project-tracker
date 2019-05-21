@@ -3,6 +3,7 @@ package com.gmail.ivanjermakov1.projecttracker.core.service;
 import com.gmail.ivanjermakov1.projecttracker.core.dto.EditTaskDto;
 import com.gmail.ivanjermakov1.projecttracker.core.dto.NewActivityDto;
 import com.gmail.ivanjermakov1.projecttracker.core.dto.NewTaskDto;
+import com.gmail.ivanjermakov1.projecttracker.core.entity.Activity;
 import com.gmail.ivanjermakov1.projecttracker.core.entity.Project;
 import com.gmail.ivanjermakov1.projecttracker.core.entity.Task;
 import com.gmail.ivanjermakov1.projecttracker.core.entity.TaskInfo;
@@ -11,6 +12,7 @@ import com.gmail.ivanjermakov1.projecttracker.core.entity.enums.TaskStatus;
 import com.gmail.ivanjermakov1.projecttracker.core.entity.enums.UserRole;
 import com.gmail.ivanjermakov1.projecttracker.core.exception.AuthorizationException;
 import com.gmail.ivanjermakov1.projecttracker.core.exception.NoSuchEntityException;
+import com.gmail.ivanjermakov1.projecttracker.core.repository.ActivityRepository;
 import com.gmail.ivanjermakov1.projecttracker.core.repository.ProjectRepository;
 import com.gmail.ivanjermakov1.projecttracker.core.repository.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,23 +23,26 @@ import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.stream.Collectors;
 
 @Service
 public class TaskService {
 	
 	private final ProjectService projectService;
+	private final ActivityService activityService;
 	private final RoleService roleService;
 	private final TaskRepository taskRepository;
 	private final ProjectRepository projectRepository;
-	private final ActivityService activityService;
+	private final ActivityRepository activityRepository;
 	
 	@Autowired
-	public TaskService(ProjectService projectService, TaskRepository taskRepository, RoleService roleService, ProjectRepository projectRepository, ActivityService activityService) {
+	public TaskService(ProjectService projectService, TaskRepository taskRepository, RoleService roleService, ProjectRepository projectRepository, ActivityService activityService, ActivityRepository activityRepository) {
 		this.projectService = projectService;
 		this.taskRepository = taskRepository;
 		this.roleService = roleService;
 		this.projectRepository = projectRepository;
 		this.activityService = activityService;
+		this.activityRepository = activityRepository;
 	}
 	
 	/**
@@ -119,12 +124,23 @@ public class TaskService {
 		return taskRepository.findAllByProject(project, pageable);
 	}
 	
-	public Task get(User user, Long taskId) throws AuthorizationException, NoSuchEntityException {
+	public Task get(User user, Long taskId) throws AuthorizationException {
 		Task task = taskRepository.findById(taskId).orElseThrow(() -> new NoSuchElementException("no such task"));
 		
 		roleService.authorize(user, task.getProject(), UserRole.VIEWER);
 		
 		return task;
+	}
+	
+	public List<Task> owned(User user, Pageable pageable) {
+		return taskRepository.findAllByCreator(user, pageable);
+	}
+	
+	public List<Task> assignee(User user, Pageable pageable) {
+		return activityRepository.findAllAssigneeActivities(user.getId(), pageable)
+				.stream()
+				.map(Activity::getTask)
+				.collect(Collectors.toList());
 	}
 	
 }

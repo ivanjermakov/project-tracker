@@ -46,6 +46,22 @@ public class TaskController {
 		return Mapper.mapAll(taskService.all(user, projectId, pageable), TaskDto.class);
 	}
 	
+	@GetMapping("owned")
+	public List<TaskDto> owned(@RequestHeader("token") String token,
+	                           @PageableDefault(direction = Sort.Direction.DESC, sort = {"opened"}) Pageable pageable) throws NoSuchEntityException, AuthorizationException {
+		User user = userService.validate(token);
+		
+		return Mapper.mapAll(taskService.owned(user, pageable), TaskDto.class);
+	}
+	
+	@GetMapping("assignee")
+	public List<TaskDto> assignee(@RequestHeader("token") String token,
+	                              @PageableDefault(direction = Sort.Direction.DESC, sort = {"opened"}) Pageable pageable) throws NoSuchEntityException, AuthorizationException {
+		User user = userService.validate(token);
+		
+		return Mapper.mapAll(taskService.assignee(user, pageable), TaskDto.class);
+	}
+	
 	@GetMapping("get")
 	public TaskDto get(@RequestHeader("token") String token, @RequestParam("taskId") Long taskId) throws NoSuchEntityException, AuthorizationException {
 		User user = userService.validate(token);

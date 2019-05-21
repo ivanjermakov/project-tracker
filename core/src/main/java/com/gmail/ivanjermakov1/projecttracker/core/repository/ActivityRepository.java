@@ -30,4 +30,14 @@ public interface ActivityRepository extends CrudRepository<Activity, Long> {
 			"group by date(a.timestamp)", nativeQuery = true)
 	List<ProjectActivity> findActivitiesByProject(@Param("id") Long projectId);
 	
+	@Query(value = "select *\n" +
+			"from task t\n" +
+			"         join (select *\n" +
+			"               from activity\n" +
+			"               where assignee_id = :id\n" +
+			"               order by timestamp desc\n" +
+			"               limit 1) as aa\n" +
+			"              on t.id = aa.task_id", nativeQuery = true)
+	List<Activity> findAllAssigneeActivities(@Param("id") Long assigneeId, Pageable pageable);
+	
 }
