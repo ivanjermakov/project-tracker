@@ -17,6 +17,7 @@ import {Title} from '@angular/platform-browser';
 import {ArrayService} from '../../../service/array.service';
 import {UserProvider} from '../../../provider/user.provider';
 import {TokenProvider} from '../../../provider/token.provider';
+import {ErrorService} from '../../../service/error.service';
 
 @Component({
 	selector: 'app-project',
@@ -47,7 +48,8 @@ export class ProjectComponent implements OnInit {
 		private userProvider: UserProvider,
 		private authService: AuthService,
 		private titleService: Title,
-		private arrayService: ArrayService
+		private arrayService: ArrayService,
+		private errorService: ErrorService
 	) {
 	}
 
@@ -106,7 +108,7 @@ export class ProjectComponent implements OnInit {
 			this.projectService.edit(token, editProject).subscribe(project => {
 				this.editMode = false;
 				this.router.navigate([project.user.login, project.name]);
-			});
+			}, e => this.errorService.raise(e));
 		});
 	}
 }
