@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -66,6 +67,8 @@ public class StatisticsService {
 			activities = fillEmptyDays(activities);
 		}
 		
+		if (activities.size() == 0) return Collections.emptyList();
+		
 		List<LocalDate> resultDates = generateDates(
 				activities.get(0).day,
 				activities.get(activities.size() - 1).day,
@@ -103,6 +106,7 @@ public class StatisticsService {
 	}
 	
 	private List<ProjectActivityDto> fillEmptyDays(List<ProjectActivityDto> activities) {
+		if (activities.isEmpty()) return activities;
 		List<ProjectActivityDto> result = new ArrayList<>();
 		
 		LocalDate currentDate = activities.get(0).day;

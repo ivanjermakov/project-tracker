@@ -48,4 +48,24 @@ public class TaskDto {
 		this.parentTaskId = parentTaskId;
 	}
 	
+	public TaskDto compute() {
+		subtasks.forEach(TaskDto::compute);
+		
+		elapsed = elapsed != null ? elapsed : 0d;
+		elapsed += subtasks
+				.stream()
+				.mapToDouble(s -> s.elapsed)
+				.sum();
+		elapsed = elapsed != 0 ? elapsed : null;
+		
+		estimate = estimate != null ? estimate : 0d;
+		estimate += subtasks
+				.stream()
+				.mapToDouble(s -> s.estimate)
+				.sum();
+		estimate = estimate != 0 ? estimate : null;
+		
+		return this;
+	}
+	
 }

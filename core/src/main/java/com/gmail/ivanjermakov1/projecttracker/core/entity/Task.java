@@ -85,14 +85,10 @@ public class Task {
 	
 	@PostLoad
 	public void postLoad() {
-		elapsed = subtasks
+		elapsed = activities
 				.stream()
-				.mapToDouble(t -> t.getElapsed() != null ? t.getElapsed() : 0d)
-				.sum() +
-				activities
-						.stream()
-						.mapToDouble(a -> a.getElapsed() != null ? a.getElapsed() : 0d)
-						.sum();
+				.mapToDouble(a -> a.getElapsed() != null ? a.getElapsed() : 0d)
+				.sum();
 	}
 	
 	public Long getId() {

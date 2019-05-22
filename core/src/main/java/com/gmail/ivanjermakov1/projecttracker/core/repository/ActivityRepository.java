@@ -27,7 +27,8 @@ public interface ActivityRepository extends CrudRepository<Activity, Long> {
 			"         join task t on p.id = t.project_id\n" +
 			"         join activity a on t.id = a.task_id\n" +
 			"where p.id = :id\n" +
-			"group by date(a.timestamp)", nativeQuery = true)
+			"group by day\n" +
+			"order by day", nativeQuery = true)
 	List<ProjectActivity> findActivitiesByProject(@Param("id") Long projectId);
 	
 	@Query(value = "select *\n" +
