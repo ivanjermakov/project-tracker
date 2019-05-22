@@ -54,7 +54,6 @@ export class TaskComponent implements OnInit {
 	) {
 	}
 
-
 	ngOnInit() {
 		this.app.onLoad(() => {
 			console.debug('task initiation');
@@ -113,5 +112,9 @@ export class TaskComponent implements OnInit {
 				this.router.navigate([task.project.user.login, task.project.name, 'task', task.id]);
 			});
 		});
+	}
+
+	isPast(due: Date): boolean {
+		return TimeService.isPast(due);
 	}
 }

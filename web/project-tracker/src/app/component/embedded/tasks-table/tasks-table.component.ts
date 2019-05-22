@@ -38,8 +38,11 @@ export class TasksTableComponent implements OnInit {
 		});
 	}
 
-	formatDate(date: Date) {
+	formatDate(date: Date): string {
 		return TimeService.formatDate(date, 'MMMM Do[, ] YYYY');
 	}
 
+	isPast(due: Date): boolean {
+		return TimeService.isPast(due);
+	}
 }

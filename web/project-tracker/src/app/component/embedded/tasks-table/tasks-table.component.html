@@ -26,7 +26,7 @@
 		<td>{{t.estimate ? t.estimate + 'h' : '-'}}</td>
 		<td [ngClass]="{'expired': t.estimate && t.elapsed > t.estimate}">{{t.elapsed ? t.elapsed + 'h' : '-'}}</td>
 		<td>{{formatDate(t.opened)}}</td>
-		<td>{{t.due ? formatDate(t.due) : '-'}}</td>
+		<td [ngClass]="{'expired': t.due && !isPast(t.due)}">{{t.due ? formatDate(t.due) : '-'}}</td>
 		<td>{{t.subtasks.length === 0 ? '-' : t.subtasks.length}}</td>
 	</tr>
 </table>

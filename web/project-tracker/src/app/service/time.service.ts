@@ -17,4 +17,7 @@ export class TimeService {
 		return moment(inp, format, language, strict);
 	}
 
+	static isPast(date: Date) {
+		return moment(date).isAfter(moment());
+	}
 }

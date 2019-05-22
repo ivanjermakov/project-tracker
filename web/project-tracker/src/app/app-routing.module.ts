@@ -13,7 +13,6 @@ import {ProjectComponent} from './component/routed/project/project.component';
 import {NewTaskComponent} from './component/routed/new-task/new-task.component';
 import {TaskComponent} from './component/routed/task/task.component';
 import {NewActivityComponent} from './component/routed/new-activity/new-activity.component';
-import {ActivityComponent} from './component/routed/activity/activity.component';
 import {TasksComponent} from './component/routed/tasks/tasks.component';
 
 
@@ -46,7 +45,6 @@ const routes: Routes = [
 	{
 		path: ':login',
 		component: ProfileComponent,
-		// TODO: change page title to user name
 		data: {title: 'Profile'},
 		children: [
 			{
@@ -90,12 +88,7 @@ const routes: Routes = [
 		path: ':login/:name/task/:taskId/activity/create',
 		component: NewActivityComponent,
 		data: {title: 'New activity'}
-	},
-	{
-		path: ':login/:name/task/:taskId/activity/:activityId',
-		component: ActivityComponent,
-		data: {title: 'Activity'}
-	},
+	}
 ];
 
 @NgModule({

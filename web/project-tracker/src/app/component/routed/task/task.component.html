@@ -44,11 +44,17 @@
 					{{task.project.name}}
 				</div>
 			</div>
-			<div class="parent-task linkable" *ngIf="task.parentTaskId">
+			<div class="parent-task linkable" *ngIf="task.parentTaskId && parentTask">
 				<div class="pre">Parent task:</div>
 				<div class="text"
 				     [routerLink]="'/' + task.project.user.login + '/' + task.project.name + '/task/' + parentTask.id">
 					{{'#' + parentTask.id + ' ' + parentTask.name}}
+				</div>
+			</div>
+			<div class="due" *ngIf="task.due">
+				<div class="pre">Due:</div>
+				<div class="text" [ngClass]="{'expired': !isPast(task.due)}">
+					{{task.due}}
 				</div>
 			</div>
 			<div class="description" *ngIf="task.description">

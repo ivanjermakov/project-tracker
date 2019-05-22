@@ -83,6 +83,10 @@ button:hover {
   padding-right: 6px;
 }
 
+.expired {
+  color: var(--bug);
+}
+
 //ANIMATIONS
 @keyframes appear {
   0% {

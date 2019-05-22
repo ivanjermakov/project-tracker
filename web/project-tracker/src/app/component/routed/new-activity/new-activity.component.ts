@@ -46,7 +46,7 @@ export class NewActivityComponent implements OnInit {
 				this.activity.taskId = params['taskId'];
 				this.activityService.create(token, this.activity).subscribe(activity => {
 					this.router.navigate(
-						[`/${activity.task.project.user.login}/${activity.task.project.name}/task/${activity.task.id}/activity/${activity.id}`]
+						[`/${activity.task.project.user.login}/${activity.task.project.name}/task/${activity.task.id}`]
 					);
 				});
 			});
