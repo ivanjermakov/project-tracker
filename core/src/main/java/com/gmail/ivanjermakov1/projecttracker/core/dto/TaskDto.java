@@ -6,6 +6,7 @@ import com.gmail.ivanjermakov1.projecttracker.core.entity.enums.TaskType;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 
 public class TaskDto {
 	
@@ -54,6 +55,7 @@ public class TaskDto {
 		elapsed = elapsed != null ? elapsed : 0d;
 		elapsed += subtasks
 				.stream()
+				.filter(s -> Objects.nonNull(s.elapsed))
 				.mapToDouble(s -> s.elapsed)
 				.sum();
 		elapsed = elapsed != 0 ? elapsed : null;
@@ -61,6 +63,7 @@ public class TaskDto {
 		estimate = estimate != null ? estimate : 0d;
 		estimate += subtasks
 				.stream()
+				.filter(s -> Objects.nonNull(s.estimate))
 				.mapToDouble(s -> s.estimate)
 				.sum();
 		estimate = estimate != 0 ? estimate : null;
