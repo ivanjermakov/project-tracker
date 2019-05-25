@@ -1,7 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {TimeService} from '../../../service/time.service';
 import {Task} from '../../../dto/Task';
-import {Project} from '../../../dto/Project';
 import {AppComponent} from '../../../app.component';
 import {ActivityService} from '../../../service/activity.service';
 import {TokenProvider} from '../../../provider/token.provider';
