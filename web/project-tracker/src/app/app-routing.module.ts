@@ -14,6 +14,7 @@ import {NewTaskComponent} from './component/routed/new-task/new-task.component';
 import {TaskComponent} from './component/routed/task/task.component';
 import {NewActivityComponent} from './component/routed/new-activity/new-activity.component';
 import {TasksComponent} from './component/routed/tasks/tasks.component';
+import {ErrorComponent} from './component/routed/error/error.component';
 
 
 const routes: Routes = [
@@ -41,6 +42,11 @@ const routes: Routes = [
 		path: 'project/create',
 		component: NewProjectComponent,
 		data: {title: 'New project'}
+	},
+	{
+		path: 'error/500',
+		component: ErrorComponent,
+		data: {title: 'Oops!'}
 	},
 	{
 		path: ':login',

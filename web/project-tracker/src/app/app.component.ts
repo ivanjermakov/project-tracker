@@ -6,6 +6,7 @@ import {AuthService} from './service/auth.service';
 import {Title} from '@angular/platform-browser';
 import {TokenProvider} from './provider/token.provider';
 import {UserProvider} from './provider/user.provider';
+import {HttpErrorResponse} from '@angular/common/http';
 
 @Component({
 	selector: 'app-root',
@@ -40,8 +41,12 @@ export class AppComponent {
 					if (url === '/') {
 						this.router.navigate(['/feed']);
 					}
-				}, () => {
-					this.router.navigate(['/auth']);
+				}, (e) => {
+					if (e && !e.ok) {
+						this.router.navigate(['error/500']);
+					} else {
+						this.router.navigate(['/auth']);
+					}
 				});
 			}
 		});
@@ -59,7 +64,7 @@ export class AppComponent {
 		}, 10);
 	}
 
-	private autoLogin(success: () => void, error: () => void): void {
+	private autoLogin(success: () => void, error: (e: HttpErrorResponse) => void): void {
 		this.tokenProvider.token.subscribe(t => {
 			if (t) {
 				this.isLoaded = true;
@@ -70,7 +75,7 @@ export class AppComponent {
 			let token = localStorage.getItem(LOCALSTORAGE_TOKEN_NAME);
 			if (!token) {
 				console.debug('app: no token in localstorage');
-				return error();
+				return error(null);
 			}
 
 			console.debug('app: token from localstorage:  ' + token);
@@ -80,10 +85,10 @@ export class AppComponent {
 				this.userProviderService.setMe(user);
 				this.isLoaded = true;
 				return success();
-			}, error2 => {
+			}, e => {
 				console.debug('app: error validating token');
 				this.tokenProvider.setToken(null);
-				return error();
+				return error(e);
 			});
 		});
 	}
