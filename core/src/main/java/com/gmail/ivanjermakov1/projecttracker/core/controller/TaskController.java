@@ -44,7 +44,10 @@ public class TaskController {
 	                         @PageableDefault(direction = Sort.Direction.DESC, sort = {"opened"}) Pageable pageable) throws NoSuchEntityException, AuthorizationException {
 		User user = userService.validate(token);
 		
-		return Mapper.mapAll(taskService.all(user, projectId, pageable), TaskDto.class).stream().map(TaskDto::compute).collect(Collectors.toList());
+		return Mapper.mapAll(taskService.all(user, projectId, pageable), TaskDto.class)
+				.stream()
+				.map(TaskDto::compute)
+				.collect(Collectors.toList());
 	}
 	
 	@GetMapping("owned")

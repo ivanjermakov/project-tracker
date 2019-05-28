@@ -21,4 +21,16 @@ public class ActivityDto {
 	public ActivityDto() {
 	}
 	
+	public TaskDto getTask() {
+		return task;
+	}
+	
+	public void setId(Long id) {
+		this.id = id;
+	}
+	
+	public void setTask(TaskDto task) {
+		this.task = task;
+	}
+	
 }

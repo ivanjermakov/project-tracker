@@ -28,25 +28,21 @@ public class TaskDto {
 	public List<TaskDto> subtasks;
 	public Long parentTaskId;
 	
-	public TaskDto() {
-	}
+	public ActivityDto lastActivity;
 	
-	public TaskDto(Long id, ProjectDto project, UserDto creator, TaskType type, Double estimate, Double elapsed, LocalDateTime opened, LocalDate due, String name, String description, List<TaskDto> subtasks) {
-		this.id = id;
-		this.project = project;
-		this.creator = creator;
-		this.type = type;
-		this.estimate = estimate;
-		this.elapsed = elapsed;
-		this.opened = opened;
-		this.due = due;
-		this.name = name;
-		this.description = description;
-		this.subtasks = subtasks;
+	public TaskDto() {
 	}
 	
 	public void setParentTaskId(Long parentTaskId) {
 		this.parentTaskId = parentTaskId;
+	}
+	
+	public ActivityDto getLastActivity() {
+		return lastActivity;
+	}
+	
+	public void setLastActivity(ActivityDto lastActivity) {
+		this.lastActivity = lastActivity;
 	}
 	
 	public TaskDto compute() {

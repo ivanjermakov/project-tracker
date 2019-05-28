@@ -1,6 +1,8 @@
 package com.gmail.ivanjermakov1.projecttracker.core.util;
 
+import com.gmail.ivanjermakov1.projecttracker.core.dto.ActivityDto;
 import com.gmail.ivanjermakov1.projecttracker.core.dto.TaskDto;
+import com.gmail.ivanjermakov1.projecttracker.core.entity.Activity;
 import com.gmail.ivanjermakov1.projecttracker.core.entity.Task;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
@@ -19,11 +21,22 @@ public class Mapper {
 				.getConfiguration()
 				.setFieldMatchingEnabled(true)
 				.setSkipNullEnabled(false)
-				.setMatchingStrategy(MatchingStrategies.LOOSE);
+				.setMatchingStrategy(MatchingStrategies.LOOSE)
+				.setAmbiguityIgnored(true);
 		
 		modelMapper
 				.createTypeMap(Task.class, TaskDto.class)
-				.addMapping(s -> s.getParent().getId(), TaskDto::setParentTaskId);
+				.addMappings(mapper -> {
+					mapper.map(s -> s.getParent().getId(), TaskDto::setParentTaskId);
+					mapper.skip((TaskDto destination, TaskDto value) -> destination.getLastActivity().setTask(value));
+				});
+		
+		modelMapper
+				.createTypeMap(Activity.class, ActivityDto.class)
+				.setPostConverter(context -> {
+					context.getDestination().getTask().setLastActivity(null);
+					return context.getDestination();
+				});
 	}
 	
 	public static <S, T> T map(S source, Class<T> targetClass) {

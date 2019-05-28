@@ -66,6 +66,9 @@ public class Task {
 	@OneToMany(mappedBy = "task", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Activity> activities;
 	
+	@Transient
+	private Activity lastActivity;
+	
 	public Task() {
 	}
 	
@@ -89,6 +92,8 @@ public class Task {
 				.stream()
 				.mapToDouble(a -> a.getElapsed() != null ? a.getElapsed() : 0d)
 				.sum();
+		
+		lastActivity = activities.stream().findFirst().orElse(null);
 	}
 	
 	public Long getId() {
@@ -185,6 +190,14 @@ public class Task {
 	
 	public void setActivities(List<Activity> activities) {
 		this.activities = activities;
+	}
+	
+	public Activity getLastActivity() {
+		return lastActivity;
+	}
+	
+	public void setLastActivity(Activity lastActivity) {
+		this.lastActivity = lastActivity;
 	}
 	
 }
