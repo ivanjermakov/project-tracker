@@ -23,18 +23,6 @@ export class TasksTableComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		this.app.onLoad(() => {
-			this.tokenProvider.token.subscribe(token => {
-				this.tasks.forEach(t => {
-					this.activityService.getLastByTask(token, t.id).subscribe(activity => {
-						t.lastActivity = activity;
-					}, error => {
-						console.log('error handled');
-						t.lastActivity = null;
-					});
-				});
-			});
-		});
 	}
 
 	formatDate(date: Date): string {

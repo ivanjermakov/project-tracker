@@ -74,9 +74,6 @@ export class TaskComponent implements OnInit {
 							this.activityService.allByTask(token, this.task.id, new Pageable(0, ACTIVITIES_IN_LIST)).subscribe(activities => {
 								this.activities = activities;
 							});
-							this.activityService.getLastByTask(token, this.task.id).subscribe(activity => {
-								this.lastActivity = activity;
-							});
 						});
 					});
 				});
