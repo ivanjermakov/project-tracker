@@ -14,6 +14,12 @@ ext {
     springfoxVersion = '2.9.2'
 }
 
+jar {
+    manifest {
+        attributes 'Main-Class': 'com.gmail.ivanjermakov1.projecttracker.core.SpringBootConfig'
+    }
+}
+
 dependencies {
     compile group: 'javax.mail', name: 'mail', version: '1.4'
     compile "org.springframework.boot:spring-boot-starter-web:$springVersion"
