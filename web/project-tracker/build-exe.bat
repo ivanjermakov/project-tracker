@@ -1,0 +1,1 @@
+electron-packager . project-tracker --platform=win32 --arch=x64 --overwrite

@@ -4,7 +4,8 @@ const url = require('url');
 let win;
 
 function createWindow() {
-	win = new BrowserWindow({});
+	win = new BrowserWindow({icon: path.join(__dirname, '/src/assets/icon/project-tracker.ico')});
+	// win = new BrowserWindow();
 	// load the dist folder from Angular
 	win.loadURL(url.format({
 		pathname: path.join(__dirname, 'dist/project-tracker/index.html'),
@@ -13,7 +14,7 @@ function createWindow() {
 	}));
 	win.maximize();
 	// Open the DevTools optionally:
-	win.webContents.openDevTools();
+	// win.webContents.openDevTools();
 	win.on('closed', () => {
 		win = null;
 	})

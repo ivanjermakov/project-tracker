@@ -9,9 +9,11 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "electron": "electron .",
-    "electron-build": "ng build --prod && electron ."
+    "electron-build": "ng build --prod && electron .",
+    "electron-exe": "electron-packager . --platform=win32 --arch=x64 --overwrite --icon=src/assets/icon/project-tracker.ico"
   },
   "main": "main.js",
+  "homepage": "localhost:4200",
   "private": true,
   "dependencies": {
     "@angular/animations": "~7.2.0",
