@@ -1,11 +1,11 @@
 <div class="header-container">
-	<img class="logo" alt="" *ngIf="LOGO_BW_SRC" [src]="LOGO_BW_SRC" [routerLink]="'/'">
-	<div class="search">
-		<input type="text" placeholder="global search">
-	</div>
-	<div class="right" *ngIf="me">
-		<div class="tab" [routerLink]="'/feed'">Feed</div>
-		<div class="tab" [routerLink]="'/tasks'">Tasks</div>
-		<div class="tab" [routerLink]="'/' + me.login">Profile</div>
-	</div>
+  <img class="logo" alt="" *ngIf="LOGO_BW_SRC" [src]="LOGO_BW_SRC" [routerLink]="'/'">
+  <!--	<div class="search">-->
+  <!--		<input type="text" placeholder="global search">-->
+  <!--	</div>-->
+  <div class="right" *ngIf="me">
+    <div class="tab" [routerLink]="'/feed'">Feed</div>
+    <div class="tab" [routerLink]="'/tasks'">Tasks</div>
+    <div class="tab" [routerLink]="'/' + me.login">Profile</div>
+  </div>
 </div>
