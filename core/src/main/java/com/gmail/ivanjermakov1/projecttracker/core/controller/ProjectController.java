@@ -81,4 +81,14 @@ public class ProjectController {
 		projectService.delete(user, projectId);
 	}
 	
+	@GetMapping("find")
+	public List<ProjectDto> find(@RequestHeader("token") String token,
+	                             @RequestParam("search") String search,
+	                             @PageableDefault(direction = Sort.Direction.DESC, sort = "created") Pageable pageable) throws NoSuchEntityException {
+		User user = userService.validate(token);
+		
+		if (search.trim().isEmpty()) return all(token, pageable);
+		return Mapper.mapAll(projectService.find(user, search, pageable), ProjectDto.class);
+	}
+	
 }

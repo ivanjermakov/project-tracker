@@ -23,4 +23,12 @@ public interface ProjectRepository extends CrudRepository<Project, Long> {
 			"where u.userCredentials.login = :login and i.name = :name")
 	Optional<Project> findByLoginAndName(@Param("login") String login, @Param("name") String name);
 	
+	@Query("select p from Project p join p.user u join p.projectInfo i " +
+			"where u = :user and i.name like :search")
+	List<Project> findContaining(@Param("user") User user, @Param("search") String search, Pageable pageable);
+	
+	default List<Project> find(User user, String search, Pageable pageable) {
+		return findContaining(user, '%' + search + '%', pageable);
+	}
+	
 }

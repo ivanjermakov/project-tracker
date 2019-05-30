@@ -103,4 +103,8 @@ public class ProjectService {
 		projectRepository.delete(project);
 	}
 	
+	public List<Project> find(User user, String search, Pageable pageable) {
+		return projectRepository.find(user, search, pageable);
+	}
+	
 }
