@@ -10,7 +10,7 @@
     "e2e": "ng e2e",
     "electron": "electron .",
     "electron-build": "ng build --prod && electron .",
-    "electron-exe": "electron-packager . --platform=win32 --arch=x64 --overwrite --icon=src/assets/icon/project-tracker.ico"
+    "electron-exe": "ng build --prod && electron-packager . --platform=win32 --arch=x64 --overwrite --icon=src/assets/icon/project-tracker.ico"
   },
   "main": "main.js",
   "homepage": "localhost:4200",
