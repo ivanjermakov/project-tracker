@@ -7,7 +7,6 @@ import {UrlService} from '../../../service/url.service';
 import {AppComponent} from '../../../app.component';
 import {ProfileService} from '../../../service/profile.service';
 import {TokenProvider} from '../../../provider/token.provider';
-import {UserProvider} from '../../../provider/user.provider';
 import {TimeService} from '../../../service/time.service';
 
 @Component({
@@ -29,7 +28,6 @@ export class ProfileComponent implements OnInit {
 		private app: AppComponent,
 		private profileService: ProfileService,
 		private tokenProvider: TokenProvider,
-		private userProvider: UserProvider,
 		private route: ActivatedRoute,
 		private router: Router,
 		private titleService: Title

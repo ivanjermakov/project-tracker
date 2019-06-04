@@ -5,7 +5,6 @@ import {UrlService} from './service/url.service';
 import {AuthService} from './service/auth.service';
 import {Title} from '@angular/platform-browser';
 import {TokenProvider} from './provider/token.provider';
-import {UserProvider} from './provider/user.provider';
 import {HttpErrorResponse} from '@angular/common/http';
 
 @Component({
@@ -23,7 +22,6 @@ export class AppComponent {
 		private titleService: Title,
 		private authService: AuthService,
 		private tokenProvider: TokenProvider,
-		private userProviderService: UserProvider,
 		private urlService: UrlService
 	) {
 		console.debug('app initiation');
@@ -82,7 +80,6 @@ export class AppComponent {
 			this.authService.validate(token).subscribe(user => {
 				console.debug('app: received \'me\'', user);
 				this.tokenProvider.setToken(token);
-				this.userProviderService.setMe(user);
 				this.isLoaded = true;
 				return success();
 			}, e => {

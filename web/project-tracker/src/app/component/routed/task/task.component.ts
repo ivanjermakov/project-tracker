@@ -15,7 +15,6 @@ import {Pageable} from '../../../dto/Pageable';
 import {ACTIVITIES_IN_LIST} from '../../../../globals';
 import {Activity} from '../../../dto/Activity';
 import {TokenProvider} from '../../../provider/token.provider';
-import {UserProvider} from '../../../provider/user.provider';
 
 @Component({
 	selector: 'app-task',
@@ -48,7 +47,6 @@ export class TaskComponent implements OnInit {
 		private taskService: TaskService,
 		private activityService: ActivityService,
 		private tokenProvider: TokenProvider,
-		private userProvider: UserProvider,
 		private authService: AuthService,
 		private titleService: Title
 	) {
@@ -57,23 +55,23 @@ export class TaskComponent implements OnInit {
 	ngOnInit() {
 		this.app.onLoad(() => {
 			console.debug('task initiation');
-			this.userProvider.me.subscribe(me => {
-				this.me = me;
-				this.route.params.subscribe(params => {
-					console.debug('params', params);
-					this.tokenProvider.token.subscribe(token => {
-						this.taskService.get(token, params['id']).subscribe(task => {
-							this.task = task;
-							console.debug(task);
-							this.titleService.setTitle(`#${task.id} ${task.name}`);
-							if (task.parentTaskId) {
-								this.taskService.get(token, task.parentTaskId).subscribe(parentTask => {
-									this.parentTask = parentTask;
-								});
-							}
-							this.activityService.allByTask(token, this.task.id, new Pageable(0, ACTIVITIES_IN_LIST)).subscribe(activities => {
-								this.activities = activities;
+			this.route.params.subscribe(params => {
+				console.debug('params', params);
+				this.tokenProvider.token.subscribe(token => {
+					this.authService.validate(token).subscribe(me => {
+						this.me = me;
+					});
+					this.taskService.get(token, params['id']).subscribe(task => {
+						this.task = task;
+						console.debug(task);
+						this.titleService.setTitle(`#${task.id} ${task.name}`);
+						if (task.parentTaskId) {
+							this.taskService.get(token, task.parentTaskId).subscribe(parentTask => {
+								this.parentTask = parentTask;
 							});
+						}
+						this.activityService.allByTask(token, this.task.id, new Pageable(0, ACTIVITIES_IN_LIST)).subscribe(activities => {
+							this.activities = activities;
 						});
 					});
 				});

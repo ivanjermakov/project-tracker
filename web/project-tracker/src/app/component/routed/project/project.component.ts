@@ -15,7 +15,6 @@ import {TASKS_IN_TABLE} from '../../../../globals';
 import {TaskService} from '../../../service/task.service';
 import {Title} from '@angular/platform-browser';
 import {ArrayService} from '../../../service/array.service';
-import {UserProvider} from '../../../provider/user.provider';
 import {TokenProvider} from '../../../provider/token.provider';
 import {ErrorService} from '../../../service/error.service';
 
@@ -45,7 +44,6 @@ export class ProjectComponent implements OnInit {
 		private projectService: ProjectService,
 		private taskService: TaskService,
 		private tokenProvider: TokenProvider,
-		private userProvider: UserProvider,
 		private authService: AuthService,
 		private titleService: Title,
 		private arrayService: ArrayService,
@@ -56,22 +54,22 @@ export class ProjectComponent implements OnInit {
 	ngOnInit() {
 		this.app.onLoad(() => {
 			console.debug('project initiation');
-			this.userProvider.me.subscribe(me => {
-				this.me = me;
-				this.route.params.subscribe(params => {
-					console.debug('params', params);
-					this.tokenProvider.token.subscribe(token => {
-						this.projectService.get(token, params['login'], params['name']).subscribe(project => {
-							this.project = project;
-							console.debug('project: ', this.project);
-							this.mine = this.project.user.id === this.me.id;
-							this.titleService.setTitle(this.project.name);
-							this.taskService.all(token, project.id, new Pageable(0, TASKS_IN_TABLE)).subscribe(tasks => {
-								// show only primary tasks (that does not have parent task above)
-								this.arrayService.filter(tasks, t => !t.parentTaskId, tasks => {
-									this.tasks = tasks;
-									console.debug(this.tasks);
-								});
+			this.route.params.subscribe(params => {
+				console.debug('params', params);
+				this.tokenProvider.token.subscribe(token => {
+					this.authService.validate(token).subscribe(me => {
+						this.me = me;
+					});
+					this.projectService.get(token, params['login'], params['name']).subscribe(project => {
+						this.project = project;
+						console.debug('project: ', this.project);
+						this.mine = this.project.user.id === this.me.id;
+						this.titleService.setTitle(this.project.name);
+						this.taskService.all(token, project.id, new Pageable(0, TASKS_IN_TABLE)).subscribe(tasks => {
+							// show only primary tasks (that does not have parent task above)
+							this.arrayService.filter(tasks, t => !t.parentTaskId, tasks => {
+								this.tasks = tasks;
+								console.debug(this.tasks);
 							});
 						});
 					});
