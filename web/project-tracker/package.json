@@ -13,7 +13,6 @@
     "electron-exe": "ng build --prod && electron-packager . --platform=win32 --arch=x64 --overwrite --icon=src/assets/icon/project-tracker.ico"
   },
   "main": "main.js",
-  "homepage": "localhost:4200",
   "private": true,
   "dependencies": {
     "@angular/animations": "~7.2.0",
