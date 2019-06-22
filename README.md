@@ -16,13 +16,14 @@ Project and issue tracking management system
     
 ### Setup
 1. `git clone https://github.com/ivanjermakov/project-tracker.git`
-2. `gradle build`
-3. Execute `database.sql` on previously created PSQL database.
-4. Fill next properties in `application.properties`:
+2. Execute `database.sql` on previously created PSQL database.
+3. Fill next properties in `application.properties`:
 
         spring.datasource.url=
         spring.datasource.username=
         spring.datasource.password=
+
+4. `gradle build`
 
 ### Run
 Web application will start on `:8080` port.
