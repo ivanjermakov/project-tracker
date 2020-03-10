@@ -2,151 +2,151 @@
 
   .content {
 
-    .back-container, .name-container, .info-container, .subtasks-container, .activities-container {
-      padding: 10px;
-    }
+	.back-container, .name-container, .info-container, .subtasks-container, .activities-container {
+	  padding: 10px;
+	}
 
-    .back-container {
-      display: flex;
-      align-items: center;
+	.back-container {
+	  display: flex;
+	  align-items: center;
 
-      cursor: pointer;
+	  cursor: pointer;
 
-      i {
-        padding: 4px;
-        color: var(--gray);
-      }
+	  i {
+		padding: 4px;
+		color: var(--gray);
+	  }
 
-      .text {
-        padding: 4px;
-        color: var(--gray);
-      }
-    }
+	  .text {
+		padding: 4px;
+		color: var(--gray);
+	  }
+	}
 
-    .back-container:hover {
-      i, .text {
-        color: black;
-      }
-    }
+	.back-container:hover {
+	  i, .text {
+		color: black;
+	  }
+	}
 
-    .name-container {
-      display: flex;
-      align-items: center;
+	.name-container {
+	  display: flex;
+	  align-items: center;
 
-      .heading {
-        padding: 4px;
-        font-weight: bold;
-      }
+	  .heading {
+		padding: 4px;
+		font-weight: bold;
+	  }
 
-      .edit {
-        margin: 2px;
+	  .edit {
+		margin: 2px;
 
-        i {
-          color: var(--gray);
-          font-size: 20px;
-          padding: 4px;
-          cursor: pointer
-        }
+		i {
+		  color: var(--gray);
+		  font-size: 20px;
+		  padding: 4px;
+		  cursor: pointer
+		}
 
-        i:hover {
-          color: var(--mainblue);
-        }
-      }
+		i:hover {
+		  color: var(--mainblue);
+		}
+	  }
 
-      .opened {
-        margin-left: auto;
+	  .opened {
+		margin-left: auto;
 
-        .text {
-          font-size: 20px;
-          color: var(--gray);
-        }
-      }
-    }
+		.text {
+		  font-size: 20px;
+		  color: var(--gray);
+		}
+	  }
+	}
 
-    .info-container {
-      display: flex;
-      flex-direction: column;
+	.info-container {
+	  display: flex;
+	  flex-direction: column;
 
-      div {
-        display: flex;
-        align-items: center;
+	  div {
+		display: flex;
+		align-items: center;
 
-        padding: 2px;
+		padding: 2px;
 
-        .text, .pre {
-          font-size: 20px;
-        }
-      }
+		.text, .pre {
+		  font-size: 20px;
+		}
+	  }
 
-      .linkable {
-        cursor: pointer;
-      }
+	  .linkable {
+		cursor: pointer;
+	  }
 
-      .linkable:hover {
+	  .linkable:hover {
 
-        .text {
-          color: var(--darkblue);
-          text-decoration: underline;
-        }
-      }
+		.text {
+		  color: var(--darkblue);
+		  text-decoration: underline;
+		}
+	  }
 
-    }
+	}
 
-    .subtasks-container {
-      display: flex;
-      flex-direction: column;
+	.subtasks-container {
+	  display: flex;
+	  flex-direction: column;
 
-      .subtasks-header {
-        display: flex;
-        align-items: center;
+	  .subtasks-header {
+		display: flex;
+		align-items: center;
 
-        .text {
-          font-size: 20px;
-          color: var(--gray)
-        }
+		.text {
+		  font-size: 20px;
+		  color: var(--gray)
+		}
 
-        .new-subtask-button {
-          margin: 0 8px;
+		.new-subtask-button {
+		  margin: 0 8px;
 
-          i {
-            font-size: 18px;
-          }
-        }
-      }
+		  i {
+			font-size: 18px;
+		  }
+		}
+	  }
 
-      .no-subtasks {
-        font-size: 20px;
-        font-style: italic;
-      }
-    }
+	  .no-subtasks {
+		font-size: 20px;
+		font-style: italic;
+	  }
+	}
 
-    .activities-container {
-      display: flex;
-      flex-direction: column;
+	.activities-container {
+	  display: flex;
+	  flex-direction: column;
 
-      .activities-header {
-        display: flex;
-        align-items: center;
+	  .activities-header {
+		display: flex;
+		align-items: center;
 
-        .text {
-          font-size: 20px;
-          color: var(--gray)
-        }
+		.text {
+		  font-size: 20px;
+		  color: var(--gray)
+		}
 
-        .new-activity-button {
-          margin: 0 8px;
+		.new-activity-button {
+		  margin: 0 8px;
 
-          i {
-            font-size: 18px;
-          }
-        }
-      }
+		  i {
+			font-size: 18px;
+		  }
+		}
+	  }
 
-      .no-activities {
-        font-size: 20px;
-        font-style: italic;
-      }
-    }
+	  .no-activities {
+		font-size: 20px;
+		font-style: italic;
+	  }
+	}
 
   }
 }

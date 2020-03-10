@@ -6,22 +6,22 @@
 
   .is-open-status {
 
-    i {
-      font-size: 20px;
-      padding: 4px;
-    }
+	i {
+	  font-size: 20px;
+	  padding: 4px;
+	}
 
-    .public-wrapper {
-      color: var(--public-lock);
-    }
+	.public-wrapper {
+	  color: var(--public-lock);
+	}
 
-    .private-wrapper {
-      color: var(--private-lock);
-    }
+	.private-wrapper {
+	  color: var(--private-lock);
+	}
   }
 
   .text {
-    margin: 0 1px;
+	margin: 0 1px;
   }
 }
 

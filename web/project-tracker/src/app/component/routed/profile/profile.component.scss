@@ -2,82 +2,82 @@
 
   .profile {
 
-    .header-container {
-      background: url('../../../../assets/header/project-header.jpg');
-      background-size: cover;
+	.header-container {
+	  background: url('../../../../assets/header/project-header.jpg');
+	  background-size: cover;
 
-      .header {
-        display: flex;
-        align-items: flex-end;
+	  .header {
+		display: flex;
+		align-items: flex-end;
 
-        padding: 200px 15px 15px 15px;
-        background: rgba(255, 255, 255, 0.7);
+		padding: 200px 15px 15px 15px;
+		background: rgba(255, 255, 255, 0.7);
 
-        .name-container {
-          display: flex;
-          flex-direction: column;
+		.name-container {
+		  display: flex;
+		  flex-direction: column;
 
-          .name {
-            .text {
-              font-size: 26px;
-            }
-          }
+		  .name {
+			.text {
+			  font-size: 26px;
+			}
+		  }
 
-          .login {
-            .text {
-              font-size: 18px;
-              color: var(--gray);
-            }
-          }
-        }
+		  .login {
+			.text {
+			  font-size: 18px;
+			  color: var(--gray);
+			}
+		  }
+		}
 
-        .joined {
-          margin-left: auto;
+		.joined {
+		  margin-left: auto;
 
-          .text {
-            margin: 4px;
+		  .text {
+			margin: 4px;
 
-            font-size: 18px;
-            color: var(--gray);
-          }
-        }
-      }
+			font-size: 18px;
+			color: var(--gray);
+		  }
+		}
+	  }
 
-      .menu {
-        display: flex;
-        align-items: stretch;
-        justify-content: space-between;
+	  .menu {
+		display: flex;
+		align-items: stretch;
+		justify-content: space-between;
 
-        background: rgba(255, 255, 255, 0.7);
+		background: rgba(255, 255, 255, 0.7);
 
-        .tab {
-          width: 100%;
+		.tab {
+		  width: 100%;
 
-          border-top: transparent solid 4px;
-          border-radius: 3px 3px 0 0;
+		  border-top: transparent solid 4px;
+		  border-radius: 3px 3px 0 0;
 
-          cursor: pointer;
+		  cursor: pointer;
 
-          transition: background-color 100ms, border-top-color 100ms;
+		  transition: background-color 100ms, border-top-color 100ms;
 
-          .text {
-            padding: 6px;
-            text-align: center;
+		  .text {
+			padding: 6px;
+			text-align: center;
 
-            color: var(--gray);
-          }
-        }
+			color: var(--gray);
+		  }
+		}
 
-        .active {
-          border-top: var(--mainblue) solid 4px;
-          background: white;
+		.active {
+		  border-top: var(--mainblue) solid 4px;
+		  background: white;
 
-          .text {
-            color: black;
-          }
-        }
-      }
-    }
+		  .text {
+			color: black;
+		  }
+		}
+	  }
+	}
   }
 }
 

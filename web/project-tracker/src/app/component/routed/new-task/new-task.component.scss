@@ -1,62 +1,62 @@
 .content-container {
   .content {
-    display: flex;
-    flex-direction: column;
+	display: flex;
+	flex-direction: column;
 
-    padding: 10px;
+	padding: 10px;
 
-    .heading {
-      margin: 0 10%;
-    }
+	.heading {
+	  margin: 0 10%;
+	}
 
-    .task-form {
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
+	.task-form {
+	  display: flex;
+	  flex-direction: column;
+	  justify-content: flex-start;
 
-      margin: 0 10%;
+	  margin: 0 10%;
 
-      .task-type-wrapper, .name-wrapper, .description-wrapper, .due-wrapper, .estimate-wrapper {
-        margin: 10px;
-      }
+	  .task-type-wrapper, .name-wrapper, .description-wrapper, .due-wrapper, .estimate-wrapper {
+		margin: 10px;
+	  }
 
-      .task-type-wrapper {
+	  .task-type-wrapper {
 
-        .select-wrapper {
-          display: flex;
-          padding: 3px;
-        }
-      }
+		.select-wrapper {
+		  display: flex;
+		  padding: 3px;
+		}
+	  }
 
-      .name-wrapper {
+	  .name-wrapper {
 
-        input {
-          width: available;
-          max-width: 400px;
-        }
-      }
+		input {
+		  width: available;
+		  max-width: 400px;
+		}
+	  }
 
-      .due-wrapper {
+	  .due-wrapper {
 
-      }
+	  }
 
-      .estimate-wrapper {
+	  .estimate-wrapper {
 
-        input {
-          width: 100px;
-          text-align: right;
-        }
-      }
+		input {
+		  width: 100px;
+		  text-align: right;
+		}
+	  }
 
-      .description-wrapper {
-        input {
-          width: 100%;
-        }
-      }
+	  .description-wrapper {
+		input {
+		  width: 100%;
+		}
+	  }
 
-      button {
-        margin: 10px;
-      }
-    }
+	  button {
+		margin: 10px;
+	  }
+	}
   }
 }

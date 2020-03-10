@@ -1,91 +1,91 @@
 .content-container {
   .content {
-    display: flex;
-    flex-direction: column;
+	display: flex;
+	flex-direction: column;
 
-    padding: 10px;
+	padding: 10px;
 
-    .heading {
-      margin: 0 10%;
-    }
+	.heading {
+	  margin: 0 10%;
+	}
 
-    .project-form {
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
+	.project-form {
+	  display: flex;
+	  flex-direction: column;
+	  justify-content: flex-start;
 
-      margin: 0 10%;
+	  margin: 0 10%;
 
-      .name-wrapper, .description-wrapper {
-        margin: 10px;
-      }
+	  .name-wrapper, .description-wrapper {
+		margin: 10px;
+	  }
 
-      .description-wrapper {
-        input {
-          width: 100%;
-        }
-      }
+	  .description-wrapper {
+		input {
+		  width: 100%;
+		}
+	  }
 
-      .public-private {
-        display: flex;
-        flex-direction: column;
+	  .public-private {
+		display: flex;
+		flex-direction: column;
 
-        margin: 10px;
+		margin: 10px;
 
-        .public-wrapper, .private-wrapper {
-          display: grid;
-          grid-template-columns: 40px auto;
-          grid-template-rows: auto auto;
+		.public-wrapper, .private-wrapper {
+		  display: grid;
+		  grid-template-columns: 40px auto;
+		  grid-template-rows: auto auto;
 
-          align-items: center;
+		  align-items: center;
 
-          transition: border 100ms;
+		  transition: border 100ms;
 
-          width: max-content;
+		  width: max-content;
 
-          padding-right: 4px;
-          border-radius: 2px;
+		  padding-right: 4px;
+		  border-radius: 2px;
 
-          cursor: pointer;
+		  cursor: pointer;
 
-          i {
-            grid-column: 1/2;
-            grid-row: 1/3;
+		  i {
+			grid-column: 1/2;
+			grid-row: 1/3;
 
 
-            justify-self: center;
-          }
+			justify-self: center;
+		  }
 
-          .text {
-            grid-column: 2/3;
-            grid-row: 1/2;
-          }
+		  .text {
+			grid-column: 2/3;
+			grid-row: 1/2;
+		  }
 
-          .description {
-            grid-column: 2/3;
-            grid-row: 2/3;
+		  .description {
+			grid-column: 2/3;
+			grid-row: 2/3;
 
-            font-size: 18px;
-          }
+			font-size: 18px;
+		  }
 
-          .public {
-            color: var(--public-lock);
-          }
+		  .public {
+			color: var(--public-lock);
+		  }
 
-          .private {
-            color: var(--private-lock);
-          }
-        }
+		  .private {
+			color: var(--private-lock);
+		  }
+		}
 
-        .selected {
-          border-left: var(--mainblue) solid 4px;
-          background: var(--bright);
-        }
-      }
+		.selected {
+		  border-left: var(--mainblue) solid 4px;
+		  background: var(--bright);
+		}
+	  }
 
-      button {
-        margin: 10px;
-      }
-    }
+	  button {
+		margin: 10px;
+	  }
+	}
   }
 }

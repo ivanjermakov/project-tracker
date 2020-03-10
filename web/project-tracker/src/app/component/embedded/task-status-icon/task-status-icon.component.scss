@@ -7,18 +7,18 @@
   width: 20px;
 
   .open, .completed {
-    color: var(--feature);
+	color: var(--feature);
   }
 
   .suspended {
-    color: var(--issue);
+	color: var(--issue);
   }
 
   .closed {
-    color: var(--bug);
+	color: var(--bug);
   }
 
   .assigned {
-    color: var(--request)
+	color: var(--request)
   }
 }

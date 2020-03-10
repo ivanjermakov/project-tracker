@@ -1,29 +1,29 @@
 <app-header></app-header>
 <div class="content-wrapper" *ngIf="projects && activities && me">
-  <div class="projects">
-    <div class="header">
-      <div class="heading">Projects</div>
-      <button class="new-project-button" [routerLink]="'/project/create'">New</button>
-      <div class="search">
-        <form (ngSubmit)="openFound()">
-          <input type="search" placeholder="Find a project" name="search"
-                 [ngModel]="searchQuery"
-                 (ngModelChange)="changed($event)">
-        </form>
-      </div>
-    </div>
-    <app-feed-project
-      *ngFor="let p of projects"
-      [project]="p"
-      [me]="me">
-    </app-feed-project>
-  </div>
-  <div class="content-container">
-    <div class="content">
-      <div class="activity-container">
-        <div class="heading">Recent activities</div>
-        <app-activity-list [activities]="activities"></app-activity-list>
-      </div>
-    </div>
-  </div>
+	<div class="projects">
+		<div class="header">
+			<div class="heading">Projects</div>
+			<button class="new-project-button" [routerLink]="'/project/create'">New</button>
+			<div class="search">
+				<form (ngSubmit)="openFound()">
+					<input type="search" placeholder="Find a project" name="search"
+					       [ngModel]="searchQuery"
+					       (ngModelChange)="changed($event)">
+				</form>
+			</div>
+		</div>
+		<app-feed-project
+				*ngFor="let p of projects"
+				[project]="p"
+				[me]="me">
+		</app-feed-project>
+	</div>
+	<div class="content-container">
+		<div class="content">
+			<div class="activity-container">
+				<div class="heading">Recent activities</div>
+				<app-activity-list [activities]="activities"></app-activity-list>
+			</div>
+		</div>
+	</div>
 </div>

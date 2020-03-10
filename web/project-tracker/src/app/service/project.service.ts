@@ -8,40 +8,40 @@ import {Pageable} from '../dto/Pageable';
 import {EditProject} from '../dto/EditProject';
 
 @Injectable({
-  providedIn: 'root'
+	providedIn: 'root'
 })
 export class ProjectService {
 
-  constructor(
-    private http: HttpClient
-  ) {
-  }
+	constructor(
+		private http: HttpClient
+	) {
+	}
 
-  create(token: string, newProject: NewProject): Observable<Project> {
-    return this.http.post<Project>(API_URL + 'project/create', newProject, {headers: {token: token}});
-  }
+	create(token: string, newProject: NewProject): Observable<Project> {
+		return this.http.post<Project>(API_URL + 'project/create', newProject, {headers: {token: token}});
+	}
 
-  all(token: string, pageable: Pageable): Observable<Project[]> {
-    return this.http.get<Project[]>(API_URL + 'project/all', {
-      params: pageable.toHttpParams(),
-      headers: {token: token}
-    });
-  }
+	all(token: string, pageable: Pageable): Observable<Project[]> {
+		return this.http.get<Project[]>(API_URL + 'project/all', {
+			params: pageable.toHttpParams(),
+			headers: {token: token}
+		});
+	}
 
-  get(token: string, login: string, name: string): Observable<Project> {
-    return this.http.get<Project>(API_URL + `project/${login}/${name}/get`, {
-      headers: {token: token}
-    });
-  }
+	get(token: string, login: string, name: string): Observable<Project> {
+		return this.http.get<Project>(API_URL + `project/${login}/${name}/get`, {
+			headers: {token: token}
+		});
+	}
 
-  edit(token: string, editProject: EditProject) {
-    return this.http.post<Project>(API_URL + 'project/edit', editProject, {headers: {token: token}});
-  }
+	edit(token: string, editProject: EditProject) {
+		return this.http.post<Project>(API_URL + 'project/edit', editProject, {headers: {token: token}});
+	}
 
-  find(token: string, search: string): Observable<Project[]> {
-    return this.http.get<Project[]>(API_URL + 'project/find', {
-      params: {search: search},
-      headers: {token: token}
-    });
-  }
+	find(token: string, search: string): Observable<Project[]> {
+		return this.http.get<Project[]>(API_URL + 'project/find', {
+			params: {search: search},
+			headers: {token: token}
+		});
+	}
 }
