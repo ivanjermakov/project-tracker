@@ -83,13 +83,13 @@ public class ActivityService {
 		
 		roleService.authorize(user, task.getProject(), UserRole.VIEWER);
 		
-		return activityRepository.findAllByTask(task, pageable);
+		return activityRepository.findAllByTask(task.getId(), pageable);
 	}
 	
 	public List<Activity> allByProject(User user, Long projectId, Pageable pageable) throws AuthorizationException, NoSuchEntityException {
 		Project project = projectService.get(user, projectId);
 		
-		return activityRepository.findAllByProject(project, pageable);
+		return activityRepository.findAllByProject(project.getId(), pageable);
 	}
 	
 	public void delete(User user, Long activityId) throws NoSuchEntityException, AuthorizationException {
