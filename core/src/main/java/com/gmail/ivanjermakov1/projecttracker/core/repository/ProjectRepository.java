@@ -11,24 +11,22 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ProjectRepository extends CrudRepository<Project, Long> {
-	
-	@Query("select p from Project p join p.projectInfo i where p.user.id = :userId and i.name = :name")
-	Optional<Project> findByNameAndUser(@Param("name") String name, @Param("userId") Long userId);
-	
-	Optional<Project> findById(Long id);
-	
-	List<Project> findAllByUser(User user, Pageable pageable);
-	
-	@Query("select p from Project p join p.user u join p.projectInfo i " +
-			"where u.userCredentials.login = :login and i.name = :name")
+
+
+	@Query(value = "select * from find_project_by_name_and_user(:name, :id)", nativeQuery = true)
+	Optional<Project> findByNameAndUser(@Param("name") String name, @Param("id") Long userId);
+
+	@Query(value = "select * from find_all_projects_by_user(:id)", nativeQuery = true)
+	List<Project> findAllByUser(@Param("id") Long userId, Pageable pageable);
+
+	@Query(value = "select * from find_projects_by_login_and_name(:login, :name)", nativeQuery = true)
 	Optional<Project> findByLoginAndName(@Param("login") String login, @Param("name") String name);
-	
-	@Query("select p from Project p join p.user u join p.projectInfo i " +
-			"where u = :user and i.name like :search")
-	List<Project> findContaining(@Param("user") User user, @Param("search") String search, Pageable pageable);
-	
+
+	@Query(value = "select * from find_projects_containing(:id, :search)", nativeQuery = true)
+	List<Project> findContaining(@Param("id") Long userId, @Param("search") String search, Pageable pageable);
+
 	default List<Project> find(User user, String search, Pageable pageable) {
-		return findContaining(user, '%' + search + '%', pageable);
+		return findContaining(user.getId(), '%' + search + '%', pageable);
 	}
-	
+
 }

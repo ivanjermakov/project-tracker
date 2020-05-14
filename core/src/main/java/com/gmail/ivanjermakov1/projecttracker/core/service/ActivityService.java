@@ -104,7 +104,7 @@ public class ActivityService {
 	
 	public List<Activity> allByUser(User user, Pageable pageable) {
 //		TODO: followers visible activities
-		return activityRepository.findAllByUser(user, pageable);
+		return activityRepository.findAllByUser(user.getId(), pageable);
 	}
 	
 }

@@ -78,7 +78,7 @@ public class ProjectService {
 	}
 	
 	public List<Project> all(User user, Pageable pageable) {
-		return projectRepository.findAllByUser(user, pageable);
+		return projectRepository.findAllByUser(user.getId(), pageable);
 	}
 	
 	public Project get(User user, String login, String name) throws NoSuchEntityException, AuthorizationException {
