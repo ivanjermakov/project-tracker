@@ -102,3 +102,15 @@ INSERT INTO public.user_role (id, user_id, project_id, role) VALUES (1, 1, 1, '0
 INSERT INTO public.user_role (id, user_id, project_id, role) VALUES (7, 1, 7, '0');
 INSERT INTO public.user_role (id, user_id, project_id, role) VALUES (18, 1, 18, '0');
 INSERT INTO public.user_role (id, user_id, project_id, role) VALUES (1123, 1, 1129, '0');
+
+--sequence fix
+select setval('activity_id_seq', 100);
+select setval('project_id_seq', 100);
+select setval('project_info_id_seq', 100);
+select setval('task_id_seq', 100);
+select setval('task_info_id_seq', 100);
+select setval('token_id_seq', 100);
+select setval('user_credentials_id_seq', 100);
+select setval('user_id_seq', 100);
+select setval('user_info_id_seq', 100);
+select setval('user_role_id_seq', 100);
