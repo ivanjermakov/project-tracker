@@ -136,6 +136,17 @@ from task t
 where t.creator_id = $1
 $$ language sql;
 
+drop function search_tasks(search_query varchar, project_id bigint);
+create or replace function search_tasks(search_query varchar, project_id bigint) returns setof task as
+$$
+select t
+from task t
+         join task_info i on t.id = i.task_id
+where t.project_id = $2
+  and to_tsvector(concat(i.name, ' ', i.description)) @@ to_tsquery($1)
+$$ language sql;
+
+
 -- token
 drop function find_token_by_token(token varchar);
 create or replace function find_token_by_token(token varchar) returns token as
