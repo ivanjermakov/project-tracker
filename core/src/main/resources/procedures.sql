@@ -129,7 +129,7 @@ order by t.type
 $$ language sql;
 
 drop function find_all_tasks_by_creator(id bigint);
-create or replace function find_all_tasks_by_creator(id bigint) returns setof record as
+create or replace function find_all_tasks_by_creator(id bigint) returns setof task as
 $$
 select t
 from task t
