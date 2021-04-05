@@ -13,7 +13,7 @@ import {RegisterComponent} from './component/routed/register/register.component'
 import {HeaderComponent} from './component/embedded/header/header.component';
 import {FeedProjectComponent} from './component/embedded/feed-project/feed-project.component';
 import {NewProjectComponent} from './component/routed/new-project/new-project.component';
-import {ProfileOverviewComponent} from './component/routed/profile-overview/profile-overview.component';
+import {ProfileProjectsComponent} from './component/routed/profile-projects/profile-projects.component';
 import {ProfileActivityComponent} from './component/routed/profile-activity/profile-activity.component';
 import {ProfileFollowersComponent} from './component/routed/profile-followers/profile-followers.component';
 import {ProfileFollowingComponent} from './component/routed/profile-following/profile-following.component';
@@ -32,6 +32,8 @@ import {ProjectTaskTypeChartComponent} from './component/embedded/data-visualiza
 import {ChartComponent} from './component/embedded/data-visualization/chart/chart.component';
 import {TasksComponent} from './component/routed/tasks/tasks.component';
 import {ErrorComponent} from './component/routed/error/error.component';
+import { ProfileProjectComponent } from './component/embedded/profile-project/profile-project.component';
+import { NotFoundComponent } from './component/embedded/not-found/not-found.component';
 
 @NgModule({
 	declarations: [
@@ -44,7 +46,7 @@ import {ErrorComponent} from './component/routed/error/error.component';
 		HeaderComponent,
 		FeedProjectComponent,
 		NewProjectComponent,
-		ProfileOverviewComponent,
+		ProfileProjectsComponent,
 		ProfileActivityComponent,
 		ProfileFollowersComponent,
 		ProfileFollowingComponent,
@@ -61,7 +63,9 @@ import {ErrorComponent} from './component/routed/error/error.component';
 		ProjectTaskTypeChartComponent,
 		ChartComponent,
 		TasksComponent,
-		ErrorComponent
+		ErrorComponent,
+		ProfileProjectComponent,
+		NotFoundComponent
 	],
 	imports: [
 		BrowserModule,

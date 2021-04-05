@@ -29,9 +29,9 @@
 					</div>
 				</div>
 				<div class="menu">
-					<div class="tab" (click)="changeTab('overview')"
-					     [ngClass]="{'active': tab === 0}">
-						<div class="text">Overview</div>
+					<div class="tab" (click)="changeTab('projects')"
+					     [ngClass]="{'active': tab === 0 || !tab}">
+						<div class="text">Projects</div>
 					</div>
 					<div class="tab" (click)="changeTab('activity')"
 					     [ngClass]="{'active': tab === 1}">

@@ -1,0 +1,17 @@
+.not-found {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  .code {
+	font-weight: 500;
+	font-size: 100px;
+  }
+}
+
+.text {
+  opacity: 0.5;
+  padding: 0;
+  margin: 0;
+}

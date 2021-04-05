@@ -1,0 +1,58 @@
+:host {
+  width: 100%;
+}
+
+.project {
+  display: grid;
+  grid-template-columns: min-content auto;
+  grid-template-rows: repeat(2, auto);
+  align-items: center;
+
+  width: 100%;
+
+  padding: 10px;
+
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  cursor: pointer;
+  transition: border linear .1s;
+
+  .is-open-status {
+	grid-column: 1/2;
+	grid-row: 1/2;
+
+	margin: 5px;
+
+	i {
+	  font-size: 20px;
+	  padding: 4px;
+	}
+
+	.public-wrapper {
+	  color: var(--public-lock);
+	}
+
+	.private-wrapper {
+	  color: var(--private-lock);
+	}
+  }
+
+  .name {
+	grid-column: 2/3;
+	grid-row: 1/2;
+
+	font-weight: 500;
+  }
+
+  .about {
+	grid-column: 1/3;
+	grid-row: 2/3;
+
+	font-size: 18px;
+  }
+
+  &:hover {
+	border-left-color: var(--mainblue);
+	border-right-color: var(--mainblue);
+  }
+}

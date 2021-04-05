@@ -35,6 +35,7 @@ export class ProjectComponent implements OnInit {
 	mine: boolean;
 	editMode: boolean = false;
 	tasks: Task[];
+	noProject = false;
 
 	constructor(
 		private app: AppComponent,
@@ -61,18 +62,21 @@ export class ProjectComponent implements OnInit {
 						this.me = me;
 					});
 					this.projectService.get(token, params['login'], params['name']).subscribe(project => {
-						this.project = project;
-						console.debug('project: ', this.project);
-						this.mine = this.project.user.id === this.me.id;
-						this.titleService.setTitle(this.project.name);
-						this.taskService.all(token, project.id, new Pageable(0, TASKS_IN_TABLE)).subscribe(tasks => {
-							// show only primary tasks (that does not have parent task above)
-							this.arrayService.filter(tasks, t => !t.parentTaskId, tasks => {
-								this.tasks = tasks;
-								console.debug(this.tasks);
+							this.project = project;
+							console.debug('project: ', this.project);
+							this.mine = this.project.user.id === this.me.id;
+							this.titleService.setTitle(this.project.name);
+							this.taskService.all(token, project.id, new Pageable(0, TASKS_IN_TABLE)).subscribe(tasks => {
+								// show only primary tasks (that does not have parent task above)
+								this.arrayService.filter(tasks, t => !t.parentTaskId, tasks => {
+									this.tasks = tasks;
+									console.debug(this.tasks);
+								});
 							});
+						},
+						error => {
+							this.noProject = true;
 						});
-					});
 				});
 			});
 		});

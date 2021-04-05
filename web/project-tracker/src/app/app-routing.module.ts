@@ -8,7 +8,7 @@ import {ProfileComponent} from './component/routed/profile/profile.component';
 import {ProfileActivityComponent} from './component/routed/profile-activity/profile-activity.component';
 import {ProfileFollowersComponent} from './component/routed/profile-followers/profile-followers.component';
 import {ProfileFollowingComponent} from './component/routed/profile-following/profile-following.component';
-import {ProfileOverviewComponent} from './component/routed/profile-overview/profile-overview.component';
+import {ProfileProjectsComponent} from './component/routed/profile-projects/profile-projects.component';
 import {ProjectComponent} from './component/routed/project/project.component';
 import {NewTaskComponent} from './component/routed/new-task/new-task.component';
 import {TaskComponent} from './component/routed/task/task.component';
@@ -54,7 +54,7 @@ const routes: Routes = [
 		data: {title: 'Profile'},
 		children: [
 			{
-				path: 'overview',
+				path: 'projects',
 				redirectTo: '',
 			},
 			{
@@ -71,7 +71,7 @@ const routes: Routes = [
 			},
 			{
 				path: '',
-				component: ProfileOverviewComponent,
+				component: ProfileProjectsComponent,
 			},
 		]
 	},

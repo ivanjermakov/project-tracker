@@ -27,6 +27,12 @@ export class ProjectService {
 			headers: {token: token}
 		});
 	}
+	userAll(token: string, ofLogin: string, pageable: Pageable): Observable<Project[]> {
+		return this.http.get<Project[]>(`${API_URL}project/${ofLogin}/all`, {
+			params: pageable.toHttpParams(),
+			headers: {token: token}
+		});
+	}
 
 	get(token: string, login: string, name: string): Observable<Project> {
 		return this.http.get<Project>(API_URL + `project/${login}/${name}/get`, {
