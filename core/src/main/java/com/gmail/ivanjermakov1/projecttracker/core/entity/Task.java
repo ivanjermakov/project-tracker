@@ -20,10 +20,28 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "task")
 public class Task {
+
+	public Task() {
+	}
+
+	public Task(Project project, Task parent, User creator, TaskType type, Double estimate, Double elapsed, LocalDateTime opened, LocalDate due, TaskInfo taskInfo, List<Task> subtasks, List<Activity> activities) {
+		this.project = project;
+		this.parent = parent;
+		this.creator = creator;
+		this.type = type;
+		this.estimate = estimate;
+		this.elapsed = elapsed;
+		this.opened = opened;
+		this.due = due;
+		this.taskInfo = taskInfo;
+		this.subtasks = subtasks;
+		this.activities = activities;
+	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -70,23 +88,6 @@ public class Task {
 	@Transient
 	private Activity lastActivity;
 
-	public Task() {
-	}
-
-	public Task(Project project, Task parent, User creator, TaskType type, Double estimate, Double elapsed, LocalDateTime opened, LocalDate due, TaskInfo taskInfo, List<Task> subtasks, List<Activity> activities) {
-		this.project = project;
-		this.parent = parent;
-		this.creator = creator;
-		this.type = type;
-		this.estimate = estimate;
-		this.elapsed = elapsed;
-		this.opened = opened;
-		this.due = due;
-		this.taskInfo = taskInfo;
-		this.subtasks = subtasks;
-		this.activities = activities;
-	}
-
 	@PostLoad
 	public void postLoad() {
 		elapsed = activities
@@ -94,7 +95,10 @@ public class Task {
 				.mapToDouble(a -> a.getElapsed() != null ? a.getElapsed() : 0d)
 				.sum();
 
-		lastActivity = activities.stream().max(Comparator.comparing(Activity::getTimestamp)).orElse(null);
+		lastActivity = activities.stream()
+				.filter(a -> Objects.nonNull(a.getTimestamp()))
+				.max(Comparator.comparing(Activity::getTimestamp))
+				.orElse(null);
 	}
 
 	public Long getId() {
