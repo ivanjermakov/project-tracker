@@ -8,6 +8,8 @@ import {AppComponent} from '../../../app.component';
 import {ProfileService} from '../../../service/profile.service';
 import {TokenProvider} from '../../../provider/token.provider';
 import {TimeService} from '../../../service/time.service';
+import {UserService} from '../../../service/user.service';
+import {AuthService} from '../../../service/auth.service';
 
 @Component({
 	selector: 'app-profile',
@@ -20,8 +22,10 @@ import {TimeService} from '../../../service/time.service';
 export class ProfileComponent implements OnInit {
 
 	user: User;
+	me: User;
 	editMode: boolean = false;
 	tab: ProfileTab;
+	followed: boolean;
 
 	constructor(
 		private urlService: UrlService,
@@ -30,7 +34,9 @@ export class ProfileComponent implements OnInit {
 		private tokenProvider: TokenProvider,
 		private route: ActivatedRoute,
 		private router: Router,
-		private titleService: Title
+		private titleService: Title,
+		private userService: UserService,
+		private authService: AuthService
 	) {
 	}
 
@@ -42,8 +48,15 @@ export class ProfileComponent implements OnInit {
 				this.tokenProvider.token.subscribe(token => {
 					this.profileService.get(token, params['login']).subscribe(user => {
 						this.user = user;
-						console.debug('profile user: ', this.user);
-						this.titleService.setTitle(`@${this.user.login}`);
+						this.authService.validate(token).subscribe(me => {
+							this.me = me;
+							console.debug('profile user: ', this.user);
+							this.titleService.setTitle(`@${this.user.login}`);
+
+							this.userService.getFollowing(token, this.me.login).subscribe(following => {
+								this.followed = following.filter(u => u.id === user.id).length > 0;
+							});
+						});
 					});
 					this.tab = this.getCurrentTab();
 					console.debug('tab: ', this.tab);
@@ -65,6 +78,14 @@ export class ProfileComponent implements OnInit {
 	getCurrentTab(): ProfileTab {
 		const tab = ProfileTab[this.router.url.split('/').slice(-1)[0].toUpperCase()];
 		return tab ? tab : ProfileTab.OVERVIEW;
+	}
+
+	follow() {
+		this.tokenProvider.token.subscribe(token => {
+			this.userService.follow(token, this.user.login, !this.followed).subscribe(() => {
+				this.followed = !this.followed;
+			});
+		});
 	}
 
 }

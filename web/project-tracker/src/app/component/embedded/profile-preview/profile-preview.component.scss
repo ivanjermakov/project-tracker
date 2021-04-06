@@ -1,0 +1,23 @@
+.preview {
+  display: flex;
+  align-items: center;
+
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  cursor: pointer;
+  transition: border linear .1s;
+
+  .text {
+	padding: 10px;
+  }
+
+  .login {
+	font-size: 18px;
+	color: var(--gray);
+  }
+
+  &:hover {
+	border-left-color: var(--mainblue);
+	border-right-color: var(--mainblue);
+  }
+}

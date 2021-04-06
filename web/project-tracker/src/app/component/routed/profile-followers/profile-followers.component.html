@@ -1,5 +1,8 @@
 <div class="tab-content">
-	<p>
-		profile-followers works!
-	</p>
+	<div class="profiles">
+		<app-profile-preview *ngFor="let profile of followers"
+		                     [user]="profile"
+		                     [routerLink]="'/' + profile.login">
+		</app-profile-preview>
+	</div>
 </div>

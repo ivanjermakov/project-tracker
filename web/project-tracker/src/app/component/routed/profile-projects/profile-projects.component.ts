@@ -23,7 +23,7 @@ export class ProfileProjectsComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
-		this.route.params.subscribe(params => {
+		this.route.parent.params.subscribe(params => {
 			this.tokenProvider.token.subscribe(token => {
 				this.projectService.userAll(token, params['login'], new Pageable(0, PROJECTS_IN_PROFILE)).subscribe(projects =>
 					this.projects = projects

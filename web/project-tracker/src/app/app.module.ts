@@ -34,6 +34,7 @@ import {TasksComponent} from './component/routed/tasks/tasks.component';
 import {ErrorComponent} from './component/routed/error/error.component';
 import { ProfileProjectComponent } from './component/embedded/profile-project/profile-project.component';
 import { NotFoundComponent } from './component/embedded/not-found/not-found.component';
+import { ProfilePreviewComponent } from './component/embedded/profile-preview/profile-preview.component';
 
 @NgModule({
 	declarations: [
@@ -65,7 +66,8 @@ import { NotFoundComponent } from './component/embedded/not-found/not-found.comp
 		TasksComponent,
 		ErrorComponent,
 		ProfileProjectComponent,
-		NotFoundComponent
+		NotFoundComponent,
+		ProfilePreviewComponent
 	],
 	imports: [
 		BrowserModule,
