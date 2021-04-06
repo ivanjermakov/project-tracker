@@ -1,6 +1,14 @@
 plugins {
     id 'java'
+    id "idea"
     id 'org.springframework.boot' version '2.1.3.RELEASE'
+}
+
+
+idea {
+    module {
+        downloadSources = true
+    }
 }
 
 sourceCompatibility = 1.8

@@ -12,7 +12,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import java.time.LocalDate;
-import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "user", schema = "public")
@@ -32,21 +32,21 @@ public class User {
 	@OneToOne(mappedBy = "user", cascade = {CascadeType.ALL}, orphanRemoval = true)
 	private UserInfo userInfo;
 	
-	@ManyToMany
+	@ManyToMany(cascade = {CascadeType.ALL})
 	@JoinTable(
 			name = "user_follower",
 			joinColumns = @JoinColumn(name = "follower_id"),
 			inverseJoinColumns = @JoinColumn(name = "user_id")
 	)
-	private List<User> followers;
+	private Set<User> followers;
 	
-	@ManyToMany
+	@ManyToMany(cascade = {CascadeType.ALL})
 	@JoinTable(
 			name = "user_follower",
 			joinColumns = @JoinColumn(name = "user_id"),
 			inverseJoinColumns = @JoinColumn(name = "follower_id")
 	)
-	private List<User> followed;
+	private Set<User> following;
 	
 	public User() {
 	}
@@ -87,20 +87,20 @@ public class User {
 		this.userInfo = userInfo;
 	}
 	
-	public List<User> getFollowers() {
+	public Set<User> getFollowers() {
 		return followers;
 	}
 	
-	public void setFollowers(List<User> followers) {
+	public void setFollowers(Set<User> followers) {
 		this.followers = followers;
 	}
 	
-	public List<User> getFollowed() {
-		return followed;
+	public Set<User> getFollowing() {
+		return following;
 	}
 	
-	public void setFollowed(List<User> followed) {
-		this.followed = followed;
+	public void setFollowing(Set<User> followed) {
+		this.following = followed;
 	}
 	
 }
