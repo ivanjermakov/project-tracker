@@ -87,6 +87,8 @@
 				<app-project-task-type-chart [project]="project"></app-project-task-type-chart>
 			</div>
 		</div>
+		<div class="delimiter" *ngIf="!editMode"></div>
+		<app-team *ngIf="!editMode" [project]="project"></app-team>
 	</div>
 </div>
 

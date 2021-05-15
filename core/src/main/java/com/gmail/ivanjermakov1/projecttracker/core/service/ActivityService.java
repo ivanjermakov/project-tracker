@@ -46,7 +46,7 @@ public class ActivityService {
 	public Activity get(User user, Long activityId) throws NoSuchEntityException, AuthorizationException {
 		Activity activity = activityRepository.findById(activityId).orElseThrow(() -> new NoSuchEntityException("no such activity"));
 		
-		roleService.authorize(user, activity.getTask().getProject(), UserRole.VIEWER);
+		roleService.authorize(user, activity.getTask().getProject(), UserRole.MODERATOR);
 		
 		return activity;
 	}
@@ -57,7 +57,7 @@ public class ActivityService {
 		
 		Task task = taskService.get(user, newActivityDto.taskId);
 		
-		roleService.authorize(user, task.getProject(), UserRole.COLLABORATOR);
+		roleService.authorize(user, task.getProject(), UserRole.MEMBER);
 		
 		Activity activity = new Activity(
 				task,
@@ -81,7 +81,7 @@ public class ActivityService {
 	public List<Activity> allByTask(User user, Long taskId, Pageable pageable) throws NoSuchEntityException, AuthorizationException {
 		Task task = taskRepository.findById(taskId).orElseThrow(() -> new NoSuchEntityException("no such task"));
 		
-		roleService.authorize(user, task.getProject(), UserRole.VIEWER);
+		roleService.authorize(user, task.getProject(), UserRole.MODERATOR);
 		
 		return activityRepository.findAllByTask(task, pageable);
 	}
@@ -95,7 +95,7 @@ public class ActivityService {
 	public void delete(User user, Long activityId) throws NoSuchEntityException, AuthorizationException {
 		Activity activity = activityRepository.findById(activityId).orElseThrow(() -> new NoSuchEntityException("no such activity"));
 		
-		if (!(roleService.hasPermission(user, activity.getTask().getProject(), UserRole.COLLABORATOR) ||
+		if (!(roleService.hasPermission(user, activity.getTask().getProject(), UserRole.MEMBER) ||
 				(activity.getTask().getCreator().getId().equals(user.getId()))))
 			throw new AuthorizationException("no permission");
 		

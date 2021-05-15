@@ -68,7 +68,7 @@ public class ProjectService {
 	public Project edit(User user, EditProjectDto editProjectDto) throws NoSuchEntityException, AuthorizationException {
 		Project project = this.projectRepository.findById(editProjectDto.id).orElseThrow(() -> new NoSuchEntityException("no such project to edit"));
 
-		roleService.authorize(user, project, UserRole.COLLABORATOR);
+		roleService.authorize(user, project, UserRole.MEMBER);
 
 		project.setPublic(editProjectDto.isPublic);
 		project.getProjectInfo().setName(editProjectDto.name);
@@ -83,7 +83,7 @@ public class ProjectService {
 
 		Project project = projectRepository.findByLoginAndName(login, name).orElseThrow(() -> noSuchProjectException);
 
-		if (!roleService.hasPermission(user, project, UserRole.VIEWER)) throw noSuchProjectException;
+		if (!roleService.hasPermission(user, project, UserRole.MODERATOR)) throw noSuchProjectException;
 
 		return project;
 	}

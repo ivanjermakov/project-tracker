@@ -35,6 +35,7 @@ import {ErrorComponent} from './component/routed/error/error.component';
 import { ProfileProjectComponent } from './component/embedded/profile-project/profile-project.component';
 import { NotFoundComponent } from './component/embedded/not-found/not-found.component';
 import { ProfilePreviewComponent } from './component/embedded/profile-preview/profile-preview.component';
+import { TeamComponent } from './component/embedded/team/team.component';
 
 @NgModule({
 	declarations: [
@@ -67,7 +68,8 @@ import { ProfilePreviewComponent } from './component/embedded/profile-preview/pr
 		ErrorComponent,
 		ProfileProjectComponent,
 		NotFoundComponent,
-		ProfilePreviewComponent
+		ProfilePreviewComponent,
+		TeamComponent
 	],
 	imports: [
 		BrowserModule,

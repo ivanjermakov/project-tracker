@@ -1,0 +1,22 @@
+<div class="team-container">
+	<div class="team">Team</div>
+	<div class="members">
+		<div class="member" *ngFor="let member of members">
+			<div class="login">@{{member.user.login}}</div>
+			<select [(ngModel)]="member.role" (change)="updateMember(member)" [disabled]="member.role === 'OWNER'">
+				<option *ngFor="let r of roles" [value]="userRole[r]">{{userRole[r].toLowerCase()}}</option>
+			</select>
+			<div class="remove" *ngIf="member.role !== 'OWNER'" (click)="removeMember(member)">
+				<i class="fas fa-times"></i>
+			</div>
+		</div>
+		<div class="add-member">
+			<input type="text" class="login" [(ngModel)]="newMember.login">
+			<select [(ngModel)]="newMember.role">
+				<option *ngFor="let r of roles" [value]="userRole[r]">{{userRole[r].toLowerCase()}}</option>
+			</select>
+			<button (click)="addMember()">Add</button>
+		</div>
+	</div>
+</div>
+

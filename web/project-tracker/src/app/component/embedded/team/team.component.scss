@@ -1,0 +1,49 @@
+.team-container {
+  padding: 10px;
+
+  .team {
+	font-size: 20px;
+	color: var(--gray)
+  }
+
+  .members {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+
+	.member {
+	  display: flex;
+	  align-items: center;
+	  padding-bottom: 10px;
+
+	  .remove {
+		margin-left: 10px;
+		color: var(--gray);
+
+		&:hover {
+		  color: var(--bug);
+		}
+	  }
+	}
+
+	.login {
+	  width: 30%;
+	}
+
+	select {
+	  margin-left: 10px;
+	  padding: 2px;
+	}
+
+	.add-member {
+	  display: flex;
+	  align-items: center;
+
+	  button {
+		margin-left: 10px;
+	  }
+	}
+
+  }
+
+}

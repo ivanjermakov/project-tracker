@@ -54,7 +54,7 @@ public class TaskService {
 	public Task create(User user, NewTaskDto newTaskDto) throws NoSuchEntityException, AuthorizationException {
 		Project project = projectService.get(user, newTaskDto.projectId);
 
-		roleService.authorize(user, project, UserRole.COLLABORATOR);
+		roleService.authorize(user, project, UserRole.MEMBER);
 
 		Task task = new Task(
 				project,
@@ -99,7 +99,7 @@ public class TaskService {
 	public Task edit(User user, EditTaskDto editTaskDto) throws NoSuchEntityException, AuthorizationException {
 		Task task = taskRepository.findById(editTaskDto.id).orElseThrow(() -> new NoSuchEntityException("no such task to edit"));
 
-		roleService.authorize(user, task.getProject(), UserRole.COLLABORATOR);
+		roleService.authorize(user, task.getProject(), UserRole.MEMBER);
 
 		TaskInfo taskInfo = task.getTaskInfo();
 		taskInfo.setName(editTaskDto.name);
@@ -112,7 +112,7 @@ public class TaskService {
 	public void delete(User user, Long taskId) throws NoSuchEntityException, AuthorizationException {
 		Task task = taskRepository.findById(taskId).orElseThrow(() -> new NoSuchEntityException("no such task to edit"));
 
-		roleService.authorize(user, task.getProject(), UserRole.COLLABORATOR);
+		roleService.authorize(user, task.getProject(), UserRole.MEMBER);
 
 		taskRepository.delete(task);
 	}
@@ -120,7 +120,7 @@ public class TaskService {
 	public List<Task> all(User user, Long projectId, Pageable pageable) throws AuthorizationException {
 		Project project = projectRepository.findById(projectId).orElseThrow(() -> new NoSuchElementException("no such project"));
 
-		roleService.authorize(user, project, UserRole.VIEWER);
+		roleService.authorize(user, project, UserRole.MODERATOR);
 
 		return taskRepository.findAllByProject(project, pageable);
 	}
@@ -128,7 +128,7 @@ public class TaskService {
 	public Task get(User user, Long taskId) throws AuthorizationException {
 		Task task = taskRepository.findById(taskId).orElseThrow(() -> new NoSuchElementException("no such task"));
 
-		roleService.authorize(user, task.getProject(), UserRole.VIEWER);
+		roleService.authorize(user, task.getProject(), UserRole.MODERATOR);
 
 		return task;
 	}

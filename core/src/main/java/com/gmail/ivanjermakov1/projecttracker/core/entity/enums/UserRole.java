@@ -5,8 +5,8 @@ package com.gmail.ivanjermakov1.projecttracker.core.entity.enums;
  */
 public enum UserRole {
 	OWNER(10),
-	COLLABORATOR(5),
-	VIEWER(1),
+	MODERATOR(7),
+	MEMBER(5),
 	UNAUTHORIZED(0);
 	
 	public Integer level;
