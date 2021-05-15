@@ -6,7 +6,7 @@
 			<select [(ngModel)]="member.role" (change)="updateMember(member)" [disabled]="member.role === 'OWNER'">
 				<option *ngFor="let r of roles" [value]="userRole[r]">{{userRole[r].toLowerCase()}}</option>
 			</select>
-			<div class="remove" *ngIf="member.role !== 'OWNER'" (click)="removeMember(member)">
+			<div class="remove" *ngIf="member.role !== 'OWNER' && member.user.login !== me.login" (click)="removeMember(member)">
 				<i class="fas fa-times"></i>
 			</div>
 		</div>

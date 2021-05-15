@@ -16,8 +16,9 @@ public interface ProjectRepository extends CrudRepository<Project, Long> {
 	Optional<Project> findByNameAndUser(@Param("name") String name, @Param("userId") Long userId);
 	
 	Optional<Project> findById(Long id);
-	
-	List<Project> findAllByUser(User user, Pageable pageable);
+
+	@Query("select p from Project p, Role r where r.project = p and r.user.id = :userId")
+	List<Project> findAllByUserABCD(@Param("userId") Long userId, Pageable pageable);
 	
 	@Query("select p from Project p join p.user u join p.projectInfo i " +
 			"where u.userCredentials.login = :login and i.name = :name")

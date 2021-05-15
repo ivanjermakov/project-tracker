@@ -120,7 +120,7 @@ public class TaskService {
 	public List<Task> all(User user, Long projectId, Pageable pageable) throws AuthorizationException {
 		Project project = projectRepository.findById(projectId).orElseThrow(() -> new NoSuchElementException("no such project"));
 
-		roleService.authorize(user, project, UserRole.MODERATOR);
+		roleService.authorize(user, project, UserRole.MEMBER);
 
 		return taskRepository.findAllByProject(project, pageable);
 	}
@@ -128,7 +128,7 @@ public class TaskService {
 	public Task get(User user, Long taskId) throws AuthorizationException {
 		Task task = taskRepository.findById(taskId).orElseThrow(() -> new NoSuchElementException("no such task"));
 
-		roleService.authorize(user, task.getProject(), UserRole.MODERATOR);
+		roleService.authorize(user, task.getProject(), UserRole.MEMBER);
 
 		return task;
 	}

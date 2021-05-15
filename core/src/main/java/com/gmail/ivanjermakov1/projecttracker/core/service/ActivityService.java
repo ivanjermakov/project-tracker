@@ -81,7 +81,7 @@ public class ActivityService {
 	public List<Activity> allByTask(User user, Long taskId, Pageable pageable) throws NoSuchEntityException, AuthorizationException {
 		Task task = taskRepository.findById(taskId).orElseThrow(() -> new NoSuchEntityException("no such task"));
 		
-		roleService.authorize(user, task.getProject(), UserRole.MODERATOR);
+		roleService.authorize(user, task.getProject(), UserRole.MEMBER);
 		
 		return activityRepository.findAllByTask(task, pageable);
 	}

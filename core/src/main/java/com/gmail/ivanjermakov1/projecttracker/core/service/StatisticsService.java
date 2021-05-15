@@ -39,7 +39,7 @@ public class StatisticsService {
 	}
 	
 	public List<ProjectActivityDto> getProjectActivities(User user, Project project) throws AuthorizationException {
-		roleService.authorize(user, project, UserRole.MODERATOR);
+		roleService.authorize(user, project, UserRole.MEMBER);
 		
 		List<ProjectActivity> activities = activityRepository.findActivitiesByProject(project.getId());
 		return format(
@@ -50,7 +50,7 @@ public class StatisticsService {
 	}
 	
 	public List<ProjectTaskTypeDto> getProjectTaskTypes(User user, Project project) throws AuthorizationException {
-		roleService.authorize(user, project, UserRole.MODERATOR);
+		roleService.authorize(user, project, UserRole.MEMBER);
 		
 		List<ProjectTaskType> taskTypes = taskRepository.findTaskTypesByProject(project.getId());
 		return taskTypes

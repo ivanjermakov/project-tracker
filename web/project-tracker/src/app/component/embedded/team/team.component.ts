@@ -5,6 +5,8 @@ import {RoleService} from '../../../service/role.service';
 import {TokenProvider} from '../../../provider/token.provider';
 import {UserRole} from '../../../dto/UserRole';
 import {SetRole} from '../../../dto/SetRole';
+import {AuthService} from '../../../service/auth.service';
+import {User} from '../../../dto/User';
 
 @Component({
 	selector: 'app-team',
@@ -21,10 +23,12 @@ export class TeamComponent implements OnInit {
 	userRole = UserRole;
 	roles: string[];
 	newMember = new SetRole();
+	me: User;
 
 	constructor(
 		private roleService: RoleService,
-		private tokenProvider: TokenProvider
+		private tokenProvider: TokenProvider,
+		private authService: AuthService
 	) {
 		this.roles = Object.keys(this.userRole).filter(k => !isNaN(Number(k)));
 	}
@@ -32,6 +36,7 @@ export class TeamComponent implements OnInit {
 	ngOnInit(): void {
 		this.newMember.projectId = this.project.id;
 		this.tokenProvider.token.subscribe(token => {
+			this.authService.validate(token).subscribe(me => this.me = me);
 			this.roleService.getProjectRoles(token, this.project.id).subscribe(
 				roles => this.members = roles
 			);
