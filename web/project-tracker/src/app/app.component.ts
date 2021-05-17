@@ -85,6 +85,7 @@ export class AppComponent {
 			}, e => {
 				console.debug('app: error validating token');
 				this.tokenProvider.setToken(null);
+				localStorage.removeItem(LOCALSTORAGE_TOKEN_NAME);
 				return error(e);
 			});
 		});

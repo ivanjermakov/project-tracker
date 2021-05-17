@@ -13,5 +13,5 @@ public interface RoleRepository extends CrudRepository<Role, Long> {
 	
 	Optional<Role> findByUserAndProject(User user, Project project);
 
-	List<UserRole> findAllByProject(Project project);
+	List<Role> findAllByProject(Project project);
 }

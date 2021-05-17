@@ -7,6 +7,7 @@ import {UserRole} from '../../../dto/UserRole';
 import {SetRole} from '../../../dto/SetRole';
 import {AuthService} from '../../../service/auth.service';
 import {User} from '../../../dto/User';
+import {ErrorService} from '../../../service/error.service';
 
 @Component({
 	selector: 'app-team',
@@ -28,7 +29,8 @@ export class TeamComponent implements OnInit {
 	constructor(
 		private roleService: RoleService,
 		private tokenProvider: TokenProvider,
-		private authService: AuthService
+		private authService: AuthService,
+		private errorService: ErrorService
 	) {
 		this.roles = Object.keys(this.userRole).filter(k => !isNaN(Number(k)));
 	}
@@ -44,8 +46,19 @@ export class TeamComponent implements OnInit {
 	}
 
 	updateMember(member: Role) {
+		console.log('update', member);
 		this.tokenProvider.token.subscribe(token => {
-			this.roleService.setUserRole(token, this.memberToSetRole(member)).subscribe();
+			this.roleService.setUserRole(token, this.memberToSetRole(member)).subscribe(
+				() => {
+				},
+				e => {
+					this.errorService.raise(e);
+					// refresh roles
+					this.roleService.getProjectRoles(token, this.project.id).subscribe(
+						roles => this.members = roles
+					);
+				}
+			);
 		});
 	}
 
@@ -53,6 +66,11 @@ export class TeamComponent implements OnInit {
 		this.tokenProvider.token.subscribe(token => {
 			this.roleService.setUserRole(token, this.newMember).subscribe(newRole => {
 					this.members.push(newRole);
+					this.newMember.role = undefined;
+					this.newMember.login = '';
+				},
+				e => {
+					this.errorService.raise(e);
 					this.newMember.role = undefined;
 					this.newMember.login = '';
 				}

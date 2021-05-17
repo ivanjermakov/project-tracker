@@ -46,7 +46,7 @@
 		  }
 		}
 
-		.follow {
+		.follow, .edit {
 		  grid-column: 3/4;
 		  grid-row: 1/3;
 		  justify-self: flex-end;
@@ -90,6 +90,18 @@
 			color: black;
 		  }
 		}
+	  }
+	}
+
+	.edit-choice {
+	  display: flex;
+	  align-items: center;
+	  justify-content: center;
+
+	  padding: 10px;
+
+	  * {
+		margin: 0 10px;
 	  }
 	}
   }

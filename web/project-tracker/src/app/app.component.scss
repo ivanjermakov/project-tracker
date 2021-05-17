@@ -1,7 +1,8 @@
 .content-container {
   display: flex;
   align-items: flex-start;
-  max-width: 1200px;
+  //max-width: 1200px;
+  width: min(100%, 1200px);
   min-height: calc(100vh - 50px);
 
   margin: 50px auto 0 auto;

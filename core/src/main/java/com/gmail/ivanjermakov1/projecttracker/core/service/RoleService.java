@@ -4,6 +4,7 @@ import com.gmail.ivanjermakov1.projecttracker.core.entity.Project;
 import com.gmail.ivanjermakov1.projecttracker.core.entity.Role;
 import com.gmail.ivanjermakov1.projecttracker.core.entity.User;
 import com.gmail.ivanjermakov1.projecttracker.core.entity.enums.UserRole;
+import com.gmail.ivanjermakov1.projecttracker.core.exception.ApiException;
 import com.gmail.ivanjermakov1.projecttracker.core.exception.AuthorizationException;
 import com.gmail.ivanjermakov1.projecttracker.core.exception.NoSuchEntityException;
 import com.gmail.ivanjermakov1.projecttracker.core.repository.RoleRepository;
@@ -23,24 +24,30 @@ public class RoleService {
 		this.roleRepository = roleRepository;
 	}
 
-	public Role setUserRole(User user, User target, Project project, UserRole role) throws AuthorizationException {
+	public Role setUserRole(User user, User target, Project project, UserRole role) throws AuthorizationException, ApiException {
 		authorize(user, project, UserRole.MODERATOR);
-		if (role == UserRole.OWNER) throw new RuntimeException("project can have only one owner");
+		if (user.getId().equals(target.getId())) throw new ApiException("unable to set or change own role");
+		if (role.level >= getRole(user, project).level) throw new ApiException("unable to set role with level higher or equal to own");
 
 		Role newRole = roleRepository.findByUserAndProject(target, project).orElse(new Role(project, target, role));
+		newRole.setRole(role);
 		return roleRepository.save(newRole);
 	}
 
-	public List<UserRole> getProjectRoles(User user, Project project) throws AuthorizationException {
+	public Role getProjectRole(User user, Project project) throws NoSuchEntityException {
+		return roleRepository.findByUserAndProject(user, project).orElseThrow(() -> new NoSuchEntityException("user is not registered on project"));
+	}
+
+	public List<Role> getProjectRoles(User user, Project project) throws AuthorizationException {
 		authorize(user, project, UserRole.MODERATOR);
 		return roleRepository.findAllByProject(project);
 	}
 
-	public void removeUserRole(User user, User target, Project project) throws AuthorizationException, NoSuchEntityException {
+	public void removeUserRole(User user, User target, Project project) throws AuthorizationException, NoSuchEntityException, ApiException {
 		authorize(user, project, UserRole.MODERATOR);
 		Role targetRole = roleRepository.findByUserAndProject(target, project).orElseThrow(() -> new NoSuchEntityException("user is not authorized for this project"));
-		if (targetRole.getRole() == UserRole.OWNER) throw new RuntimeException("unable to remove owner");
-		if (user.getId().equals(target.getId())) throw new RuntimeException("unable to remove yourself");
+		if (targetRole.getRole() == UserRole.OWNER) throw new ApiException("unable to remove owner");
+		if (user.getId().equals(target.getId())) throw new ApiException("unable to remove yourself");
 
 		this.roleRepository.delete(targetRole);
 	}

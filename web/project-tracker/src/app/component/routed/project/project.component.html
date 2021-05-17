@@ -13,21 +13,21 @@
 				</div>
 				<div class="name">
 					<div class="text"
-					     [routerLink]="'/' + me.login">
-						{{me.login}}
+					     [routerLink]="'/' + project.user.login">
+						{{project.user.login}}
 					</div>
 					<div class="text name-delimiter">/</div>
 					<div class="text"
 					     [ngClass]="{'editing': editMode}"
 					     [contentEditable]="editMode"
-					     [routerLink]="'/' + me.login + '/' + project.name"
+					     [routerLink]="'/' + project.user.login + '/' + project.name"
 					     [textContent]="project.name"
 					     (input)="project.name = $event.target.textContent">
 						{{project.name}}
 					</div>
 				</div>
 				<div class="edit" title="Edit project"
-				     *ngIf="!editMode"
+				     *ngIf="!editMode && role && ['OWNER', 'MODERATOR'].includes(role.role.toString())"
 				     (click)="edit()">
 					<i class="fas fa-pen"></i>
 				</div>
@@ -60,7 +60,7 @@
 			</app-tasks-table>
 			<div *ngIf="tasks.length === 0" class="no-tasks">No tasks yet.</div>
 		</div>
-		<div class="delimiter" *ngIf="!editMode"></div>
+		<div class="delimiter" *ngIf="(project.about && project.about.length != 0) || editMode"></div>
 		<div class="about-container"
 		     *ngIf="(project.about && project.about.length != 0) || editMode">
 			<div class="about">About</div>
@@ -69,15 +69,6 @@
 			     [contentEditable]="editMode"
 			     [textContent]="project.about"
 			     (input)="project.about = $event.target.textContent">{{project.about}}</div>
-		</div>
-		<div class="edit-choice"
-		     *ngIf="editMode">
-			<button
-					(click)="applyEdit()">Apply
-			</button>
-			<div class="cancel"
-			     (click)="cancelEdit()">Cancel
-			</div>
 		</div>
 		<div class="delimiter" *ngIf="!editMode"></div>
 		<div class="stats-container" *ngIf="!editMode">
@@ -88,7 +79,19 @@
 			</div>
 		</div>
 		<div class="delimiter" *ngIf="!editMode"></div>
-		<app-team *ngIf="!editMode" [project]="project"></app-team>
+		<app-team
+				*ngIf="!editMode && role && ['OWNER', 'MODERATOR'].includes(role.role.toString())"
+				[project]="project">
+		</app-team>
+		<div class="edit-choice"
+		     *ngIf="editMode">
+			<button
+					(click)="applyEdit()">Apply
+			</button>
+			<div class="cancel"
+			     (click)="cancelEdit()">Cancel
+			</div>
+		</div>
 	</div>
 </div>
 

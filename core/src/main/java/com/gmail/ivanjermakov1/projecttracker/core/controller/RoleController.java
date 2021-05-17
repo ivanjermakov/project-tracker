@@ -4,6 +4,7 @@ import com.gmail.ivanjermakov1.projecttracker.core.dto.RoleDto;
 import com.gmail.ivanjermakov1.projecttracker.core.dto.SetRoleDto;
 import com.gmail.ivanjermakov1.projecttracker.core.entity.Project;
 import com.gmail.ivanjermakov1.projecttracker.core.entity.User;
+import com.gmail.ivanjermakov1.projecttracker.core.exception.ApiException;
 import com.gmail.ivanjermakov1.projecttracker.core.exception.AuthorizationException;
 import com.gmail.ivanjermakov1.projecttracker.core.exception.NoSuchEntityException;
 import com.gmail.ivanjermakov1.projecttracker.core.service.ProjectService;
@@ -38,7 +39,7 @@ public class RoleController {
 	}
 
 	@PostMapping
-	public RoleDto setUserRole(@RequestHeader("token") String token, @RequestBody SetRoleDto setRoleDto) throws AuthorizationException, NoSuchEntityException {
+	public RoleDto setUserRole(@RequestHeader("token") String token, @RequestBody SetRoleDto setRoleDto) throws AuthorizationException, NoSuchEntityException, ApiException {
 		User user = userService.validate(token);
 		User target = userService.getUser(user, setRoleDto.getLogin());
 		Project project = projectService.get(user, setRoleDto.getProjectId());
@@ -50,7 +51,7 @@ public class RoleController {
 	}
 
 	@DeleteMapping("{projectId}/{login}")
-	public void removeUserRole(@RequestHeader("token") String token, @PathVariable Long projectId, @PathVariable String login) throws NoSuchEntityException, AuthorizationException {
+	public void removeUserRole(@RequestHeader("token") String token, @PathVariable Long projectId, @PathVariable String login) throws NoSuchEntityException, AuthorizationException, ApiException {
 		User user = userService.validate(token);
 		User target = userService.getUser(user, login);
 		Project project = projectService.get(user, projectId);
@@ -59,6 +60,16 @@ public class RoleController {
 	}
 
 	@GetMapping("{projectId}")
+	public RoleDto getProjectRole(@RequestHeader("token") String token, @PathVariable Long projectId) throws AuthorizationException, NoSuchEntityException {
+		User user = userService.validate(token);
+		Project project = projectService.get(user, projectId);
+		return Mapper.map(
+				roleService.getProjectRole(user, project),
+				RoleDto.class
+		);
+	}
+
+	@GetMapping("{projectId}/all")
 	public List<RoleDto> getProjectRoles(@RequestHeader("token") String token, @PathVariable Long projectId) throws AuthorizationException, NoSuchEntityException {
 		User user = userService.validate(token);
 		Project project = projectService.get(user, projectId);

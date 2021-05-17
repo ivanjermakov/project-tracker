@@ -70,7 +70,7 @@ public class UserService {
 	}
 
 	public User edit(User user, EditUserDto editUserDto) throws NoSuchEntityException, AuthorizationException {
-		User editingUser = getUser(user, editUserDto.login);
+		User editingUser = userRepository.findById(editUserDto.id).orElseThrow(() -> new NoSuchEntityException("no user with such id"));
 		if (!user.getId().equals(editingUser.getId())) throw new AuthorizationException("no permission");
 
 		editingUser.getUserCredentials().setLogin(editUserDto.login);

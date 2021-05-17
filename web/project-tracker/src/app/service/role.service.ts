@@ -16,8 +16,14 @@ export class RoleService {
 	) {
 	}
 
+	getProjectRole(token: string, projectId: number): Observable<Role> {
+		return this.http.get<Role>(`${API_URL}role/${projectId}`, {
+			headers: {token: token}
+		});
+	}
+
 	getProjectRoles(token: string, projectId: number): Observable<Role[]> {
-		return this.http.get<Role[]>(`${API_URL}role/${projectId}`, {
+		return this.http.get<Role[]>(`${API_URL}role/${projectId}/all`, {
 			headers: {token: token}
 		});
 	}

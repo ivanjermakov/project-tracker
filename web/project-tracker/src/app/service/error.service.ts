@@ -10,10 +10,8 @@ export class ErrorService {
 	}
 
 	raise(httpError: HttpErrorResponse) {
-		httpError.error.errors.forEach(e => {
-			alert(`error: ${e.defaultMessage}`);
-			console.log(`error: ${e.defaultMessage}`);
-		});
+		alert(`error: ${httpError.error.message}`);
+		console.log(`error: ${httpError.error.message}`);
 	}
 
 }

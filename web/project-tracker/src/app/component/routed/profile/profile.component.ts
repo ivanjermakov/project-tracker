@@ -10,6 +10,8 @@ import {TokenProvider} from '../../../provider/token.provider';
 import {TimeService} from '../../../service/time.service';
 import {UserService} from '../../../service/user.service';
 import {AuthService} from '../../../service/auth.service';
+import {EditUser} from '../../../dto/EditUser';
+import {ErrorService} from '../../../service/error.service';
 
 @Component({
 	selector: 'app-profile',
@@ -17,11 +19,13 @@ import {AuthService} from '../../../service/auth.service';
 	styleUrls: [
 		'./profile.component.scss',
 		'./../../../app.component.scss',
+		'./../../../style/edit.scss',
 	]
 })
 export class ProfileComponent implements OnInit {
 
 	user: User;
+	beforeEditUser: User;
 	me: User;
 	editMode: boolean = false;
 	tab: ProfileTab;
@@ -36,7 +40,8 @@ export class ProfileComponent implements OnInit {
 		private router: Router,
 		private titleService: Title,
 		private userService: UserService,
-		private authService: AuthService
+		private authService: AuthService,
+		private errorService: ErrorService
 	) {
 	}
 
@@ -88,4 +93,28 @@ export class ProfileComponent implements OnInit {
 		});
 	}
 
+	edit() {
+		this.beforeEditUser = JSON.parse(JSON.stringify(this.user));
+		this.editMode = true;
+	}
+
+	cancelEdit() {
+		this.editMode = false;
+		this.user = this.beforeEditUser;
+		this.beforeEditUser = null;
+	}
+
+	applyEdit() {
+		let editUser = new EditUser();
+		editUser.id = this.user.id;
+		editUser.login = this.user.login;
+		editUser.name = this.user.userInfo.name;
+
+		this.tokenProvider.token.subscribe(token => {
+			this.profileService.edit(token, editUser).subscribe(user => {
+				this.editMode = false;
+				this.router.navigate([user.login]);
+			}, e => this.errorService.raise(e));
+		});
+	}
 }

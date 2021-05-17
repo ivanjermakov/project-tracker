@@ -3,10 +3,15 @@
 	<div class="members">
 		<div class="member" *ngFor="let member of members">
 			<div class="login">@{{member.user.login}}</div>
-			<select [(ngModel)]="member.role" (change)="updateMember(member)" [disabled]="member.role === 'OWNER'">
+			<select
+					*ngIf="member"
+					[(ngModel)]="member.role"
+					(change)="updateMember(member)"
+					[disabled]="member.role.toString() === 'OWNER' || member.user.id === me.id">
 				<option *ngFor="let r of roles" [value]="userRole[r]">{{userRole[r].toLowerCase()}}</option>
 			</select>
-			<div class="remove" *ngIf="member.role !== 'OWNER' && member.user.login !== me.login" (click)="removeMember(member)">
+			<div class="remove" *ngIf="member.role !== 'OWNER' && member.user.login !== me.login"
+			     (click)="removeMember(member)">
 				<i class="fas fa-times"></i>
 			</div>
 		</div>

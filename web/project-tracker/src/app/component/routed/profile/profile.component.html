@@ -4,7 +4,7 @@
 		<div class="profile">
 			<div class="header-container">
 				<div class="header">
-					<div class="name" *ngIf="user.userInfo.name">
+					<div class="name">
 						<div class="text"
 						     [ngClass]="{'editing': editMode}"
 						     [contentEditable]="editMode"
@@ -13,14 +13,13 @@
 							{{user.userInfo.name}}
 						</div>
 					</div>
-					<!--TODO: editing-->
 					<div class="login">
 						<div class="text"
 						     [ngClass]="{'editing': editMode}"
 						     [contentEditable]="editMode"
-						     [textContent]="'@' + user.login"
+						     [textContent]="user.login"
 						     (input)="user.login = $event.target.textContent">
-							{{user.login}}
+							@{{user.login}}
 						</div>
 					</div>
 					<div class="joined">
@@ -29,6 +28,7 @@
 					<button class="follow" type="submit" (click)="follow()" *ngIf="me.id !== user.id">
 						{{followed ? 'Unfollow' : 'Follow'}}
 					</button>
+					<button class="edit" type="submit" (click)="edit()" *ngIf="me.id === user.id">Edit</button>
 				</div>
 				<div class="menu">
 					<div class="tab" (click)="changeTab('projects')"
@@ -47,6 +47,15 @@
 					     [ngClass]="{'active': tab === 3}">
 						<div class="text">Following</div>
 					</div>
+				</div>
+			</div>
+			<div class="edit-choice"
+			     *ngIf="editMode">
+				<button
+						(click)="applyEdit()">Apply
+				</button>
+				<div class="cancel"
+				     (click)="cancelEdit()">Cancel
 				</div>
 			</div>
 			<router-outlet></router-outlet>
