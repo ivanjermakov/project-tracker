@@ -22,7 +22,6 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.stream.Collectors;
 
 @Service
 public class TaskService {
@@ -138,10 +137,7 @@ public class TaskService {
 	}
 
 	public List<Task> assignee(User user, Pageable pageable) {
-		return activityRepository.findAllAssigneeActivities(user.getId(), pageable)
-				.stream()
-				.map(Activity::getTask)
-				.collect(Collectors.toList());
+		return activityRepository.findAllAssigneeActivities(user.getId(), pageable);
 	}
 
 }

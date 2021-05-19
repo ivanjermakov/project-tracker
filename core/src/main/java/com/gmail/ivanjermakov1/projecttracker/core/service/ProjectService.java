@@ -100,7 +100,7 @@ public class ProjectService {
 	}
 
 	public List<Project> all(User user, User ofUser, Pageable pageable) {
-		return projectRepository.findAllByUserABCD(ofUser.getId(), pageable).stream()
+		return projectRepository.findAllByUser(ofUser.getId(), pageable).stream()
 				.filter(p -> {
 					if (user.getId().equals(ofUser.getId())) return true;
 					return p.getPublic();

@@ -88,6 +88,9 @@ public class Task {
 	@Transient
 	private Activity lastActivity;
 
+	@Transient
+	private User assignee;
+
 	@PostLoad
 	public void postLoad() {
 		elapsed = activities
@@ -98,6 +101,12 @@ public class Task {
 		lastActivity = activities.stream()
 				.filter(a -> Objects.nonNull(a.getTimestamp()))
 				.max(Comparator.comparing(Activity::getTimestamp))
+				.orElse(null);
+
+		assignee = activities.stream()
+				.map(Activity::getAssignee)
+				.filter(Objects::nonNull)
+				.findFirst()
 				.orElse(null);
 	}
 
@@ -205,4 +214,11 @@ public class Task {
 		this.lastActivity = lastActivity;
 	}
 
+	public User getAssignee() {
+		return assignee;
+	}
+
+	public void setAssignee(User assignee) {
+		this.assignee = assignee;
+	}
 }

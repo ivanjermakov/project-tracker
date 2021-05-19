@@ -2,8 +2,10 @@ package com.gmail.ivanjermakov1.projecttracker.core.util;
 
 import com.gmail.ivanjermakov1.projecttracker.core.dto.ActivityDto;
 import com.gmail.ivanjermakov1.projecttracker.core.dto.TaskDto;
+import com.gmail.ivanjermakov1.projecttracker.core.dto.UserDto;
 import com.gmail.ivanjermakov1.projecttracker.core.entity.Activity;
 import com.gmail.ivanjermakov1.projecttracker.core.entity.Task;
+import com.twilio.rest.chat.v1.service.User;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 
@@ -28,6 +30,7 @@ public class Mapper {
 				.createTypeMap(Task.class, TaskDto.class)
 				.addMappings(mapper -> {
 					mapper.map(s -> s.getParent().getId(), TaskDto::setParentTaskId);
+					mapper.map(s -> s.getTaskInfo().getDescription(), TaskDto::setDescription);
 					mapper.skip((TaskDto destination, TaskDto value) -> destination.getLastActivity().setTask(value));
 				});
 		

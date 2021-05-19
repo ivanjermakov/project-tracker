@@ -1,5 +1,7 @@
 package com.gmail.ivanjermakov1.projecttracker.core.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -38,6 +40,7 @@ public class User {
 			joinColumns = @JoinColumn(name = "follower_id"),
 			inverseJoinColumns = @JoinColumn(name = "user_id")
 	)
+	@JsonIgnore
 	private Set<User> followers;
 	
 	@ManyToMany(cascade = {CascadeType.ALL})
@@ -46,6 +49,7 @@ public class User {
 			joinColumns = @JoinColumn(name = "user_id"),
 			inverseJoinColumns = @JoinColumn(name = "follower_id")
 	)
+	@JsonIgnore
 	private Set<User> following;
 	
 	public User() {

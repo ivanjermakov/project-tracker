@@ -23,5 +23,36 @@ public class UserDto {
 		this.userInfo = userInfo;
 		this.login = login;
 	}
-	
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public LocalDate getJoined() {
+		return joined;
+	}
+
+	public void setJoined(LocalDate joined) {
+		this.joined = joined;
+	}
+
+	public UserInfoDto getUserInfo() {
+		return userInfo;
+	}
+
+	public void setUserInfo(UserInfoDto userInfo) {
+		this.userInfo = userInfo;
+	}
+
+	public String getLogin() {
+		return login;
+	}
+
+	public void setLogin(String login) {
+		this.login = login;
+	}
 }
