@@ -18,4 +18,5 @@ export class Task {
 	subtasks: Task[];
 
 	lastActivity: Activity;
+	assignee: User;
 }

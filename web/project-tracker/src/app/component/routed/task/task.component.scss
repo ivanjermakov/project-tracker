@@ -2,7 +2,7 @@
 
   .content {
 
-	.back-container, .name-container, .info-container, .subtasks-container, .activities-container {
+	.back-container, .name-container, .info-container, .description-container, .subtasks-container, .activities-container {
 	  padding: 10px;
 	}
 
@@ -90,6 +90,13 @@
 		}
 	  }
 
+	}
+
+	.description-container {
+	  .header {
+		font-size: 20px;
+		color: var(--gray)
+	  }
 	}
 
 	.subtasks-container {

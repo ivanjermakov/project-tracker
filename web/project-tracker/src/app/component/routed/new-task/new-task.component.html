@@ -26,7 +26,8 @@
 			</div>
 			<div class="description-wrapper">
 				<div class="text">Description</div>
-				<input type="text" placeholder="description" name="description" [(ngModel)]="task.description">
+				<textarea type="text" placeholder="description" name="description" rows="10" [(ngModel)]="task.description">
+				</textarea>
 			</div>
 
 			<button type="submit" (click)="open()">Open task</button>

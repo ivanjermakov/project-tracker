@@ -31,11 +31,25 @@
 				<div class="text">
 					{{task.type[0] + task.type.toString().slice(1).toLowerCase()}}
 				</div>
+				<app-task-type-icon [type]="task.type"></app-task-type-icon>
+			</div>
+			<div class="status" *ngIf="lastActivity?.status">
+				<div class="pre">Status:</div>
+				<div class="text">
+					{{lastActivity.status[0] + lastActivity.status.toString().slice(1).toLowerCase()}}
+				</div>
+				<app-task-status-icon [status]="lastActivity.status"></app-task-status-icon>
 			</div>
 			<div class="creator linkable">
 				<div class="pre">Creator:</div>
 				<div class="text" [routerLink]="'/' + task.creator.login">
 					@{{task.creator.login}}
+				</div>
+			</div>
+			<div class="assignee linkable" *ngIf="task.assignee">
+				<div class="pre">Assignee:</div>
+				<div class="text" [routerLink]="'/' + task.assignee.login">
+					@{{task.assignee.login}}
 				</div>
 			</div>
 			<div class="project linkable">
@@ -51,21 +65,34 @@
 					{{'#' + parentTask.id + ' ' + parentTask.name}}
 				</div>
 			</div>
+			<div class="elapsed" *ngIf="task.elapsed">
+				<div class="pre">Elapsed:</div>
+				<div class="text">
+					{{task.elapsed}}h
+				</div>
+			</div>
+			<div class="estimate" *ngIf="task.estimate">
+				<div class="pre">Estimate:</div>
+				<div class="text">
+					{{task.estimate}}h
+				</div>
+			</div>
 			<div class="due" *ngIf="task.due">
 				<div class="pre">Due:</div>
 				<div class="text" [ngClass]="{'expired': !isPast(task.due)}">
 					{{task.due}}
 				</div>
 			</div>
-			<div class="description" *ngIf="task.description">
-				<div class="pre">Description:</div>
-				<div class="text"
-				     [ngClass]="{'editing': editMode}"
-				     [contentEditable]="editMode"
-				     [textContent]="task.description"
-				     (input)="task.description = $event.target.textContent">
-					{{task.description}}
-				</div>
+		</div>
+		<div class="delimiter" *ngIf="task.description || editMode"></div>
+		<div class="description-container">
+			<div class="header">Description</div>
+			<div class="text"
+			     [ngClass]="{'editing': editMode}"
+			     [contentEditable]="editMode"
+			     [textContent]="task.description"
+			     (input)="task.description = $event.target.textContent">
+				{{task.description}}
 			</div>
 		</div>
 		<div class="delimiter"></div>

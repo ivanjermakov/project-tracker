@@ -16,6 +16,7 @@ export class HeaderComponent implements OnInit {
 	LOGO_BW_SRC = LOGO_BW_SRC;
 
 	me: User;
+	displayName: string;
 
 	constructor(
 		private app: AppComponent,
@@ -29,6 +30,7 @@ export class HeaderComponent implements OnInit {
 			this.tokenProvider.token.subscribe(token => {
 				this.authService.validate(token).subscribe(me => {
 					this.me = me;
+					this.displayName = me.userInfo.name ? me.userInfo.name : `@${me.login}`;
 				});
 			});
 		});
