@@ -27,6 +27,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -73,7 +74,8 @@ public class TaskTest {
 								TaskType.FEATURE,
 								TaskPriority.MINOR,
 								null,
-								null,
+								LocalDate.now(),
+								LocalDate.now(),
 								"task_" + i,
 								null
 						));

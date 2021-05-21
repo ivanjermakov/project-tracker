@@ -42,12 +42,12 @@ public class AuthTest {
 	
 	@Test
 	public void shouldAuthAndValidateUser() throws AuthenticationException, NoSuchEntityException, IOException {
-		String token = authController.authenticate(new AuthUserDto(registerUserDto.login, registerUserDto.password));
+		String token = authController.authenticate(new AuthUserDto(registerUserDto.getLogin(), registerUserDto.getPassword()));
 		Assert.assertNotNull(token);
 		
 		UserDto user = authController.validate(token);
 		Assert.assertNotNull(user);
-		Assert.assertEquals(user.login, registerUserDto.login);
+		Assert.assertEquals(user.getLogin(), registerUserDto.getLogin());
 	}
 	
 }

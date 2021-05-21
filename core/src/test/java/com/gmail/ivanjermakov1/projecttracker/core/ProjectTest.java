@@ -49,7 +49,7 @@ public class ProjectTest {
 		RegisterUserDto registerUserDto = new RegisterUserDto("test", "password");
 		registerController.register(registerUserDto);
 		
-		token = authController.authenticate(new AuthUserDto(registerUserDto.login, registerUserDto.password));
+		token = authController.authenticate(new AuthUserDto(registerUserDto.getLogin(), registerUserDto.getPassword()));
 		projectsCount = 5;
 		IntStream
 				.range(0, projectsCount)
@@ -75,10 +75,10 @@ public class ProjectTest {
 	public void shouldGetProject() throws NoSuchEntityException, AuthorizationException {
 		project = projectController.get(
 				token,
-				authController.validate(token).login,
+				authController.validate(token).getLogin(),
 				projectController.all(token, PageRequest.of(0, 1))
 						.stream()
-						.findFirst().orElseThrow(NoSuchEntityException::new).name
+						.findFirst().orElseThrow(NoSuchEntityException::new).getName()
 		);
 		
 		Assert.assertNotNull(project);
@@ -94,25 +94,25 @@ public class ProjectTest {
 		Assert.assertNotNull(project);
 		
 		project = projectController.edit(token, new EditProjectDto(
-				project.id,
-				project.isPublic,
-				project.name,
-				project.description,
-				project.about
+				project.getId(),
+				project.getIsPublic(),
+				project.getName(),
+				project.getDescription(),
+				project.getAbout()
 		));
 		
 		Assert.assertNotNull(project);
 		
 		project = projectController.edit(token, new EditProjectDto(
-				project.id,
+				project.getId(),
 				false,
 				"test_proj_new_name",
-				project.description,
-				project.about
+				project.getDescription(),
+				project.getAbout()
 		));
 		
 		Assert.assertNotNull(project);
-		Assert.assertEquals("test_proj_new_name", project.name);
+		Assert.assertEquals("test_proj_new_name", project.getName());
 	}
 	
 	//	TODO: fix test
@@ -124,7 +124,7 @@ public class ProjectTest {
 		projectController.delete(token, allProjects
 				.stream()
 				.findFirst()
-				.orElseThrow(NoSuchEntityException::new).id);
+				.orElseThrow(NoSuchEntityException::new).getId());
 		
 		List<ProjectDto> allProjectsExceptDeleted = projectController.all(token, PageRequest.of(0, Integer.MAX_VALUE));
 		

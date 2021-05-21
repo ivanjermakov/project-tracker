@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 public class ProjectDto {
 
 	Long id;
-	Boolean is;
+	Boolean isPublic;
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	LocalDateTime created;
 	String name;
