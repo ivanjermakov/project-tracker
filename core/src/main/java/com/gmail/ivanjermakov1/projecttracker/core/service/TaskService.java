@@ -20,10 +20,12 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -70,6 +72,7 @@ public class TaskService {
 				newTaskDto.getEstimate(),
 				0d,
 				LocalDateTime.now(),
+				Optional.ofNullable(newTaskDto.getStarted()).orElse(LocalDate.now()),
 				newTaskDto.getDue(),
 				null,
 				new ArrayList<>(),
@@ -150,7 +153,7 @@ public class TaskService {
 	}
 
 	public List<Task> assignee(User user, Pageable pageable) {
-		return activityRepository.findAllAssigneeActivities(user.getId(), pageable);
+		return taskRepository.findAllByAssignee(user, pageable);
 	}
 
 	public List<Task> list(User user, Project project, ListTaskDto listTaskDto) throws AuthorizationException {

@@ -9,6 +9,7 @@ export class NewTask {
 	status: TaskStatus;
 	priority: TaskPriority;
 	estimate: number;
+	started: Date;
 	due: Date;
 	name: string;
 	description: string;

@@ -22,7 +22,7 @@
 				<i class="fas fa-pen"></i>
 			</div>
 			<div class="opened">
-				<div class="text">opened on {{formatDateWithTime(task.opened)}}</div>
+				<div class="text">opened on {{formatDate(task.opened)}}</div>
 			</div>
 		</div>
 		<div class="info-container">
@@ -77,10 +77,22 @@
 					{{task.estimate}}h
 				</div>
 			</div>
+			<div class="started" *ngIf="task.started">
+				<div class="pre">Start:</div>
+				<div class="text">
+					{{formatDate(task.started)}}
+				</div>
+			</div>
+			<div class="started" *ngIf="!task.started">
+				<div class="pre">Start:</div>
+				<div class="text">
+					{{formatDate(task.opened)}}
+				</div>
+			</div>
 			<div class="due" *ngIf="task.due">
 				<div class="pre">Due:</div>
 				<div class="text" [ngClass]="{'expired': !isPast(task.due)}">
-					{{task.due}}
+					{{formatDate(task.due)}}
 				</div>
 			</div>
 		</div>

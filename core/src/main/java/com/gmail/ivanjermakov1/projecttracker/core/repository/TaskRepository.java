@@ -25,4 +25,5 @@ public interface TaskRepository extends CrudRepository<Task, Long> {
 
 	List<Task> findAllByCreator(User user, Pageable pageable);
 
+	List<Task> findAllByAssignee(User user, Pageable pageable);
 }

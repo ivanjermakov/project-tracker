@@ -26,6 +26,10 @@
 				<div class="text">Task name<span class="required">*</span></div>
 				<input type="text" placeholder="name" name="name" [(ngModel)]="task.name">
 			</div>
+			<div class="started-wrapper">
+				<div class="text">Starting</div>
+				<input type="date" name="started" [(ngModel)]="task.started">
+			</div>
 			<div class="due-wrapper">
 				<div class="text">Due</div>
 				<input type="date" name="due" [(ngModel)]="task.due">

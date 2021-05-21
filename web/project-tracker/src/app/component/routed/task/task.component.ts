@@ -80,8 +80,8 @@ export class TaskComponent implements OnInit {
 		});
 	}
 
-	formatDateWithTime(date: Date) {
-		return TimeService.formatDate(date, 'MMMM Do[, ] YYYY [ at ] HH:mm');
+	formatDate(date: Date) {
+		return TimeService.formatDate(date, 'MMMM Do[, ] YYYY');
 	}
 
 	edit() {

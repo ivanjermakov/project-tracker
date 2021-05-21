@@ -17,6 +17,7 @@ export class Task {
 	estimate: number;
 	elapsed: number;
 	opened: Date;
+	started: Date;
 	due: Date;
 	name: string;
 	description: string;

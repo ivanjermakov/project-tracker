@@ -35,6 +35,9 @@ public class TaskDto {
 	LocalDateTime opened;
 
 	@JsonFormat(pattern = "yyyy-MM-dd")
+	LocalDate started;
+
+	@JsonFormat(pattern = "yyyy-MM-dd")
 	LocalDate due;
 
 	String name;

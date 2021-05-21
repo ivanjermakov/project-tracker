@@ -9,7 +9,7 @@
 		<th>Priority</th>
 		<th>Estimate</th>
 		<th>Elapsed</th>
-		<th>Opened</th>
+		<th>Start</th>
 		<th>Due</th>
 		<th>Subtasks</th>
 		<th>Assignee</th>
@@ -32,12 +32,10 @@
 		</td>
 		<td>{{t.estimate ? t.estimate + 'h' : '-'}}</td>
 		<td [ngClass]="{'expired': t.estimate && t.elapsed > t.estimate}">{{t.elapsed ? t.elapsed + 'h' : '-'}}</td>
-		<td>{{formatDate(t.opened)}}</td>
+		<td>{{t.started ? formatDate(t.started) : formatDate(t.opened)}}</td>
 		<td [ngClass]="{'expired': t.due && !isPast(t.due)}">{{t.due ? formatDate(t.due) : '-'}}</td>
 		<td>{{t.subtasks.length === 0 ? '-' : t.subtasks.length}}</td>
-		<td>
-			<div class=text *ngIf="t.assignee">@{{t.assignee.login}}</div>
-			<div class=text *ngIf="!t.assignee">-</div>
-		</td>
+		<td *ngIf="t.assignee">@{{t.assignee.login}}</td>
+		<td *ngIf="!t.assignee">-</td>
 	</tr>
 </table>

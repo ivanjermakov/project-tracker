@@ -25,7 +25,6 @@ public class ListTaskDto implements Predicate<Task> {
 	TaskPriority priority;
 	String assignee;
 	String name;
-	//TODO
 	String tag;
 
 	@Override

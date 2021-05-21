@@ -79,6 +79,9 @@ public class Task {
 	@Column(name = "opened")
 	LocalDateTime opened;
 
+	@Column(name = "started")
+	LocalDate started;
+
 	@Column(name = "due")
 	LocalDate due;
 

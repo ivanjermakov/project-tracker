@@ -34,6 +34,9 @@ public class NewTaskDto {
 	Double estimate;
 
 	@JsonFormat(pattern = "yyyy-MM-dd")
+	LocalDate started;
+
+	@JsonFormat(pattern = "yyyy-MM-dd")
 	LocalDate due;
 
 	@NotBlank
