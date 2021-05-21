@@ -40,8 +40,13 @@ public class ListTaskDto implements Predicate<Task> {
 		if (priority != null && task.getPriority() != priority) {
 			return false;
 		}
-		if (assignee != null && !task.getAssignee().getUserCredentials().getLogin().equals(assignee)) {
-			return false;
+		if (!nullOrEmpty(assignee)) {
+			if (task.getAssignee() == null) {
+				return false;
+			}
+			if (task.getAssignee() != null && !task.getAssignee().getUserCredentials().getLogin().equals(assignee)) {
+				return false;
+			}
 		}
 		if (!nullOrEmpty(name) && !task.getTaskInfo().getName().contains(name)) {
 			return false;

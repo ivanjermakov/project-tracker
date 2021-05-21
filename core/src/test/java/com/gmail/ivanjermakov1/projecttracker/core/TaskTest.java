@@ -11,7 +11,6 @@ import com.gmail.ivanjermakov1.projecttracker.core.dto.ProjectDto;
 import com.gmail.ivanjermakov1.projecttracker.core.dto.RegisterUserDto;
 import com.gmail.ivanjermakov1.projecttracker.core.dto.TaskDto;
 import com.gmail.ivanjermakov1.projecttracker.core.entity.enums.TaskPriority;
-import com.gmail.ivanjermakov1.projecttracker.core.entity.enums.TaskStatus;
 import com.gmail.ivanjermakov1.projecttracker.core.entity.enums.TaskType;
 import com.gmail.ivanjermakov1.projecttracker.core.exception.AuthenticationException;
 import com.gmail.ivanjermakov1.projecttracker.core.exception.AuthorizationException;
@@ -72,7 +71,6 @@ public class TaskTest {
 								null,
 								project.getId(),
 								TaskType.FEATURE,
-								TaskStatus.OPEN,
 								TaskPriority.MINOR,
 								null,
 								null,

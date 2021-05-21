@@ -29,9 +29,6 @@ public class NewTaskDto {
 	TaskType type;
 
 	@NotNull
-	TaskStatus status;
-
-	@NotNull
 	TaskPriority priority;
 
 	Double estimate;
