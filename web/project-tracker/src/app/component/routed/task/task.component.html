@@ -84,6 +84,22 @@
 				</div>
 			</div>
 		</div>
+		<div class="delimiter" *ngIf="task.tag || editMode"></div>
+		<div class="tag-container" *ngIf="task.tag || editMode">
+			<div class="header">Tags</div>
+			<div class="text"
+			     *ngIf="editMode"
+			     [ngClass]="{'editing': editMode}"
+			     [contentEditable]="editMode"
+			     [textContent]="task.tag"
+			     (input)="task.tag = $event.target.textContent">
+				{{task.tag}}
+			</div>
+			<div class="tag-wrapper"
+			     *ngIf="!editMode">
+				<div class="tag" *ngFor="let tag of task.tag.split(' ')">{{tag}}</div>
+			</div>
+		</div>
 		<div class="delimiter" *ngIf="task.description || editMode"></div>
 		<div class="description-container" *ngIf="task.description || editMode">
 			<div class="header">Description</div>

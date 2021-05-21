@@ -22,7 +22,6 @@ public class ListTaskDto implements Predicate<Task> {
 
 	TaskStatus status;
 	TaskType type;
-	//TODO
 	TaskPriority priority;
 	String assignee;
 	String name;

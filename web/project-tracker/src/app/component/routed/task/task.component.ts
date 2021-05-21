@@ -101,6 +101,7 @@ export class TaskComponent implements OnInit {
 		editTask.id = this.task.id;
 		editTask.name = this.task.name;
 		editTask.description = this.task.description;
+		editTask.tag = this.task.tag;
 
 		this.tokenProvider.token.subscribe(token => {
 			this.taskService.edit(token, editTask).subscribe(task => {

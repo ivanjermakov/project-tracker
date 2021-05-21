@@ -1,0 +1,6 @@
+<div class="task-priority-icon">
+	<i class="fas fa-angle-double-down trivial" title="trivial" *ngIf="priority.toString() === 'TRIVIAL'"></i>
+	<i class="fas fa-angle-down minor" title="minor" *ngIf="priority.toString() === 'MINOR'"></i>
+	<i class="fas fa-angle-up major" title="major" *ngIf="priority.toString() === 'MAJOR'"></i>
+	<i class="fas fa-angle-double-up critical" title="critical" *ngIf="priority.toString() === 'CRITICAL'"></i>
+</div>

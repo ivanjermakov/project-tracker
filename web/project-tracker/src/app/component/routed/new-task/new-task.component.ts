@@ -7,6 +7,7 @@ import {TaskService} from '../../../service/task.service';
 import {TaskType} from '../../../dto/TaskType';
 import {ArrayService} from '../../../service/array.service';
 import {TokenProvider} from '../../../provider/token.provider';
+import {TaskPriority} from '../../../dto/TaskPriority';
 
 @Component({
 	selector: 'app-new-task',
@@ -20,6 +21,7 @@ export class NewTaskComponent implements OnInit {
 
 	task: NewTask = new NewTask();
 	taskTypes: string[];
+	taskPriorities: string[] = ['TRIVIAL', 'MINOR', 'MAJOR', 'CRITICAL'];
 
 	constructor(
 		private router: Router,
@@ -32,10 +34,9 @@ export class NewTaskComponent implements OnInit {
 	) {
 		// @ts-ignore
 		this.task.type = TaskType[TaskType.FEATURE];
-		this.arrayService.filter(Object.keys(TaskType), k => isNaN(parseInt(k)), keys => {
-			this.taskTypes = keys;
-			console.debug(this.taskTypes);
-		});
+		this.arrayService.filter(Object.keys(TaskType), k => isNaN(parseInt(k)), keys => this.taskTypes = keys);
+		// @ts-ignore
+		this.task.priority = TaskPriority[TaskPriority.MINOR];
 	}
 
 	ngOnInit() {

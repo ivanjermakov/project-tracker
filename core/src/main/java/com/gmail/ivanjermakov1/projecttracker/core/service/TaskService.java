@@ -116,6 +116,7 @@ public class TaskService {
 		taskInfo.setName(editTaskDto.getName());
 		taskInfo.setDescription(editTaskDto.getDescription());
 		task.setTaskInfo(taskInfo);
+		task.setTag(editTaskDto.getTag());
 
 		return taskRepository.save(task);
 	}

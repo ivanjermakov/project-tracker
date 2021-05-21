@@ -2,31 +2,41 @@
 	<tr>
 		<th>Id</th>
 		<th>Name</th>
-		<th>Project</th>
+		<th *ngIf="showProject">Project</th>
 		<th>Type</th>
 		<th>Status</th>
+		<th>Priority</th>
 		<th>Estimate</th>
 		<th>Elapsed</th>
 		<th>Opened</th>
 		<th>Due</th>
 		<th>Subtasks</th>
+		<th>Assignee</th>
 	</tr>
 	<tr class="row" *ngFor="let t of tasks"
 	    [routerLink]="'/' + t.project.user.login + '/' + t.project.name + '/task/' + t.id">
 		<td>#{{t.id}}</td>
 		<td>{{t.name}}</td>
-		<td>{{t.project.name}}</td>
+		<td *ngIf="showProject">{{t.project.name}}</td>
 		<td>
 			<app-task-type-icon [type]="t.type"></app-task-type-icon>
 		</td>
 		<td>
-			<app-task-status-icon [status]="t.lastActivity.status" *ngIf="t.lastActivity"></app-task-status-icon>
-			<ng-container *ngIf="!t.lastActivity">-</ng-container>
+			<app-task-status-icon [status]="t.status" *ngIf="t.status"></app-task-status-icon>
+			<div class="text" *ngIf="!t.status">-</div>
+		</td>
+		<td>
+			<app-task-priority-icon [priority]="t.priority" *ngIf="t.priority"></app-task-priority-icon>
+			<div class="text" *ngIf="!t.priority">-</div>
 		</td>
 		<td>{{t.estimate ? t.estimate + 'h' : '-'}}</td>
 		<td [ngClass]="{'expired': t.estimate && t.elapsed > t.estimate}">{{t.elapsed ? t.elapsed + 'h' : '-'}}</td>
 		<td>{{formatDate(t.opened)}}</td>
 		<td [ngClass]="{'expired': t.due && !isPast(t.due)}">{{t.due ? formatDate(t.due) : '-'}}</td>
 		<td>{{t.subtasks.length === 0 ? '-' : t.subtasks.length}}</td>
+		<td>
+			<div class=text *ngIf="t.assignee">@{{t.assignee.login}}</div>
+			<div class=text *ngIf="!t.assignee">-</div>
+		</td>
 	</tr>
 </table>
