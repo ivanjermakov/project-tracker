@@ -23,4 +23,6 @@ public class EditTaskDto {
 
 	String description;
 
+	String tag;
+
 }
