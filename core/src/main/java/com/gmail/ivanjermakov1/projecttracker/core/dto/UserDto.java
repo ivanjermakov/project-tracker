@@ -1,58 +1,26 @@
 package com.gmail.ivanjermakov1.projecttracker.core.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.FieldDefaults;
 
 import java.time.LocalDate;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class UserDto {
-	
-	public Long id;
-	
+
+	Long id;
+
 	@JsonFormat(pattern = "yyyy-MM-dd")
-	public LocalDate joined;
-	
-	public UserInfoDto userInfo;
-	public String login;
-	
-	public UserDto() {
-	}
-	
-	public UserDto(Long id, LocalDate joined, UserInfoDto userInfo, String login) {
-		this.id = id;
-		this.joined = joined;
-		this.userInfo = userInfo;
-		this.login = login;
-	}
+	LocalDate joined;
 
-	public Long getId() {
-		return id;
-	}
+	UserInfoDto userInfo;
+	String login;
 
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public LocalDate getJoined() {
-		return joined;
-	}
-
-	public void setJoined(LocalDate joined) {
-		this.joined = joined;
-	}
-
-	public UserInfoDto getUserInfo() {
-		return userInfo;
-	}
-
-	public void setUserInfo(UserInfoDto userInfo) {
-		this.userInfo = userInfo;
-	}
-
-	public String getLogin() {
-		return login;
-	}
-
-	public void setLogin(String login) {
-		this.login = login;
-	}
 }

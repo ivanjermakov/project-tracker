@@ -1,6 +1,7 @@
 package com.gmail.ivanjermakov1.projecttracker.core.service;
 
 import com.gmail.ivanjermakov1.projecttracker.core.dto.EditTaskDto;
+import com.gmail.ivanjermakov1.projecttracker.core.dto.ListTaskDto;
 import com.gmail.ivanjermakov1.projecttracker.core.dto.NewTaskDto;
 import com.gmail.ivanjermakov1.projecttracker.core.entity.Activity;
 import com.gmail.ivanjermakov1.projecttracker.core.entity.Project;
@@ -15,6 +16,7 @@ import com.gmail.ivanjermakov1.projecttracker.core.repository.ActivityRepository
 import com.gmail.ivanjermakov1.projecttracker.core.repository.ProjectRepository;
 import com.gmail.ivanjermakov1.projecttracker.core.repository.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +24,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.stream.Collectors;
 
 @Service
 public class TaskService {
@@ -51,38 +54,47 @@ public class TaskService {
 	 * @throws AuthorizationException if no access. Required role is {@code UserRole.COLLABORATOR}
 	 */
 	public Task create(User user, NewTaskDto newTaskDto) throws NoSuchEntityException, AuthorizationException {
-		Project project = projectService.get(user, newTaskDto.projectId);
+		Project project = projectService.get(user, newTaskDto.getProjectId());
 
 		roleService.authorize(user, project, UserRole.MEMBER);
 
 		Task task = new Task(
+				null,
 				project,
 				null,
 				user,
-				newTaskDto.type,
-				newTaskDto.estimate,
+				newTaskDto.getType(),
+				TaskStatus.OPEN,
+				newTaskDto.getPriority(),
+				null,
+				newTaskDto.getEstimate(),
 				0d,
 				LocalDateTime.now(),
-				newTaskDto.due,
+				newTaskDto.getDue(),
 				null,
 				new ArrayList<>(),
-				new ArrayList<>()
+				new ArrayList<>(),
+				null,
+				null
 		);
+		task.setStatus(TaskStatus.OPEN);
 
-		if (newTaskDto.parentTaskId != null) {
-			Task parentTask = taskRepository.findById(newTaskDto.parentTaskId).orElseThrow(() -> new NoSuchElementException("no such parent task"));
+		if (newTaskDto.getParentTaskId() != null) {
+			Task parentTask = taskRepository.findById(newTaskDto.getParentTaskId()).orElseThrow(() -> new NoSuchElementException("no such parent task"));
 			task.setParent(parentTask);
 		}
 
 		task = taskRepository.save(task);
 
 		task.setTaskInfo(new TaskInfo(
+				null,
 				task,
-				newTaskDto.name,
-				newTaskDto.description
+				newTaskDto.getName(),
+				newTaskDto.getDescription()
 		));
 
 		task.getActivities().add(new Activity(
+				null,
 				task,
 				task.getCreator(),
 				null,
@@ -96,13 +108,13 @@ public class TaskService {
 	}
 
 	public Task edit(User user, EditTaskDto editTaskDto) throws NoSuchEntityException, AuthorizationException {
-		Task task = taskRepository.findById(editTaskDto.id).orElseThrow(() -> new NoSuchEntityException("no such task to edit"));
+		Task task = taskRepository.findById(editTaskDto.getId()).orElseThrow(() -> new NoSuchEntityException("no such task to edit"));
 
 		roleService.authorize(user, task.getProject(), UserRole.MEMBER);
 
 		TaskInfo taskInfo = task.getTaskInfo();
-		taskInfo.setName(editTaskDto.name);
-		taskInfo.setDescription(editTaskDto.description);
+		taskInfo.setName(editTaskDto.getName());
+		taskInfo.setDescription(editTaskDto.getDescription());
 		task.setTaskInfo(taskInfo);
 
 		return taskRepository.save(task);
@@ -138,6 +150,13 @@ public class TaskService {
 
 	public List<Task> assignee(User user, Pageable pageable) {
 		return activityRepository.findAllAssigneeActivities(user.getId(), pageable);
+	}
+
+	public List<Task> list(User user, Project project, ListTaskDto listTaskDto) throws AuthorizationException {
+		List<Task> tasks = taskRepository.findAllByProject(project, PageRequest.of(0, Integer.MAX_VALUE));
+		return tasks.stream()
+				.filter(listTaskDto)
+				.collect(Collectors.toList());
 	}
 
 }

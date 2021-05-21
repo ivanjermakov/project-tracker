@@ -1,35 +1,29 @@
 package com.gmail.ivanjermakov1.projecttracker.core.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.FieldDefaults;
 
 import java.time.LocalDateTime;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class ProjectDto {
-	
-	public Long id;
-	public Boolean isPublic;
+
+	Long id;
+	Boolean is;
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-	public LocalDateTime created;
-	public String name;
-	public String description;
-	public String about;
-	public UserDto user;
-	public Double estimate;
-	public Double elapsed;
-	
-	public ProjectDto() {
-	}
-	
-	public ProjectDto(Long id, Boolean isPublic, LocalDateTime created, String name, String description, String about, UserDto user, Double estimate, Double elapsed) {
-		this.id = id;
-		this.isPublic = isPublic;
-		this.created = created;
-		this.name = name;
-		this.description = description;
-		this.about = about;
-		this.user = user;
-		this.estimate = estimate;
-		this.elapsed = elapsed;
-	}
-	
+	LocalDateTime created;
+	String name;
+	String description;
+	String about;
+	UserDto user;
+	Double estimate;
+	Double elapsed;
+
 }

@@ -1,5 +1,11 @@
 package com.gmail.ivanjermakov1.projecttracker.core.entity;
 
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.FieldDefaults;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,52 +15,24 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
 @Table(name = "token")
 public class Token {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
-	private Long id;
-	
+	Long id;
+
 	@ManyToOne
 	@JoinColumn(name = "user_id")
-	private User user;
-	
+	User user;
+
 	@Column(name = "token")
-	private String token;
-	
-	public Token() {
-	}
-	
-	public Token(User user, String token) {
-		this.user = user;
-		this.token = token;
-	}
-	
-	public Long getId() {
-		return id;
-	}
-	
-	public void setId(Long id) {
-		this.id = id;
-	}
-	
-	public User getUser() {
-		return user;
-	}
-	
-	public void setUser(User user) {
-		this.user = user;
-	}
-	
-	public String getToken() {
-		return token;
-	}
-	
-	public void setToken(String token) {
-		this.token = token;
-	}
-	
+	String token;
+
 }

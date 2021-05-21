@@ -29,7 +29,7 @@ public class RoleService {
 		if (user.getId().equals(target.getId())) throw new ApiException("unable to set or change own role");
 		if (role.level >= getRole(user, project).level) throw new ApiException("unable to set role with level higher or equal to own");
 
-		Role newRole = roleRepository.findByUserAndProject(target, project).orElse(new Role(project, target, role));
+		Role newRole = roleRepository.findByUserAndProject(target, project).orElse(new Role(null, project, target, role));
 		newRole.setRole(role);
 		return roleRepository.save(newRole);
 	}
@@ -66,7 +66,7 @@ public class RoleService {
 	 */
 	public boolean hasPermission(User user, Project project, UserRole role) {
 		UserRole userRole = getRole(user, project);
-		if (!project.getPublic() && userRole.level < UserRole.MEMBER.level) return false;
+		if (!project.getIsPublic() && userRole.level < UserRole.MEMBER.level) return false;
 		return userRole.level >= role.level;
 	}
 

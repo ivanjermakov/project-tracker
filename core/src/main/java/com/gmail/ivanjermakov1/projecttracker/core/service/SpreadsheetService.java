@@ -56,21 +56,21 @@ public class SpreadsheetService {
 			ActivityDto a = activities.get(i);
 			
 			Row row = sheet.createRow(i + 1);
-			row.createCell(0).setCellValue(a.id);
-			row.createCell(1).setCellValue(a.task.id);
-			row.createCell(2).setCellValue(a.task.name);
-			row.createCell(3).setCellValue(a.creator.login);
-			if (a.assignee != null) row.createCell(4).setCellValue(a.assignee.login);
-			row.createCell(5).setCellValue(a.status.toString());
-			row.createCell(6).setCellValue(a.description);
-			if (a.elapsed != null) row.createCell(7).setCellValue(a.elapsed);
+			row.createCell(0).setCellValue(a.getId());
+			row.createCell(1).setCellValue(a.getTask().getId());
+			row.createCell(2).setCellValue(a.getTask().getName());
+			row.createCell(3).setCellValue(a.getCreator().getLogin());
+			if (a.getAssignee() != null) row.createCell(4).setCellValue(a.getAssignee().getLogin());
+			row.createCell(5).setCellValue(a.getStatus().toString());
+			row.createCell(6).setCellValue(a.getDescription());
+			if (a.getElapsed() != null) row.createCell(7).setCellValue(a.getElapsed());
 		}
 		
 		for (int i = 0; i < 8; i++) {
 			sheet.autoSizeColumn(i);
 		}
 		
-		String filePath = fileuploadPath + stylesheetPath + project.id + "/" + name + stylesheetExtension;
+		String filePath = fileuploadPath + stylesheetPath + project.getId() + "/" + name + stylesheetExtension;
 		
 		new File(filePath).getParentFile().mkdirs();
 		FileOutputStream fos = new FileOutputStream(filePath);

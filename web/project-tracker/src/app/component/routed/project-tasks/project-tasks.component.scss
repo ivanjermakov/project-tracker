@@ -1,0 +1,64 @@
+:host {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.content-container {
+
+
+  .content {
+
+	.back-container, .tasks-container {
+	  padding: 10px;
+	}
+
+	.back-container {
+	  display: flex;
+	  align-items: center;
+
+	  cursor: pointer;
+
+	  i {
+		padding: 4px;
+		color: var(--gray);
+	  }
+
+	  .text {
+		padding: 4px;
+		color: var(--gray);
+	  }
+	}
+
+	.back-container:hover {
+	  i, .text {
+		color: black;
+	  }
+
+	  .tasks-container {
+		padding: 10px;
+
+		.no-tasks {
+		  font-size: 20px;
+		  font-style: italic;
+		}
+	  }
+	}
+
+	.filters {
+	  padding: 10px;
+	  display: flex;
+	  align-items: self-start;
+
+	  table {
+		flex: 1;
+	  }
+	}
+
+  }
+}
+
+input, select {
+  width: 100%;
+}

@@ -1,6 +1,13 @@
 package com.gmail.ivanjermakov1.projecttracker.core.entity;
 
+import com.gmail.ivanjermakov1.projecttracker.core.entity.enums.TaskPriority;
+import com.gmail.ivanjermakov1.projecttracker.core.entity.enums.TaskStatus;
 import com.gmail.ivanjermakov1.projecttracker.core.entity.enums.TaskType;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.FieldDefaults;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -18,78 +25,78 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
 @Table(name = "task")
 public class Task {
 
-	public Task() {
-	}
-
-	public Task(Project project, Task parent, User creator, TaskType type, Double estimate, Double elapsed, LocalDateTime opened, LocalDate due, TaskInfo taskInfo, List<Task> subtasks, List<Activity> activities) {
-		this.project = project;
-		this.parent = parent;
-		this.creator = creator;
-		this.type = type;
-		this.estimate = estimate;
-		this.elapsed = elapsed;
-		this.opened = opened;
-		this.due = due;
-		this.taskInfo = taskInfo;
-		this.subtasks = subtasks;
-		this.activities = activities;
-	}
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
-	private Long id;
+	Long id;
 
 	@ManyToOne
 	@JoinColumn(name = "project_id")
-	private Project project;
+	Project project;
 
 	@ManyToOne
 	@JoinColumn(name = "parent_id")
-	private Task parent;
+	Task parent;
 
 	@ManyToOne
 	@JoinColumn(name = "creator_id")
-	private User creator;
+	User creator;
 
 	@Enumerated
 	@Column(name = "type")
-	private TaskType type;
+	TaskType type;
+
+	@Enumerated
+	@Column(name = "status")
+	TaskStatus status;
+
+	@Enumerated
+	@Column(name = "priority")
+	TaskPriority priority;
+
+	@Column(name = "tag")
+	String tag;
 
 	@Column(name = "estimate")
-	private Double estimate;
+	Double estimate;
 
 	@Transient
-	private Double elapsed;
+	Double elapsed;
 
 	@Column(name = "opened")
-	private LocalDateTime opened;
+	LocalDateTime opened;
 
 	@Column(name = "due")
-	private LocalDate due;
+	LocalDate due;
 
 	@OneToOne(mappedBy = "task", cascade = {CascadeType.ALL}, orphanRemoval = true)
-	private TaskInfo taskInfo;
+	TaskInfo taskInfo;
 
 	@OneToMany(mappedBy = "parent", cascade = {CascadeType.ALL}, orphanRemoval = true)
-	private List<Task> subtasks;
+	List<Task> subtasks;
 
 	@OneToMany(mappedBy = "task", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<Activity> activities;
+	List<Activity> activities;
 
 	@Transient
-	private Activity lastActivity;
+	Activity lastActivity;
 
-	@Transient
-	private User assignee;
+	@ManyToOne
+	@JoinColumn(name = "assignee_id")
+	User assignee;
 
 	@PostLoad
 	public void postLoad() {
@@ -102,123 +109,6 @@ public class Task {
 				.filter(a -> Objects.nonNull(a.getTimestamp()))
 				.max(Comparator.comparing(Activity::getTimestamp))
 				.orElse(null);
-
-		assignee = activities.stream()
-				.map(Activity::getAssignee)
-				.filter(Objects::nonNull)
-				.findFirst()
-				.orElse(null);
 	}
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public Project getProject() {
-		return project;
-	}
-
-	public void setProject(Project project) {
-		this.project = project;
-	}
-
-	public Task getParent() {
-		return parent;
-	}
-
-	public void setParent(Task parent) {
-		this.parent = parent;
-	}
-
-	public User getCreator() {
-		return creator;
-	}
-
-	public void setCreator(User creator) {
-		this.creator = creator;
-	}
-
-	public TaskType getType() {
-		return type;
-	}
-
-	public void setType(TaskType type) {
-		this.type = type;
-	}
-
-	public Double getEstimate() {
-		return estimate;
-	}
-
-	public void setEstimate(Double estimate) {
-		this.estimate = estimate;
-	}
-
-	public Double getElapsed() {
-		return elapsed;
-	}
-
-	public void setElapsed(Double elapsed) {
-		this.elapsed = elapsed;
-	}
-
-	public LocalDateTime getOpened() {
-		return opened;
-	}
-
-	public void setOpened(LocalDateTime opened) {
-		this.opened = opened;
-	}
-
-	public LocalDate getDue() {
-		return due;
-	}
-
-	public void setDue(LocalDate due) {
-		this.due = due;
-	}
-
-	public TaskInfo getTaskInfo() {
-		return taskInfo;
-	}
-
-	public void setTaskInfo(TaskInfo taskInfo) {
-		this.taskInfo = taskInfo;
-	}
-
-	public List<Task> getSubtasks() {
-		return subtasks;
-	}
-
-	public void setSubtasks(List<Task> subtasks) {
-		this.subtasks = subtasks;
-	}
-
-	public List<Activity> getActivities() {
-		return activities;
-	}
-
-	public void setActivities(List<Activity> activities) {
-		this.activities = activities;
-	}
-
-	public Activity getLastActivity() {
-		return lastActivity;
-	}
-
-	public void setLastActivity(Activity lastActivity) {
-		this.lastActivity = lastActivity;
-	}
-
-	public User getAssignee() {
-		return assignee;
-	}
-
-	public void setAssignee(User assignee) {
-		this.assignee = assignee;
-	}
 }

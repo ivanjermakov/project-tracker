@@ -10,6 +10,8 @@ import com.gmail.ivanjermakov1.projecttracker.core.dto.NewTaskDto;
 import com.gmail.ivanjermakov1.projecttracker.core.dto.ProjectDto;
 import com.gmail.ivanjermakov1.projecttracker.core.dto.RegisterUserDto;
 import com.gmail.ivanjermakov1.projecttracker.core.dto.TaskDto;
+import com.gmail.ivanjermakov1.projecttracker.core.entity.enums.TaskPriority;
+import com.gmail.ivanjermakov1.projecttracker.core.entity.enums.TaskStatus;
 import com.gmail.ivanjermakov1.projecttracker.core.entity.enums.TaskType;
 import com.gmail.ivanjermakov1.projecttracker.core.exception.AuthenticationException;
 import com.gmail.ivanjermakov1.projecttracker.core.exception.AuthorizationException;
@@ -56,7 +58,7 @@ public class TaskTest {
 		RegisterUserDto registerUserDto = new RegisterUserDto("test", "password");
 		registerController.register(registerUserDto);
 		
-		token = authController.authenticate(new AuthUserDto(registerUserDto.login, registerUserDto.password));
+		token = authController.authenticate(new AuthUserDto(registerUserDto.getLogin(), registerUserDto.getPassword()));
 		int tasksCount = 5;
 		
 		project = projectController.create(token, new NewProjectDto(true, "test_proj", null, null));
@@ -68,8 +70,10 @@ public class TaskTest {
 					try {
 						return taskController.create(token, new NewTaskDto(
 								null,
-								project.id,
+								project.getId(),
 								TaskType.FEATURE,
+								TaskStatus.OPEN,
+								TaskPriority.MINOR,
 								null,
 								null,
 								"task_" + i,
@@ -88,9 +92,9 @@ public class TaskTest {
 		taskController.delete(token, tasks
 				.stream()
 				.findFirst()
-				.orElseThrow(NoSuchEntityException::new).id);
+				.orElseThrow(NoSuchEntityException::new).getId());
 		
-		List<TaskDto> tasksExceptDeleted = taskController.all(token, project.id, PageRequest.of(0, Integer.MAX_VALUE));
+		List<TaskDto> tasksExceptDeleted = taskController.all(token, project.getId(), PageRequest.of(0, Integer.MAX_VALUE));
 		
 		Assert.assertEquals(tasks.size() - 1, tasksExceptDeleted.size());
 	}

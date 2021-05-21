@@ -30,10 +30,7 @@ export class NewActivityComponent implements OnInit {
 	) {
 		// @ts-ignore
 		this.activity.status = TaskStatus[TaskStatus.OPEN];
-		this.arrayService.filter(Object.keys(TaskStatus), k => isNaN(parseInt(k)), keys => {
-			this.taskStatuses = keys;
-			console.debug(this.taskStatuses);
-		});
+		this.arrayService.filter(Object.keys(TaskStatus), k => isNaN(parseInt(k)), keys => this.taskStatuses = keys);
 	}
 
 	ngOnInit() {

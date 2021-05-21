@@ -14,7 +14,7 @@ import java.util.List;
 public interface TaskRepository extends CrudRepository<Task, Long> {
 	
 	List<Task> findAllByProject(Project project, Pageable pageable);
-	
+
 	@Query(value = "select t.type, count(*)\n" +
 			"from project p\n" +
 			"         join task t on p.id = t.project_id\n" +
@@ -22,7 +22,7 @@ public interface TaskRepository extends CrudRepository<Task, Long> {
 			"group by t.type\n" +
 			"order by t.type", nativeQuery = true)
 	List<ProjectTaskType> findTaskTypesByProject(@Param("id") Long projectId);
-	
+
 	List<Task> findAllByCreator(User user, Pageable pageable);
-	
+
 }

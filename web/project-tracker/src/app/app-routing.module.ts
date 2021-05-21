@@ -15,6 +15,7 @@ import {TaskComponent} from './component/routed/task/task.component';
 import {NewActivityComponent} from './component/routed/new-activity/new-activity.component';
 import {TasksComponent} from './component/routed/tasks/tasks.component';
 import {ErrorComponent} from './component/routed/error/error.component';
+import {ProjectTasksComponent} from './component/routed/project-tasks/project-tasks.component';
 
 
 const routes: Routes = [
@@ -90,6 +91,11 @@ const routes: Routes = [
 		path: ':login/:name/task/:id',
 		component: TaskComponent,
 		data: {title: 'Project'}
+	},
+	{
+		path: ':login/:name/list',
+		component: ProjectTasksComponent,
+		data: {title: 'Project tasks'}
 	},
 	{
 		path: ':login/:name/task/:taskId/activity/create',

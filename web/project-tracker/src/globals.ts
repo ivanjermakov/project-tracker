@@ -10,6 +10,7 @@ export const LOGO_BW_SRC = 'assets/logo/project-tracker-bw.png';
 export const PROJECTS_IN_FEED = 20;
 export const PROJECTS_IN_PROFILE = 20;
 export const TASKS_IN_TABLE = 10;
+export const TASKS_IN_PROJECT = 50;
 export const ACTIVITIES_IN_LIST = 20;
 export const ACTIVITIES_IN_FEED = 100;
 export const OWNED_TASKS_IN_TASKS = 100;

@@ -19,6 +19,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -37,43 +38,50 @@ public class ProjectService {
 	}
 
 	public ProjectDto create(User user, NewProjectDto newProjectDto) throws DuplicationException {
-		if (projectRepository.findByNameAndUser(newProjectDto.name, user.getId()).isPresent())
+		if (projectRepository.findByNameAndUser(newProjectDto.getName(), user.getId()).isPresent())
 			throw new DuplicationException("such project already exist");
 
 		Project project = projectRepository.save(
 				new Project(
+						null,
 						user,
-						newProjectDto.isPublic,
-						LocalDateTime.now()
+						newProjectDto.getIsPublic(),
+						LocalDateTime.now(),
+						null,
+						new ArrayList<>(),
+						new ArrayList<>(),
+						null,
+						null
 				)
 		);
 
 		ProjectInfo projectInfo = new ProjectInfo(
+				null,
 				project,
-				newProjectDto.name,
-				newProjectDto.description,
-				newProjectDto.about
+				newProjectDto.getName(),
+				newProjectDto.getDescription(),
+				newProjectDto.getAbout()
 		);
 
 		project.setProjectInfo(projectInfo);
 
 		projectRepository.save(project);
 
-		roleRepository.save(new Role(project, user, UserRole.OWNER));
+		roleRepository.save(new Role(null, project, user, UserRole.OWNER));
 
 //		TODO: feature: progress
 		return Mapper.map(project, ProjectDto.class);
 	}
 
 	public Project edit(User user, EditProjectDto editProjectDto) throws NoSuchEntityException, AuthorizationException {
-		Project project = this.projectRepository.findById(editProjectDto.id).orElseThrow(() -> new NoSuchEntityException("no such project to edit"));
+		Project project = this.projectRepository.findById(editProjectDto.getId()).orElseThrow(() -> new NoSuchEntityException("no such project to edit"));
 
 		roleService.authorize(user, project, UserRole.MODERATOR);
 
-		project.setPublic(editProjectDto.isPublic);
-		project.getProjectInfo().setName(editProjectDto.name);
-		project.getProjectInfo().setDescription(editProjectDto.description);
-		project.getProjectInfo().setAbout(editProjectDto.about);
+		project.setIsPublic(editProjectDto.getIsPublic());
+		project.getProjectInfo().setName(editProjectDto.getName());
+		project.getProjectInfo().setDescription(editProjectDto.getDescription());
+		project.getProjectInfo().setAbout(editProjectDto.getAbout());
 
 		return projectRepository.save(project);
 	}
@@ -103,7 +111,7 @@ public class ProjectService {
 		return projectRepository.findAllByUser(ofUser.getId(), pageable).stream()
 				.filter(p -> {
 					if (user.getId().equals(ofUser.getId())) return true;
-					return p.getPublic();
+					return p.getIsPublic();
 				})
 				.collect(Collectors.toList());
 	}

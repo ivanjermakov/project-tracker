@@ -1,43 +1,47 @@
 package com.gmail.ivanjermakov1.projecttracker.core.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.gmail.ivanjermakov1.projecttracker.core.entity.enums.TaskPriority;
+import com.gmail.ivanjermakov1.projecttracker.core.entity.enums.TaskStatus;
 import com.gmail.ivanjermakov1.projecttracker.core.entity.enums.TaskType;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.FieldDefaults;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class NewTaskDto {
-	
-	public Long parentTaskId;
-	
+
+	Long parentTaskId;
+
 	@NotNull
-	public Long projectId;
-	
+	Long projectId;
+
 	@NotNull
-	public TaskType type;
-	
-	public Double estimate;
-	
+	TaskType type;
+
+	@NotNull
+	TaskStatus status;
+
+	@NotNull
+	TaskPriority priority;
+
+	Double estimate;
+
 	@JsonFormat(pattern = "yyyy-MM-dd")
-	public LocalDate due;
-	
+	LocalDate due;
+
 	@NotBlank
-	public String name;
-	
-	public String description;
-	
-	public NewTaskDto() {
-	}
-	
-	public NewTaskDto(Long parentTaskId, Long projectId, TaskType type, Double estimate, LocalDate due, String name, String description) {
-		this.parentTaskId = parentTaskId;
-		this.projectId = projectId;
-		this.type = type;
-		this.estimate = estimate;
-		this.due = due;
-		this.name = name;
-		this.description = description;
-	}
-	
+	String name;
+
+	String description;
+
 }

@@ -36,12 +36,12 @@ public class UserService {
 	}
 
 	public String authenticate(AuthUserDto authUserDto) throws NoSuchEntityException, AuthenticationException {
-		User user = userCredentialsRepository.findByLogin(authUserDto.login)
+		User user = userCredentialsRepository.findByLogin(authUserDto.getLogin())
 				.orElseThrow(() -> new NoSuchEntityException("no user with such login")).getUser();
-		if (!Hasher.check(authUserDto.password, user.getUserCredentials().getHash()))
+		if (!Hasher.check(authUserDto.getPassword(), user.getUserCredentials().getHash()))
 			throw new AuthenticationException("invalid userCredentials");
 
-		Token token = new Token(user, TokenGenerator.generate());
+		Token token = new Token(null, user, TokenGenerator.generate());
 		return tokenRepository.save(token).getToken();
 	}
 
@@ -52,14 +52,14 @@ public class UserService {
 	}
 
 	public void register(RegisterUserDto registerUserDto) throws RegistrationException {
-		if (userCredentialsRepository.findByLogin(registerUserDto.login).isPresent())
+		if (userCredentialsRepository.findByLogin(registerUserDto.getLogin()).isPresent())
 			throw new RegistrationException("user with such login already exist");
 
-		User user = new User(LocalDate.now());
+		User user = new User(null, LocalDate.now(), null, null, null, null);
 		userRepository.save(user);
 
-		user.setUserCredentials(new UserCredentials(user, registerUserDto.login, Hasher.getHash(registerUserDto.password)));
-		user.setUserInfo(new UserInfo(user));
+		user.setUserCredentials(new UserCredentials(null, user, registerUserDto.getLogin(), Hasher.getHash(registerUserDto.getPassword())));
+		user.setUserInfo(new UserInfo(null, user, null, null, null, null, null));
 		userRepository.save(user);
 	}
 
@@ -70,17 +70,17 @@ public class UserService {
 	}
 
 	public User edit(User user, EditUserDto editUserDto) throws NoSuchEntityException, AuthorizationException {
-		User editingUser = userRepository.findById(editUserDto.id).orElseThrow(() -> new NoSuchEntityException("no user with such id"));
+		User editingUser = userRepository.findById(editUserDto.getId()).orElseThrow(() -> new NoSuchEntityException("no user with such id"));
 		if (!user.getId().equals(editingUser.getId())) throw new AuthorizationException("no permission");
 
-		editingUser.getUserCredentials().setLogin(editUserDto.login);
+		editingUser.getUserCredentials().setLogin(editUserDto.getLogin());
 
 		UserInfo userInfo = editingUser.getUserInfo();
-		userInfo.setName(editUserDto.name);
-		userInfo.setBio(editUserDto.bio);
-		userInfo.setCompany(editUserDto.company);
-		userInfo.setUrl(editUserDto.url);
-		userInfo.setLocation(editUserDto.location);
+		userInfo.setName(editUserDto.getName());
+		userInfo.setBio(editUserDto.getBio());
+		userInfo.setCompany(editUserDto.getCompany());
+		userInfo.setUrl(editUserDto.getUrl());
+		userInfo.setLocation(editUserDto.getLocation());
 		editingUser.setUserInfo(userInfo);
 
 		return userRepository.save(editingUser);

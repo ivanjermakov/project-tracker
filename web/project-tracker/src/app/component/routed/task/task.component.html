@@ -85,7 +85,7 @@
 			</div>
 		</div>
 		<div class="delimiter" *ngIf="task.description || editMode"></div>
-		<div class="description-container">
+		<div class="description-container" *ngIf="task.description || editMode">
 			<div class="header">Description</div>
 			<div class="text"
 			     [ngClass]="{'editing': editMode}"

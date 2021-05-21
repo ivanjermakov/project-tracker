@@ -6,6 +6,7 @@ import {HttpClient} from '@angular/common/http';
 import {NewTask} from '../dto/NewTask';
 import {EditTask} from '../dto/EditTask';
 import {Task} from '../dto/Task';
+import {ListTask} from '../dto/ListTask';
 
 @Injectable({
 	providedIn: 'root'
@@ -56,6 +57,13 @@ export class TaskService {
 
 	delete(token: string, taskId: number): Observable<void> {
 		return this.http.post<void>(API_URL + 'task/delete', taskId, {headers: {token: token}});
+	}
+
+	list(token: string, projectId: number, listTask: ListTask, pageable: Pageable): Observable<Task[]> {
+		return this.http.post<Task[]>(`${API_URL}task/${projectId}/list`, listTask, {
+			params: pageable.toHttpParams(),
+			headers: {token: token}
+		});
 	}
 
 }

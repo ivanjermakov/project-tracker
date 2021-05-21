@@ -1,33 +1,30 @@
 package com.gmail.ivanjermakov1.projecttracker.core.dto;
 
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.FieldDefaults;
+
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class EditUserDto {
-	
+
 	@NotNull
-	public Long id;
-	
+	Long id;
+
 	@NotBlank
-	public String login;
-	
-	public String name;
-	public String bio;
-	public String url;
-	public String company;
-	public String location;
-	
-	public EditUserDto() {
-	}
-	
-	public EditUserDto(Long id, String login, String name, String bio, String url, String company, String location) {
-		this.id = id;
-		this.login = login;
-		this.name = name;
-		this.bio = bio;
-		this.url = url;
-		this.company = company;
-		this.location = location;
-	}
-	
+	String login;
+
+	String name;
+	String bio;
+	String url;
+	String company;
+	String location;
+
 }

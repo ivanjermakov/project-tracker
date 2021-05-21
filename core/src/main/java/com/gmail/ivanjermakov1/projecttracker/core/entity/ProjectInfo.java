@@ -1,5 +1,11 @@
 package com.gmail.ivanjermakov1.projecttracker.core.entity;
 
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.FieldDefaults;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,76 +15,30 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
 @Table(name = "project_info")
 public class ProjectInfo {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
-	private Long id;
-	
+	Long id;
+
 	@OneToOne
 	@JoinColumn(name = "project_id")
-	private Project project;
-	
+	Project project;
+
 	@Column(name = "name")
-	private String name;
-	
+	String name;
+
 	@Column(name = "description")
-	private String description;
-	
+	String description;
+
 	@Column(name = "about")
-	private String about;
-	
-	public ProjectInfo() {
-	}
-	
-	public ProjectInfo(Project project, String name, String description, String about) {
-		this.project = project;
-		this.name = name;
-		this.description = description;
-		this.about = about;
-	}
-	
-	public Long getId() {
-		return id;
-	}
-	
-	public void setId(Long id) {
-		this.id = id;
-	}
-	
-	public Project getProject() {
-		return project;
-	}
-	
-	public void setProject(Project project) {
-		this.project = project;
-	}
-	
-	public String getName() {
-		return name;
-	}
-	
-	public void setName(String name) {
-		this.name = name;
-	}
-	
-	public String getDescription() {
-		return description;
-	}
-	
-	public void setDescription(String description) {
-		this.description = description;
-	}
-	
-	public String getAbout() {
-		return about;
-	}
-	
-	public void setAbout(String about) {
-		this.about = about;
-	}
-	
+	String about;
+
 }

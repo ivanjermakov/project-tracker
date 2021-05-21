@@ -1,29 +1,29 @@
 package com.gmail.ivanjermakov1.projecttracker.core.dto;
 
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.FieldDefaults;
+
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class NewProjectDto {
-	
+
 	@NotNull
-	public Boolean isPublic;
-	
+	Boolean isPublic;
+
 	@NotBlank
 	@Pattern(regexp = "^[\\w-]{3,}[0-9a-zA-Z]$", message = "should match the pattern /^[\\w-]{3,30}[0-9a-zA-Z]$/")
-	public String name;
-	
-	public String description;
-	public String about;
-	
-	public NewProjectDto() {
-	}
-	
-	public NewProjectDto(Boolean isPublic, String name, String description, String about) {
-		this.isPublic = isPublic;
-		this.name = name;
-		this.description = description;
-		this.about = about;
-	}
-	
+	String name;
+
+	String description;
+	String about;
+
 }

@@ -52,29 +52,37 @@ public class ActivityService {
 	}
 	
 	public Activity create(User user, NewActivityDto newActivityDto) throws NoSuchEntityException, AuthorizationException {
-		if (newActivityDto.status == null && newActivityDto.elapsed == null && newActivityDto.assigneeLogin == null)
+		if (newActivityDto.getStatus() == null && newActivityDto.getElapsed() == null && newActivityDto.getAssigneeLogin() == null)
 			throw new InvalidParameterException("empty activities are not allowed");
 		
-		Task task = taskService.get(user, newActivityDto.taskId);
+		Task task = taskService.get(user, newActivityDto.getTaskId());
 		
 		roleService.authorize(user, task.getProject(), UserRole.MEMBER);
 		
 		Activity activity = new Activity(
+				null,
 				task,
 				user,
-				!Strings.isBlank(newActivityDto.assigneeLogin)
-						? userService.getUser(user, newActivityDto.assigneeLogin)
+				!Strings.isBlank(newActivityDto.getAssigneeLogin())
+						? userService.getUser(user, newActivityDto.getAssigneeLogin())
 						: null,
-				newActivityDto.status,
-				newActivityDto.elapsed,
+				newActivityDto.getStatus(),
+				newActivityDto.getElapsed(),
 				LocalDateTime.now(),
-				newActivityDto.description
+				newActivityDto.getDescription()
 		);
-		
+
 		task.getActivities().add(activity);
-		
+		if (activity.getStatus() != null) {
+			task.setStatus(activity.getStatus());
+		}
+//		task.setPriority(activity.getPriority());
+		if (activity.getAssignee() != null) {
+			task.setAssignee(activity.getAssignee());
+		}
+
 		taskRepository.save(task);
-		
+
 		return activity;
 	}
 	

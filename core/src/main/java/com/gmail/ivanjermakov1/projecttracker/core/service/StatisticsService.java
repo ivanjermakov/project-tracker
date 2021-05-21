@@ -70,8 +70,8 @@ public class StatisticsService {
 		if (activities.size() == 0) return Collections.emptyList();
 		
 		List<LocalDate> resultDates = generateDates(
-				activities.get(0).day,
-				activities.get(activities.size() - 1).day,
+				activities.get(0).getDay(),
+				activities.get(activities.size() - 1).getDay(),
 				period
 		);
 		
@@ -79,10 +79,10 @@ public class StatisticsService {
 		
 		return groups.stream()
 				.map(group -> new ProjectActivityDto(
-						group.get(0).day,
+						group.get(0).getDay(),
 						group
 								.stream()
-								.mapToInt(a -> a.activityAmount)
+								.mapToInt(ProjectActivityDto::getActivityAmount)
 								.sum()
 				))
 				.collect(Collectors.toList());
@@ -94,8 +94,8 @@ public class StatisticsService {
 		for (int i = 0; i < startDates.size(); i++) {
 			List<ProjectActivityDto> group = new ArrayList<>();
 			for (ProjectActivityDto a : activities) {
-				if (!a.day.isBefore(startDates.get(i)) &&
-						(i == startDates.size() - 1 || a.day.isBefore(startDates.get(i + 1)))) {
+				if (!a.getDay().isBefore(startDates.get(i)) &&
+						(i == startDates.size() - 1 || a.getDay().isBefore(startDates.get(i + 1)))) {
 					group.add(a);
 				}
 			}
@@ -109,15 +109,15 @@ public class StatisticsService {
 		if (activities.isEmpty()) return activities;
 		List<ProjectActivityDto> result = new ArrayList<>();
 		
-		LocalDate currentDate = activities.get(0).day;
-		LocalDate toDate = activities.get(activities.size() - 1).day;
+		LocalDate currentDate = activities.get(0).getDay();
+		LocalDate toDate = activities.get(activities.size() - 1).getDay();
 		
 		while (!currentDate.isAfter(toDate)) {
 			LocalDate finalCurrentDate = currentDate;
 			
 			Optional<ProjectActivityDto> current = activities
 					.stream()
-					.filter(a -> a.day.equals(finalCurrentDate))
+					.filter(a -> a.getDay().equals(finalCurrentDate))
 					.findFirst();
 			
 			if (current.isPresent()) {

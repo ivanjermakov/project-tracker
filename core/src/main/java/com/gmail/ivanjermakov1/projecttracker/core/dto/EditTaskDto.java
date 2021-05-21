@@ -1,25 +1,26 @@
 package com.gmail.ivanjermakov1.projecttracker.core.dto;
 
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.FieldDefaults;
+
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class EditTaskDto {
-	
+
 	@NotNull
-	public Long id;
-	
+	Long id;
+
 	@NotBlank
-	public String name;
-	
-	public String description;
-	
-	public EditTaskDto() {
-	}
-	
-	public EditTaskDto(Long id, String name, String description) {
-		this.id = id;
-		this.name = name;
-		this.description = description;
-	}
-	
+	String name;
+
+	String description;
+
 }
