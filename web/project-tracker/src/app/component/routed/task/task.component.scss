@@ -2,7 +2,7 @@
 
   .content {
 
-	.back-container, .name-container, .info-container, .description-container, .tag-container, .subtasks-container, .activities-container {
+	.back-container, .name-container, .info-container, .description-container, .tag-container, .subtasks-container, .activities-container, .comments-container {
 	  padding: 10px;
 	}
 
@@ -173,6 +173,77 @@
 		font-size: 20px;
 		font-style: italic;
 	  }
+	}
+
+	.comments-container {
+
+	  .text {
+		font-size: 20px;
+		color: var(--gray)
+	  }
+
+	  .no-comments {
+		font-size: 20px;
+		font-style: italic;
+	  }
+
+	  .comments {
+		display: flex;
+		flex-direction: column;
+		width: 100%;
+
+		.comment {
+		  display: grid;
+		  grid-template-columns: auto auto;
+		  grid-template-rows: auto auto;
+
+		  padding: 10px;
+		  margin: 5px;
+
+		  border: 1px solid silver;
+		  border-radius: 5px;
+
+		  white-space: pre-wrap;
+
+		  .poster {
+			grid-column: 1/2;
+			grid-row: 1/2;
+		  }
+
+		  .content {
+			grid-column: 1/3;
+			grid-row: 2/3;
+
+			color: black;
+			font-size: 20px;
+		  }
+
+		  .timestamp {
+			grid-column: 2/3;
+			grid-row: 1/2;
+			justify-self: flex-end;
+		  }
+
+		}
+	  }
+
+	  .new-comment {
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+
+		textarea {
+		  flex: 1;
+		  margin: 4px;
+
+		  border-radius: 5px;
+		}
+
+		button {
+		  margin: 4px;
+		}
+	  }
+
 	}
 
   }

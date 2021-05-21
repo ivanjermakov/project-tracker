@@ -15,6 +15,9 @@ import {Pageable} from '../../../dto/Pageable';
 import {ACTIVITIES_IN_LIST} from '../../../../globals';
 import {Activity} from '../../../dto/Activity';
 import {TokenProvider} from '../../../provider/token.provider';
+import {Comment} from '../../../dto/Comment';
+import {CommentService} from '../../../service/comment.service';
+import {NewComment} from '../../../dto/NewComment';
 
 @Component({
 	selector: 'app-task',
@@ -29,14 +32,14 @@ export class TaskComponent implements OnInit {
 
 	me: User;
 	task: Task;
-	beforeEditTask: Task;
-
 	parentTask: Task;
-
 	activities: Activity[];
-	lastActivity: Activity;
 
+	beforeEditTask: Task;
 	editMode: boolean = false;
+
+	comments: Comment[];
+	newComment: NewComment = new NewComment();
 
 	constructor(
 		private app: AppComponent,
@@ -48,7 +51,8 @@ export class TaskComponent implements OnInit {
 		private activityService: ActivityService,
 		private tokenProvider: TokenProvider,
 		private authService: AuthService,
-		private titleService: Title
+		private titleService: Title,
+		private commentService: CommentService,
 	) {
 	}
 
@@ -63,7 +67,7 @@ export class TaskComponent implements OnInit {
 					});
 					this.taskService.get(token, params['id']).subscribe(task => {
 						this.task = task;
-						console.debug(task);
+						this.newComment.taskId = task.id;
 						this.titleService.setTitle(`#${task.id} ${task.name}`);
 						if (task.parentTaskId) {
 							this.taskService.get(token, task.parentTaskId).subscribe(parentTask => {
@@ -72,8 +76,8 @@ export class TaskComponent implements OnInit {
 						}
 						this.activityService.allByTask(token, this.task.id, new Pageable(0, ACTIVITIES_IN_LIST)).subscribe(activities => {
 							this.activities = activities;
-							this.lastActivity = activities[0];
 						});
+						this.commentService.getAll(token, this.task.id).subscribe(comments => this.comments = comments);
 					});
 				});
 			});
@@ -82,6 +86,10 @@ export class TaskComponent implements OnInit {
 
 	formatDate(date: Date) {
 		return TimeService.formatDate(date, 'MMMM Do[, ] YYYY');
+	}
+
+	formatDateTime(date: Date) {
+		return TimeService.formatDate(date, 'MMMM Do[, ] YYYY [ at ] HH:mm');
 	}
 
 	edit() {
@@ -114,4 +122,14 @@ export class TaskComponent implements OnInit {
 	isPast(due: Date): boolean {
 		return TimeService.isPast(due);
 	}
+
+	postComment() {
+		this.tokenProvider.token.subscribe(token => {
+			this.commentService.post(token, this.newComment).subscribe(comment => {
+				this.comments.push(comment);
+				this.newComment.text = '';
+			});
+		});
+	}
+
 }

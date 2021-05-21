@@ -15,7 +15,7 @@
 				{{task.name}}
 			</div>
 			<app-task-type-icon [type]="task.type"></app-task-type-icon>
-			<app-task-status-icon [status]="lastActivity.status" *ngIf="lastActivity"></app-task-status-icon>
+			<app-task-status-icon [status]="task.status" *ngIf="task.status"></app-task-status-icon>
 			<div class="edit" title="Edit project"
 			     *ngIf="!editMode"
 			     (click)="edit()">
@@ -33,12 +33,12 @@
 				</div>
 				<app-task-type-icon [type]="task.type"></app-task-type-icon>
 			</div>
-			<div class="status" *ngIf="lastActivity?.status">
+			<div class="status" *ngIf="task?.status">
 				<div class="pre">Status:</div>
 				<div class="text">
-					{{lastActivity.status[0] + lastActivity.status.toString().slice(1).toLowerCase()}}
+					{{task.status[0] + task.status.toString().slice(1).toLowerCase()}}
 				</div>
-				<app-task-status-icon [status]="lastActivity.status"></app-task-status-icon>
+				<app-task-status-icon [status]="task.status"></app-task-status-icon>
 			</div>
 			<div class="creator linkable">
 				<div class="pre">Creator:</div>
@@ -147,6 +147,22 @@
 			</div>
 			<app-activity-list [activities]="activities"></app-activity-list>
 			<div *ngIf="activities.length === 0" class="no-activities">No activities yet.</div>
+		</div>
+		<div class="delimiter"></div>
+		<div class="comments-container" *ngIf="!editMode && comments">
+			<div class="text">Comments</div>
+			<div class="no-comments" *ngIf="comments.length === 0">No comments yet.</div>
+			<div class="comments">
+				<div class="comment" *ngFor="let comment of comments">
+					<div class="text poster">@{{comment.creator.login}}</div>
+					<div class="text content">{{comment.text}}</div>
+					<div class="text timestamp">{{formatDateTime(comment.timestamp)}}</div>
+				</div>
+			</div>
+			<div class="new-comment">
+				<textarea rows="3" [(ngModel)]="newComment.text" placeholder="New comment"></textarea>
+				<button (click)="postComment()">Post</button>
+			</div>
 		</div>
 		<div class="delimiter"></div>
 		<div class="edit-choice"
