@@ -30,28 +30,18 @@ public class ListTaskDto implements Predicate<Task> {
 
 	@Override
 	public boolean test(Task task) {
-		if (status != null && task.getStatus() != status) {
-			return false;
-		}
-		if (type != null && task.getType() != type) {
-			return false;
-		}
-		if (priority != null && task.getPriority() != priority) {
-			return false;
-		}
+		if (status != null && task.getStatus() != status) return false;
+		if (type != null && task.getType() != type) return false;
+		if (priority != null && task.getPriority() != priority) return false;
 		if (!nullOrEmpty(assignee)) {
-			if (task.getAssignee() == null) {
+			if (task.getAssignee() == null) return false;
+			if (task.getAssignee() != null && !task.getAssignee().getUserCredentials().getLogin().equals(assignee))
 				return false;
-			}
-			if (task.getAssignee() != null && !task.getAssignee().getUserCredentials().getLogin().equals(assignee)) {
-				return false;
-			}
 		}
-		if (!nullOrEmpty(name) && !task.getTaskInfo().getName().contains(name)) {
-			return false;
-		}
-		if (!nullOrEmpty(tag) && !task.getTag().contains(tag)) {
-			return false;
+		if (!nullOrEmpty(name) && !task.getTaskInfo().getName().contains(name)) return false;
+		if (!nullOrEmpty(tag)) {
+			if (nullOrEmpty(task.getTag())) return false;
+			if (!task.getTag().contains(tag)) return false;
 		}
 		return true;
 	}
