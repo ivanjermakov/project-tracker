@@ -4,5 +4,6 @@
 		<div class="tab" [routerLink]="'/feed'">Feed</div>
 		<div class="tab" [routerLink]="'/tasks'">Tasks</div>
 		<div class="tab" [routerLink]="'/' + me.login" *ngIf="displayName">{{displayName}}</div>
+		<div class="tab logout" (click)="logOut()">Log out</div>
 	</div>
 </div>

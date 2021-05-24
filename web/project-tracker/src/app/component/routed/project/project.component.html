@@ -83,8 +83,9 @@
 		</div>
 		<div class="delimiter" *ngIf="!editMode"></div>
 		<app-team
-				*ngIf="!editMode && role && ['OWNER', 'MODERATOR'].includes(role.role.toString())"
-				[project]="project">
+				*ngIf="!editMode && role"
+				[project]="project"
+				[myRole]="role.role">
 		</app-team>
 		<div class="edit-choice"
 		     *ngIf="editMode">
