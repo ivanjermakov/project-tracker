@@ -18,5 +18,6 @@ public class UserInfoDto {
 	String url;
 	String company;
 	String location;
+	String skills;
 
 }

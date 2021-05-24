@@ -29,22 +29,25 @@
 						{{followed ? 'Unfollow' : 'Follow'}}
 					</button>
 					<button class="edit" type="submit" (click)="edit()" *ngIf="me.id === user.id">Edit</button>
+					<div class="skills" *ngIf="!editMode && skills && skills.length !== 0">
+						<div class="text skill" *ngFor="let skill of skills">{{skill}}</div>
+					</div>
+					<div class="skills" *ngIf="editMode">
+						<textarea rows="3" [(ngModel)]="user.userInfo.skills" placeholder="Skills, space separated">
+						</textarea>
+					</div>
 				</div>
 				<div class="menu">
 					<div class="tab" (click)="changeTab('projects')"
 					     [ngClass]="{'active': tab === 0 || !tab}">
 						<div class="text">Projects</div>
 					</div>
-					<div class="tab" (click)="changeTab('activity')"
-					     [ngClass]="{'active': tab === 1}">
-						<div class="text">Activity</div>
-					</div>
 					<div class="tab" (click)="changeTab('followers')"
-					     [ngClass]="{'active': tab === 2}">
+					     [ngClass]="{'active': tab === 1}">
 						<div class="text">Followers</div>
 					</div>
 					<div class="tab" (click)="changeTab('following')"
-					     [ngClass]="{'active': tab === 3}">
+					     [ngClass]="{'active': tab === 2}">
 						<div class="text">Following</div>
 					</div>
 				</div>

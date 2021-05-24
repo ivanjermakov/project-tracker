@@ -46,7 +46,7 @@
 		  }
 		}
 
-		.follow, .edit {
+		.follow, .edit, .logout {
 		  grid-column: 3/4;
 		  grid-row: 1/3;
 		  justify-self: flex-end;
@@ -54,6 +54,27 @@
 
 		  display: grid;
 		  align-items: center;
+		}
+
+		.skills {
+		  grid-column: 1/4;
+		  grid-row: 3/4;
+
+		  display: flex;
+		  align-items: center;
+		  flex-wrap: wrap;
+
+		  textarea {
+			width: 100%;
+		  }
+
+		  .skill {
+			background: var(--mainblue);
+			color: white;
+			border-radius: 5px;
+			padding: 2px 4px;
+			margin-right: 5px;
+		  }
 		}
 	  }
 

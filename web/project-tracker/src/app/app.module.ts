@@ -21,7 +21,6 @@ import {NewTaskComponent} from './component/routed/new-task/new-task.component';
 import {TaskComponent} from './component/routed/task/task.component';
 import {TasksTableComponent} from './component/embedded/tasks-table/tasks-table.component';
 import {TaskTypeIconComponent} from './component/embedded/task-type-icon/task-type-icon.component';
-import {ActivityComponent} from './component/routed/activity/activity.component';
 import {ActivityListComponent} from './component/embedded/activity-list/activity-list.component';
 import {TaskStatusIconComponent} from './component/embedded/task-status-icon/task-status-icon.component';
 import {NewActivityComponent} from './component/routed/new-activity/new-activity.component';
@@ -32,12 +31,12 @@ import {ProjectTaskTypeChartComponent} from './component/embedded/data-visualiza
 import {ChartComponent} from './component/embedded/data-visualization/chart/chart.component';
 import {TasksComponent} from './component/routed/tasks/tasks.component';
 import {ErrorComponent} from './component/routed/error/error.component';
-import { ProfileProjectComponent } from './component/embedded/profile-project/profile-project.component';
-import { NotFoundComponent } from './component/embedded/not-found/not-found.component';
-import { ProfilePreviewComponent } from './component/embedded/profile-preview/profile-preview.component';
-import { TeamComponent } from './component/embedded/team/team.component';
-import { ProjectTasksComponent } from './component/routed/project-tasks/project-tasks.component';
-import { TaskPriorityIconComponent } from './component/embedded/task-priority-icon/task-priority-icon.component';
+import {ProfileProjectComponent} from './component/embedded/profile-project/profile-project.component';
+import {NotFoundComponent} from './component/embedded/not-found/not-found.component';
+import {ProfilePreviewComponent} from './component/embedded/profile-preview/profile-preview.component';
+import {TeamComponent} from './component/embedded/team/team.component';
+import {ProjectTasksComponent} from './component/routed/project-tasks/project-tasks.component';
+import {TaskPriorityIconComponent} from './component/embedded/task-priority-icon/task-priority-icon.component';
 
 @NgModule({
 	declarations: [
@@ -58,7 +57,6 @@ import { TaskPriorityIconComponent } from './component/embedded/task-priority-ic
 		TaskComponent,
 		TasksTableComponent,
 		TaskTypeIconComponent,
-		ActivityComponent,
 		ActivityListComponent,
 		TaskStatusIconComponent,
 		NewActivityComponent,

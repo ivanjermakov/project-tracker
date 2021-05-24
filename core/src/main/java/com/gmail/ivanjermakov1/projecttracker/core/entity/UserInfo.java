@@ -49,4 +49,7 @@ public class UserInfo {
 	@Column(name = "location")
 	String location;
 
+	@Column(name = "skills")
+	String skills;
+
 }

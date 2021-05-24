@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @RestController
@@ -46,10 +47,17 @@ public class UserController {
 
 	@GetMapping("/{login}/following")
 	public Set<UserDto> getFollowing(@RequestHeader("token") String token,
-	                                @PathVariable String login) throws NoSuchEntityException {
+	                                 @PathVariable String login) throws NoSuchEntityException {
 		User user = userService.validate(token);
 		User targetUser = userService.getUser(user, login);
 		return new HashSet<>(Mapper.mapAll(targetUser.getFollowing(), UserDto.class));
+	}
+
+	@GetMapping("find")
+	public List<UserDto> find(@RequestHeader("token") String token,
+	                          @RequestParam("query") String query) throws NoSuchEntityException {
+		User user = userService.validate(token);
+		return Mapper.mapAll(userService.find(user, query), UserDto.class);
 	}
 
 }

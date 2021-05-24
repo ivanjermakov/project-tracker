@@ -35,4 +35,11 @@ export class UserService {
 		});
 	}
 
+	find(token: string, query: string): Observable<User[]> {
+		return this.http.get<User[]>(`${API_URL}user/find`, {
+			headers: {token: token},
+			params: {query: query}
+		});
+	}
+
 }

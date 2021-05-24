@@ -8,26 +8,36 @@ import {SetRole} from '../../../dto/SetRole';
 import {AuthService} from '../../../service/auth.service';
 import {User} from '../../../dto/User';
 import {ErrorService} from '../../../service/error.service';
+import {UserService} from '../../../service/user.service';
 
 @Component({
 	selector: 'app-team',
 	templateUrl: './team.component.html',
-	styleUrls: ['./team.component.scss']
+	styleUrls: [
+		'./team.component.scss',
+		'./../../../app.component.scss'
+	]
 })
 export class TeamComponent implements OnInit {
 
 	@Input()
 	project: Project;
 
+	@Input()
+	myRole: UserRole;
+
 	members: Role[];
 
 	userRole = UserRole;
 	roles: string[];
 	newMember = new SetRole();
+	query: string;
 	me: User;
+	suggestions: any[];
 
 	constructor(
 		private roleService: RoleService,
+		private userService: UserService,
 		private tokenProvider: TokenProvider,
 		private authService: AuthService,
 		private errorService: ErrorService
@@ -36,6 +46,7 @@ export class TeamComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
+		console.log(this.myRole);
 		this.newMember.projectId = this.project.id;
 		this.tokenProvider.token.subscribe(token => {
 			this.authService.validate(token).subscribe(me => this.me = me);
@@ -62,17 +73,18 @@ export class TeamComponent implements OnInit {
 		});
 	}
 
-	addMember() {
+	addMember(user: any) {
+		this.newMember.login = user.login;
 		this.tokenProvider.token.subscribe(token => {
 			this.roleService.setUserRole(token, this.newMember).subscribe(newRole => {
 					this.members.push(newRole);
+					this.query = '';
+					this.suggestions = undefined;
 					this.newMember.role = undefined;
 					this.newMember.login = '';
 				},
 				e => {
 					this.errorService.raise(e);
-					this.newMember.role = undefined;
-					this.newMember.login = '';
 				}
 			);
 		});
@@ -92,5 +104,16 @@ export class TeamComponent implements OnInit {
 		setRole.projectId = member.project.id;
 		setRole.role = member.role;
 		return setRole;
+	}
+
+	search() {
+		this.tokenProvider.token.subscribe(token => {
+			this.userService.find(token, this.query).subscribe(suggestions => {
+				this.suggestions = suggestions;
+				this.suggestions.forEach(s => {
+					s.skillList = s.userInfo.skills?.split(' ');
+				});
+			});
+		});
 	}
 }

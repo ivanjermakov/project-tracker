@@ -27,6 +27,7 @@ public class RoleService {
 	public Role setUserRole(User user, User target, Project project, UserRole role) throws AuthorizationException, ApiException {
 		authorize(user, project, UserRole.MODERATOR);
 		if (user.getId().equals(target.getId())) throw new ApiException("unable to set or change own role");
+		if (role == null) throw new ApiException("no role specified");
 		if (role.level >= getRole(user, project).level) throw new ApiException("unable to set role with level higher or equal to own");
 
 		Role newRole = roleRepository.findByUserAndProject(target, project).orElse(new Role(null, project, target, role));
@@ -39,7 +40,7 @@ public class RoleService {
 	}
 
 	public List<Role> getProjectRoles(User user, Project project) throws AuthorizationException {
-		authorize(user, project, UserRole.MODERATOR);
+		authorize(user, project, UserRole.MEMBER);
 		return roleRepository.findAllByProject(project);
 	}
 

@@ -30,6 +30,7 @@ export class ProfileComponent implements OnInit {
 	editMode: boolean = false;
 	tab: ProfileTab;
 	followed: boolean;
+	skills: string[];
 
 	constructor(
 		private urlService: UrlService,
@@ -53,6 +54,7 @@ export class ProfileComponent implements OnInit {
 				this.tokenProvider.token.subscribe(token => {
 					this.profileService.get(token, params['login']).subscribe(user => {
 						this.user = user;
+						this.updateSkills(user);
 						this.authService.validate(token).subscribe(me => {
 							this.me = me;
 							console.debug('profile user: ', this.user);
@@ -68,6 +70,10 @@ export class ProfileComponent implements OnInit {
 				});
 			});
 		});
+	}
+
+	updateSkills(user: User): void {
+		this.skills = user.userInfo.skills?.split(' ');
 	}
 
 	formatDate(date: Date) {
@@ -109,9 +115,11 @@ export class ProfileComponent implements OnInit {
 		editUser.id = this.user.id;
 		editUser.login = this.user.login;
 		editUser.name = this.user.userInfo.name;
+		editUser.skills = this.user.userInfo.skills;
 
 		this.tokenProvider.token.subscribe(token => {
 			this.profileService.edit(token, editUser).subscribe(user => {
+				this.updateSkills(user);
 				this.editMode = false;
 				this.router.navigate([user.login]);
 			}, e => this.errorService.raise(e));

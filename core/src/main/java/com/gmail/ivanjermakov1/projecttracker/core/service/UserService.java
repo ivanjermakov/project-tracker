@@ -16,10 +16,16 @@ import com.gmail.ivanjermakov1.projecttracker.core.repository.UserCredentialsRep
 import com.gmail.ivanjermakov1.projecttracker.core.repository.UserRepository;
 import com.gmail.ivanjermakov1.projecttracker.core.security.Hasher;
 import com.gmail.ivanjermakov1.projecttracker.core.security.TokenGenerator;
+import com.google.common.collect.Streams;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService {
@@ -59,7 +65,7 @@ public class UserService {
 		userRepository.save(user);
 
 		user.setUserCredentials(new UserCredentials(null, user, registerUserDto.getLogin(), Hasher.getHash(registerUserDto.getPassword())));
-		user.setUserInfo(new UserInfo(null, user, null, null, null, null, null));
+		user.setUserInfo(new UserInfo(null, user, null, null, null, null, null, ""));
 		userRepository.save(user);
 	}
 
@@ -81,6 +87,7 @@ public class UserService {
 		userInfo.setCompany(editUserDto.getCompany());
 		userInfo.setUrl(editUserDto.getUrl());
 		userInfo.setLocation(editUserDto.getLocation());
+		userInfo.setSkills(editUserDto.getSkills());
 		editingUser.setUserInfo(userInfo);
 
 		return userRepository.save(editingUser);
@@ -95,6 +102,21 @@ public class UserService {
 			user.getFollowing().remove(followUser);
 		}
 		userRepository.save(user);
+	}
+
+	public List<User> find(User user, String query) {
+		if (query.isEmpty()) return Collections.emptyList();
+		String lowerQuery = query.toLowerCase();
+		return Streams.stream(userRepository.findAll())
+				.filter(u -> {
+					List<String> skills = Optional.ofNullable(u.getUserInfo().getSkills()).map(s -> Arrays.asList(s.split(" "))).orElse(Collections.emptyList());
+					if (!skills.isEmpty() && skills.contains(lowerQuery)) return true;
+					String name = u.getUserInfo().getName();
+					if (name != null && name.toLowerCase().contains(lowerQuery)) return true;
+					if (u.getUserCredentials().getLogin().toLowerCase().contains(lowerQuery)) return true;
+					return false;
+				})
+				.collect(Collectors.toList());
 	}
 
 }

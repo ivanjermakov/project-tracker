@@ -6,4 +6,5 @@ export class EditUser {
 	url: string;
 	company: string;
 	location: string;
+	skills: string;
 }

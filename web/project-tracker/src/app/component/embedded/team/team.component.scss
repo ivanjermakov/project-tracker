@@ -1,5 +1,6 @@
 .team-container {
   padding: 10px;
+  margin-bottom: 100px;
 
   .team {
 	font-size: 20px;
@@ -30,6 +31,15 @@
 	  width: 30%;
 	}
 
+	.linkable {
+	  cursor: pointer;
+
+	  &:hover {
+		color: var(--darkblue);
+		text-decoration: underline;
+	  }
+	}
+
 	select {
 	  margin-left: 10px;
 	  padding: 2px;
@@ -39,8 +49,41 @@
 	  display: flex;
 	  align-items: center;
 
-	  button {
-		margin-left: 10px;
+	  div {
+		margin-right: 10px;
+	  }
+	}
+
+	.suggestions {
+
+	  .suggestion {
+
+		.name {
+
+		}
+
+		.skills {
+		  display: flex;
+		  align-items: center;
+
+		  .skill {
+			margin-right: 5px;
+			margin-top: 6px;
+			font-size: 18px;
+			padding: 2px;
+			color: white;
+			background: var(--mainblue);
+			border-radius: 4px;
+		  }
+		}
+
+		.role {
+
+		}
+
+		.add {
+
+		}
 	  }
 	}
 
