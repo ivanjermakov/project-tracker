@@ -20,8 +20,21 @@
 
 			<div class="assignee-wrapper">
 				<div class="text">Assignee</div>
-				@<input type="text" placeholder="assignee login" name="assignee" [(ngModel)]="activity.assigneeLogin">
+				<input type="text" class="login" [(ngModel)]="query" (keyup)="search()"
+				       placeholder="login, name, skills..." name="assignee" autocomplete="off">
 			</div>
+
+			<table class="suggestions" *ngIf="suggestions">
+				<tr class="suggestion" *ngFor="let suggestion of suggestions">
+					<td class="text name">{{suggestion.userInfo.name || suggestion.login}}</td>
+					<td class="skills">
+						<div class="text skill" *ngFor="let skill of suggestion.skillList">{{skill}}</div>
+					</td>
+					<td class="add">
+						<button (click)="assignMember(suggestion)">Assign</button>
+					</td>
+				</tr>
+			</table>
 
 			<div class="description-wrapper">
 				<div class="text">Description</div>

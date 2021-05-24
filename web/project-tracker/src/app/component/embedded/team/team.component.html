@@ -17,7 +17,7 @@
 		</div>
 		<div class="add-member" *ngIf="myRole.toString() !== 'MEMBER'">
 			<div class="text">Add new member:</div>
-			<input type="text" class="login" [(ngModel)]="query" (change)="search()"
+			<input type="text" class="login" [(ngModel)]="query" (keyup)="search()"
 			       placeholder="login, name, skills...">
 			<select [(ngModel)]="newMember.role">
 				<option *ngFor="let r of roles" [value]="userRole[r]">{{userRole[r].toLowerCase()}}</option>

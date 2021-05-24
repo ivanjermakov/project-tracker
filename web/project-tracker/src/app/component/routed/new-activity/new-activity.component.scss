@@ -16,7 +16,7 @@
 
 	  margin: 0 10%;
 
-	  .task-status-wrapper, .elapsed-wrapper, .assignee-wrapper, .description-wrapper {
+	  .task-status-wrapper, .elapsed-wrapper, .assignee-wrapper, .suggestions, .description-wrapper {
 		margin: 10px;
 	  }
 
@@ -36,8 +36,25 @@
 		}
 	  }
 
-	  .assignee-wrapper {
+	  .suggestions {
 
+		.suggestion {
+
+		  .skills {
+			display: flex;
+			align-items: center;
+
+			.skill {
+			  margin-right: 5px;
+			  margin-top: 6px;
+			  font-size: 18px;
+			  padding: 2px;
+			  color: white;
+			  background: var(--mainblue);
+			  border-radius: 4px;
+			}
+		  }
+		}
 	  }
 
 	  .description-wrapper {

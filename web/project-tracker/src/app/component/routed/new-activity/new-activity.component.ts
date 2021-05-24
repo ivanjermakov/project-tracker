@@ -6,6 +6,7 @@ import {ArrayService} from '../../../service/array.service';
 import {NewActivity} from '../../../dto/NewActivity';
 import {TaskStatus} from '../../../dto/TaskStatus';
 import {ActivityService} from '../../../service/activity.service';
+import {UserService} from '../../../service/user.service';
 
 @Component({
 	selector: 'app-new-activity',
@@ -20,13 +21,17 @@ export class NewActivityComponent implements OnInit {
 	activity: NewActivity = new NewActivity();
 	taskStatuses: string[];
 
+	query: string;
+	suggestions: any[];
+
 	constructor(
 		private router: Router,
 		private route: ActivatedRoute,
 		private activityService: ActivityService,
 		private tokenProvider: TokenProvider,
 		private authService: AuthService,
-		private arrayService: ArrayService
+		private arrayService: ArrayService,
+		private userService: UserService,
 	) {
 		// @ts-ignore
 		this.activity.status = TaskStatus[TaskStatus.OPEN];
@@ -48,6 +53,23 @@ export class NewActivityComponent implements OnInit {
 				});
 			});
 		});
+	}
+
+	search() {
+		this.tokenProvider.token.subscribe(token => {
+			this.userService.find(token, this.query).subscribe(suggestions => {
+				this.suggestions = suggestions;
+				this.suggestions.forEach(s => {
+					s.skillList = s.userInfo.skills?.split(' ');
+				});
+			});
+		});
+	}
+
+	assignMember(user: any) {
+		this.activity.assigneeLogin = user.login;
+		this.query = user.login;
+		this.suggestions = undefined;
 	}
 
 }

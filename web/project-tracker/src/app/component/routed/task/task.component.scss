@@ -208,6 +208,13 @@
 		  .poster {
 			grid-column: 1/2;
 			grid-row: 1/2;
+
+			cursor: pointer;
+
+			&:hover {
+			  color: var(--mainblue);
+			  text-decoration: underline;
+			}
 		  }
 
 		  .content {
@@ -235,6 +242,7 @@
 		textarea {
 		  flex: 1;
 		  margin: 4px;
+		  padding: 10px;
 
 		  border-radius: 5px;
 		}
