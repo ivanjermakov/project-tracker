@@ -141,7 +141,7 @@ create table user_info
 
 create table activity
 (
-    id bigserial
+    id          bigserial
         constraint activity_pk
             primary key,
     task_id     bigint    not null
@@ -157,5 +157,20 @@ create table activity
     elapsed     double precision,
     timestamp   timestamp not null,
     description varchar
+);
+
+create table comment
+(
+    id         bigserial
+        constraint comment_pk
+            primary key,
+    text       varchar,
+    timestamp  timestamp,
+    task_id    bigint
+        constraint comment_task_id_fk
+            references task,
+    creator_id bigint
+        constraint comment_user_id_fk
+            references "user"
 );
 
