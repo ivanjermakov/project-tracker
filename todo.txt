@@ -1,0 +1,10 @@
+- TODO: Patient card (details, illness history etc.)
+- TODO: Remove registration view
+- TODO: Rename skills to occupation
+- TODO: User avatars, set per registration
+
+- TODO: Specific task types
+- TODO: Translate all to russian
+- TODO: Remove following/followers tabs, replace with corporate hierarchy
+- TODO: Add trial phase next to task status
+- TODO: Remove time tracking (estimated & elapsed time)
