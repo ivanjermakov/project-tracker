@@ -25,11 +25,6 @@ const routes: Routes = [
 		data: {title: 'Auth'}
 	},
 	{
-		path: 'register',
-		component: RegisterComponent,
-		data: {title: 'Register'}
-	},
-	{
 		path: 'feed',
 		component: FeedComponent,
 		data: {title: 'Feed'}

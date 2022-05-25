@@ -1,5 +1,4 @@
 - TODO: Patient card (details, illness history etc.)
-- TODO: Remove registration view
 - TODO: Rename skills to occupation
 - TODO: User avatars, set per registration
 
