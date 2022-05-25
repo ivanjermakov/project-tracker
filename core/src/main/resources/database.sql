@@ -1,35 +1,29 @@
 create table "user"
 (
-    id     bigserial not null
+    id     bigserial
         constraint user_pk
             primary key,
-    joined date      not null
+    joined date not null
 );
-
-alter table "user"
-    owner to postgres;
 
 create table user_credentials
 (
-    id      bigserial not null
+    id      bigserial
         constraint user_credentials_pk
             primary key,
-    user_id bigint    not null
+    user_id bigint  not null
         constraint user_credentials_user_id_fk
             references "user",
-    login   varchar   not null,
-    hash    varchar   not null
+    login   varchar not null,
+    hash    varchar not null
 );
-
-alter table user_credentials
-    owner to postgres;
 
 create unique index user_credentials_login_uindex
     on user_credentials (login);
 
 create table project
 (
-    id      bigserial not null
+    id bigserial
         constraint project_pk
             primary key,
     user_id bigint    not null
@@ -39,79 +33,71 @@ create table project
     created timestamp not null
 );
 
-alter table project
-    owner to postgres;
-
 create table project_info
 (
-    id          bigserial not null
+    id          bigserial
         constraint project_info_pk
             primary key,
-    project_id  bigint    not null
+    project_id  bigint  not null
         constraint project_info_project_id_fk
             references project,
-    name        varchar   not null,
+    name        varchar not null,
     description varchar,
     about       varchar
 );
 
-alter table project_info
-    owner to postgres;
-
 create table task
 (
-    id         bigserial not null
+    id          bigserial
         constraint task_pk
             primary key,
-    project_id bigint    not null
+    project_id  bigint  not null
         constraint task_project_id_fk
             references project,
-    parent_id  bigint
+    parent_id   bigint
         constraint task_task_id_fk
             references task,
-    creator_id bigint    not null
+    creator_id  bigint  not null
         constraint task_user_id_fk
             references "user",
-    type       varchar   not null,
-    estimate   double precision,
-    opened     timestamp,
-    due        date
+    type        varchar not null,
+    estimate    double precision,
+    opened      timestamp,
+    due         date,
+    assignee_id bigint
+        constraint task_user_id_fk_2
+            references "user",
+    priority    varchar,
+    started     timestamp,
+    status      varchar,
+    tag         varchar
 );
-
-alter table task
-    owner to postgres;
 
 create table task_info
 (
-    id          bigserial not null
+    id          bigserial
         constraint task_info_pk
             primary key,
-    task_id     bigint    not null
+    task_id     bigint  not null
         constraint task_info_task_id_fk
             references task,
-    name        varchar   not null,
+    name        varchar not null,
     description varchar
 );
 
-alter table task_info
-    owner to postgres;
-
 create table user_role
 (
-    id         bigserial not null
+    id         bigserial
         constraint user_role_pk
             primary key,
-    user_id    bigint    not null
+    user_id    bigint  not null
         constraint user_role_user_id_fk
             references "user",
-    project_id bigint    not null
+    project_id bigint  not null
         constraint user_role_project_id_fk
             references project,
-    role       varchar   not null
+    role       varchar not null
 );
-
-alter table user_role
-    owner to postgres;
 
 create table user_follower
 (
@@ -123,47 +109,39 @@ create table user_follower
             references "user"
 );
 
-alter table user_follower
-    owner to postgres;
-
 create table token
 (
-    id      bigserial not null
+    id    bigserial
         constraint token_pk
             primary key,
     user_id bigint
         constraint token_user_id_fk
             references "user",
-    token   varchar   not null
+    token varchar not null
 );
-
-alter table token
-    owner to postgres;
 
 create unique index token_token_uindex
     on token (token);
 
 create table user_info
 (
-    id       bigserial not null
+    id       bigserial
         constraint user_info_pk
             primary key,
-    user_id  bigint    not null
+    user_id  bigint not null
         constraint user_info_user_id_fk
             references "user",
     name     varchar,
     bio      varchar,
     url      varchar,
     company  varchar,
-    location varchar
+    location varchar,
+    skills   varchar
 );
-
-alter table user_info
-    owner to postgres;
 
 create table activity
 (
-    id          bigserial not null
+    id bigserial
         constraint activity_pk
             primary key,
     task_id     bigint    not null
@@ -180,7 +158,4 @@ create table activity
     timestamp   timestamp not null,
     description varchar
 );
-
-alter table activity
-    owner to postgres;
 
