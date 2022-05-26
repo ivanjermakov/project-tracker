@@ -85,7 +85,7 @@
 		<div class="delimiter"></div>
 		<div class="info-container">
 			<div class="fullName" *ngIf="task.fullName">
-				<div class="pre">ФИО:</div>
+				<div class="pre">ФИО испытуемого:</div>
 				<div class="text">
 					{{task.fullName}}
 				</div>
@@ -114,7 +114,7 @@
 					{{task.medicalHistory}}
 				</div>
 			</div>
-			<div class="tookMedicine" *ngIf="task.tookMedicine !== undefined">
+			<div class="tookMedicine" *ngIf="task.tookMedicine != undefined">
 				<div class="pre">Принимал лекарства последние сутки:</div>
 				<div class="text">
 					{{task.tookMedicine === true ? 'Да' : 'Нет'}}

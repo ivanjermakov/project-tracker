@@ -2,6 +2,7 @@ package com.gmail.ivanjermakov1.projecttracker.core.controller;
 
 import com.gmail.ivanjermakov1.projecttracker.core.dto.CommentDto;
 import com.gmail.ivanjermakov1.projecttracker.core.dto.NewCommentDto;
+import com.gmail.ivanjermakov1.projecttracker.core.dto.UserDto;
 import com.gmail.ivanjermakov1.projecttracker.core.entity.Task;
 import com.gmail.ivanjermakov1.projecttracker.core.entity.User;
 import com.gmail.ivanjermakov1.projecttracker.core.exception.AuthorizationException;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("comment")
@@ -33,11 +35,16 @@ public class CommentController {
 
 	@GetMapping
 	public List<CommentDto> getAll(@RequestHeader("token") String token, @RequestParam("taskId") Long taskId) throws NoSuchEntityException, AuthorizationException {
-		User user = userService.validate(token);
-		Task task = taskService.get(user, taskId);
+        User user = userService.validate(token);
+        Task task = taskService.get(user, taskId);
 
-		return Mapper.mapAll(commentService.getAll(user, task), CommentDto.class);
-	}
+        return commentService.getAll(user, task).stream().map(c -> {
+                    CommentDto dto = Mapper.map(c, CommentDto.class);
+                    dto.setCreator(Mapper.map(c.getCreator(), UserDto.class));
+                    return dto;
+                })
+                .collect(Collectors.toList());
+    }
 
 	@PostMapping
 	public CommentDto post(@RequestHeader("token") String token, @Valid @RequestBody NewCommentDto newCommentDto) throws NoSuchEntityException, AuthorizationException {
