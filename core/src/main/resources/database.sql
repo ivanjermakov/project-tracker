@@ -48,29 +48,35 @@ create table project_info
 
 create table task
 (
-    id          bigserial
+    id              bigserial
         constraint task_pk
             primary key,
-    project_id  bigint  not null
+    project_id      bigint  not null
         constraint task_project_id_fk
             references project,
-    parent_id   bigint
+    parent_id       bigint
         constraint task_task_id_fk
             references task,
-    creator_id  bigint  not null
+    creator_id      bigint  not null
         constraint task_user_id_fk
             references "user",
-    type        varchar not null,
-    estimate    double precision,
-    opened      timestamp,
-    due         date,
-    assignee_id bigint
+    type            varchar not null,
+    estimate        double precision,
+    opened          timestamp,
+    due             date,
+    assignee_id     bigint
         constraint task_user_id_fk_2
             references "user",
-    priority    varchar,
-    started     timestamp,
-    status      varchar,
-    tag         varchar
+    priority        varchar,
+    started         timestamp,
+    status          varchar,
+    tag             varchar,
+    full_name       varchar,
+    birth_date      timestamp,
+    height          integer,
+    weight          integer,
+    medical_history varchar,
+    took_medicine   boolean
 );
 
 create table task_info

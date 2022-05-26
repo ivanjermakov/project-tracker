@@ -10,6 +10,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 
+import javax.persistence.Column;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
@@ -43,5 +44,18 @@ public class NewTaskDto {
 	String name;
 
 	String description;
+
+    String fullName;
+
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    LocalDate birthDate;
+
+    Integer height;
+
+    Integer weight;
+
+    String medicalHistory;
+
+    Boolean tookMedicine;
 
 }

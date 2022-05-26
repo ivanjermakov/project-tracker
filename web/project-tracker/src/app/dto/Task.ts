@@ -19,6 +19,14 @@ export class Task {
 	opened: Date;
 	started: Date;
 	due: Date;
+
+	fullName: string;
+	birthDate: Date;
+	height: number;
+	weight: number;
+	medicalHistory: string;
+	tookMedicine: boolean;
+
 	name: string;
 	description: string;
 	subtasks: Task[];

@@ -1,4 +1,3 @@
-- TODO: Patient card (details, illness history etc.)
 - TODO: Rename skills to occupation
 - TODO: User avatars, set per registration
 

@@ -29,25 +29,35 @@ public class TaskDto {
 	TaskPriority priority;
 	String tag;
 	Double estimate;
-	Double elapsed;
+    Double elapsed;
 
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-	LocalDateTime opened;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    LocalDateTime opened;
 
-	@JsonFormat(pattern = "yyyy-MM-dd")
-	LocalDate started;
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    LocalDate started;
 
-	@JsonFormat(pattern = "yyyy-MM-dd")
-	LocalDate due;
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    LocalDate due;
 
-	String name;
-	String description;
-	List<TaskDto> subtasks;
-	Long parentTaskId;
+    String fullName;
 
-	ActivityDto lastActivity;
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    LocalDate birthDate;
 
-	UserDto assignee;
+    Integer height;
+    Integer weight;
+    String medicalHistory;
+    Boolean tookMedicine;
+
+    String name;
+    String description;
+    List<TaskDto> subtasks;
+    Long parentTaskId;
+
+    ActivityDto lastActivity;
+
+    UserDto assignee;
 
 	public TaskDto compute() {
 		subtasks.forEach(TaskDto::compute);

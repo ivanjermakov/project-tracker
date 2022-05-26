@@ -3,7 +3,7 @@
 	<div class="content">
 		<div class="heading">Create a new task</div>
 		<form class="task-form">
-			<div class="task-type-wrapper">
+			<div class="task-type-wrapper wrapper">
 				<div class="text">Task type<span class="required">*</span></div>
 				<div class="select-wrapper">
 					<select [(ngModel)]="task.type" name="type">
@@ -12,7 +12,7 @@
 					<app-task-type-icon [type]="task.type"></app-task-type-icon>
 				</div>
 			</div>
-			<div class="task-type-wrapper">
+			<div class="task-type-wrapper wrapper">
 				<div class="text">Task priority<span class="required">*</span></div>
 				<div class="select-wrapper">
 					<select [(ngModel)]="task.priority" name="priority">
@@ -22,25 +22,51 @@
 					<app-task-priority-icon [priority]="task.priority"></app-task-priority-icon>
 				</div>
 			</div>
-			<div class="name-wrapper">
+			<div class="wrapper">
 				<div class="text">Task name<span class="required">*</span></div>
 				<input type="text" placeholder="name" name="name" [(ngModel)]="task.name">
 			</div>
-			<div class="started-wrapper">
+			<div class="wrapper">
 				<div class="text">Starting</div>
 				<input type="date" name="started" [(ngModel)]="task.started">
 			</div>
-			<div class="due-wrapper">
+			<div class="wrapper">
 				<div class="text">Due</div>
 				<input type="date" name="due" [(ngModel)]="task.due">
 			</div>
-			<div class="estimate-wrapper">
+			<div class="wrapper">
+				<div class="text">Full name</div>
+				<input type="text" name="full-name" [(ngModel)]="task.fullName">
+			</div>
+			<div class="wrapper">
+				<div class="text">Birth date</div>
+				<input type="date" name="birth-date" [(ngModel)]="task.birthDate">
+			</div>
+			<div class="wrapper">
+				<div class="text">Height</div>
+				<input type="number" name="height" [(ngModel)]="task.height">
+			</div>
+			<div class="wrapper">
+				<div class="text">Weight</div>
+				<input type="number" name="weight" [(ngModel)]="task.weight">
+			</div>
+			<div class="wrapper">
+				<div class="text">Medical history</div>
+				<textarea type="text" placeholder="Medical history" name="medical-history" rows="10"
+				          [(ngModel)]="task.medicalHistory">
+				</textarea>
+			</div>
+			<div class="wrapper">
+				<div class="text">Took medicine in the past 24h</div>
+				<input type="checkbox" name="took-medicine" [(ngModel)]="task.tookMedicine">
+			</div>
+			<div class="wrapper">
 				<div class="text">Estimate</div>
 				<input type="text" placeholder="0" name="estimate" [(ngModel)]="task.estimate">h
 			</div>
-			<div class="description-wrapper">
+			<div class="wrapper">
 				<div class="text">Description</div>
-				<textarea type="text" placeholder="description" name="description" rows="10"
+				<textarea type="text" placeholder="Description" name="description" rows="10"
 				          [(ngModel)]="task.description">
 				</textarea>
 			</div>

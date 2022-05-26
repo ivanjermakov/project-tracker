@@ -3,6 +3,7 @@ package com.gmail.ivanjermakov1.projecttracker.core.entity;
 import com.gmail.ivanjermakov1.projecttracker.core.entity.enums.TaskPriority;
 import com.gmail.ivanjermakov1.projecttracker.core.entity.enums.TaskStatus;
 import com.gmail.ivanjermakov1.projecttracker.core.entity.enums.TaskType;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -84,6 +85,24 @@ public class Task {
 
 	@Column(name = "due")
 	LocalDate due;
+
+    @Column(name="full_name")
+    String fullName;
+
+    @Column(name = "birth_date")
+    LocalDate birthDate;
+
+    @Column(name = "height")
+    Integer height;
+
+    @Column(name = "weight")
+    Integer weight;
+
+    @Column(name = "medical_history")
+    String medicalHistory;
+
+    @Column(name = "took_medicine")
+    Boolean tookMedicine;
 
 	@OneToOne(mappedBy = "task", cascade = {CascadeType.ALL}, orphanRemoval = true)
 	TaskInfo taskInfo;

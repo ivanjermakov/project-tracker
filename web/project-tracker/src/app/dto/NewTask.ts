@@ -11,6 +11,14 @@ export class NewTask {
 	estimate: number;
 	started: Date;
 	due: Date;
+
+	fullName: string;
+	birthDate: Date;
+	height: number;
+	weight: number;
+	medicalHistory: string;
+	tookMedicine: boolean;
+
 	name: string;
 	description: string;
 }
