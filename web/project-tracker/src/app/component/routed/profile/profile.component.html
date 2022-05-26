@@ -13,6 +13,13 @@
 						     (input)="user.userInfo.name = $event.target.textContent">
 							{{user.userInfo.name}}
 						</div>
+						<div class="skills" *ngIf="!editMode && skills && skills.length !== 0">
+							<div class="text skill" *ngFor="let skill of skills">{{skill}}</div>
+						</div>
+						<div class="skills" *ngIf="editMode">
+						<textarea rows="1" [(ngModel)]="user.userInfo.skills" placeholder="Position">
+						</textarea>
+						</div>
 					</div>
 					<div class="login">
 						<div class="text"
@@ -26,31 +33,7 @@
 					<div class="joined">
 						<div class="text">joined on {{formatDate(user.joined)}}</div>
 					</div>
-					<button class="follow" type="submit" (click)="follow()" *ngIf="me.id !== user.id">
-						{{followed ? 'Unfollow' : 'Follow'}}
-					</button>
 					<button class="edit" type="submit" (click)="edit()" *ngIf="me.id === user.id">Edit</button>
-					<div class="skills" *ngIf="!editMode && skills && skills.length !== 0">
-						<div class="text skill" *ngFor="let skill of skills">{{skill}}</div>
-					</div>
-					<div class="skills" *ngIf="editMode">
-						<textarea rows="3" [(ngModel)]="user.userInfo.skills" placeholder="Position">
-						</textarea>
-					</div>
-				</div>
-				<div class="menu">
-					<div class="tab" (click)="changeTab('projects')"
-					     [ngClass]="{'active': tab === 0 || !tab}">
-						<div class="text">Projects</div>
-					</div>
-					<div class="tab" (click)="changeTab('followers')"
-					     [ngClass]="{'active': tab === 1}">
-						<div class="text">Followers</div>
-					</div>
-					<div class="tab" (click)="changeTab('following')"
-					     [ngClass]="{'active': tab === 2}">
-						<div class="text">Following</div>
-					</div>
 				</div>
 			</div>
 			<div class="edit-choice"
@@ -62,7 +45,11 @@
 				     (click)="cancelEdit()">Cancel
 				</div>
 			</div>
-			<router-outlet></router-outlet>
+			<div class="profile-content">
+				<app-profile-projects></app-profile-projects>
+				<app-profile-following></app-profile-following>
+				<app-profile-followers></app-profile-followers>
+			</div>
 		</div>
 	</div>
 </div>

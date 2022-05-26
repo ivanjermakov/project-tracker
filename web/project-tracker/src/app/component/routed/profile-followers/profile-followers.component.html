@@ -1,4 +1,5 @@
-<div class="tab-content">
+<div class="tab-content" *ngIf="followers && followers.length">
+	<div class="heading">Subordinates</div>
 	<div class="profiles">
 		<app-profile-preview *ngFor="let profile of followers"
 		                     [user]="profile"

@@ -24,7 +24,7 @@ export class ProfileFollowersComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		this.route.parent.params.subscribe(params => {
+		this.route.params.subscribe(params => {
 			this.tokenProvider.token.subscribe(token => {
 				this.userService.getFollowers(token, params['login']).subscribe(followers => {
 					this.followers = followers;
