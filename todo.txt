@@ -1,4 +1,3 @@
-- TODO: Rename skills to occupation
 - TODO: User avatars, set per registration
 
 - TODO: Specific task types
