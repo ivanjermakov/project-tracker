@@ -131,18 +131,19 @@ create unique index token_token_uindex
 
 create table user_info
 (
-    id       bigserial
+    id         bigserial
         constraint user_info_pk
             primary key,
-    user_id  bigint not null
+    user_id    bigint not null
         constraint user_info_user_id_fk
             references "user",
-    name     varchar,
-    bio      varchar,
-    url      varchar,
-    company  varchar,
-    location varchar,
-    skills   varchar
+    name       varchar,
+    bio        varchar,
+    url        varchar,
+    company    varchar,
+    location   varchar,
+    skills     varchar,
+    avatar_url varchar
 );
 
 create table activity
@@ -162,7 +163,8 @@ create table activity
     status      varchar,
     elapsed     double precision,
     timestamp   timestamp not null,
-    description varchar
+    description varchar,
+    type        varchar
 );
 
 create table comment
