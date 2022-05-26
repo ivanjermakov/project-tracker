@@ -1,33 +1,33 @@
 <app-header></app-header>
 <div class="content-container">
 	<div class="content">
-		<div class="heading">Create a new project</div>
+		<div class="heading">Создать проект</div>
 		<form class="project-form">
 			<div class="name-wrapper">
-				<div class="text">Project name
+				<div class="text">Имя проекта
 					<span class="required">*</span>
 				</div>
 				<input type="text" placeholder="name" name="name" [(ngModel)]="project.name">
 			</div>
 			<div class="description-wrapper">
-				<div class="text">Description</div>
+				<div class="text">Описание</div>
 				<input type="text" placeholder="description" name="description" [(ngModel)]="project.description">
 			</div>
 			<div class="public-private">
 				<div class="public-wrapper" [ngClass]="{'selected': project.isPublic}"
 				     (click)="project.isPublic = true">
 					<i class="fas fa-unlock-alt public"></i>
-					<div class="text">Public</div>
-					<div class="description">Anyone can see project and its activity</div>
+					<div class="text">Открытый</div>
+					<div class="description">Все пользователи видят проект, его задачи и активности</div>
 				</div>
 				<div class="private-wrapper" [ngClass]="{'selected': !project.isPublic}"
 				     (click)="project.isPublic = false">
 					<i class="fas fa-lock private"></i>
-					<div class="text">Private</div>
-					<div class="description">You manually give access to a project</div>
+					<div class="text">Закрытый</div>
+					<div class="description">Администратор проекта вручную настраивает доступ</div>
 				</div>
 			</div>
-			<button type="submit" (click)="create()">Create project</button>
+			<button type="submit" (click)="create()">Создать</button>
 		</form>
 	</div>
 </div>

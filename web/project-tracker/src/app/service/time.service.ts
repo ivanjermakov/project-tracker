@@ -10,14 +10,14 @@ export class TimeService {
 	}
 
 	static formatDate(date: Date, format: string) {
-		return moment(date).format(format);
+		return TimeService.moment(date).format(format);
 	}
 
 	static moment(inp?: moment.MomentInput, format?: moment.MomentFormatSpecification, language?: string, strict?: boolean): moment.Moment {
-		return moment(inp, format, language, strict);
+		return moment(inp, format, 'ru', strict);
 	}
 
 	static isPast(date: Date) {
-		return moment(date).isAfter(moment());
+		return TimeService.moment(date).isAfter(moment());
 	}
 }

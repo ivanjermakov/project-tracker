@@ -1,10 +1,10 @@
 <app-header></app-header>
 <div class="content-container">
 	<div class="content">
-		<div class="heading">Create a new activity</div>
+		<div class="heading">Создать активность</div>
 		<form class="activity-form">
 			<div class="task-status-wrapper">
-				<div class="text">Task status</div>
+				<div class="text">Статус задачи</div>
 				<div class="select-wrapper">
 					<select [(ngModel)]="activity.status" name="activity-form">
 						<option *ngFor="let t of taskStatuses" [value]="t">{{t[0] + t.slice(1).toLowerCase()}}</option>
@@ -14,7 +14,7 @@
 			</div>
 
 			<div class="assignee-wrapper">
-				<div class="text">Assignee</div>
+				<div class="text">Исполнитель</div>
 				<input type="text" class="login" [(ngModel)]="query" (keyup)="search()"
 				       placeholder="login, name, position..." name="assignee" autocomplete="off">
 			</div>
@@ -26,17 +26,17 @@
 						<div class="text skill" *ngFor="let skill of suggestion.skillList">{{skill}}</div>
 					</td>
 					<td class="add">
-						<button (click)="assignMember(suggestion)">Assign</button>
+						<button (click)="assignMember(suggestion)">Назначить</button>
 					</td>
 				</tr>
 			</table>
 
 			<div class="description-wrapper">
-				<div class="text">Description</div>
+				<div class="text">Описание</div>
 				<input type="text" placeholder="description" name="description" [(ngModel)]="activity.description">
 			</div>
 
-			<button type="submit" (click)="create()">Create activity</button>
+			<button type="submit" (click)="create()">Создать</button>
 		</form>
 	</div>
 </div>

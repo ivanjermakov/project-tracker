@@ -1,5 +1,5 @@
 <div class="team-container">
-	<div class="team">Team</div>
+	<div class="team">Команда</div>
 	<div class="members">
 		<div class="member" *ngFor="let member of members">
 			<div class="login linkable" [routerLink]="'/' + member.user.login">@{{member.user.login}}</div>
@@ -16,7 +16,7 @@
 			</div>
 		</div>
 		<div class="add-member" *ngIf="myRole.toString() !== 'MEMBER'">
-			<div class="text">Add new member:</div>
+			<div class="text">Добавить участника:</div>
 			<input type="text" class="login" [(ngModel)]="query" (keyup)="search()"
 			       placeholder="login, name, position...">
 			<select [(ngModel)]="newMember.role">
@@ -30,7 +30,7 @@
 					<div class="text skill" *ngFor="let skill of suggestion.skillList">{{skill}}</div>
 				</td>
 				<td class="add">
-					<button (click)="addMember(suggestion)">Add</button>
+					<button (click)="addMember(suggestion)">Добавить</button>
 				</td>
 			</tr>
 		</table>

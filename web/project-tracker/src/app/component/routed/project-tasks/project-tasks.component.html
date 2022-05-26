@@ -3,18 +3,18 @@
 	<div class="content">
 		<div class="back-container" [routerLink]="'/' + project.user.login + '/' + project.name">
 			<i class="fas fa-arrow-left"></i>
-			<div class="text">Back to project</div>
+			<div class="text">Вернуться к проекту</div>
 		</div>
 		<div class="delimiter"></div>
 		<div class="filters">
 
 			<table class="col-1" (change)="change()">
 				<tr>
-					<td class="text">Task name</td>
+					<td class="text">Название задачи</td>
 					<td><input type="text" placeholder="name" name="name" [(ngModel)]="listTask.name"></td>
 				</tr>
 				<tr>
-					<td class="text">Task status</td>
+					<td class="text">Статус задачи</td>
 					<td class="select-wrapper">
 						<select [(ngModel)]="listTask.status" name="status">
 							<option *ngFor="let t of taskStatuses"
@@ -23,7 +23,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td class="text">Task type</td>
+					<td class="text">Тип задачи</td>
 					<td class="select-wrapper">
 						<select [(ngModel)]="listTask.type" name="type">
 							<option *ngFor="let t of taskTypes" [value]="t">{{t === '' ? '' : t[0] + t.slice(1).toLowerCase()}}</option>
@@ -33,7 +33,7 @@
 			</table>
 			<table class="col-2" (change)="change()">
 				<tr>
-					<td class="text">Task priority</td>
+					<td class="text">Приоритет задачи</td>
 					<td class="select-wrapper">
 						<select [(ngModel)]="listTask.priority" name="priority">
 							<option *ngFor="let t of taskPriorities"
@@ -42,11 +42,11 @@
 					</td>
 				</tr>
 				<tr>
-					<td class="text">Assignee</td>
+					<td class="text">Исполнитель</td>
 					<td><input type="text" placeholder="assignee" name="assignee" [(ngModel)]="listTask.assignee"></td>
 				</tr>
 				<tr>
-					<td class="text">Tags</td>
+					<td class="text">Тэги</td>
 					<td><input type="text" placeholder="tags" name="tags" [(ngModel)]="listTask.tag"></td>
 				</tr>
 			</table>

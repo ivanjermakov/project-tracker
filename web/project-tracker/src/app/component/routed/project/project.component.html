@@ -32,13 +32,13 @@
 					<i class="fas fa-pen"></i>
 				</div>
 				<div class="created">
-					<div class="text">created on {{formatDateWithTime(project.created)}}</div>
+					<div class="text">создан {{formatDateWithTime(project.created)}}</div>
 				</div>
 			</div>
 		</div>
 		<div class="description-container"
 		     *ngIf="(project.description && project.description.length != 0) || editMode">
-			<div class="description">Description</div>
+			<div class="description">Описание</div>
 			<div class="text"
 			     [ngClass]="{'editing': editMode}"
 			     [contentEditable]="editMode"
@@ -51,7 +51,7 @@
 		<div class="tasks-container"
 		     *ngIf="!editMode">
 			<div class="tasks-header">
-				<div class="tasks">Tasks</div>
+				<div class="tasks">Задачи</div>
 				<button class="new-task-button" [routerLink]="'task/create'" title="New task">
 					<i class="fas fa-plus"></i>
 				</button>
@@ -61,12 +61,12 @@
 			</div>
 			<app-tasks-table [tasks]="tasks">
 			</app-tasks-table>
-			<div *ngIf="tasks.length === 0" class="no-tasks">No tasks yet.</div>
+			<div *ngIf="tasks.length === 0" class="no-tasks">нет задач</div>
 		</div>
 		<div class="delimiter" *ngIf="(project.about && project.about.length != 0) || editMode"></div>
 		<div class="about-container"
 		     *ngIf="(project.about && project.about.length != 0) || editMode">
-			<div class="about">About</div>
+			<div class="about">Описание</div>
 			<div class="text"
 			     [ngClass]="{'editing': editMode}"
 			     [contentEditable]="editMode"
@@ -75,7 +75,7 @@
 		</div>
 		<div class="delimiter" *ngIf="!editMode"></div>
 		<div class="stats-container" *ngIf="!editMode">
-			<div class="stats">Stats</div>
+			<div class="stats">Статистика</div>
 			<div class="charts-container">
 				<app-project-activity-chart [project]="project"></app-project-activity-chart>
 				<app-project-task-type-chart [project]="project"></app-project-task-type-chart>
@@ -90,13 +90,13 @@
 		<div class="edit-choice"
 		     *ngIf="editMode">
 			<button
-					(click)="applyEdit()">Apply
+					(click)="applyEdit()">Применить
 			</button>
 			<div class="cancel"
-			     (click)="cancelEdit()">Cancel
+			     (click)="cancelEdit()">Отмена
 			</div>
 		</div>
 	</div>
 </div>
 
-<app-not-found *ngIf="noProject" [message]="'no such project'"></app-not-found>
+<app-not-found *ngIf="noProject" [message]="'проект не найден'"></app-not-found>

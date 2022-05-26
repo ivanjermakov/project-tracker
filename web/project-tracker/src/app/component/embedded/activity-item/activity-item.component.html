@@ -3,24 +3,24 @@
 		<div class="text">{{formatDateFromNow(activity.timestamp)}}</div>
 	</div>
 	<div class="of">
-		<div class="pre">Of</div>
+		<div class="pre">С</div>
 		<div class="text">{{'#' + activity.task.id + ' ' + activity.task.name}}</div>
 	</div>
 	<div class="by">
-		<div class="pre">By</div>
+		<div class="pre">От</div>
 		<div class="text">{{'@' + activity.creator.login}}</div>
 	</div>
 	<div class="description">
-		<div class="pre">Description</div>
+		<div class="pre">Описание</div>
 		<div class="text">{{activity.description ? activity.description : '-'}}</div>
 	</div>
 	<div class="actions">
 		<div class="status" *ngIf="activity.status">
-			<div class="pre">Changed status to</div>
+			<div class="pre">Статус изменен</div>
 			<app-task-status-icon [status]="activity.status"></app-task-status-icon>
 		</div>
 		<div class="assigned" *ngIf="activity.assignee">
-			<div class="pre">Assigned to</div>
+			<div class="pre">Исполнитель</div>
 			<div class="text">{{'@' + activity.assignee.login}}</div>
 		</div>
 	</div>

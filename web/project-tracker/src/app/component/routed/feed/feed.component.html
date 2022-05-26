@@ -2,11 +2,11 @@
 <div class="content-wrapper" *ngIf="projects && activities && me">
 	<div class="projects">
 		<div class="header">
-			<div class="heading">Projects</div>
-			<button class="new-project-button" [routerLink]="'/project/create'">New</button>
+			<div class="heading">Проекты</div>
+			<button class="new-project-button" [routerLink]="'/project/create'">Создать</button>
 			<div class="search">
 				<form (ngSubmit)="openFound()">
-					<input type="search" placeholder="Find a project" name="search"
+					<input type="search" placeholder="Поиск" name="search"
 					       [ngModel]="searchQuery"
 					       (ngModelChange)="changed($event)">
 				</form>
@@ -21,7 +21,7 @@
 	<div class="content-container">
 		<div class="content">
 			<div class="activity-container">
-				<div class="heading">Recent activities</div>
+				<div class="heading">Последняя активность</div>
 				<app-activity-list [activities]="activities"></app-activity-list>
 			</div>
 		</div>

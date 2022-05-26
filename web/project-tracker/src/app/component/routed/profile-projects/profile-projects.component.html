@@ -1,7 +1,7 @@
 <div class="projects">
-	<div class="heading">Projects</div>
+	<div class="heading">Проекты</div>
 	<app-profile-project *ngFor="let project of projects"
 	                     [project]="project">
 	</app-profile-project>
-	<div class="text no-projects" *ngIf="projects && projects.length === 0">no projects yet</div>
+	<div class="text no-projects" *ngIf="projects && projects.length === 0">нет проектов</div>
 </div>

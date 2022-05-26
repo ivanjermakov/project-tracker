@@ -1,9 +1,9 @@
 <div class="header-container">
 	<img class="logo" alt="" *ngIf="LOGO_BW_SRC" [src]="LOGO_BW_SRC" [routerLink]="'/'">
 	<div class="right" *ngIf="me">
-		<div class="tab" [routerLink]="'/feed'">Feed</div>
-		<div class="tab" [routerLink]="'/tasks'">Tasks</div>
+		<div class="tab" [routerLink]="'/feed'">Последнее</div>
+		<div class="tab" [routerLink]="'/tasks'">Задачи</div>
 		<div class="tab" [routerLink]="'/' + me.login" *ngIf="displayName">{{displayName}}</div>
-		<div class="tab logout" (click)="logOut()">Log out</div>
+		<div class="tab logout" (click)="logOut()">Выход</div>
 	</div>
 </div>

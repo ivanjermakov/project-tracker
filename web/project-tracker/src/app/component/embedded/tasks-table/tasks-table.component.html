@@ -1,16 +1,16 @@
 <table class="tasks-table" *ngIf="tasks && tasks.length !== 0">
 	<tr>
 		<!--TODO: sort-->
-		<th>Id</th>
-		<th>Name</th>
-		<th *ngIf="showProject">Project</th>
-		<th>Type</th>
-		<th>Status</th>
-		<th>Priority</th>
-		<th>Start</th>
-		<th>Due</th>
-		<th>Subtasks</th>
-		<th>Assignee</th>
+		<th>ID</th>
+		<th>Имя</th>
+		<th *ngIf="showProject">Проект</th>
+		<th>Тип</th>
+		<th>Статус</th>
+		<th>Приоритет</th>
+		<th>Начало</th>
+		<th>Окончание</th>
+		<th>Подзадач</th>
+		<th>Исполнитель</th>
 	</tr>
 	<tr class="row" *ngFor="let t of tasks"
 	    [routerLink]="'/' + t.project.user.login + '/' + t.project.name + '/task/' + t.id">

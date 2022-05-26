@@ -3,7 +3,7 @@
 	<div class="content">
 		<div class="back-container" [routerLink]="'/' + task.project.user.login + '/' + task.project.name">
 			<i class="fas fa-arrow-left"></i>
-			<div class="text">Back to project</div>
+			<div class="text">Вернуться к проекту</div>
 		</div>
 		<div class="delimiter"></div>
 		<div class="name-container">
@@ -16,69 +16,69 @@
 			</div>
 			<app-task-type-icon [type]="task.type"></app-task-type-icon>
 			<app-task-status-icon [status]="task.status" *ngIf="task.status"></app-task-status-icon>
-			<div class="edit" title="Edit project"
+			<div class="edit" title="Изменить проект"
 			     *ngIf="!editMode"
 			     (click)="edit()">
 				<i class="fas fa-pen"></i>
 			</div>
 			<div class="opened">
-				<div class="text">opened on {{formatDate(task.opened)}}</div>
+				<div class="text">создан {{formatDate(task.opened)}}</div>
 			</div>
 		</div>
 		<div class="info-container">
 			<div class="type">
-				<div class="pre">Type:</div>
+				<div class="pre">Тип:</div>
 				<div class="text">
 					{{task.type[0] + task.type.toString().slice(1).toLowerCase()}}
 				</div>
 				<app-task-type-icon [type]="task.type"></app-task-type-icon>
 			</div>
 			<div class="status" *ngIf="task?.status">
-				<div class="pre">Status:</div>
+				<div class="pre">Статус:</div>
 				<div class="text">
 					{{task.status[0] + task.status.toString().slice(1).toLowerCase()}}
 				</div>
 				<app-task-status-icon [status]="task.status"></app-task-status-icon>
 			</div>
 			<div class="creator linkable">
-				<div class="pre">Creator:</div>
+				<div class="pre">Автор:</div>
 				<div class="text" [routerLink]="'/' + task.creator.login">
 					@{{task.creator.login}}
 				</div>
 			</div>
 			<div class="assignee linkable" *ngIf="task.assignee">
-				<div class="pre">Assignee:</div>
+				<div class="pre">Исполнитель:</div>
 				<div class="text" [routerLink]="'/' + task.assignee.login">
 					@{{task.assignee.login}}
 				</div>
 			</div>
 			<div class="project linkable">
-				<div class="pre">Project:</div>
+				<div class="pre">Проект:</div>
 				<div class="text" [routerLink]="'/' + task.project.user.login + '/' + task.project.name">
 					{{task.project.name}}
 				</div>
 			</div>
 			<div class="parent-task linkable" *ngIf="task.parentTaskId && parentTask">
-				<div class="pre">Parent task:</div>
+				<div class="pre">Родительская задача:</div>
 				<div class="text"
 				     [routerLink]="'/' + task.project.user.login + '/' + task.project.name + '/task/' + parentTask.id">
 					{{'#' + parentTask.id + ' ' + parentTask.name}}
 				</div>
 			</div>
 			<div class="started" *ngIf="task.started">
-				<div class="pre">Start:</div>
+				<div class="pre">Создан:</div>
 				<div class="text">
 					{{formatDate(task.started)}}
 				</div>
 			</div>
 			<div class="started" *ngIf="!task.started">
-				<div class="pre">Start:</div>
+				<div class="pre">Начало:</div>
 				<div class="text">
 					{{formatDate(task.opened)}}
 				</div>
 			</div>
 			<div class="due" *ngIf="task.due">
-				<div class="pre">Due:</div>
+				<div class="pre">Окончание:</div>
 				<div class="text" [ngClass]="{'expired': !isPast(task.due)}">
 					{{formatDate(task.due)}}
 				</div>
@@ -87,45 +87,45 @@
 		<div class="delimiter"></div>
 		<div class="info-container">
 			<div class="fullName" *ngIf="task.fullName">
-				<div class="pre">Full name:</div>
+				<div class="pre">ФИО:</div>
 				<div class="text">
 					{{task.fullName}}
 				</div>
 			</div>
 			<div class="birthDate" *ngIf="task.birthDate">
-				<div class="pre">Birth date:</div>
+				<div class="pre">Дата рождения:</div>
 				<div class="text">
 					{{formatDate(task.birthDate)}}
 				</div>
 			</div>
 			<div class="height" *ngIf="task.height">
-				<div class="pre">Height:</div>
+				<div class="pre">Рост:</div>
 				<div class="text">
 					{{task.height}}
 				</div>
 			</div>
 			<div class="weight" *ngIf="task.weight">
-				<div class="pre">Weight:</div>
+				<div class="pre">Вес:</div>
 				<div class="text">
 					{{task.weight}}
 				</div>
 			</div>
 			<div class="medicalHistory" *ngIf="task.medicalHistory">
-				<div class="pre">Medical history:</div>
+				<div class="pre">Анамнез:</div>
 				<div class="text">
 					{{task.medicalHistory}}
 				</div>
 			</div>
 			<div class="tookMedicine" *ngIf="task.tookMedicine !== undefined">
-				<div class="pre">Took medicine in the past 24h:</div>
+				<div class="pre">Принимал лекарства последние сутки:</div>
 				<div class="text">
-					{{task.tookMedicine === true ? 'Yes' : 'No'}}
+					{{task.tookMedicine === true ? 'Да' : 'Нет'}}
 				</div>
 			</div>
 		</div>
 		<div class="delimiter" *ngIf="task.tag || editMode"></div>
 		<div class="tag-container" *ngIf="task.tag || editMode">
-			<div class="header">Tags</div>
+			<div class="header">Тэги</div>
 			<div class="text"
 			     *ngIf="editMode"
 			     [ngClass]="{'editing': editMode}"
@@ -141,7 +141,7 @@
 		</div>
 		<div class="delimiter" *ngIf="task.description || editMode"></div>
 		<div class="description-container" *ngIf="task.description || editMode">
-			<div class="header">Description</div>
+			<div class="header">Описание</div>
 			<div class="text"
 			     [ngClass]="{'editing': editMode}"
 			     [contentEditable]="editMode"
@@ -153,7 +153,7 @@
 		<div class="delimiter"></div>
 		<div class="subtasks-container" *ngIf="!editMode">
 			<div class="subtasks-header">
-				<div class="text">Subtasks</div>
+				<div class="text">Подзадачи</div>
 				<button class="new-subtask-button"
 				        [routerLink]="'/' + task.project.user.login + '/' + task.project.name + '/task/create'"
 				        [queryParams]="{parentTaskId: task.id}" title="New subtask">
@@ -162,23 +162,23 @@
 			</div>
 			<app-tasks-table [tasks]="task.subtasks">
 			</app-tasks-table>
-			<div *ngIf="task.subtasks.length === 0" class="no-subtasks">No subtasks yet.</div>
+			<div *ngIf="task.subtasks.length === 0" class="no-subtasks">нет подзадач</div>
 		</div>
 		<div class="delimiter"></div>
 		<div class="activities-container" *ngIf="!editMode && activities">
 			<div class="activities-header">
-				<div class="text">Activities</div>
+				<div class="text">Активности</div>
 				<button class="new-activity-button" [routerLink]="'activity/create'" title="New activity">
 					<i class="fas fa-plus"></i>
 				</button>
 			</div>
 			<app-activity-list [activities]="activities"></app-activity-list>
-			<div *ngIf="activities.length === 0" class="no-activities">No activities yet.</div>
+			<div *ngIf="activities.length === 0" class="no-activities">нет активностей</div>
 		</div>
 		<div class="delimiter"></div>
 		<div class="comments-container" *ngIf="!editMode && comments">
-			<div class="text">Comments</div>
-			<div class="no-comments" *ngIf="comments.length === 0">No comments yet.</div>
+			<div class="text">Комментарии</div>
+			<div class="no-comments" *ngIf="comments.length === 0">нет комментариев</div>
 			<div class="comments">
 				<div class="comment" *ngFor="let comment of comments">
 					<div class="text poster" [routerLink]="'/' + comment.creator.login">
@@ -191,18 +191,18 @@
 				</div>
 			</div>
 			<div class="new-comment">
-				<textarea rows="3" [(ngModel)]="newComment.text" placeholder="New comment"></textarea>
-				<button (click)="postComment()">Post</button>
+				<textarea rows="3" [(ngModel)]="newComment.text" placeholder="Новый комментарий"></textarea>
+				<button (click)="postComment()">Отправить</button>
 			</div>
 		</div>
 		<div class="delimiter"></div>
 		<div class="edit-choice"
 		     *ngIf="editMode">
 			<button
-					(click)="applyEdit()">Apply
+					(click)="applyEdit()">Изменить
 			</button>
 			<div class="cancel"
-			     (click)="cancelEdit()">Cancel
+			     (click)="cancelEdit()">Отмена
 			</div>
 		</div>
 	</div>

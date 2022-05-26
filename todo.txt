@@ -1,3 +1,2 @@
 - TODO: Specific task types
-- TODO: Translate all to russian
 - TODO: Add trial phase next to task status

@@ -3,12 +3,12 @@
 	<div class="content">
 		<div class="tasks-container">
 			<div class="owned" *ngIf="ownedTasks">
-				<div class="heading">Your tasks</div>
+				<div class="heading">Ваши задачи</div>
 				<app-tasks-table [tasks]="ownedTasks" [showProject]="true"></app-tasks-table>
 			</div>
 			<div class="delimiter"></div>
 			<div class="assignee" *ngIf="assigneeTasks">
-				<div class="heading">Assignee tasks</div>
+				<div class="heading">Назначенные задачи</div>
 				<app-tasks-table [tasks]="assigneeTasks" [showProject]="true"></app-tasks-table>
 			</div>
 		</div>
