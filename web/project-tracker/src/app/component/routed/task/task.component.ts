@@ -18,6 +18,7 @@ import {TokenProvider} from '../../../provider/token.provider';
 import {Comment} from '../../../dto/Comment';
 import {CommentService} from '../../../service/comment.service';
 import {NewComment} from '../../../dto/NewComment';
+import {TaskType} from '../../../dto/TaskType';
 
 @Component({
 	selector: 'app-task',
@@ -40,6 +41,8 @@ export class TaskComponent implements OnInit {
 
 	comments: Comment[];
 	newComment: NewComment = new NewComment();
+
+	TaskType = TaskType
 
 	constructor(
 		private app: AppComponent,

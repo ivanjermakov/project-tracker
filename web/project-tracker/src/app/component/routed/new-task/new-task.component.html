@@ -4,10 +4,10 @@
 		<div class="heading">Создать задачу</div>
 		<form class="task-form">
 			<div class="task-type-wrapper wrapper">
-				<div class="text">Тип задачи<span class="required">*</span></div>
+				<div class="text">Фаза испытаний<span class="required">*</span></div>
 				<div class="select-wrapper">
 					<select [(ngModel)]="task.type" name="type">
-						<option *ngFor="let t of taskTypes" [value]="t">{{t[0] + t.slice(1).toLowerCase()}}</option>
+						<option *ngFor="let t of taskTypes" [value]="t">{{t + 1}}</option>
 					</select>
 					<app-task-type-icon [type]="task.type"></app-task-type-icon>
 				</div>

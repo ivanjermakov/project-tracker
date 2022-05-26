@@ -74,13 +74,6 @@
 			     (input)="project.about = $event.target.textContent">{{project.about}}</div>
 		</div>
 		<div class="delimiter" *ngIf="!editMode"></div>
-		<div class="stats-container" *ngIf="!editMode">
-			<div class="stats">Статистика</div>
-			<div class="charts-container">
-				<app-project-activity-chart [project]="project"></app-project-activity-chart>
-				<app-project-task-type-chart [project]="project"></app-project-task-type-chart>
-			</div>
-		</div>
 		<div class="delimiter" *ngIf="!editMode"></div>
 		<app-team
 				*ngIf="!editMode && role"

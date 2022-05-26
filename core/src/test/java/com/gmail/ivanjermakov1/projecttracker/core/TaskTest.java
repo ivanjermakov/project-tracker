@@ -68,17 +68,7 @@ public class TaskTest {
 				.boxed()
 				.map(i -> {
 					try {
-						return taskController.create(token, new NewTaskDto(
-								null,
-								project.getId(),
-								TaskType.FEATURE,
-								TaskPriority.MINOR,
-								null,
-								LocalDate.now(),
-								LocalDate.now(),
-								"task_" + i,
-								null
-						));
+						return taskController.create(token, new NewTaskDto());
 					} catch (NoSuchEntityException | AuthorizationException e) {
 						e.printStackTrace();
 						throw new IllegalStateException();

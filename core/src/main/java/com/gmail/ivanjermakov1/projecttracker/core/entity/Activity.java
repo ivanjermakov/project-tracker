@@ -1,6 +1,7 @@
 package com.gmail.ivanjermakov1.projecttracker.core.entity;
 
 import com.gmail.ivanjermakov1.projecttracker.core.entity.enums.TaskStatus;
+import com.gmail.ivanjermakov1.projecttracker.core.entity.enums.TaskType;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -47,6 +48,10 @@ public class Activity {
 	@Enumerated
 	@Column(name = "status")
 	TaskStatus status;
+
+    @Enumerated
+    @Column(name = "type")
+    TaskType type;
 
 	@Column(name = "elapsed")
 	Double elapsed;

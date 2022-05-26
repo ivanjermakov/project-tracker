@@ -102,16 +102,7 @@ public class TaskService {
 				newTaskDto.getDescription()
 		));
 
-		task.getActivities().add(new Activity(
-				null,
-				task,
-				task.getCreator(),
-				null,
-				TaskStatus.OPEN,
-				null,
-				LocalDateTime.now(),
-				null
-		));
+		task.getActivities().add(new Activity());
 
 		return taskRepository.save(task);
 	}

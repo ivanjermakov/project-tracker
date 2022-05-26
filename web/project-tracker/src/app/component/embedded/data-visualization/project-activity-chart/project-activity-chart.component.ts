@@ -32,7 +32,7 @@ export class ProjectActivityChartComponent implements OnInit {
 						[
 							{
 								data: projectActivities.map(a => a.activityAmount),
-								label: 'Activities',
+								label: 'Активности',
 								backgroundColor: 'rgba(83, 144, 228, 0.4)',
 								borderColor: 'rgb(83, 144, 228)',
 								pointBackgroundColor: 'rgb(83, 144, 228)',

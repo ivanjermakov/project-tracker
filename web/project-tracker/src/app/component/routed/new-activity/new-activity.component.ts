@@ -7,6 +7,7 @@ import {NewActivity} from '../../../dto/NewActivity';
 import {TaskStatus} from '../../../dto/TaskStatus';
 import {ActivityService} from '../../../service/activity.service';
 import {UserService} from '../../../service/user.service';
+import {TaskType} from '../../../dto/TaskType';
 
 @Component({
 	selector: 'app-new-activity',
@@ -20,6 +21,7 @@ export class NewActivityComponent implements OnInit {
 
 	activity: NewActivity = new NewActivity();
 	taskStatuses: string[];
+	taskTypes: number[];
 
 	query: string;
 	suggestions: any[];
@@ -36,6 +38,7 @@ export class NewActivityComponent implements OnInit {
 		// @ts-ignore
 		this.activity.status = TaskStatus[TaskStatus.OPEN];
 		this.arrayService.filter(Object.keys(TaskStatus), k => isNaN(parseInt(k)), keys => this.taskStatuses = keys);
+		this.taskTypes = Object.keys(TaskType).map(k => parseInt(k)).filter(k => !isNaN(k));
 	}
 
 	ngOnInit() {

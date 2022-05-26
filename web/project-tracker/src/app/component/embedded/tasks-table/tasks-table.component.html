@@ -4,7 +4,7 @@
 		<th>ID</th>
 		<th>Имя</th>
 		<th *ngIf="showProject">Проект</th>
-		<th>Тип</th>
+		<th>Фаза</th>
 		<th>Статус</th>
 		<th>Приоритет</th>
 		<th>Начало</th>
@@ -18,7 +18,7 @@
 		<td>{{t.name}}</td>
 		<td *ngIf="showProject">{{t.project.name}}</td>
 		<td>
-			<app-task-type-icon [type]="t.type"></app-task-type-icon>
+			{{TaskType[t.type] + 1}}
 		</td>
 		<td>
 			<app-task-status-icon [status]="t.status" *ngIf="t.status"></app-task-status-icon>

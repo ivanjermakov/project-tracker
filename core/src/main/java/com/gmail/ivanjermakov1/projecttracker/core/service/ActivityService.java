@@ -67,6 +67,7 @@ public class ActivityService {
 						? userService.getUser(user, newActivityDto.getAssigneeLogin())
 						: null,
 				newActivityDto.getStatus(),
+                newActivityDto.getType(),
 				newActivityDto.getElapsed(),
 				LocalDateTime.now(),
 				newActivityDto.getDescription()
@@ -76,6 +77,9 @@ public class ActivityService {
 		if (activity.getStatus() != null) {
 			task.setStatus(activity.getStatus());
 		}
+        if (activity.getType() != null) {
+            task.setType(activity.getType());
+        }
 //		task.setPriority(activity.getPriority());
 		if (activity.getAssignee() != null) {
 			task.setAssignee(activity.getAssignee());

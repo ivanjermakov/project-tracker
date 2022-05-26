@@ -14,7 +14,6 @@
 			     (input)="task.name = $event.target.textContent">
 				{{task.name}}
 			</div>
-			<app-task-type-icon [type]="task.type"></app-task-type-icon>
 			<app-task-status-icon [status]="task.status" *ngIf="task.status"></app-task-status-icon>
 			<div class="edit" title="Изменить проект"
 			     *ngIf="!editMode"
@@ -27,11 +26,10 @@
 		</div>
 		<div class="info-container">
 			<div class="type">
-				<div class="pre">Тип:</div>
+				<div class="pre">Фаза испытаний:</div>
 				<div class="text">
-					{{task.type[0] + task.type.toString().slice(1).toLowerCase()}}
+					{{TaskType[task.type] + 1}}
 				</div>
-				<app-task-type-icon [type]="task.type"></app-task-type-icon>
 			</div>
 			<div class="status" *ngIf="task?.status">
 				<div class="pre">Статус:</div>

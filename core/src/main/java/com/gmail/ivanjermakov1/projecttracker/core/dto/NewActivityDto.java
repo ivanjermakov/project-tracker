@@ -1,6 +1,7 @@
 package com.gmail.ivanjermakov1.projecttracker.core.dto;
 
 import com.gmail.ivanjermakov1.projecttracker.core.entity.enums.TaskStatus;
+import com.gmail.ivanjermakov1.projecttracker.core.entity.enums.TaskType;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,6 +21,7 @@ public class NewActivityDto {
 	Long taskId;
 
 	TaskStatus status;
+    TaskType type;
 	String description;
 
 	@Min(value = 0, message = "elapsed time cannot be negative")

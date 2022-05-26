@@ -4,6 +4,7 @@ import {Task} from '../../../dto/Task';
 import {AppComponent} from '../../../app.component';
 import {ActivityService} from '../../../service/activity.service';
 import {TokenProvider} from '../../../provider/token.provider';
+import {TaskType} from '../../../dto/TaskType';
 
 @Component({
 	selector: 'app-tasks-table',
@@ -17,6 +18,8 @@ export class TasksTableComponent implements OnInit {
 
 	@Input()
 	showProject: boolean = false;
+
+	TaskType = TaskType
 
 	constructor(
 		private app: AppComponent,

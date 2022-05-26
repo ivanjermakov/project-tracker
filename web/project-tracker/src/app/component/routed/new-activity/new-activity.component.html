@@ -12,6 +12,14 @@
 					<app-task-status-icon [status]="activity.status"></app-task-status-icon>
 				</div>
 			</div>
+			<div class="task-status-wrapper">
+				<div class="text">Фаза испытаний</div>
+				<div class="select-wrapper">
+					<select [(ngModel)]="activity.type" name="activity-form">
+						<option *ngFor="let t of taskTypes" [value]="t">{{t + 1}}</option>
+					</select>
+				</div>
+			</div>
 
 			<div class="assignee-wrapper">
 				<div class="text">Исполнитель</div>

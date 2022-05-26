@@ -1,2 +1,0 @@
-- TODO: Specific task types
-- TODO: Add trial phase next to task status

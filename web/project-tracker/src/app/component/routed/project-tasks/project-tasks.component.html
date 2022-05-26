@@ -22,14 +22,6 @@
 						</select>
 					</td>
 				</tr>
-				<tr>
-					<td class="text">Тип задачи</td>
-					<td class="select-wrapper">
-						<select [(ngModel)]="listTask.type" name="type">
-							<option *ngFor="let t of taskTypes" [value]="t">{{t === '' ? '' : t[0] + t.slice(1).toLowerCase()}}</option>
-						</select>
-					</td>
-				</tr>
 			</table>
 			<table class="col-2" (change)="change()">
 				<tr>

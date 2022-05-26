@@ -20,7 +20,7 @@ import {TaskPriority} from '../../../dto/TaskPriority';
 export class NewTaskComponent implements OnInit {
 
 	task: NewTask = new NewTask();
-	taskTypes: string[];
+	taskTypes: number[];
 	taskPriorities: string[] = ['TRIVIAL', 'MINOR', 'MAJOR', 'CRITICAL'];
 
 	constructor(
@@ -34,7 +34,7 @@ export class NewTaskComponent implements OnInit {
 	) {
 		// @ts-ignore
 		this.task.type = TaskType[TaskType.FEATURE];
-		this.arrayService.filter(Object.keys(TaskType), k => isNaN(parseInt(k)), keys => this.taskTypes = keys);
+		this.taskTypes = Object.keys(TaskType).map(k => parseInt(k)).filter(k => !isNaN(k));
 		// @ts-ignore
 		this.task.priority = TaskPriority[TaskPriority.MINOR];
 	}
