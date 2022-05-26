@@ -52,4 +52,7 @@ public class UserInfo {
 	@Column(name = "skills")
 	String skills;
 
+    @Column(name = "avatarUrl")
+    String avatarUrl;
+
 }

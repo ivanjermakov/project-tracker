@@ -193,7 +193,11 @@
 			<div class="no-comments" *ngIf="comments.length === 0">No comments yet.</div>
 			<div class="comments">
 				<div class="comment" *ngFor="let comment of comments">
-					<div class="text poster" [routerLink]="'/' + comment.creator.login">@{{comment.creator.login}}</div>
+					<div class="text poster" [routerLink]="'/' + comment.creator.login">
+						<app-avatar [user]="comment.creator"></app-avatar>
+						<div class="text">{{comment.creator.userInfo.name}}</div>
+						<div class="text">@{{comment.creator.login}}</div>
+					</div>
 					<div class="text content">{{comment.text}}</div>
 					<div class="text timestamp">{{formatDateTime(comment.timestamp)}}</div>
 				</div>

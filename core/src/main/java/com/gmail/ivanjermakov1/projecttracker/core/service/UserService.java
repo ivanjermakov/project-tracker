@@ -65,7 +65,7 @@ public class UserService {
 		userRepository.save(user);
 
 		user.setUserCredentials(new UserCredentials(null, user, registerUserDto.getLogin(), Hasher.getHash(registerUserDto.getPassword())));
-		user.setUserInfo(new UserInfo(null, user, null, null, null, null, null, ""));
+		user.setUserInfo(new UserInfo(null, user, null, null, null, null, null, "", null));
 		userRepository.save(user);
 	}
 

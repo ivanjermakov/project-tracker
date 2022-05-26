@@ -37,6 +37,7 @@ import {ProfilePreviewComponent} from './component/embedded/profile-preview/prof
 import {TeamComponent} from './component/embedded/team/team.component';
 import {ProjectTasksComponent} from './component/routed/project-tasks/project-tasks.component';
 import {TaskPriorityIconComponent} from './component/embedded/task-priority-icon/task-priority-icon.component';
+import { AvatarComponent } from './component/embedded/avatar/avatar.component';
 
 @NgModule({
 	declarations: [
@@ -71,7 +72,8 @@ import {TaskPriorityIconComponent} from './component/embedded/task-priority-icon
 		ProfilePreviewComponent,
 		TeamComponent,
 		ProjectTasksComponent,
-		TaskPriorityIconComponent
+		TaskPriorityIconComponent,
+		AvatarComponent
 	],
 	imports: [
 		BrowserModule,

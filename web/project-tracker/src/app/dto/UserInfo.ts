@@ -5,4 +5,5 @@ export class UserInfo {
 	company: string;
 	location: string;
 	skills: string;
+	avatarUrl: string;
 }

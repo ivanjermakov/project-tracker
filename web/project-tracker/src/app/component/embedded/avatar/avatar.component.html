@@ -1,0 +1,4 @@
+<div class="avatar" *ngIf="url || user">
+	<img [src]="url" *ngIf="url">
+	<img [src]="'https://icotar.com/initials/'+(user.userInfo.name || user.login)+'.svg'" *ngIf="user">
+</div>

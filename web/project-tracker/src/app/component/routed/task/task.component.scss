@@ -206,8 +206,11 @@
 		  white-space: pre-wrap;
 
 		  .poster {
+			display: flex;
+			align-items: center;
 			grid-column: 1/2;
 			grid-row: 1/2;
+			gap: 6px;
 
 			cursor: pointer;
 
